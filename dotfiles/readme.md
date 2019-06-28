@@ -1,6 +1,6 @@
 # los dotfiles
-from https://www.atlassian.com/git/tutorials/dotfiles
-seems all unnecessary now but it works ¯\_(ツ)_/¯
+from https://www.atlassian.com/git/tutorials/dotfiles  
+seems all unnecessary now but it works ¯\ _(ツ)_/¯
 
 ## Setup
 ```sh
