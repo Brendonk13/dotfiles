@@ -1,0 +1,7 @@
+export submit="/mnt/c/Users/Brendon*/Documents/b-submissions/"
+
+export doc="/mnt/c/Users/Brendon*/Documents/"
+export dow="/mnt/c/UsersBrendon*/Downloads/"
+export song="/mnt/c/Users/Brendon*/Documents/Documents/07*/music*/"
+
+export FZF_DEFAULT_COMMAND='ag -l --hidden'

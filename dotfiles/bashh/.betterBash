@@ -1,0 +1,105 @@
+# note that alias's in this file are at bottom
+
+# should make a cmd called aliases which cat's the bash_aliases file then also the last lines in
+# this one until it encounters a line with nada on it
+
+source ~/dotfiles/bashh/from_online.sh
+
+
+function up() {
+  times=$1
+  while [ "$times" -gt "0" ]; do
+    cd ..
+    times=$(($times - 1))
+  done
+}
+
+function changeDirAndShow() {
+	cd "$1"; ls 
+}
+
+function lcc() {
+	cd "$1"
+	echo ""
+	ls
+	echo ""
+}
+
+# this function moves files to a directory then changes user to that folder
+function mcd() {
+    if [ "$#" -lt 2 ]; then
+        echo "Input files and destination for this to work jeez."
+        exit 1
+    fi
+    
+    file_destination=${@:$#}
+    num_files=$#
+    # if given mcd fil dest, just do move cmd
+    if [ "$num_files" -eq 2 ]; then
+        mv $1 $2
+    fi
+
+    # if given multiple files to move then move em !
+    if [ "$num_files" -gt 2 ]; then
+        #files stores all but last argument to mcd function
+        files=${@:1:$#-1}
+        num_files=$(($num_files - 1))
+
+        while [ "$num_files" -gt 0 ]; do
+            mv "$1" "$file_destination"
+            num_files=$(($num_files - 1))
+            shift
+        done
+    fi
+
+    echo "";  echo " ----- NEW DIR CONTAINS:";
+    cd "$file_destination"
+    ls
+    echo ""
+}
+        
+function extract () {
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xvjf $1    ;;
+      *.tar.gz)    tar xvzf $1    ;;
+      *.tar.xz)    tar Jxvf $1    ;;
+      *.bz2)       bunzip2 $1     ;;
+      *.rar)       rar x $1       ;;
+      *.gz)        gunzip $1      ;;
+      *.tar)       tar xvf $1     ;;
+      *.tbz2)      tar xvjf $1    ;;
+      *.tgz)       tar xvzf $1    ;;
+      *.zip)       unzip -d `echo $1 | sed 's/\(.*\)\.zip/\1/'` $1;;
+      *.Z)         uncompress $1  ;;
+      *.7z)        7z x $1        ;;
+      *)           echo "don't know how to extract '$1'" ;;
+    esac
+  else
+    echo "'$1' is not a valid file!"
+  fi
+}
+
+alias pip='pip3'
+alias vim='nvim'
+alias lc=changeDirAndShow
+alias lc..='lc ..'
+alias lcc..='lcc ..'
+alias lsa='ls -A'
+alias ll='ls -l'
+alias dotf='cd ~/dotfiles/bashh; lsa'
+alias ag='ag --ignore-dir ~/FromInternet'
+
+alias gcom='git commit -m'
+
+
+## SMARTER TAB-COMPLETION (Readline bindings) ##
+#
+# Perform file completion in a case insensitive fashion
+bind "set completion-ignore-case on"
+
+# Treat hyphens and underscores as equivalent
+bind "set completion-map-case on"
+
+# Display matches for ambiguous patterns at first tab press
+bind "set show-all-if-ambiguous on"
