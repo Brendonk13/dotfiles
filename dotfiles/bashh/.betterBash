@@ -103,3 +103,9 @@ bind "set completion-map-case on"
 
 # Display matches for ambiguous patterns at first tab press
 bind "set show-all-if-ambiguous on"
+
+#Avoid duplicate entries
+HISTCONTROL="erasedups:ignoreboth"
+
+# Don't record some commands
+export HISTIGNORE="&:[ ]*:exit:ls:history:clear"
