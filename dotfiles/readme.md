@@ -1,4 +1,4 @@
-les
+los dotfiles
 
 ## Setup
 ```sh
