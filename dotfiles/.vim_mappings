@@ -4,16 +4,13 @@ let mapleader = " "
 inoremap <S-Tab> <esc>
 onoremap <S-Tab> <esc>
 
-" MAP :Wq TO :wq I always press that !!!
-" happens cuz need to press shift for colon
-:command WQ wq
-:command Wq wq
-:command W w
-"   using :q was sometimes quitting all my windows so now I use   :C
-command -nargs=0 C :close
-
 " allow enter key in normal mode use leader key so i don't fuck with quickfix :cw
 nnoremap <leader><CR> i<CR><esc>
+nnoremap <leader><BS> i<BS><esc>
+
+" makes sense, even suggested in help!
+nnoremap Y y$
+
 
 " makes you go down line wise regardless of wrapping.
 nnoremap j gj
@@ -24,30 +21,20 @@ inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 inoremap <C-k> <Up>
 
+"http://vimcasts.org/episodes/the-edit-command/
+" can automatically expand curr buffer's dir_path with %% anywhere on c-line!!
+cnoremap %% <C-R>=fnameescape(expand('%:p:h')).'/'<cr>
+map <leader>ew :e %%
+map <leader>es :sp %%
+map <leader>ev :vs %%
+map <leader>et :tabe %%
 
-" allow to finish brackets without using C-h to move back inside
-inoremap <> <><Left>
-inoremap () ()<Left>
-inoremap {} {}<Left>
-inoremap [] []<Left>
-inoremap "" ""<Left>
-inoremap '' ''<Left>
-inoremap `` ``<Left>
 
 " force non-usage of arrow keys
 imap <Up>    <Nop>
 imap <Down>  <Nop>
 imap <Left>  <Nop>
 imap <Right> <Nop>
-
-
-" take advantage of 'insert normal' mode in vim to execute a single command
-" in normal mode before returning automatically to insert with CTRL-o
-"imap <leader>0 <          -------------- keep this bullshit here in case a workaround appears
-"inoremap <C-Left> <C-o>^
-"inoremap <C-$> <C-o>$
-
-" I am thinking about mapping the right shift to something else...
 
 " http://learnvimscriptthehardway.stevelosh.com/chapters/15.html\   has nice operator pending maps 
 " https://medium.com/@sidneyliebrand/a-collection-of-vim-key-binds-4d227c9a455
@@ -71,11 +58,4 @@ nnoremap <C-l> <C-w>l
 nnoremap <leader>o :only<CR>
 " ----------- END WINDOW MANAGEMENT -----------
 
-" ----------------------  mappings with alt key!!!! ------------------------
-"  just add word wise movements  ------------------------ just a pain to use the alt key, especially combined with shift :(
-"inoremap <M-e> <C-o>e
-"inoremap <M-E> <C-o>E
-"inoremap <M-w> <C-o>w
-"inoremap <M-W> <C-o>W
-"inoremap <M-b> <C-o>b
-"inoremap <M-B> <C-o>B
+" note that there are hella commands possible from with insert mode, check index!!
