@@ -3,6 +3,14 @@ let mapleader = " "
 " no more escape keys !!
 inoremap <S-Tab> <esc>
 onoremap <S-Tab> <esc>
+vnoremap <S-Tab> <esc>
+
+
+xmap <leader>x y:call SendViaOSC52(getreg('"'))<cr>
+
+"the only thing ; is used for is f,t searches, and I hate doing shift-;!
+nnoremap ; :
+nnoremap : ;
 
 " allow enter key in normal mode use leader key so i don't fuck with quickfix :cw
 nnoremap <leader><CR> i<CR><esc>
@@ -23,6 +31,7 @@ inoremap <C-k> <Up>
 
 "http://vimcasts.org/episodes/the-edit-command/
 " can automatically expand curr buffer's dir_path with %% anywhere on c-line!!
+"  These are hella useful if have mult files in mult dir's open already
 cnoremap %% <C-R>=fnameescape(expand('%:p:h')).'/'<cr>
 map <leader>ew :e %%
 map <leader>es :sp %%
@@ -59,3 +68,15 @@ nnoremap <leader>o :only<CR>
 " ----------- END WINDOW MANAGEMENT -----------
 
 " note that there are hella commands possible from with insert mode, check index!!
+
+
+
+"------------------ SEARCH --------------------
+nnoremap <leader>/ ms/
+nnoremap <leader>? ms?
+"----------------- END SEARCH ----------------
+
+"----------------- VISUAL MODE -------------------
+" this visually selects most recent paste/insert mode session
+nnoremap gV `[v`]
+

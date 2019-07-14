@@ -5,3 +5,10 @@ export dow="/mnt/c/UsersBrendon*/Downloads/"
 export song="/mnt/c/Users/Brendon*/Documents/Documents/07*/music*/"
 
 export FZF_DEFAULT_COMMAND='ag -l --hidden'
+
+# this is for italic comments according to https://stackoverflow.com/questions/3494435/vimrc-make-comments-italic
+#export TERM="xterm-256color-italic" 
+#echo -e "\e[3mfoo\e[23m"  command result shows that my terminal doesnt support italic
+
+#https://hobo.house/2017/07/17/using-italics-with-vim-in-your-terminal/
+# this link shows how I made italic comments work in wsltty
