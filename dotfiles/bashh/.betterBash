@@ -36,15 +36,14 @@ function mcd() {
     num_files=$#
     # if given mcd fil dest, just do move cmd
     if [ "$num_files" -eq 2 ]; then
-        mv $1 $2
+        mv "$1" "$2"
     fi
-
+    
     # if given multiple files to move then move em !
     if [ "$num_files" -gt 2 ]; then
-        #files stores all but last argument to mcd function
-        files=${@:1:$#-1}
+        #files=${@:1:$#-1}
         num_files=$(($num_files - 1))
-
+i
         while [ "$num_files" -gt 0 ]; do
             mv "$1" "$file_destination"
             num_files=$(($num_files - 1))

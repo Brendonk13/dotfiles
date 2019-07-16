@@ -10,7 +10,7 @@ set autoread              " re-read file into buffer if disk version changed whi
 " the splits feel more natural this way 
 set splitright
 set splitbelow           
-set lazyredraw            " redraw screen less often or something
+set lazyredraw            " disables redrawing screen while executing macros -- faster macro execution
 
 set hidden                " allow :bn instead of :bn! for swapping a hidden buffer to buffer list
 " autoindent: indent when enter pressed in insert, indent with o,O in normal
@@ -31,7 +31,6 @@ set relativenumber         " line #'s are relative to cursor position, good for 
 set nu                     " having both on shows line # instead of 0 for cursor line
 set laststatus=2
 
-set termguicolors        " this allows for usage of truecolor !
 "set formatoptions+=j     " Delete comment character when joining commented lines
 set cursorline                        " highlight current line
 set linebreak               " don't wrap line mid-word
@@ -56,42 +55,21 @@ if filereadable(expand("~/dotfiles/vimm/.vim_commands"))
     source ~/dotfiles/vimm/.vim_commands
 endif
 
-
+set termguicolors        " this allows for usage of truecolor !
 set t_Co=256
 syntax enable
 set background=dark
 colorscheme solarized
 
-" from https://thoughtbot.com/blog/faster-grepping-in-vim 
- if executable('ag')
-     "Use ag over grep
-     set grepprg=ag\ --nogroup\ --nocolor
-     command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-     " map Ag to backslash!
-     nnoremap \ :Ag<SPACE>
-endif
-
-
-" send signal called Osc52 escape sequence to any 64 bit OS to copy from vim to clipboard
-" first we base64 encode the yanked register: @0
-"function! Osc52Yank()
-"    let buffer=system('base64 -w0', @0)  " -w0 to disable 76 char line wrapping 
-"    let buffer='\ePtmux;\e\e]52;c;'.buffer.'\x07\e\\'
-"    silent exe "!echo -ne ".shellescape(buffer)." > ".shellescape(/dev/tty)
-"endfunction 
+"" from https://thoughtbot.com/blog/faster-grepping-in-vim 
+" if executable('ag')
+"     "Use ag over grep
+"     set grepprg=ag\ --nogroup\ --nocolor
+"     command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+"     " map Ag to backslash!
+"     nnoremap \ :Ag<SPACE>
+"endif
 "
-"function! Osc52Yank()
-"    let buffer=system('base64 -w0', @0)
-"    let buffer=substitute(buffer, "\n$", "", "")
-"    let buffer='\e]52;c;'.buffer.'\x07'
-"    silent exe "!echo -ne ".shellescape(buffer)." > ".shellescape("/dev/tty")
-"endfunction
-"command! Osc52CopyYank call Osc52Yank()
-"augroup Example
-"    autocmd!
-"    autocmd TextYankPost * if v:event.operator ==# 'y' | call Osc52Yank() | endif
-"augroup END
-"
-""nnoremap <leader>y :call Osc52Yank()<CR>
-"nnoremap <leader>y Osc52CopyYank
-"
+" accidently deleted a file today, now I have vim version control!!
+set undodir=~/.vim/tmp/undo
+set undofile

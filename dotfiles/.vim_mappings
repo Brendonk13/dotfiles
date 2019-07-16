@@ -1,23 +1,23 @@
-
 let mapleader = " "
 " no more escape keys !!
 inoremap <S-Tab> <esc>
 onoremap <S-Tab> <esc>
 vnoremap <S-Tab> <esc>
 
-
-xmap <leader>x y:call SendViaOSC52(getreg('"'))<cr>
-
-"the only thing ; is used for is f,t searches, and I hate doing shift-;!
-nnoremap ; :
-nnoremap : ;
-
 " allow enter key in normal mode use leader key so i don't fuck with quickfix :cw
-nnoremap <leader><CR> i<CR><esc>
+nnoremap <leader><CR> a<CR><esc>
 nnoremap <leader><BS> i<BS><esc>
 
 " makes sense, even suggested in help!
 nnoremap Y y$
+
+" had a mapping that switched :,; but then loupe didn't work every now and then idk, also thats such a big mapping to make
+" SHOULD I CHANGE THIS TO MAP ; : ,,, AND NOREMAP ;; ;   ---- THEN I'M DOING FOR ALL MODES, WHY NOT?
+" could make a abbreviation for c-line mode so that I don't get confused?
+
+nnoremap ; :
+nnoremap ;; ;
+
 
 
 " makes you go down line wise regardless of wrapping.
@@ -37,6 +37,13 @@ map <leader>ew :e %%
 map <leader>es :sp %%
 map <leader>ev :vs %%
 map <leader>et :tabe %%
+" note that I could change the commands from edits to finds
+" ^ there is no need for this since the whole point of the find 
+" command is to search for files in the set'd path variable
+" whereas the benefit of this command is we know we wanna open
+" a file in the same, or subdir of this directory
+" and I could always do set path+=%% if I really wanted to take advantage
+" of the find command
 
 
 " force non-usage of arrow keys
@@ -72,11 +79,19 @@ nnoremap <leader>o :only<CR>
 
 
 "------------------ SEARCH --------------------
-nnoremap <leader>/ ms/
-nnoremap <leader>? ms?
+"nnoremap <leader>/ ms/
+"nnoremap <leader>? ms?    
+" my excuse for not adding these before was that I'd break nerdtree/ some other plugin i'm not using
+" and premature optimization is the death of all.. besides <leader>/ is unrememberable
+nnoremap / ms/
+nnoremap ? ms?
 "----------------- END SEARCH ----------------
 
 "----------------- VISUAL MODE -------------------
 " this visually selects most recent paste/insert mode session
 nnoremap gV `[v`]
+
+
+
+
 
