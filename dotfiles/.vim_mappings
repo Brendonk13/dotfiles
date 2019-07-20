@@ -7,6 +7,10 @@ vnoremap <S-Tab> <esc>
 " allow enter key in normal mode use leader key so i don't fuck with quickfix :cw
 nnoremap <leader><CR> a<CR><esc>
 nnoremap <leader><BS> i<BS><esc>
+" <CR> would be much better as a function which moved to beginning of word then i<CR>
+" iff in cursor in the middle of word
+
+
 
 " makes sense, even suggested in help!
 nnoremap Y y$
@@ -17,7 +21,6 @@ nnoremap Y y$
 
 nnoremap ; :
 nnoremap ;; ;
-
 
 
 " makes you go down line wise regardless of wrapping.
