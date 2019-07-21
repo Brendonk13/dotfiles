@@ -11,11 +11,12 @@ set autoread              " re-read file into buffer if disk version changed whi
 set splitright
 set splitbelow           
 set lazyredraw            " disables redrawing screen while executing macros -- faster macro execution
+" for security reasons
+set nomodeline
 
 set hidden                " allow :bn instead of :bn! for swapping a hidden buffer to buffer list
 " autoindent: indent when enter pressed in insert, indent with o,O in normal
 set autoindent
-
 " This doesn't seem to add anything strangely ..
 set backspace=indent,eol,start
 " tabs take up 4 spaces
@@ -26,6 +27,8 @@ set expandtab
 set shiftwidth=4
 " deletes expanded tab in 1 backspace
 set softtabstop=4
+" round up tabs to always be multiple of 4
+set shiftround
 
 set relativenumber         " line #'s are relative to cursor position, good for small jumps
 set nu                     " having both on shows line # instead of 0 for cursor line
@@ -34,6 +37,15 @@ set laststatus=2
 "set formatoptions+=j     " Delete comment character when joining commented lines
 set cursorline                        " highlight current line
 set linebreak               " don't wrap line mid-word
+
+set list
+set listchars=trail:Δ
+
+" show matching bracket for 3 seconds
+set matchtime=3
+
+" tree view!
+let g:netrw_liststyle=3
 
 " didnt't seem to do anything...
 "set showcmd            " show cmd in status line
@@ -56,21 +68,18 @@ if filereadable(expand("~/dotfiles/vimm/.vim_commands"))
     source ~/dotfiles/vimm/.vim_commands
 endif
 
+"highlight Cursor cterm=underline ctermbg=none ctermfg=none
+
+autocmd ColorScheme * highlight Cursor cterm=bold ctermbg=none ctermfg=none
+
 set termguicolors        " this allows for usage of truecolor !
 set t_Co=256
+let g:solarized_bold=1
+let g:solarized_italic=1
 syntax enable
 set background=dark
 colorscheme solarized
 
-"" from https://thoughtbot.com/blog/faster-grepping-in-vim 
-" if executable('ag')
-"     "Use ag over grep
-"     set grepprg=ag\ --nogroup\ --nocolor
-"     command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-"     " map Ag to backslash!
-"     nnoremap \ :Ag<SPACE>
-"endif
-"
 " accidently deleted a file today, now I have vim version control!!
 set undodir=~/.vim/tmp/undo
 set undofile
@@ -81,3 +90,9 @@ set grepprg=rg
 " these settings don't autocomplete my omni-complete till i press enter!
 " yes enter, i have a mapping to use this instead of <C-y>
 set completeopt=longest,menuone,preview
+
+"hi Comment cterm=bold,underline ctermbg=none ctermfg=none
+
+"autocmd ColorScheme * highlight Comment cterm=bold ctermbg=none ctermfg=none
+
+"highlight CursorLine cterm=bold,underline

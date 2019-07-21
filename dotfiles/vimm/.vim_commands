@@ -42,7 +42,7 @@ func! GetSelectedText()
 endfunc
 
 if !has("clipboard") && executable("clip.exe")
-    noremap <leader>y :call system('clip.exe', GetSelectedText())<CR>
+    noremap <silent> <leader>y :call system('clip.exe', GetSelectedText())<CR>
     " could/should add a cut command but who cares
     "noremap <C-X> :call system('clip.exe', GetSelectedText())<CR>gvx
 endif

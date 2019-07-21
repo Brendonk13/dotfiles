@@ -76,8 +76,14 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" this >> nerdtree (add netrw_liststyle=3 and behold)
+nmap <leader>ls :vert topleft 15vs %%<CR>
+" need to figure out netrw a bit tho ..
+
 " map :only to <leader>o
 nnoremap <leader>o :only<CR>
+" close windows easily!!
+nnoremap <leader>c :close<CR>
 " ----------- END WINDOW MANAGEMENT -----------
 
 " note that there are hella commands possible from with insert mode, check index!!
@@ -89,8 +95,11 @@ nnoremap <leader>o :only<CR>
 "nnoremap <leader>? ms?    
 " my excuse for not adding these before was that I'd break nerdtree/ some other plugin i'm not using
 " and premature optimization is the death of all.. besides <leader>/ is unrememberable
-nnoremap / ms/
-nnoremap ? ms?
+"nnoremap / ms/
+"nnoremap ? ms?
+
+" these ^ didn't work, need to change loupe function to do: ms<bar>fxnCall
+
 "----------------- END SEARCH ----------------
 
 "----------------- VISUAL MODE -------------------
@@ -100,8 +109,21 @@ nnoremap gV `[v`]
 
 
 "----------------- INSERT MODE ------------------
-imap .<tab> .<C-x><C-o>
 
+" this inserts a line below me from insert mode
+" use '.' since I'm already using this for omni and I want minimal "lag keys"
+inoremap .<CR> <esc>O
+inoremap .<BS> <down><BS>
+" so now enter, bs operate on lines above me, the dot variant acts on lines below current!
+
+
+" for the rare times you want to stay in insert mode
+inoremap <C-e> <C-o>$
+inoremap <C-b> <C-o>^
+
+
+" ---  omnicomplete mappings-----
+inoremap .<tab> .<C-x><C-o>
 
 " all of these omnicomplete mappings are from https://vim.fandom.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
 :inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -111,4 +133,6 @@ imap .<tab> .<C-x><C-o>
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
+" if I want preview window to stay open after
+" then change to InsertLeave
 autocmd CompleteDone * pclose
