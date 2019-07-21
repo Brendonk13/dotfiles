@@ -67,6 +67,9 @@ nnoremap <C-w>2> <C-w>40>
 nnoremap <C-w>< <C-w>20<
 nnoremap <C-w>2< <C-w>40<
 
+" easier maximization of windows!!
+nnoremap <C-w>- <C-w>_
+
 " easier window switching
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -96,5 +99,16 @@ nnoremap gV `[v`]
 
 
 
+"----------------- INSERT MODE ------------------
+imap .<tab> .<C-x><C-o>
 
 
+" all of these omnicomplete mappings are from https://vim.fandom.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
+:inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+"^ this one allows me to press enter instead of C-y to select item
+
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+\ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+autocmd CompleteDone * pclose

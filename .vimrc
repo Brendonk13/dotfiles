@@ -41,6 +41,7 @@ set noshowmode          " now the insert shit doesnt show at bottom, have vim ai
 set ignorecase          " case insensitive search by default
 set smartcase           " override ignorecase if capital entered mid search
 set incsearch           " jump to candidates while typing search pattern
+set gdefault            " assume the /g flag on :s substitutions to replace all matches in a line
 
 if filereadable(expand("~/.vimPlug/vimPlugCall"))
     source ~/.vimPlug/vimPlugCall
@@ -73,3 +74,10 @@ colorscheme solarized
 " accidently deleted a file today, now I have vim version control!!
 set undodir=~/.vim/tmp/undo
 set undofile
+
+" use ripgrep instead of grep
+set grepprg=rg
+
+" these settings don't autocomplete my omni-complete till i press enter!
+" yes enter, i have a mapping to use this instead of <C-y>
+set completeopt=longest,menuone,preview

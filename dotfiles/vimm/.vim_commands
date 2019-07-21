@@ -6,6 +6,7 @@
 
 "   using :q was sometimes quitting all my windows so now I use   :C
 command -nargs=0 C :close
+" can also use <C-w>c
 
 function! MarkWindowSwap()
     let g:markedWinNum = winnr()
@@ -45,9 +46,4 @@ if !has("clipboard") && executable("clip.exe")
     " could/should add a cut command but who cares
     "noremap <C-X> :call system('clip.exe', GetSelectedText())<CR>gvx
 endif
-
-
-
-"autocmd VimEnter * command! -bang -nargs=* Ag
-"  \ call fzf#vim#ag(<q-args>, 'ag -l --path-to-ignore ~/.ignore --nocolor --hidden -g ""', <bang>0)
 
