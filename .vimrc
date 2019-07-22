@@ -3,13 +3,20 @@
 " well as Vim. ---- from http://vimcasts.org/episodes/meet-neovim/
 
 set nocompatible
-set path+=**              " allows for fuzzy file finding if autochdir is off! 
+" , means the dir in which vim was opened, '.' means the directory of the file where the cursor is
+set path=.,,,~/,~/vimCommands,~/dotfiles/**,~/PyShit/**,
 " now these types don't appear in wild menu options
-set wildignore=*.o,*.a,*.so,*.pyc,*.swp,.git/*,*.class 
+set wildignore=*.o,*.a,*.so,*.pyc,*.swp,.git/*,*.class,~/FromInternet/*,*.dll,~/.vim_black/*,*pycache*
+set wildignorecase
+
+"longest makes it so that tab completes to longest common substring of matches
+"which appear in wildmenu produced by full portion.
+" generally, wildmode tells wildmenu how to behave
+set wildmode=longest:full
 set autoread              " re-read file into buffer if disk version changed while vim's open
 " the splits feel more natural this way 
 set splitright
-set splitbelow           
+set splitbelow
 set lazyredraw            " disables redrawing screen while executing macros -- faster macro execution
 " for security reasons
 set nomodeline
@@ -49,7 +56,7 @@ let g:netrw_liststyle=3
 
 " didnt't seem to do anything...
 "set showcmd            " show cmd in status line
-set noshowmode          " now the insert shit doesnt show at bottom, have vim airline now!
+"set noshowmode          " now the insert shit doesnt show at bottom, have vim airline now!
 set ignorecase          " case insensitive search by default
 set smartcase           " override ignorecase if capital entered mid search
 set incsearch           " jump to candidates while typing search pattern
@@ -68,9 +75,11 @@ if filereadable(expand("~/dotfiles/vimm/.vim_commands"))
     source ~/dotfiles/vimm/.vim_commands
 endif
 
-"highlight Cursor cterm=underline ctermbg=none ctermfg=none
+let g:python3_host_prog='/usr/bin/python3.6'
 
-autocmd ColorScheme * highlight Cursor cterm=bold ctermbg=none ctermfg=none
+"highlight Cursor cterm=underline gui=underline term=underline
+
+"autocmd ColorScheme * highlight Comment cterm=underline gui=underline term=underline -- Needs to be before colorscheme set
 
 set termguicolors        " this allows for usage of truecolor !
 set t_Co=256
@@ -91,8 +100,3 @@ set grepprg=rg
 " yes enter, i have a mapping to use this instead of <C-y>
 set completeopt=longest,menuone,preview
 
-"hi Comment cterm=bold,underline ctermbg=none ctermfg=none
-
-"autocmd ColorScheme * highlight Comment cterm=bold ctermbg=none ctermfg=none
-
-"highlight CursorLine cterm=bold,underline

@@ -1,4 +1,5 @@
 let mapleader = " "
+
 " no more escape keys !!
 inoremap <S-Tab> <esc>
 onoremap <S-Tab> <esc>
@@ -9,6 +10,18 @@ nnoremap <leader><CR> a<CR><esc>
 nnoremap <leader><BS> i<BS><esc>
 " <CR> would be much better as a function which moved to beginning of word then i<CR>
 " iff in cursor in the middle of word
+
+nnoremap <leader>s :source $MYVIMRC<CR>
+
+
+" allow '.' and '@' to work in VISUAL MODE
+vnoremap . :norm . <CR>
+vnoremap @ :norm @
+
+"should probly change these to <leader>__t to be consistent with my other normal mode splits
+cnoremap termv vs<bar>:terminal<CR>i
+cnoremap terms sp<bar>:terminal<CR>i
+cnoremap termt tabnew<bar>:terminal<CR>i
 
 
 
@@ -36,10 +49,10 @@ inoremap <C-k> <Up>
 " can automatically expand curr buffer's dir_path with %% anywhere on c-line!!
 "  These are hella useful if have mult files in mult dir's open already
 cnoremap %% <C-R>=fnameescape(expand('%:p:h')).'/'<cr>
-map <leader>ew :e %%
-map <leader>es :sp %%
-map <leader>ev :vs %%
-map <leader>et :tabe %%
+map <leader>we :e %%
+map <leader>se :sp %%
+map <leader>ve :vs %%
+map <leader>te :tabe %%
 " note that I could change the commands from edits to finds
 " ^ there is no need for this since the whole point of the find 
 " command is to search for files in the set'd path variable
@@ -77,14 +90,15 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " this >> nerdtree (add netrw_liststyle=3 and behold)
-nmap <leader>ls :vert topleft 15vs %%<CR>
-" need to figure out netrw a bit tho ..
+nmap <leader>ls :vert topleft 22vs %%<CR>
+" need to figure out netrw a bit tho ..    -- like how to make close parent dir and make another "root"
 
 " map :only to <leader>o
 nnoremap <leader>o :only<CR>
 " close windows easily!!
 nnoremap <leader>c :close<CR>
-" ----------- END WINDOW MANAGEMENT -----------
+
+"----------- END WINDOW MANAGEMENT -----------
 
 " note that there are hella commands possible from with insert mode, check index!!
 
@@ -99,6 +113,21 @@ nnoremap <leader>c :close<CR>
 "nnoremap ? ms?
 
 " these ^ didn't work, need to change loupe function to do: ms<bar>fxnCall
+
+"nnoremap <leader>f :vertTorTnah
+" very hacky way to change split type and not have new normal mode mapping
+" DEFAULT is vertical split
+"cabbrev vertTorTnahs split sf
+"cabbrev vertTorTnah vert sf
+
+
+nnoremap <leader>wf :find<space>
+nnoremap <leader>sf :sfind<space>
+nnoremap <leader>vf :vert sf<space>
+nnoremap <leader>tf :tabfind<space>
+
+
+
 
 "----------------- END SEARCH ----------------
 
@@ -136,3 +165,35 @@ inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 " if I want preview window to stay open after
 " then change to InsertLeave
 autocmd CompleteDone * pclose
+
+
+
+
+if has('nvim')
+    " so for some reason these alt mappings don't work consistently
+    " but working so far for escaping terminal mode, can delete others probly
+    tnoremap <M-[> <C-\><C-n>
+    " using meta key allows for the esc key to work in terminal mode still
+
+    " Terminal mode:
+    tnoremap <M-h> <c-\><c-n><c-w>h
+    tnoremap <M-j> <c-\><c-n><c-w>j
+    tnoremap <M-k> <c-\><c-n><c-w>k
+    tnoremap <M-l> <c-\><c-n><c-w>l
+    " Insert mode:
+    inoremap <M-h> <Esc><c-w>h
+    inoremap <M-j> <Esc><c-w>j
+    inoremap <M-k> <Esc><c-w>k
+    inoremap <M-l> <Esc><c-w>l
+    " Visual mode:
+    vnoremap <M-h> <Esc><c-w>h
+    vnoremap <M-j> <Esc><c-w>j
+    vnoremap <M-k> <Esc><c-w>k
+    vnoremap <M-l> <Esc><c-w>l
+    " Normal mode:
+    nnoremap <M-h> <c-w>h
+    nnoremap <M-j> <c-w>j
+    nnoremap <M-k> <c-w>k
+    nnoremap <M-l> <c-w>l
+
+endif
