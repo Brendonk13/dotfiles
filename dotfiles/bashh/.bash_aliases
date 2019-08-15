@@ -5,7 +5,7 @@ alias song='dow;  cd W*/Av*/'
 
 alias cd..='cd ..'
 alias   .='ls'
-alias  ..='cd ..;  ls'      
+alias  ..='cd ..;  ls'
 alias ...='up 2;  ls'
 
 alias rpy='python3'
@@ -16,8 +16,10 @@ alias act='conda activate'
 alias deac='conda deactivate'
 
 # maybe I want to add in --hidden, .. later
-alias ag='ag --path-to-ignore ~/.ignore' 
+alias ag='ag --path-to-ignore ~/.ignore'
 
+alias vi='nvim'
+alias v='nvim'
 
 # need to actually add files to bare dotfile repo
 # just add and commit files one at a time ie config add .vimr, config com.. config push finally

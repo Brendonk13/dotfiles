@@ -4,10 +4,17 @@ conda:
 remc envName
 newc envName
 
-need to add shit to my bare repo can do this with config add .vimrc, config commit -m .. 
+CTRL-R to paste from register vim
 
-whole point of me trying to combine ag and fzf was so that fzf could use ag to find files 
+currently can do \ instead of n.
+the new marks: strongest is ],  then . is a subset of ]
+what comes last ? gi -- used by ^
 
-    honestly whole point of that was to replace helpgrep with popup quickfix window
-        but don't matter now that I know the :cw command luhl, will remove ag and add ripgrep with ALE oneday
-    but now I have the benefit of fzf ignoring ~/FromInternet by default!!
+g] -- lists em in not qf window
+
+don't forget gd, gf, gv, gV, <C-a>
+
+seems [[ == [m so keep using easier one till i figure out difference
+
+-- C-p == :Files
+-- mapped: Q to @@! vis, normal

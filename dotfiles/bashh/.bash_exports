@@ -17,3 +17,8 @@ export RIPGREP_CONFIG_PATH="$HOME/FromInternet/.ripgreprc"
 
 #https://hobo.house/2017/07/17/using-italics-with-vim-in-your-terminal/
 # this link shows how I made italic comments work in wsltty
+
+export _Z_DATA="$HOME/FromInternet/z/.z"
+
+# using this and XCsrv1.20.1.4
+export DISPLAY=localhost:0.0

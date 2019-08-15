@@ -6,6 +6,11 @@ dotBashDir=~/dotfiles/bashh
 alias ls='ls --group-directories-first --color=auto'
 
 #set -o vi    # vim mode in bash upon pressing escape!
+#bind "set show-mode-in-prompt on"
+# think my plan with this might be to use normal emacs readline on
+# then maybe add these commands to vim's command line editing 
+# note that I could get similar functionality to vim, ie bind ci" to f"f"cT" 
+# but rlly don't like how there is a lag between <esc> and exiting the mode..
 
 
 # If not running interactively, don't do anything
@@ -99,10 +104,6 @@ fi
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 if [ -f $dotBashDir/.bash_aliases ]; then
     source $dotBashDir/.bash_aliases
@@ -236,3 +237,8 @@ if [ -f ~/.dir_colors ]; then
     eval `dircolors ~/.dir_colors`
 fi
 
+if [ -f ~/FromInternet/z/z.sh ]; then
+    source ~/FromInternet/z/z.sh
+fi
+
+export LIBGL_ALWAYS_INDIRECT=1

@@ -31,19 +31,19 @@ function mcd() {
         echo "Input files and destination for this to work jeez."
         exit 1
     fi
-    
+
     file_destination=${@:$#}
     num_files=$#
     # if given mcd fil dest, just do move cmd
     if [ "$num_files" -eq 2 ]; then
         mv "$1" "$2"
     fi
-    
+
     # if given multiple files to move then move em !
     if [ "$num_files" -gt 2 ]; then
         #files=${@:1:$#-1}
         num_files=$(($num_files - 1))
-i
+
         while [ "$num_files" -gt 0 ]; do
             mv "$1" "$file_destination"
             num_files=$(($num_files - 1))
@@ -56,7 +56,7 @@ i
     ls
     echo ""
 }
-        
+
 function extract () {
   if [ -f $1 ] ; then
     case $1 in
@@ -81,15 +81,19 @@ function extract () {
 
 alias pip='pip3'
 alias vim='nvim'
-alias lc=changeDirAndShow
-alias lc..='lc ..'
+alias cdl=changeDirAndShow
+alias cdl..='cdl ..'
 alias lcc..='lcc ..'
+# -A doesn't show ., .. directories while -a does
 alias lsa='ls -A'
 alias ll='ls -l'
 alias dotf='cd ~/dotfiles/bashh; lsa'
 alias ag='ag --ignore-dir ~/FromInternet'
 
 alias gcom='git commit -m'
+
+# no more friggin error sound !!!
+bind 'set bell-style none'
 
 
 ## SMARTER TAB-COMPLETION (Readline bindings) ##

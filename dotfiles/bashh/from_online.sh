@@ -8,8 +8,10 @@ export HISTFILESIZE=10000        # increase history file size (default is 500)
 export HISTSIZE=${HISTFILESIZE}  # increase history size (default is 500)
 # ensure synchronization between Bash memory and history file
 export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
+
 # if this is interactive shell, then bind hstr to Ctrl-r (for Vi mode check doc)
-if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
+# fzf has a better interface
+#if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
 # if this is interactive shell, then bind 'kill last command' to Ctrl-x k
 if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 
@@ -23,6 +25,8 @@ if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 # delete more options incrementally by testing on the command line till it works
 
 
+# note that downloading and using fd as the default command should be faster
+# -- actually not true since they both "use the same code to walk the directories" -burntsushi reddit
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # options like --hidden and --smart-case are specified as rg defaults in ~/FromInternet/.ripgreprc
@@ -31,9 +35,9 @@ export FZF_ALT_C_COMMAND="bfs -type d -nohidden"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS='--bind J:down,K:up --reverse --ansi --multi'
 bind -x '"\C-p": vim $(fzf);'
-#bind -x '"\C-p": fvim'
-# the commented one is in bag-man's vimrc, it calls a function im not gunna add cuz i dont have tmux, yet.
-# the one i replaced was in his first blog post
+# what's the point of a ctrl-t command lol 
+#-- can do ctrl-t in c-line to search without pulling up vim
+# and the alt c command is for FINDING DIRECTORIES ONLY
 
 # the --no-ignore means we're searching thru .gitignore's!
 # the --follow flag means we're following symlinks!
@@ -51,3 +55,6 @@ sf() {
     files=`eval $rg_command $search | fzf --ansi --multi --reverse | awk -F ':' '{print $1":"$2":"$3}'`
     [[ -n "$files" ]] && ${EDITOR:-nvim} $files
 }
+
+
+alias man='pinfo'

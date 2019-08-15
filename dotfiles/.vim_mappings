@@ -1,9 +1,16 @@
 let mapleader = " "
 
-" no more escape keys !!
-inoremap <S-Tab> <esc>
-onoremap <S-Tab> <esc>
-vnoremap <S-Tab> <esc>
+"           note that <CR> by itself is not used in normal mode!!!
+"-- here do: map <expr> <CR> empty(&buftype) ? '@@' : '<CR>'
+" so that <CR> works on special buffers like qf window!!
+" --- use the replay plugin if ever map <CR> @@
+
+"another dece one is <S-Tab>
+" also d<CR> and most char<CR> combos are free space!!
+" look into the usefulness of current K command!
+" currently never use U, and replace mode is replacable
+" the Z cmd not used, but theres a delay when mapping cuz of ZZ cmd
+" would be sickkk if i could get rid of that delay (kinda)
 
 " allow enter key in normal mode use leader key so i don't fuck with quickfix :cw
 nnoremap <leader><CR> a<CR><esc>
@@ -14,36 +21,44 @@ nnoremap <leader><BS> i<BS><esc>
 nnoremap <leader>s :source $MYVIMRC<CR>
 
 
-" allow '.' and '@' to work in VISUAL MODE
-vnoremap . :norm . <CR>
-vnoremap @ :norm @
+" goat mapping -- can now add count to @@
+nnoremap Q @@
+
+" the backticks are way more useful marks than quotes
+omap ' `
+nmap ' `
+
+" from damian conway's vim talk
+vmap <expr> ++ VMATH_YankAndAnalyse()
+nmap ++  vip++
 
 "should probly change these to <leader>__t to be consistent with my other normal mode splits
-cnoremap termv vs<bar>:terminal<CR>i
-cnoremap terms sp<bar>:terminal<CR>i
-cnoremap termt tabnew<bar>:terminal<CR>i
+nnoremap <silent> <leader>wt :terminal<CR>i
+nnoremap <silent> <leader>vt :vs<bar>:terminal<CR>i
+nnoremap <silent> <leader>st :sp<bar>:terminal<CR>i
+nnoremap <silent> <leader>tt :tabnew<bar>:terminal<CR>i
 
 
 
 " makes sense, even suggested in help!
 nnoremap Y y$
 
-" had a mapping that switched :,; but then loupe didn't work every now and then idk, also thats such a big mapping to make
-" SHOULD I CHANGE THIS TO MAP ; : ,,, AND NOREMAP ;; ;   ---- THEN I'M DOING FOR ALL MODES, WHY NOT?
-" could make a abbreviation for c-line mode so that I don't get confused?
+"mnemonic:  yank set path --- needs a modifiable split above or to right!!
+" yank the line, move windows, paste it, replace spaces with ? wildcard
+" cut line, add to path, then rand search to make shit not show up!
+nnoremap ysp "tyy<C-w>t"tp:s/\v\ /\?/<CR>0"tdd:set path+=<C-r>t<CR>/rAnD0MsTrInG$<esc>:<esc>
+
+
+" another day, mnemonic: yank add subdirectories
+"nnoremap yas "tyy<C-w>t"tp:s/\v\ /\?/<CR>0"tdd:set path+=<C-r>t<CR>/RAnD0MsTrInG$<esc>
+
 
 nnoremap ; :
 nnoremap ;; ;
 
-
 " makes you go down line wise regardless of wrapping.
 nnoremap j gj
 nnoremap k gk
-" allow for moving in insert mode
-inoremap <C-j> <Down>
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
-inoremap <C-k> <Up>
 
 "http://vimcasts.org/episodes/the-edit-command/
 " can automatically expand curr buffer's dir_path with %% anywhere on c-line!!
@@ -53,20 +68,7 @@ map <leader>we :e %%
 map <leader>se :sp %%
 map <leader>ve :vs %%
 map <leader>te :tabe %%
-" note that I could change the commands from edits to finds
-" ^ there is no need for this since the whole point of the find 
-" command is to search for files in the set'd path variable
-" whereas the benefit of this command is we know we wanna open
-" a file in the same, or subdir of this directory
-" and I could always do set path+=%% if I really wanted to take advantage
-" of the find command
 
-
-" force non-usage of arrow keys
-imap <Up>    <Nop>
-imap <Down>  <Nop>
-imap <Left>  <Nop>
-imap <Right> <Nop>
 
 " http://learnvimscriptthehardway.stevelosh.com/chapters/15.html\   has nice operator pending maps 
 " https://medium.com/@sidneyliebrand/a-collection-of-vim-key-binds-4d227c9a455
@@ -94,9 +96,9 @@ nmap <leader>ls :vert topleft 22vs %%<CR>
 " need to figure out netrw a bit tho ..    -- like how to make close parent dir and make another "root"
 
 " map :only to <leader>o
-nnoremap <leader>o :only<CR>
+nnoremap <silent> <leader>o :only<CR>
 " close windows easily!!
-nnoremap <leader>c :close<CR>
+nnoremap <silent> <leader>c :close<CR>
 
 "----------- END WINDOW MANAGEMENT -----------
 
@@ -126,7 +128,13 @@ nnoremap <leader>sf :sfind<space>
 nnoremap <leader>vf :vert sf<space>
 nnoremap <leader>tf :tabfind<space>
 
+" faster spamming of n. , can optionally add a count also!
+nnoremap \ :norm n.<CR>
 
+" now have this mapping for bash && vim
+nnoremap <C-p> :FZF<CR>
+
+" don't really like c-p since I accidently press lots when trying to esc.
 
 
 "----------------- END SEARCH ----------------
@@ -135,14 +143,28 @@ nnoremap <leader>tf :tabfind<space>
 " this visually selects most recent paste/insert mode session
 nnoremap gV `[v`]
 
-
+" allow '.' and '@' to work in VISUAL MODE
+vnoremap . :norm .<CR>
+vnoremap Q :norm @@<CR>
 
 "----------------- INSERT MODE ------------------
+" neeeeeeeed to make put all these bs things in a fold, i even know to use mkview..
+" force non-usage of arrow keys
+imap <Up>    <Nop>
+imap <Down>  <Nop>
+imap <Left>  <Nop>
+imap <Right> <Nop>
+
+" allow for moving in insert mode
+inoremap <C-j> <Down>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+inoremap <C-k> <Up>
 
 " this inserts a line below me from insert mode
 " use '.' since I'm already using this for omni and I want minimal "lag keys"
-inoremap .<CR> <esc>O
-inoremap .<BS> <down><BS>
+inoremap ,<CR> <esc>mto<esc>`ta
+inoremap ,<BS> <esc>mt<down>0i<BS><esc>`ta
 " so now enter, bs operate on lines above me, the dot variant acts on lines below current!
 
 
@@ -150,9 +172,11 @@ inoremap .<BS> <down><BS>
 inoremap <C-e> <C-o>$
 inoremap <C-b> <C-o>^
 
-
 " ---  omnicomplete mappings-----
-inoremap .<tab> .<C-x><C-o>
+inoremap <silent> ,, <C-x><C-o>
+
+" this still brings up a err msg maybe the solution is to make a function ...
+
 
 " all of these omnicomplete mappings are from https://vim.fandom.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
 :inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -166,8 +190,12 @@ inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 " then change to InsertLeave
 autocmd CompleteDone * pclose
 
+"I need a autocmd that does <C-n><C-p> every time I press a letter? so that I can view a preview always
+" what might be better tho is so just have a key mapped to <C-n><C-p> ... or maybe just press those keystrokes when this is desired behavior
 
+" how can I turn off the E764 error which says omnifunc not set when I press '.' in insert mode.
 
+inoreabbrev slef self
 
 if has('nvim')
     " so for some reason these alt mappings don't work consistently
@@ -180,20 +208,5 @@ if has('nvim')
     tnoremap <M-j> <c-\><c-n><c-w>j
     tnoremap <M-k> <c-\><c-n><c-w>k
     tnoremap <M-l> <c-\><c-n><c-w>l
-    " Insert mode:
-    inoremap <M-h> <Esc><c-w>h
-    inoremap <M-j> <Esc><c-w>j
-    inoremap <M-k> <Esc><c-w>k
-    inoremap <M-l> <Esc><c-w>l
-    " Visual mode:
-    vnoremap <M-h> <Esc><c-w>h
-    vnoremap <M-j> <Esc><c-w>j
-    vnoremap <M-k> <Esc><c-w>k
-    vnoremap <M-l> <Esc><c-w>l
-    " Normal mode:
-    nnoremap <M-h> <c-w>h
-    nnoremap <M-j> <c-w>j
-    nnoremap <M-k> <c-w>k
-    nnoremap <M-l> <c-w>l
 
 endif
