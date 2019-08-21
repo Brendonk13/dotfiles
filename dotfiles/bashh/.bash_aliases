@@ -21,6 +21,28 @@ alias ag='ag --path-to-ignore ~/.ignore'
 alias vi='nvim'
 alias v='nvim'
 
+#alias s!='sudo "!!"'
+
+# mnemonic: add sudo
+alias as='sudo $(history -p !!)'
+
+
+# note that can make sudo work with aliases by adding: 
+# alias sudo='sudo ' -- the trailing space tells shell to look for aliases in other that first word of cmd
+
 # need to actually add files to bare dotfile repo
 # just add and commit files one at a time ie config add .vimr, config com.. config push finally
+
+alias pip='pip3'
+alias vim='nvim'
+# this is a function defined in .betterBash
+alias cdl=changeDirAndShow
+alias cdl..='cdl ..'
+alias lcc..='lcc ..'
+# -A doesn't show ., .. directories while -a does
+alias lsa='ls -A'
+alias ll='ls -l'
+alias dotf='cd ~/dotfiles/bashh; lsa'
+alias ag='ag --ignore-dir ~/FromInternet'
+alias gcom='git commit -m'
 

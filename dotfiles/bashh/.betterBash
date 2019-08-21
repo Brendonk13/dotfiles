@@ -79,19 +79,6 @@ function extract () {
   fi
 }
 
-alias pip='pip3'
-alias vim='nvim'
-alias cdl=changeDirAndShow
-alias cdl..='cdl ..'
-alias lcc..='lcc ..'
-# -A doesn't show ., .. directories while -a does
-alias lsa='ls -A'
-alias ll='ls -l'
-alias dotf='cd ~/dotfiles/bashh; lsa'
-alias ag='ag --ignore-dir ~/FromInternet'
-
-alias gcom='git commit -m'
-
 # no more friggin error sound !!!
 bind 'set bell-style none'
 
@@ -107,8 +94,6 @@ bind "set completion-map-case on"
 # Display matches for ambiguous patterns at first tab press
 bind "set show-all-if-ambiguous on"
 
-#Avoid duplicate entries
-HISTCONTROL="erasedups:ignoreboth"
 
-# Don't record some commands
-export HISTIGNORE="&:[ ]*:exit:ls:history:clear"
+# Don't record some commands -- who cares if they only show up once!
+#export HISTIGNORE="&:[ ]*:exit:ls:history:clear"

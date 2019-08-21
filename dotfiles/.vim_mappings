@@ -25,12 +25,15 @@ nnoremap <leader>s :source $MYVIMRC<CR>
 nnoremap Q @@
 
 " the backticks are way more useful marks than quotes
-omap ' `
-nmap ' `
+onoremap ' `
+onoremap ` '
+
+nnoremap ' `
+nnoremap ` '
 
 " from damian conway's vim talk
-vmap <expr> ++ VMATH_YankAndAnalyse()
-nmap ++  vip++
+vnoremap <expr> ++ VMATH_YankAndAnalyse()
+nnoremap ++  vip++
 
 "should probly change these to <leader>__t to be consistent with my other normal mode splits
 nnoremap <silent> <leader>wt :terminal<CR>i
@@ -46,7 +49,7 @@ nnoremap Y y$
 "mnemonic:  yank set path --- needs a modifiable split above or to right!!
 " yank the line, move windows, paste it, replace spaces with ? wildcard
 " cut line, add to path, then rand search to make shit not show up!
-nnoremap ysp "tyy<C-w>t"tp:s/\v\ /\?/<CR>0"tdd:set path+=<C-r>t<CR>/rAnD0MsTrInG$<esc>:<esc>
+nnoremap ysp "ty$<C-w>t"tp:s/\v /\\\\\\ /<CR>0"tD:set path+=<C-r>t<CR>/rAnD0MsTrInG$<esc>:<esc>
 
 
 " another day, mnemonic: yank add subdirectories
@@ -64,11 +67,12 @@ nnoremap k gk
 " can automatically expand curr buffer's dir_path with %% anywhere on c-line!!
 "  These are hella useful if have mult files in mult dir's open already
 cnoremap %% <C-R>=fnameescape(expand('%:p:h')).'/'<cr>
-map <leader>we :e %%
-map <leader>se :sp %%
-map <leader>ve :vs %%
-map <leader>te :tabe %%
+nmap <leader>we :e %%
+nmap <leader>se :sp %%
+nmap <leader>ve :vs %%
+nmap <leader>te :tabe %%
 
+" these^^^ muuuust be map, not noremap!
 
 " http://learnvimscriptthehardway.stevelosh.com/chapters/15.html\   has nice operator pending maps 
 " https://medium.com/@sidneyliebrand/a-collection-of-vim-key-binds-4d227c9a455
@@ -84,6 +88,8 @@ nnoremap <C-w>2< <C-w>40<
 
 " easier maximization of windows!!
 nnoremap <C-w>- <C-w>_
+nnoremap <C-w>\ <C-w><bar>
+
 
 " easier window switching
 nnoremap <C-h> <C-w>h
@@ -91,7 +97,7 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" this >> nerdtree (add netrw_liststyle=3 and behold)
+" this >> nerdtree (add netrw_liststyle=3 and behold) --  needs nmap
 nmap <leader>ls :vert topleft 22vs %%<CR>
 " need to figure out netrw a bit tho ..    -- like how to make close parent dir and make another "root"
 
@@ -116,20 +122,13 @@ nnoremap <silent> <leader>c :close<CR>
 
 " these ^ didn't work, need to change loupe function to do: ms<bar>fxnCall
 
-"nnoremap <leader>f :vertTorTnah
-" very hacky way to change split type and not have new normal mode mapping
-" DEFAULT is vertical split
-"cabbrev vertTorTnahs split sf
-"cabbrev vertTorTnah vert sf
-
-
 nnoremap <leader>wf :find<space>
 nnoremap <leader>sf :sfind<space>
 nnoremap <leader>vf :vert sf<space>
 nnoremap <leader>tf :tabfind<space>
 
 " faster spamming of n. , can optionally add a count also!
-nnoremap \ :norm n.<CR>
+"nnoremap \ :norm n.<CR>
 
 " now have this mapping for bash && vim
 nnoremap <C-p> :FZF<CR>
@@ -144,6 +143,8 @@ nnoremap <C-p> :FZF<CR>
 nnoremap gV `[v`]
 
 " allow '.' and '@' to work in VISUAL MODE
+" note these don't work with recursive macros, v tempted to get wincent's
+" plugin which reassigns <CR> to @@ but runs most recently created OR recently used AND works with recursive macros
 vnoremap . :norm .<CR>
 vnoremap Q :norm @@<CR>
 
@@ -179,9 +180,9 @@ inoremap <silent> ,, <C-x><C-o>
 
 
 " all of these omnicomplete mappings are from https://vim.fandom.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
-:inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-"^ this one allows me to press enter instead of C-y to select item
+"note that above started with :inoremap
 
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
@@ -197,6 +198,14 @@ autocmd CompleteDone * pclose
 
 inoreabbrev slef self
 
+" frequently want to capitalize a word I just typed
+inoremap <C-u> <C-o>gUiw<esc>ea
+
+" frequently find myself knowing I will repeat a word as I type it
+" besides, C-c is useless in insert mode
+inoremap <C-y> <C-o>"iyiw<esc>ea
+
+
 if has('nvim')
     " so for some reason these alt mappings don't work consistently
     " but working so far for escaping terminal mode, can delete others probly
@@ -208,5 +217,4 @@ if has('nvim')
     tnoremap <M-j> <c-\><c-n><c-w>j
     tnoremap <M-k> <c-\><c-n><c-w>k
     tnoremap <M-l> <c-\><c-n><c-w>l
-
 endif

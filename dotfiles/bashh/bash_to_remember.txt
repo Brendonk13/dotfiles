@@ -17,4 +17,6 @@ don't forget gd, gf, gv, gV, <C-a>
 seems [[ == [m so keep using easier one till i figure out difference
 
 -- C-p == :Files
--- mapped: Q to @@! vis, normal
+-- mapped: Q to @@! vis, normal  <C-U> to capitalize from insert mode!
+
+i_<C-y> copies to "i register!
