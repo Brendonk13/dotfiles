@@ -1,3 +1,4 @@
+#!/bin/bash
 #alias doc='cd /mnt/c/Users/Brendon*/Documents/Documents/'
 #alias sem='doc;  cd 00*/0*/0*/'
 #alias dow='cd /mnt/c/Users/Brendon*/Downloads/'
@@ -27,6 +28,8 @@ alias v='nvim'
 
 # mnemonic: add sudo
 alias as='sudo $(history -p !!)'
+
+alias cadd='config add ~/.bashrc; config add ~/.vimrc; config add ~/dotfiles/'
 
 
 # note that can make sudo work with aliases by adding: 

@@ -1,3 +1,4 @@
+#!/bin/bash
 export EDITOR=nvim
 
 if [[ "$OSTYPE" != "linux-gnu" ]]; then

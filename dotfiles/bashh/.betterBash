@@ -1,3 +1,4 @@
+#!/bin/bash
 # note that alias's in this file are at bottom
 
 # should make a cmd called aliases which cat's the bash_aliases file then also the last lines in
