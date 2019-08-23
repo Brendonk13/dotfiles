@@ -1,7 +1,9 @@
-alias doc='cd /mnt/c/Users/Brendon*/Documents/Documents/'
-alias sem='doc;  cd 00*/0*/0*/'
-alias dow='cd /mnt/c/Users/Brendon*/Downloads/'
-alias song='dow;  cd W*/Av*/'
+#alias doc='cd /mnt/c/Users/Brendon*/Documents/Documents/'
+#alias sem='doc;  cd 00*/0*/0*/'
+#alias dow='cd /mnt/c/Users/Brendon*/Downloads/'
+#alias song='dow;  cd W*/Av*/'
+
+#alias do
 
 alias cd..='cd ..'
 alias   .='ls'
@@ -38,7 +40,7 @@ alias vim='nvim'
 # this is a function defined in .betterBash
 alias cdl=changeDirAndShow
 alias cdl..='cdl ..'
-alias lcc..='lcc ..'
+#alias lcc..='lcc ..'
 # -A doesn't show ., .. directories while -a does
 alias lsa='ls -A'
 alias ll='ls -l'

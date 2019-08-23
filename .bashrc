@@ -226,8 +226,16 @@ if [ -f ~/.dir_colors ]; then
     eval `dircolors ~/.dir_colors`
 fi
 
-if [ -f ~/FromInternet/z/z.sh ]; then
-    source ~/FromInternet/z/z.sh
-fi
+if [[ "$OSTYPE" != "linux-gnu" ]]; then
 
-export LIBGL_ALWAYS_INDIRECT=1
+    if [ -f ~/FromInternet/z/z.sh ]; then
+        source ~/FromInternet/z/z.sh
+    fi
+
+else
+    if [ -f /usr/share/z/z.sh ]; then
+        source /usr/share/z/z.sh
+    fi
+
+fi
+#export LIBGL_ALWAYS_INDIRECT=1

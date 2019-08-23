@@ -5,7 +5,7 @@
 set nocompatible
 set encoding=utf-8     "default for nvim, but who knows about elsewhere..
 " , means the dir in which vim was opened, '.' means the directory of the file where the cursor is
-set path=.,,,~/,~/vimCommands,~/dotfiles/**,~/PyStuff/morsels
+set path=.,,,~/,~/vim-notes,~/dotfiles/**,~/PyStuff/morsels
 " now these types don't appear in wild menu options
 set wildignore=*.o,*.a,*.so,*.pyc,*.swp,.git/*,*.class,~/FromInternet/*,*.dll,~/.vim_black/,~/.vim_black/**~/.vim_black,*pycache*
 " whhyyyy can't I get .vim_black to not appear in wildignore!!
@@ -112,8 +112,8 @@ set termguicolors        " this allows for usage of truecolor !
 set t_Co=256
 let g:solarized_bold=1
 let g:solarized_italic=1
-syntax enable
 set background=dark
+syntax enable
 colorscheme solarized
 
 " use ripgrep instead of grep

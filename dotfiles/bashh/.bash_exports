@@ -1,27 +1,31 @@
 export EDITOR=nvim
-export submit="/mnt/c/Users/Brendon*/Documents/b-submissions/"
 
+if [[ "$OSTYPE" != "linux-gnu" ]]; then
+
+echo "using a windows? computer"
+
+export submit="/mnt/c/Users/Brendon*/Documents/b-submissions/"
 export doc="/mnt/c/Users/Brendon*/Documents/"
 export dow="/mnt/c/Users/Brendon*/Downloads/"
 export song="/mnt/c/Users/Brendon*/Documents/Documents/07*/music*/"
-
-# had the -l option here too
-export FZF_DEFAULT_COMMAND='ag -l --path-to-ignore ~/.ignore --nocolor --hidden -g ""'
-#'ag --hidden -g'
-export RIPGREP_CONFIG_PATH="$HOME/FromInternet/.ripgreprc"
-
-
-# this is for italic comments according to https://stackoverflow.com/questions/3494435/vimrc-make-comments-italic
-#export TERM="xterm-256color-italic" 
-#echo -e "\e[3mfoo\e[23m"  command result shows that my terminal doesnt support italic
-
-#https://hobo.house/2017/07/17/using-italics-with-vim-in-your-terminal/
-# this link shows how I made italic comments work in wsltty
-
 export _Z_DATA="$HOME/FromInternet/z/.z"
 
 # using this and XCsrv1.20.1.4
-export DISPLAY=localhost:0.0
+#export DISPLAY=localhost:0.0
+export RIPGREP_CONFIG_PATH="$HOME/FromInternet/.ripgreprc"
+
+else
+
+export Z_DATA="$HOME/.config/.z_data_file"
+
+
+fi
+
+
+
+
+
+
 
 #Avoid duplicate entries
 export HISTCONTROL=ignoredups:erasedups
