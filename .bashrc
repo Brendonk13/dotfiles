@@ -98,21 +98,26 @@ if [ -f $dotBashDir/.bash_aliases ]; then
     source $dotBashDir/.bash_aliases
 fi
 
-# echo's for formatting
-echo ""; echo -n " --- "
-#send weather report to tempfil
-curl -s "wttr.in/$1?m1" > tempfil.txt
+if [[ "$OSTYPE" != "linux-gnu" ]]; then
 
-# remove last line of some guy begging to follow his twitter
-sed -i '$ d' tempfil.txt
-cat tempfil.txt;  rm tempfil.txt
+    # echo's for formatting
+    echo ""; echo -n " --- "
+    #send weather report to tempfil
+    curl -s "wttr.in/$1?m1" > tempfil.txt
 
-#append --'s to beginning of alias file, store in tempfil
-sed -e 's/^/ ----- /' $dotBashDir/bash_to_remember.txt > tempfil.txt
-cat tempfil.txt;  rm tempfil.txt
-echo ""
+    # remove last line of some guy begging to follow his twitter
+    sed -i '$ d' tempfil.txt
+    cat tempfil.txt;  rm tempfil.txt
 
+    #append --'s to beginning of alias file, store in tempfil
+    sed -e 's/^/ ----- /' $dotBashDir/bash_to_remember.txt > tempfil.txt
+    cat tempfil.txt;  rm tempfil.txt
+    echo ""
 
+else
+    neofetch
+
+fi
 
 source $dotBashDir/.bash_exports
 
@@ -236,6 +241,5 @@ else
     if [ -f /usr/share/z/z.sh ]; then
         source /usr/share/z/z.sh
     fi
-
 fi
 #export LIBGL_ALWAYS_INDIRECT=1
