@@ -115,6 +115,7 @@ if [[ "$OSTYPE" != "linux-gnu" ]]; then
     echo ""
 
 else
+    echo ""
     neofetch
 
 fi

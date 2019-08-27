@@ -113,8 +113,8 @@ nnoremap <silent> <leader>c :close<CR>
 
 
 "------------------ SEARCH --------------------
-"nnoremap <leader>/ ms/
-"nnoremap <leader>? ms?    
+nmap / ms/
+nmap ? ms?
 " my excuse for not adding these before was that I'd break nerdtree/ some other plugin i'm not using
 " and premature optimization is the death of all.. besides <leader>/ is unrememberable
 "nnoremap / ms/
@@ -196,7 +196,6 @@ autocmd CompleteDone * pclose
 
 " how can I turn off the E764 error which says omnifunc not set when I press '.' in insert mode.
 
-inoreabbrev slef self
 
 " frequently want to capitalize a word I just typed
 inoremap <C-u> <C-o>gUiw<esc>ea
@@ -204,6 +203,14 @@ inoremap <C-u> <C-o>gUiw<esc>ea
 " frequently find myself knowing I will repeat a word as I type it
 " besides, C-c is useless in insert mode
 inoremap <C-y> <C-o>"iyiw<esc>ea
+
+" ------------ abbreviations!! ---------------------------
+
+inoreabbrev slef self
+
+
+cnoreabbrev makrs marks
+
 
 
 if has('nvim')

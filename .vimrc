@@ -5,7 +5,7 @@
 set nocompatible
 set encoding=utf-8     "default for nvim, but who knows about elsewhere..
 " , means the dir in which vim was opened, '.' means the directory of the file where the cursor is
-set path=.,,,~/,~/vim-notes,~/dotfiles/**,~/PyStuff/morsels
+set path=.,,,~/,~/vim-notes,~/dotfiles/**,~/PyStuff/morsels,~/.i3
 " now these types don't appear in wild menu options
 set wildignore=*.o,*.a,*.so,*.pyc,*.swp,.git/*,*.class,~/FromInternet/*,*.dll,~/.vim_black/,~/.vim_black/**~/.vim_black,*pycache*
 " whhyyyy can't I get .vim_black to not appear in wildignore!!
