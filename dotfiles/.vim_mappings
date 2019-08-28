@@ -131,7 +131,7 @@ nnoremap <leader>tf :tabfind<space>
 "nnoremap \ :norm n.<CR>
 
 " now have this mapping for bash && vim
-nnoremap <C-p> :FZF<CR>
+"nnoremap <C-p> :FZF<CR>
 
 " don't really like c-p since I accidently press lots when trying to esc.
 
@@ -211,17 +211,54 @@ inoreabbrev slef self
 
 cnoreabbrev makrs marks
 
+" ------------ END abbreviations!! ---------------------------
+
+"------------------- plugin mappings --------------------------------
+
+" Better command history with q:
+command! CmdHist call fzf#vim#command_history({'bottom': '10'})
+nnoremap q: :CmdHist<CR>
+
+" Better search history
+command! QHist call fzf#vim#search_history({'bottom': '10'})
+nnoremap q/ :QHist<CR>
+
+nnoremap <M-f> :FZF<CR>
+
+"mnemonic: meta-buffers
+nnoremap <M-b> :Buffers<CR>
+
+"mnemonic: meta-current
+nnoremap <M-c> :BLines<CR>
+
+"mnemonic: meta-windows   -- this just searches file name of open windows 
+"nnoremap <M-w> :Windows<CR>
+
+" mnemonic: meta-help
+nnoremap <M-h> :Helptags<CR>
+
+"don't like that these are such big windows so far:(
+
+"------------------- TERMINAL ---------------------------------------
 
 
 if has('nvim')
-    " so for some reason these alt mappings don't work consistently
-    " but working so far for escaping terminal mode, can delete others probly
-    tnoremap <M-[> <C-\><C-n>
-    " using meta key allows for the esc key to work in terminal mode still
+  " so for some reason these alt mappings don't work consistently
+  " but working so far for escaping terminal mode, can delete others probly
+  tnoremap <M-[> <C-\><C-n>
+  " using meta key allows for the esc key to work in terminal mode still
 
-    " Terminal mode:
-    tnoremap <M-h> <c-\><c-n><c-w>h
-    tnoremap <M-j> <c-\><c-n><c-w>j
-    tnoremap <M-k> <c-\><c-n><c-w>k
-    tnoremap <M-l> <c-\><c-n><c-w>l
+  " Terminal mode:
+  tnoremap <M-h> <c-\><c-n><c-w>h
+  tnoremap <M-j> <c-\><c-n><c-w>j
+  tnoremap <M-k> <c-\><c-n><c-w>k
+  tnoremap <M-l> <c-\><c-n><c-w>l
+
+  augroup term
+  autocmd!
+  autocmd TermOpen * set nonumber norelativenumber
+  augroup END
+
 endif
+
+"------------------- END TERMINAL ---------------------------------------

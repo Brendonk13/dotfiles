@@ -5,7 +5,7 @@
 set nocompatible
 set encoding=utf-8     "default for nvim, but who knows about elsewhere..
 " , means the dir in which vim was opened, '.' means the directory of the file where the cursor is
-set path=.,,,~/,~/vim-notes,~/dotfiles/**,~/PyStuff/morsels,~/.i3
+set path=.,,,~/,~/vim-notes,~/dotfiles/**,~/PyStuff/morsels,~/.i3,~/.vimPlug/**
 " now these types don't appear in wild menu options
 set wildignore=*.o,*.a,*.so,*.pyc,*.swp,.git/*,*.class,~/FromInternet/*,*.dll,~/.vim_black/,~/.vim_black/**~/.vim_black,*pycache*
 " whhyyyy can't I get .vim_black to not appear in wildignore!!
@@ -100,6 +100,15 @@ if filereadable(expand("~/dotfiles/vimm/.vim_commands"))
 else
     echoerr 'could not find|read ~/dotfiles/vimm/.vim_mappings'
 endif
+
+if filereadable(expand("~/dotfiles/vimm/.my_autocmds"))
+    source ~/dotfiles/vimm/.my_autocmds
+else
+    echoerr 'Could not find|read ~/dotfiles/vimm/.my_autocmds'
+endif
+
+
+
 
 " note that rpy runs anacondas py3.7 -- also has readline
 let g:python3_host_prog='/usr/bin/python3.6'

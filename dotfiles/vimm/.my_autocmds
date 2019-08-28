@@ -1,0 +1,7 @@
+
+augroup vimFiles
+  autocmd!
+  autocmd Bufread */vimm/* setlocal shiftwidth=2 tabstop=2 softtabstop=2
+  autocmd Bufread ~/dotfiles/.vim_mappings setlocal shiftwidth=2 tabstop=2 softtabstop=2
+augroup END
+
