@@ -32,7 +32,7 @@ alias v="$VISUAL"
 alias as='sudo $(history -p !!)'
 
 alias cadd='config add ~/.bashrc; config add ~/.vimrc; config add ~/dotfiles/'
-
+alias cpush='config push origin master'
 
 # note that can make sudo work with aliases by adding: 
 # alias sudo='sudo ' -- the trailing space tells shell to look for aliases in other that first word of cmd
