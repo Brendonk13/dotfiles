@@ -47,6 +47,33 @@ endif
 " I would like to add a command that calls isort on my python files upon exiting them -- maybe this is overkill tho 
 
 
+
+
+let g:opened_neoterm = 0
+
+function! ToggleDropDownNeoterm()
+  if g:opened_neoterm
+    redir => neoterm_win_num
+      silent! execute "filter /neoterm/ ls"
+    redir END
+    "echom neoterm_win_num[3]
+    redir => neoterm_win_height
+      silent! execute "echo" . winheight(neoterm_win_num[3])
+    redir END
+
+    " set so next toggle opens to currents "drop down" window's height
+    let g:neoterm_size = substitute(neoterm_win_height, '^\n', '', '')
+    "echom g:neoterm_size
+    let g:opened_neoterm = 0
+    Tclose
+  else
+    let g:opened_neoterm = 1
+    Topen
+  endif
+endfunction
+
+
+
 " when in a neovim terminal, add a buffer to the existing vim session
 " instead of nesting (credit justinmk)
 autocmd VimEnter * if !empty($NVIM_LISTEN_ADDRESS) && $NVIM_LISTEN_ADDRESS !=# v:servername

@@ -59,6 +59,16 @@ nnoremap ysp "ty$<C-w>t"tp:s/\v /\\\\\\ /<CR>0"tD:set path+=<C-r>t<CR>/rAnD0MsTr
 nnoremap ; :
 nnoremap ;; ;
 
+
+" should make this into a function at some point which pastes at the correct indentation level
+" can just get the current column number
+nnoremap <leader>p mto<esc>p`t
+nnoremap <leader>P mtO<esc>p`t
+
+" saner searching
+nnoremap g; g;zz
+nnoremap g, g,zz
+
 " makes you go down line wise regardless of wrapping.
 nnoremap j gj
 nnoremap k gk
@@ -78,6 +88,16 @@ nmap <leader>te :tabe %%
 " https://medium.com/@sidneyliebrand/a-collection-of-vim-key-binds-4d227c9a455
 
 
+" would be nice to have a drop down general use terminal for traversing purposes
+" was thinking it would be nice to have one per tab
+"nnoremap <silent>,<CR> :call ()<cr>
+
+
+nnoremap <silent><leader><CR> :call ToggleDropDownNeoterm()<cr>
+vnoremap <silent><leader>ss :TREPLSendSelection<CR>
+" this next one defines an operator which I can use to send selections to neoterm
+nmap <silent><leader>s <Plug>(neoterm-repl-send)
+
 "---------- WINDOW MANAGEMENT ------------
 " maybe I will change this to <C-<lt>> as a normal mode mapping ... this is barely less keystrokes, just nice not to think about numbers
 nnoremap <C-w>> <C-w>20>
@@ -85,6 +105,11 @@ nnoremap <C-w>2> <C-w>40>
 " other direction now
 nnoremap <C-w>< <C-w>20<
 nnoremap <C-w>2< <C-w>40<
+
+
+" will use this for my "drop down" neoterm
+nnoremap <M-j> <C-w>3-
+nnoremap <M-k> <C-w>3+
 
 " easier maximization of windows!!
 nnoremap <C-w>- <C-w>_
@@ -198,11 +223,11 @@ autocmd CompleteDone * pclose
 
 
 " frequently want to capitalize a word I just typed
-inoremap <C-u> <C-o>gUiw<esc>ea
+inoremap <C-u> <esc>gUiwea
 
 " frequently find myself knowing I will repeat a word as I type it
 " besides, C-c is useless in insert mode
-inoremap <C-y> <C-o>"iyiw<esc>ea
+inoremap <C-y> <esc>"iyiwea
 
 " ------------ abbreviations!! ---------------------------
 

@@ -94,10 +94,6 @@ fi
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 
-if [ -f $dotBashDir/.bash_aliases ]; then
-    source $dotBashDir/.bash_aliases
-fi
-
 if [[ "$OSTYPE" != "linux-gnu" ]]; then
 
     # echo's for formatting
@@ -116,11 +112,18 @@ if [[ "$OSTYPE" != "linux-gnu" ]]; then
 
 else
     echo ""
-    neofetch
+    neofetch | sed -e 's/^/  /'
+    echo ""
 
 fi
 
-source $dotBashDir/.bash_exports
+if [ -f $dotBashDir/.bash_exports ]; then
+    source $dotBashDir/.bash_exports
+fi
+
+if [ -f $dotBashDir/.bash_aliases ]; then
+    source $dotBashDir/.bash_aliases
+fi
 
 
 
@@ -135,7 +138,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH=~/FromInternet/anaconda3/bin:$PATH
 
 
 #betterBash has functions and a few common alias's 
@@ -237,6 +239,7 @@ if [[ "$OSTYPE" != "linux-gnu" ]]; then
     if [ -f ~/FromInternet/z/z.sh ]; then
         source ~/FromInternet/z/z.sh
     fi
+    export PATH=~/FromInternet/anaconda3/bin:$PATH
 
 else
     if [ -f /usr/share/z/z.sh ]; then

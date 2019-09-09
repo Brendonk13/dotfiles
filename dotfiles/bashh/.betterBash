@@ -16,21 +16,21 @@ function up() {
 }
 
 function changeDirAndShow() {
-	cd "$1"; ls 
+    cd "$1"; ls
 }
 
 function lcc() {
-	cd "$1"
-	echo ""
-	ls
-	echo ""
+    cd "$1"
+    echo ""
+    ls
+    echo ""
 }
 
 # this function moves files to a directory then changes user to that folder
 function mcd() {
     if [ "$#" -lt 2 ]; then
         echo "Input files and destination for this to work jeez."
-        exit 1
+        return
     fi
 
     file_destination=${@:$#}
@@ -80,6 +80,21 @@ function extract () {
   fi
 }
 
+function search_packages() {
+    pac_manager="$1"
+    package_name=$("$pac_manager" -Slq | fzf) > /dev/null 2>&1
+    if [ "$package_name" == "" ]; then
+        #echo "CTRL-C detected"
+        return
+    fi
+    if [ "$pac_manager" == "yay" ]; then
+        "$pac_manager" -S "$package_name"
+        # sudo not recommended for yay installs
+    else
+        sudo "$pac_manager" -S "$package_name"
+    fi
+}
+
 # no more friggin error sound !!!
 bind 'set bell-style none'
 
@@ -94,7 +109,6 @@ bind "set completion-map-case on"
 
 # Display matches for ambiguous patterns at first tab press
 bind "set show-all-if-ambiguous on"
-
 
 # Don't record some commands -- who cares if they only show up once!
 #export HISTIGNORE="&:[ ]*:exit:ls:history:clear"
