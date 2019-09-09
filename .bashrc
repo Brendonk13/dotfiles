@@ -94,7 +94,7 @@ fi
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 
-if [[ "$OSTYPE" != "linux-gnu" ]]; then
+if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
 
     # echo's for formatting
     echo ""; echo -n " --- "
@@ -116,6 +116,7 @@ else
     echo ""
 
 fi
+
 
 if [ -f $dotBashDir/.bash_exports ]; then
     source $dotBashDir/.bash_exports
