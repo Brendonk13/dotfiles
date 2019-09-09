@@ -1,8 +1,21 @@
 #!/bin/bash
-#alias doc='cd /mnt/c/Users/Brendon*/Documents/Documents/'
-#alias sem='doc;  cd 00*/0*/0*/'
-#alias dow='cd /mnt/c/Users/Brendon*/Downloads/'
-#alias song='dow;  cd W*/Av*/'
+if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
+
+    alias doc='cd /mnt/c/Users/Brendon*/Documents/Documents/'
+    alias sem='doc;  cd 00*/0*/0*/'
+    alias dow='cd /mnt/c/Users/Brendon*/Downloads/'
+    alias song='dow;  cd W*/Av*/'
+
+else
+    # functions in betterBash -- fuzzy finds packages in pacman/yay
+    alias spac='search_packages pacman'
+    alias syay='search_packages yay'
+
+    # copy speakers code to clipboards
+    alias blue='echo 'C0:28:8D:01:4F:DE' | xclip -selection c; bluetoothctl'
+
+
+fi
 
 #alias do
 
@@ -33,6 +46,7 @@ alias as='sudo $(history -p !!)'
 
 alias cadd='config add ~/.bashrc; config add ~/.vimrc; config add ~/dotfiles/'
 alias cpush='config push origin master'
+alias ccom='config commit -m'
 
 # note that can make sudo work with aliases by adding: 
 # alias sudo='sudo ' -- the trailing space tells shell to look for aliases in other that first word of cmd
@@ -56,8 +70,3 @@ alias gcom='git commit -m'
 alias cat='bat'
 alias bell='echo -ne "\a"'
 
-# functions in betterBash -- fuzzy finds packages in pacman/yay
-alias spac='search_packages pacman'
-alias syay='search_packages yay'
-
-alias blue='echo 'C0:28:8D:01:4F:DE' | xclip -selection c; bluetoothctl'

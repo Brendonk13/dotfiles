@@ -235,7 +235,7 @@ if [ -f ~/.dir_colors ]; then
     eval `dircolors ~/.dir_colors`
 fi
 
-if [[ "$OSTYPE" != "linux-gnu" ]]; then
+if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
 
     if [ -f ~/FromInternet/z/z.sh ]; then
         source ~/FromInternet/z/z.sh

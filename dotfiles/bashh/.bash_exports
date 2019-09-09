@@ -2,7 +2,6 @@
 export EDITOR=nvim
 
 if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
-    echo "using a windows computer"
 
     export submit="/mnt/c/Users/Brendon*/Documents/b-submissions/"
     export doc="/mnt/c/Users/Brendon*/Documents/"
