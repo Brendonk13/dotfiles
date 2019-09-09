@@ -10,6 +10,7 @@ if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
     export song="/mnt/c/Users/Brendon*/Documents/Documents/07*/music*/"
     export _Z_DATA="$HOME/FromInternet/z/.z"
 
+    export VISUAL="nvim"
     # using this and XCsrv1.20.1.4
     #export DISPLAY=localhost:0.0
     export RIPGREP_CONFIG_PATH="$HOME/FromInternet/.ripgreprc"
@@ -19,17 +20,14 @@ else
     export Z_DATA="$HOME/.config/.z_data_file"
     export RIPGREP_CONFIG_PATH=$HOME/.config/.ripgreprc
 
+    # have this in here since haven't downloaded nvr on windows partition
+    if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+        export VISUAL="nvr --remote-tab"
+    else
+        export VISUAL="nvim"
+    fi
+
 fi
-
-
-if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
-    export VISUAL="nvr --remote-tab"
-else
-    export VISUAL="nvim"
-fi
-
-
-
 
 
 #Avoid duplicate entries

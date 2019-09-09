@@ -69,6 +69,7 @@ nnoremap <leader>P mtO<esc>p`t
 nnoremap g; g;zz
 nnoremap g, g,zz
 
+
 " makes you go down line wise regardless of wrapping.
 nnoremap j gj
 nnoremap k gk
