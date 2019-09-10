@@ -67,6 +67,10 @@ alias dotf='cd ~/dotfiles/bashh; lsa'
 alias ag='ag --ignore-dir ~/FromInternet'
 alias gcom='git commit -m'
 
+alias co='git checkout'
+alias gadd='git add'
+alias gstat='git status'
+
 alias cat='bat'
 alias bell='echo -ne "\a"'
 

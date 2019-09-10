@@ -223,7 +223,7 @@ function parse_git_dirty {
 # this allows me to only show current and parent directory!
 curr_parent='${PWD#"${PWD%/*/*}/"}'
 
-export PS1="\`parse_git_branch\` \[\e[40m\] \[\e[m\]\[\e[33m\]-\[\e[m\]  \@ \[\e[33m\]-\[\e[m\] \[\e[31m\][\[\e[m\] $curr_parent \[\e[31;40m\]]\[\e[m\]\[\e[40m\] \[\e[m\]\[\e[32;40m\]\\$\[\e[m\] "
+export PS1="\`parse_git_branch\`  \[\e[33m\]-\[\e[m\]  \@ \[\e[33m\]-\[\e[m\] \[\e[31m\][\[\e[m\] $curr_parent \[\e[31m\]] \[\e[m\]\[\e[32m\]\\$\[\e[m\] "
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 #export LS_COLORS="$(vivid generate ayu)"

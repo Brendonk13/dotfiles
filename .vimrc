@@ -111,7 +111,8 @@ endif
 
 
 " note that rpy runs anacondas py3.7 -- also has readline
-let g:python3_host_prog='/usr/bin/python3.6'
+"let g:python3_host_prog='/usr/bin/python3.6'
+let g:python3_host_prog='/usr/bin/python'
 
 "highlight Cursor cterm=underline gui=underline term=underline
 

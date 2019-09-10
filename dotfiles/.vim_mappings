@@ -190,8 +190,8 @@ inoremap <C-k> <Up>
 
 " this inserts a line below me from insert mode
 " use '.' since I'm already using this for omni and I want minimal "lag keys"
-inoremap ,<CR> <esc>mto<esc>`ta
-inoremap ,<BS> <esc>mt<down>0i<BS><esc>`ta
+inoremap ;<CR> <esc>mto<esc>`ta
+inoremap ;<BS> <esc>mt<down>0i<BS><esc>`ta
 " so now enter, bs operate on lines above me, the dot variant acts on lines below current!
 
 
@@ -200,7 +200,7 @@ inoremap <C-e> <C-o>$
 inoremap <C-b> <C-o>^
 
 " ---  omnicomplete mappings-----
-inoremap <silent> ,, <C-x><C-o>
+inoremap <silent> ;; <C-x><C-o>
 
 " this still brings up a err msg maybe the solution is to make a function ...
 
