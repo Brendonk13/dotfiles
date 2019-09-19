@@ -5,3 +5,15 @@ augroup vimFiles
   autocmd Bufread ~/dotfiles/.vim_mappings setlocal shiftwidth=2 tabstop=2 softtabstop=2
 augroup END
 
+
+augroup java
+  autocmd!
+  " add delete and add comments, add == yc supposed to be similar
+  " to how we add in surround plugin
+  autocmd Filetype java nnoremap <buffer> dc mt^"_2x`thh
+  autocmd Filetype java nnoremap <buffer> yc mtI//<esc>`tll
+  " have seen a disorienting ammount of tabs in project
+  autocmd Filetype java setlocal nolist
+  autocmd Filetype java set makeprg=javac\ %
+  set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
+augroup END

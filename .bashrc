@@ -226,14 +226,11 @@ curr_parent='${PWD#"${PWD%/*/*}/"}'
 export PS1="\`parse_git_branch\`  \[\e[33m\]-\[\e[m\]  \@ \[\e[33m\]-\[\e[m\] \[\e[01;31m\][\[\e[m\]$curr_parent\[\e[01;31m\]] \[\e[m\]\[\e[32m\]\\$\[\e[m\] "
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-#export LS_COLORS="$(vivid generate ayu)"
-#eval `dircolors $dotBashDir/dircolors.moonshine`
-#LS_COLORS=$LS_COLORS:'ow=01;93;100'
 
 
-if [ -f ~/.dir_colors ]; then
-    eval `dircolors ~/.dir_colors`
-fi
+#if [ -f ~/.dir_colors ]; then
+#    eval `dircolors ~/.dir_colors`
+#fi
 
 if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
 
@@ -246,5 +243,8 @@ else
     if [ -f /usr/share/z/z.sh ]; then
         source /usr/share/z/z.sh
     fi
+
+    #source /home/brendonk/Scripts/spotify-sp/fa6258f3ff7b17747ee3/sp >/dev/null 2>&1
 fi
+
 #export LIBGL_ALWAYS_INDIRECT=1

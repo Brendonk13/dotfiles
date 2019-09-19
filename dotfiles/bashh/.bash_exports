@@ -15,8 +15,10 @@ if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
     export RIPGREP_CONFIG_PATH="$HOME/FromInternet/.ripgreprc"
 
 else
+    export dow="~/Downloads"
+    export submit="~/Documents/Mcgill/submissions"
 
-    export Z_DATA="$HOME/.config/.z_data_file"
+    export _Z_DATA="$HOME/.config/.z_data_file"
     export RIPGREP_CONFIG_PATH=$HOME/.config/.ripgreprc
 
     # have this in here since haven't downloaded nvr on windows partition
@@ -25,6 +27,10 @@ else
     else
         export VISUAL="nvim"
     fi
+
+    export JAVA_HOME="/opt/java/jdk1.8.0_221"
+    export PATH=$PATH:"/opt/java/jdk1.8.0_221/bin"
+
 
 fi
 

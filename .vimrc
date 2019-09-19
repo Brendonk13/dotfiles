@@ -63,7 +63,10 @@ endif
 
 set list
 set listchars=trail:•
-"set listchars+=tab:<C-V>U25B7 (0:51 settings V)
+set listchars+=tab:▷┅
+
+"U25B7 then U2505
+
 
 
 " show matching bracket for 3 seconds -- not working, check ben orenstein's rc

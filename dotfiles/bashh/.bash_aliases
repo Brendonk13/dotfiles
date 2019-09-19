@@ -7,6 +7,10 @@ if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
     alias song='dow;  cd W*/Av*/'
 
 else
+    alias dow='cd ~/Downloads'
+    alias submit='cd ~/Documents/Mcgill/submissions'
+    alias sem='cd ~/Documents/Mcgill/5th-year'
+
     # functions in betterBash -- fuzzy finds packages in pacman/yay
     alias spac='search_packages pacman'
     alias syay='search_packages yay'
@@ -14,6 +18,8 @@ else
     # copy speakers code to clipboards
     alias blue='echo 'C0:28:8D:01:4F:DE' | xclip -selection c; bluetoothctl'
 
+    alias eclipse='cd /home/brendonk/Downloads/programs/java-2019-06/eclipse; ./eclipse &'
+    alias eclipsedir='cd /home/brendonk/Downloads/programs/eclipse-workspace/graphics-a1/src/comp557/a1; ls'
 
 fi
 
@@ -70,7 +76,12 @@ alias gcom='git commit -m'
 alias co='git checkout'
 alias gadd='git add'
 alias gstat='git status'
+alias gl1='git log --oneline'
 
 alias cat='bat'
 alias bell='echo -ne "\a"'
+alias man='pinfo'
+alias open='xdg-open'
+alias sudo='sudo '
+
 

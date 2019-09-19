@@ -32,7 +32,7 @@ export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_ALT_C_COMMAND="bfs -type d -nohidden"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS='--bind J:down,K:up --reverse --ansi --multi'
-bind -x '"\C-p": vim $(fzf);'
+bind -x '"\C-p": fzf'
 # what's the point of a ctrl-t command lol 
 #-- can do ctrl-t in c-line to search without pulling up vim
 # and the alt c command is for FINDING DIRECTORIES ONLY
@@ -51,8 +51,7 @@ sf() {
     #exclude=".config,.git,node_modules,vendor,build,yarn.lock,*.sty,*.bst,*.coffee,dist"
     rg_command='rg --column --line-number --no-heading --fixed-strings --color "always"'
     files=`eval $rg_command $search | fzf --ansi --multi --reverse | awk -F ':' '{print $1":"$2":"$3}'`
-    [[ -n "$files" ]] && ${EDITOR:-nvim} $files
+    [[ -n "$files" ]] && $VISUAL $files
 }
 
 
-alias man='pinfo'

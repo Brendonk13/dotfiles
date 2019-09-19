@@ -18,7 +18,8 @@ nnoremap <leader><BS> i<BS><esc>
 " <CR> would be much better as a function which moved to beginning of word then i<CR>
 " iff in cursor in the middle of word
 
-nnoremap <leader>s :source $MYVIMRC<CR>
+" <leader>s used by neoterm send as operator
+nnoremap <leader>S :source $MYVIMRC<CR>
 
 
 " goat mapping -- can now add count to @@
@@ -139,8 +140,8 @@ nnoremap <silent> <leader>c :close<CR>
 
 
 "------------------ SEARCH --------------------
-nmap / ms/
-nmap ? ms?
+"nmap / ms/
+"nmap ? ms?
 " my excuse for not adding these before was that I'd break nerdtree/ some other plugin i'm not using
 " and premature optimization is the death of all.. besides <leader>/ is unrememberable
 "nnoremap / ms/

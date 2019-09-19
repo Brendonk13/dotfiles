@@ -32,14 +32,13 @@ function mcd() {
         echo "Input files and destination for this to work jeez."
         return
     fi
-
     file_destination=${@:$#}
     num_files=$#
+
     # if given mcd fil dest, just do move cmd
     if [ "$num_files" -eq 2 ]; then
         mv "$1" "$2"
     fi
-
     # if given multiple files to move then move em !
     if [ "$num_files" -gt 2 ]; then
         #files=${@:1:$#-1}
@@ -94,6 +93,8 @@ function search_packages() {
         sudo "$pac_manager" -S "$package_name"
     fi
 }
+
+#bind -x '"\C-y": "sp-dbus PlayPause"'
 
 # no more friggin error sound !!!
 bind 'set bell-style none'

@@ -42,8 +42,8 @@ endif
 
 " this is used by my manjaro
 if has('clipboard')
-  nnoremap <leader>y :normal! gv"+y<CR>
-  vnoremap <leader>y :normal! gv"+y<CR>
+  nnoremap <silent><leader>y :normal! gv"+y<CR>
+  vnoremap <silent><leader>y :normal! gv"+y<CR>
 endif
 
 " I would like to add a command that calls isort on my python files upon exiting them -- maybe this is overkill tho 
@@ -65,7 +65,6 @@ function! ToggleDropDownNeoterm()
 
     " set so next toggle opens to currents "drop down" window's height
     let g:neoterm_size = substitute(neoterm_win_height, '^\n', '', '')
-    "echom g:neoterm_size
     let g:opened_neoterm = 0
     Tclose
   else
@@ -73,16 +72,3 @@ function! ToggleDropDownNeoterm()
     Topen
   endif
 endfunction
-
-
-
-" when in a neovim terminal, add a buffer to the existing vim session
-" instead of nesting (credit justinmk)
-autocmd VimEnter * if !empty($NVIM_LISTEN_ADDRESS) && $NVIM_LISTEN_ADDRESS !=# v:servername
-  \ |let g:r=jobstart(['nc', '-U', $NVIM_LISTEN_ADDRESS],{'rpc':v:true})
-  \ |let g:f=fnameescape(expand('%:p'))
-  \ |noau bwipe
-  \ |call rpcrequest(g:r, "nvim_command", "edit ".g:f)
-  \ |call rpcrequest(g:r, "nvim_command", "call lib#SetNumberDisplay()")
-  \ |qa
-  \ |endif
