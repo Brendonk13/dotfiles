@@ -20,9 +20,10 @@ else
     alias blue='echo 'C0:28:8D:01:4F:DE' | xclip -selection c; bluetoothctl'
     alias night='redshift -l 45.513860:-73.570660'
 
-    alias al=search_aliases
+    #alias al=search_aliases
+    alias graph='cd ~/Downloads/Assignments/COMP557A3F19Provided/comp557F19/src/comp557/a3; ls; echo -e "\n  ----------------------------   up 3 to root dir"'
     alias eclipse='cd /home/brendonk/Downloads/programs/java-2019-06/eclipse; ./eclipse &'
-    alias toclip='cd /home/brendonk/Downloads/programs/eclipse-workspace/graphics-a2/src/comp557/a2; ls'
+    #alias toclip='cd /home/brendonk/Downloads/programs/eclipse-workspace/graphics-a2/src/comp557/a2; ls'
 
     # mnemonic:  EclipseWorkspace
     alias ework='cd /home/brendonk/Downloads/programs/eclipse-workspace; ls'
