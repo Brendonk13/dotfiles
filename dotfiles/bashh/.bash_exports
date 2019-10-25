@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 export EDITOR=nvim
 
 if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
@@ -15,8 +15,9 @@ if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
     export RIPGREP_CONFIG_PATH="$HOME/FromInternet/.ripgreprc"
 
 else
-    export dow="~/Downloads"
-    export submit="~/Documents/Mcgill/submissions"
+    export dow="$HOME/Downloads/"
+    export submit="$HOME/Documents/Mcgill/submissions/"
+    export sem="/home/brendonk/Documents/Mcgill/5th-year/fall-sem/"
 
     export _Z_DATA="$HOME/.config/.z_data_file"
     export RIPGREP_CONFIG_PATH=$HOME/.config/.ripgreprc

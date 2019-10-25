@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 # note that alias's in this file are at bottom
 
 # should make a cmd called aliases which cat's the bash_aliases file then also the last lines in
@@ -16,7 +16,7 @@ function up() {
 }
 
 function changeDirAndShow() {
-    cd "$1"; ls
+    cd "$1" && ls -A
 }
 
 function lcc() {
@@ -56,6 +56,45 @@ function mcd() {
     ls
     echo ""
 }
+
+
+# this should never have been done..
+function search_aliases() {
+    chars_before_eq=`alias | awk '{first = $1; $1 = ""; print $0, first; }' | cut -d = -f 1`
+    #echo "$chars_before_eq"
+    #alias | sed -e 's/^alias//' | awk -v "fst=$1" '{printf "$1"; for (i=0; i < $(($max_chars - ${#fst})); i++) printf " "; printf "="; for (j=2; j<NF; j++) printf $j " "; print $NF}' | fzf
+
+    # this loop finds the longest alias name
+    max_chars=-1
+    word=""
+    while read -r line; do
+        # add quotes to curr_chars if not working
+        if [ ${#line} -gt $max_chars ]; then
+            max_chars=${#line}
+            word="$line"
+        fi
+    done <<< "$chars_before_eq"
+    echo -n "the longest alias has: "; echo -n "$max_chars"; echo " characters."
+    echo -n "the word is: "; echo "$word"
+
+    #awk {'first = $1; $1 = ""; printf ("%${max_chars}s%s\n", $5, $1)'}
+    # print first thing: alias name, then $max_chars spaces, another space, then print everything but fst col (fst printed at beginning)
+    alias | sed -e 's/^alias//' | awk -v "loop_count=$(($max_chars - ${#1}))" '{printf $1; for (i=0; i<"$loop_count"; i++) printf " "; printf "="; for (j=2; j<NF; j++) printf $j " "; print $NF}' | fzf
+
+    # alias | sed -e 's/^alias//' | cut -d = -f 1
+    # ---- to retrieve alias name only
+    # need to delete alias keyword, then compute #whitespaces== max_chars - curr_char length
+    # then print #whitespaces
+    # then do print:  alias | cut -d = -f 2:100
+    #----- this prints everything after the equals sign
+    #-------- alias | sed -e 's/^.\+\=//' does this better
+
+    #awk '{first = $1; $1 = ""; for (i=}'
+    # adds $diff spaces at beginning of line
+    #sed 's/^/'"$(printf %${DIFF}s)"'/'
+    return
+}
+
 
 function extract () {
   if [ -f $1 ] ; then

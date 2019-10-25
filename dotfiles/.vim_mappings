@@ -231,6 +231,11 @@ inoremap <C-u> <esc>gUiwea
 " besides, C-c is useless in insert mode
 inoremap <C-y> <esc>"iyiwea
 
+
+" mnemonic: Capitalize
+inoremap <C-c> <esc>b~ea
+
+
 " ------------ abbreviations!! ---------------------------
 
 inoreabbrev slef self

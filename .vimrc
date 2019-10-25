@@ -5,7 +5,7 @@
 set nocompatible
 set encoding=utf-8     "default for nvim, but who knows about elsewhere..
 " , means the dir in which vim was opened, '.' means the directory of the file where the cursor is
-set path=.,,,~/,~/vim-notes,~/dotfiles/**,~/PyStuff/morsels,~/.i3,~/.vimPlug/**
+set path=.,,,~/,~/vim-notes,~/dotfiles/**,~/PyStuff/morsels,~/.i3,~/.vimPlug/**,~/Scripts/
 " now these types don't appear in wild menu options
 set wildignore=*.o,*.a,*.so,*.pyc,*.swp,.git/*,*.class,~/FromInternet/*,*.dll,~/.vim_black/,~/.vim_black/**~/.vim_black,*pycache*
 " whhyyyy can't I get .vim_black to not appear in wildignore!!
@@ -64,9 +64,13 @@ endif
 set list
 set listchars=trail:•
 set listchars+=tab:▷┅
-
 "U25B7 then U2505
 
+
+
+" see :h fillchars
+"set fillchars=stl:─,stlnc:─,vert:│
+"set fillchars=vert:|
 
 
 " show matching bracket for 3 seconds -- not working, check ben orenstein's rc

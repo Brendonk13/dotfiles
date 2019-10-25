@@ -5,6 +5,12 @@ augroup vimFiles
   autocmd Bufread ~/dotfiles/.vim_mappings setlocal shiftwidth=2 tabstop=2 softtabstop=2
 augroup END
 
+augroup python
+  autocmd!
+  autocmd Filetype python nnoremap <buffer> dc mt^"_x`th
+  autocmd Filetype python nnoremap <buffer> yc mtI#<esc>`tl
+augroup END
+
 
 augroup java
   autocmd!
@@ -17,3 +23,16 @@ augroup java
   autocmd Filetype java set makeprg=javac\ %
   set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
 augroup END
+
+augroup xml
+  autocmd!
+  autocmd Filetype xml setlocal shiftwidth=2 tabstop=2 softtabstop=2
+  "autocmd FileType xml setlocal foldmethod=indent foldlevelstart=999 foldminlines=0
+augroup END
+
+"augroup goyo
+  "autocmd!
+autocmd! User GoyoEnter Limelight
+"autocmd! User GoyoEnter setlocal nocursorline
+autocmd! User GoyoLeave Limelight!
+"augroup END

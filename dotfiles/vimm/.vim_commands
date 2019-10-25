@@ -49,7 +49,7 @@ endif
 " I would like to add a command that calls isort on my python files upon exiting them -- maybe this is overkill tho 
 
 
-
+" is there a place I can read from that's more stable than just picking the first one in bufflist?
 
 let g:opened_neoterm = 0
 

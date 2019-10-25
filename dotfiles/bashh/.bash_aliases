@@ -1,15 +1,16 @@
-#!/bin/bash
+#!/bin/env bash
 if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
 
     alias doc='cd /mnt/c/Users/Brendon*/Documents/Documents/'
-    alias sem='doc;  cd 00*/0*/0*/'
-    alias dow='cd /mnt/c/Users/Brendon*/Downloads/'
-    alias song='dow;  cd W*/Av*/'
+    alias sem='doc;  cd 00*/0*/0*/; ls'
+    alias dow='cd /mnt/c/Users/Brendon*/Downloads/; ls'
+    alias song='dow;  cd W*/Av*/; ls -A'
 
 else
-    alias dow='cd ~/Downloads'
+    alias dow='cd ~/Downloads; ls'
     alias submit='cd ~/Documents/Mcgill/submissions'
-    alias sem='cd ~/Documents/Mcgill/5th-year'
+    alias sem='cd ~/Documents/Mcgill/5th-year/fall-sem; ls'
+    alias scrot='cd ~/Pictures/screenshots; ls'
 
     # functions in betterBash -- fuzzy finds packages in pacman/yay
     alias spac='search_packages pacman'
@@ -17,9 +18,15 @@ else
 
     # copy speakers code to clipboards
     alias blue='echo 'C0:28:8D:01:4F:DE' | xclip -selection c; bluetoothctl'
+    alias night='redshift -l 45.513860:-73.570660'
 
+    alias al=search_aliases
     alias eclipse='cd /home/brendonk/Downloads/programs/java-2019-06/eclipse; ./eclipse &'
-    alias eclipsedir='cd /home/brendonk/Downloads/programs/eclipse-workspace/graphics-a1/src/comp557/a1; ls'
+    alias toclip='cd /home/brendonk/Downloads/programs/eclipse-workspace/graphics-a2/src/comp557/a2; ls'
+
+    # mnemonic:  EclipseWorkspace
+    alias ework='cd /home/brendonk/Downloads/programs/eclipse-workspace; ls'
+    alias andor='cd /home/brendonk/Documents/Mcgill/5th-year/fall-sem/andor/f2019-hexanome-14; ls'
 
 fi
 

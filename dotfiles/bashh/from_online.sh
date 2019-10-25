@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 # HSTR configuration - add this to ~/.bashrc
 #alias hh=hstr                    # hh to be alias for hstr
 #export HSTR_CONFIG=hicolor       # get more colors
