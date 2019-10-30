@@ -44,6 +44,7 @@ nnoremap <silent> <leader>tt :tabnew<bar>:terminal<CR>i
 
 
 
+
 " makes sense, even suggested in help!
 nnoremap Y y$
 
@@ -86,6 +87,15 @@ nmap <leader>te :tabe %%
 
 " these^^^ muuuust be map, not noremap!
 
+set wildcharm=<C-z>
+cnoremap Bd :ls<CR>:      bd<space><C-z>
+" have spaces in order to see status ie hidden/active
+
+" mnemonic: Delete tab
+nnoremap <leader>d<tab> :%s/\v^\s+$//<CR>
+
+
+
 " http://learnvimscriptthehardway.stevelosh.com/chapters/15.html\   has nice operator pending maps 
 " https://medium.com/@sidneyliebrand/a-collection-of-vim-key-binds-4d227c9a455
 
@@ -123,6 +133,11 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+
+" easy switch back to previous buffer
+nnoremap <leader><leader> <C-^>
+
 
 " this >> nerdtree (add netrw_liststyle=3 and behold) --  needs nmap
 nmap <leader>ls :vert topleft 22vs %%<CR>

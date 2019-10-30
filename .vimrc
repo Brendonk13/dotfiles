@@ -1,9 +1,6 @@
-" 1st 3 cmd's allow: all runtime files and packages in ~/.vim will be loaded by Neovim.
-" Any customisations you make in your ~/.vimrc will now apply to Neovim as
-" well as Vim. ---- from http://vimcasts.org/episodes/meet-neovim/
-
 set nocompatible
-set encoding=utf-8     "default for nvim, but who knows about elsewhere..
+"default for nvim, but who knows about elsewhere..
+set encoding=utf-8
 " , means the dir in which vim was opened, '.' means the directory of the file where the cursor is
 set path=.,,,~/,~/vim-notes,~/dotfiles/**,~/PyStuff/morsels,~/.i3,~/.vimPlug/**,~/Scripts/
 " now these types don't appear in wild menu options
@@ -24,11 +21,14 @@ set autoread              " re-read file into buffer if disk version changed whi
 " the splits feel more natural this way 
 set splitright
 set splitbelow
-set lazyredraw            " disables redrawing screen while executing macros -- faster macro execution
+" disables redrawing screen while executing macros -- faster macro execution
+set lazyredraw
 
-set nomodeline            " for security reasons
+" for security reasons
+set nomodeline
 
-set hidden                " allow :bn instead of :bn! for swapping a hidden buffer to buffer list
+" allow :bn instead of :bn! for swapping a hidden buffer to buffer list
+set hidden
 " autoindent: indent when enter pressed in insert, indent with o,O in normal
 set autoindent
 " This doesn't seem to add anything strangely ..
@@ -44,17 +44,19 @@ set softtabstop=4
 " round up tabs to always be multiple of 4
 set shiftround
 
-set relativenumber         " line #'s are relative to cursor position, good for small jumps
-set nu                     " having both on shows line # instead of 0 for cursor line
+"set relativenumber         " line #'s are relative to cursor position, good for small jumps
+"set nu                     " having both on shows line # instead of 0 for cursor line
 set laststatus=2
 
 " cursor now only goes within 1 line of top/bottom
 set scrolloff=1
 
 "set formatoptions+=j     " Delete comment character when joining commented lines
-set formatoptions+=n        "allows smart indenting for numbered lists
-set cursorline                        " highlight current line
-set linebreak               " don't wrap line mid-word
+"allows smart indenting for numbered lists
+set formatoptions+=n
+set cursorline
+" highlight current line" don't wrap line mid-word
+set linebreak
 
 if has('virtualedit')
     "idk how to explain, nice for visual block mode
@@ -66,13 +68,6 @@ set listchars=trail:•
 set listchars+=tab:▷┅
 "U25B7 then U2505
 
-
-
-" see :h fillchars
-"set fillchars=stl:─,stlnc:─,vert:│
-"set fillchars=vert:|
-
-
 " show matching bracket for 3 seconds -- not working, check ben orenstein's rc
 " for other cmd before this one
 set matchtime=3
@@ -81,13 +76,16 @@ set matchtime=3
 " tree view!
 let g:netrw_liststyle=3
 
-" didnt't seem to do anything...
-"set showcmd            " show cmd in status line
-set noshowmode          " now the insert shit doesnt show at bottom, have vim airline now!
-set ignorecase          " case insensitive search by default
-set smartcase           " override ignorecase if capital entered mid search
-set incsearch           " jump to candidates while typing search pattern
-set gdefault            " assume the /g flag on :s substitutions to replace all matches in a line
+" now the insert shit doesnt show at bottom, have vim lightline now!
+set noshowmode
+" case insensitive search by default
+set ignorecase
+" override ignorecase if capital entered mid search
+set smartcase
+" jump to candidates while typing search pattern
+set incsearch
+" assume the /g flag on :s substitutions to replace all matches in a line
+set gdefault
 
 if filereadable(expand("~/.vimPlug/vimPlugCall"))
     source ~/.vimPlug/vimPlugCall
@@ -125,7 +123,8 @@ let g:python3_host_prog='/usr/bin/python'
 
 "autocmd ColorScheme * highlight Comment cterm=underline gui=underline term=underline -- Needs to be before colorscheme set
 
-set termguicolors        " this allows for usage of truecolor !
+" this allows for usage of truecolor !
+set termguicolors
 set t_Co=256
 let g:solarized_bold=1
 let g:solarized_italic=1
@@ -133,12 +132,22 @@ set background=dark
 syntax enable
 colorscheme solarized
 
+" sets vertical split to be a bar
+set fillchars+=vert:│
+highlight VertSplit ctermbg=NONE guibg=NONE
+
+" set status line divider for inactive windows
+" TODO: create a function which will only draw these ~'s if the window is on
+" top and there exists a horizontal split
+" do this using winwidth(), winheight() total_num_wins = winnr('$'), and screencol()/screenrow()
+" map out where the window is to see if the bottom row is at &lines (then we
+" are on top window)
+" https://stackoverflow.com/questions/8070850/get-position-of-splitted-windows-on-a-vim-editor
+set fillchars+=stlnc:~
+highlight StatusLineNC ctermbg=NONE guibg=NONE
+
 " use ripgrep instead of grep
 set grepprg=rg
-
-
-"highlight CursorLineNr gui=bold guifg=238
-"I find this slightly distracting, I care more about seeing relative #'s
 
 
 " these settings don't autocomplete my omni-complete till i press enter!
@@ -146,6 +155,8 @@ set grepprg=rg
 set completeopt=longest,menuone,preview
 highlight Pmenu ctermbg=238 gui=bold
 " This color is similar to my background color, I like it better
+
+
 " this sets a red cursor for terminal mode!
 highlight TermCursor ctermfg=red guifg=red
 
@@ -157,7 +168,8 @@ if has('persistent_undo')
         set undodir=~/.vim/tmp/undo
         set undodir+=~/local/.vim/tmp/undo
         set undodir+=.
-        set undofile             " actually turn on undofiles
+        " actually turn on undofiles
+        set undofile
     endif
 endif
 
@@ -200,5 +212,6 @@ endif
 
 
 if exists('&belloff')
-  set belloff=all                       " bells bad!
+" bells bad!
+  set belloff=all
 endif
