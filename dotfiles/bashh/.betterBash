@@ -6,7 +6,7 @@
 
 source ~/dotfiles/bashh/from_online.sh
 
-
+# moves up $1 directories
 function up() {
   times=$1
   while [ "$times" -gt "0" ]; do
@@ -35,21 +35,15 @@ function mcd() {
     file_destination=${@:$#}
     num_files=$#
 
-    # if given mcd fil dest, just do move cmd
-    if [ "$num_files" -eq 2 ]; then
-        mv "$1" "$2"
-    fi
-    # if given multiple files to move then move em !
-    if [ "$num_files" -gt 2 ]; then
-        #files=${@:1:$#-1}
-        num_files=$(($num_files - 1))
+    # num_files is originally counting files and the destination dir
+    # so shift one less time than $#
+    num_files=$(($num_files - 1))
 
-        while [ "$num_files" -gt 0 ]; do
-            mv "$1" "$file_destination"
-            num_files=$(($num_files - 1))
-            shift
-        done
-    fi
+    while [ "$num_files" -gt 0 ]; do
+        mv "$1" "$file_destination"
+        num_files=$(($num_files - 1))
+        shift
+    done
 
     echo "";  echo " ----- NEW DIR CONTAINS:";
     cd "$file_destination"
@@ -95,7 +89,7 @@ function search_aliases() {
     return
 }
 
-
+# Universal zip extracter
 function extract () {
   if [ -f $1 ] ; then
     case $1 in
@@ -118,6 +112,7 @@ function extract () {
   fi
 }
 
+# fuzzy search arch/AUR repositories then download
 function search_packages() {
     pac_manager="$1"
     package_name=$("$pac_manager" -Slq | fzf) > /dev/null 2>&1

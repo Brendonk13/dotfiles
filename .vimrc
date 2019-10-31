@@ -119,9 +119,7 @@ endif
 "let g:python3_host_prog='/usr/bin/python3.6'
 let g:python3_host_prog='/usr/bin/python'
 
-"highlight Cursor cterm=underline gui=underline term=underline
 
-"autocmd ColorScheme * highlight Comment cterm=underline gui=underline term=underline -- Needs to be before colorscheme set
 
 " this allows for usage of truecolor !
 set termguicolors

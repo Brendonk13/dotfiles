@@ -43,6 +43,7 @@ nnoremap <silent> <leader>st :sp<bar>:terminal<CR>i
 nnoremap <silent> <leader>tt :tabnew<bar>:terminal<CR>i
 
 
+nnoremap <silent> <C-s> :w<CR>
 
 
 " makes sense, even suggested in help!

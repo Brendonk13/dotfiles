@@ -1,6 +1,6 @@
-# los dotfiles
-from https://www.atlassian.com/git/tutorials/dotfiles  
-seems all unnecessary now but it works ¯\ _(ツ)_/¯
+# my dotfile setup
+From https://www.atlassian.com/git/tutorials/dotfiles
+Kind of messy but also kind of well documented as well as being kind of cross-platform for windows and linux (Manjaro) given file structure is the same.
 
 ## Setup
 ```sh
