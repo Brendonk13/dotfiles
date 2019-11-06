@@ -92,7 +92,15 @@ if filereadable(expand("~/.vimPlug/vimPlugCall"))
 else
     echoerr 'could not find|read ~/.vimPlug/vimPlugCall'
 endif
-" source those keyboard mappings  
+
+if filereadable(expand("~/.vimPlug/plugSettings"))
+    source ~/.vimPlug/plugSettings
+else
+    echoerr 'could not find|read ~/.vimPlug/plugSettings'
+endif
+
+
+" source those keyboard mappings
 " how can I move this file to diff folder and make it work with git?
 if filereadable(expand("~/dotfiles/.vim_mappings"))
     source ~/dotfiles/.vim_mappings

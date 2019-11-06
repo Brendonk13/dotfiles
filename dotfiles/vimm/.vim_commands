@@ -46,29 +46,40 @@ if has('clipboard')
   vnoremap <silent><leader>y :normal! gv"+y<CR>
 endif
 
-" I would like to add a command that calls isort on my python files upon exiting them -- maybe this is overkill tho 
-
-
-" is there a place I can read from that's more stable than just picking the first one in bufflist?
+" I would like to add a command that calls isort on my python files upon exiting them -- maybe this is overkill tho
 
 let g:opened_neoterm = 0
 
 function! ToggleDropDownNeoterm()
+  " If neoterm is open, then save window height before closing
+  " so that the next neoterm we open has the same height.
   if g:opened_neoterm
-    redir => neoterm_win_num
+
+    " neoterm_buff_line is something like: 3 #a \".vimrc\" line 10
+    redir => neoterm_buff_line
       silent! execute "filter /neoterm/ ls"
     redir END
-    "echom neoterm_win_num[3]
-    redir => neoterm_win_height
-      silent! execute "echo" . winheight(neoterm_win_num[3])
-    redir END
 
-    " set so next toggle opens to currents "drop down" window's height
-    let g:neoterm_size = substitute(neoterm_win_height, '^\n', '', '')
+    " buff num is first item when u do :ls
+    let neoterm_buff_num = split(neoterm_buff_line)[0]
+
+    " get the unique window id from the buffer number
+    let neoterm_win_id = win_findbuf(neoterm_buff_num)[0]
+
+    " get window height of open neoterm from it's window id
+    let neoterm_win_height = winheight(neoterm_win_id)
+    " echom \"neoterm buff num: \" . neoterm_buff_num
+    " echom \"the win_id is: \" . neoterm_win_id
+    " echom \"it's height: \" . neoterm_win_height
+
+    let g:neoterm_size = neoterm_win_height
+
     let g:opened_neoterm = 0
-    Tclose
+    " now close the neoterm window
+    Ttoggle
   else
     let g:opened_neoterm = 1
-    Topen
+    Ttoggle
   endif
 endfunction
+

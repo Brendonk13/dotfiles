@@ -105,8 +105,12 @@ nnoremap <leader>d<tab> :%s/\v^\s+$//<CR>
 " was thinking it would be nice to have one per tab
 "nnoremap <silent>,<CR> :call ()<cr>
 
+" makes s work like d but yanks to blackhole register
+nnoremap s "_d
+
 
 nnoremap <silent><leader><CR> :call ToggleDropDownNeoterm()<cr>
+" nnoremap <silent><leader><CR> :Ttoggle<CR>
 vnoremap <silent><leader>ss :TREPLSendSelection<CR>
 " this next one defines an operator which I can use to send selections to neoterm
 nmap <silent><leader>s <Plug>(neoterm-repl-send)
@@ -120,7 +124,7 @@ nnoremap <C-w>< <C-w>20<
 nnoremap <C-w>2< <C-w>40<
 
 
-" will use this for my "drop down" neoterm
+" will use this for my \"drop down\" neoterm
 nnoremap <M-j> <C-w>3-
 nnoremap <M-k> <C-w>3+
 
@@ -304,7 +308,7 @@ if has('nvim')
 
   augroup term
   autocmd!
-  autocmd TermOpen * set nonumber norelativenumber
+  autocmd TermOpen * setlocal nonumber norelativenumber
   augroup END
 
 endif
