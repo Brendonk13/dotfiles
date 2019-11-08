@@ -24,7 +24,8 @@ else
 
     # have this in here since haven't downloaded nvr on windows partition
     if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
-        export VISUAL="nvr --remote-tab"
+        #export VISUAL="nvr --remote-tab"
+        export VISUAL="nvr"
     else
         export VISUAL="nvim"
     fi
