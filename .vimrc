@@ -114,12 +114,8 @@ else
     echoerr 'could not find|read ~/dotfiles/vimm/.vim_mappings'
 endif
 
-if filereadable(expand("~/dotfiles/vimm/.my_autocmds"))
-    source ~/dotfiles/vimm/.my_autocmds
-else
-    echoerr 'Could not find|read ~/dotfiles/vimm/.my_autocmds'
-endif
-
+" NOTE: that I source autocmd's at bottom of file (need highlights done after
+" loading colorscheme.
 
 
 
@@ -215,6 +211,25 @@ endif
 "  else
 "    if isdirectory('~/.vim/tmp')
 "      set viminfo+=n~/.vim/tmp
+
+
+" augroup all
+"   autocmd!
+" augroup END
+" set iskeyword+=:
+" syntax match myNote "\vNOTE\:"
+" highlight! link myNote ToDo
+
+
+if filereadable(expand("~/dotfiles/vimm/.my_autocmds"))
+    source ~/dotfiles/vimm/.my_autocmds
+else
+    echoerr 'Could not find|read ~/dotfiles/vimm/.my_autocmds'
+endif
+
+
+
+
 
 
 if exists('&belloff')

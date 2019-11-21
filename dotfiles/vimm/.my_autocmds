@@ -1,3 +1,29 @@
+" This syntax matchesku the word NOTE
+" syn keyword	cNote		contained NOTE
+" This add the cNote syntax keyword to the cCommentGroup cluster, so it only
+" shows up in comments
+" syn cluster	cCommentGroup	contains=cTodo,cNote,cBadContinuation
+" This links the syntax matcher to the highlight group Note
+" hi def link cNote Note
+" This set the Note group highlight color
+" hi Note ctermfg=107 ctermbg=16 cterm=bold guifg=#87af5f guibg=#000000 gui=bold
+" code above is from:
+" https://gist.github.com/kbenzie/e108ccf375aa63d69d12
+" allows us to always highlight \"Note\"
+
+
+" this highlights the or'd words (if they have colon at the end!)
+augroup highlight_todo
+    autocmd!
+    autocmd Syntax * syn match MyTodo /\v<(FIXME|NOTE|Note|note|TODO|Todo|todo|OPTIMIZE):/
+          \ containedin=.*Comment,vimCommentTitle
+augroup END
+highlight def link MyTodo Todo
+" from bottom of: https://stackoverflow.com/questions/4097259/in-vim-how-do-i-highlight-todo-and-fixme
+
+
+
+
 augroup vimFiles
   autocmd!
   autocmd Bufread */vimm/* setlocal shiftwidth=2 tabstop=2 softtabstop=2 ft=vim
@@ -28,6 +54,11 @@ augroup xml
   autocmd Filetype xml setlocal shiftwidth=2 tabstop=2 softtabstop=2
   "autocmd FileType xml setlocal foldmethod=indent foldlevelstart=999 foldminlines=0
 augroup END
+
+" augroup shaders
+"   autocmd!
+"   autocmd Filetype fp, vp set ft=java 
+" augroup END
 
 "augroup goyo
   "autocmd!
