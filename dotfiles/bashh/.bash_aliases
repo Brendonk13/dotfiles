@@ -40,6 +40,7 @@ alias dotf='cd ~/dotfiles/bashh; lsa'
 alias cdl=changeDirAndShow
 alias cdl..='cdl ..'
 
+alias ls='ls --group-directories-first --color=auto'
 alias lsa='ls -A'
 alias ll='ls -l'
 
@@ -65,6 +66,10 @@ alias cat='bat'
 alias bell='echo -ne "\a"'
 alias man='pinfo'
 alias open='xdg-open'
+
+# An "alert" alias for long running commands.
+# sends notification containing the command the command when it's done
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # The trailing space tells shell to look for aliases in other that first word of cmd
 alias sudo='sudo '

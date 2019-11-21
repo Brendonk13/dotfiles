@@ -1,24 +1,6 @@
 #!/bin/env bash
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
 
 dotBashDir=~/dotfiles/bashh
-alias ls='ls --group-directories-first --color=auto'
-
-#set -o vi    # vim mode in bash upon pressing escape!
-#bind "set show-mode-in-prompt on"
-# think my plan with this might be to use normal emacs readline on
-# then maybe add these commands to vim's command line editing 
-# note that I could get similar functionality to vim, ie bind ci" to f"f"cT" 
-# but rlly don't like how there is a lag between <esc> and exiting the mode..
-
-
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -30,15 +12,6 @@ shopt -s checkwinsize
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-
-# An "alert" alias for long running commands.
-# sends notification containing the command the command when it's done
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 
 # Different prompt for when I'm on windows
 if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
@@ -64,14 +37,12 @@ else
 fi
 
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+# gotta have tab complete
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
+    source /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
+    source /etc/bash_completion
   fi
 fi
 
@@ -90,9 +61,6 @@ if [ -f $dotBashDir/.betterBash ]; then
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-
-
 
 
 if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
