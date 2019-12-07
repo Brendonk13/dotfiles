@@ -95,6 +95,21 @@ format-prefix-padding-right = ${layout.icon-padding}
 
 
 
+[module/openweathermap-fullfeatured]
+type = custom/script
+label-font = 9
+format = <label>
+label = %output%
+format-label-foreground = #FFF
+format-label-background = #444
+
+format-prefix = "  "
+
+exec = /home/brendonk/.config/polybar/openweathermap-fullfeatured.sh
+click-left = /home/brendonk/.config/polybar/clickedWeather.sh
+interval = 4
+
+
 [module/BeforeDate]
 type = custom/text
 format-prefix-font = 2
@@ -155,22 +170,24 @@ font-0 = "mplus Nerd Font:style=Medium:size=22;6"
 font-1 = "mplus Nerd Font:style=Medium:size=15;3"
 ; 2 is for the time
 font-2 = "mplus Nerd Font:style=Medium:size=15;2"
-; find all fonts greater than TWO and increment them
 
 font-3 = "mplus Nerd Font:style=Medium:size=13;2"
 font-4 = "mplus Nerd Font:style=Medium:size=12;3"
 
 font-5 = "mplus Nerd Font:style=Medium:size=11;1"
-;font-5 = "mplus Nerd Font:style=Medium:size=7;3"
 
 
 font-6 = "FontAwesome5Free:style=Solid:size=14:antialias=false"
 font-7 = "FontAwesome5Brands:style=Solid:size=14:antialias=false"
+font-8 = "Weather Icons:style=Regular:size=12;1"
 
 
 " after I3 is meant to have padding beteen i3 and line
-modules-left = BeforeDate date AfterDate i3 AfterI3
+
+modules-left = BeforeDate date AfterDate i3 AfterI3 openweathermap-fullfeatured
+
 modules-right = left-end-bottom brightness right-end-top left-end-bottom memory  cpu right-end-top left-end-bottom battery right-end-top powermenu
+enable-ipc = true
 
 tray-position = right
 tray-padding = 2
