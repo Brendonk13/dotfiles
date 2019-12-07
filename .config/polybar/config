@@ -110,15 +110,6 @@ click-left = /home/brendonk/.config/polybar/clickedWeather.sh
 interval = 4
 
 
-[module/BeforeDate]
-type = custom/text
-format-prefix-font = 2
-content-foreground = #69F48B00
-content-background = ${colors.bg}
-content = 
-;content = 
-
-
 [module/AfterI3]
 type = custom/text
 content-foreground = #69F48B00
@@ -129,10 +120,21 @@ content = 
 ;format-suffix = "  █"
 
 
+
+[module/BeforeDate]
+type = custom/text
+format-prefix-font = 2
+content-foreground = #69F48B00
+content-background = ${colors.bg}
+content = 
+;content = 
+
+
+
 [module/AfterDate]
 type = custom/text
-content-foreground = #9c101010
 ;content-foreground = #81111111
+content-foreground = #9c101010
 content-background = ${colors.background-alt}
 content = 
 
@@ -260,6 +262,7 @@ type = internal/xbacklight
 ; Use the following command to list available cards:
 ; $ ls -1 /sys/class/backlight/
 card = intel_backlight
+interval = 2
 
 ; Available tags:
 ;   <label> (default)
@@ -412,9 +415,10 @@ date-alt = " %a-%b  (%d/%m/%Y)  "
 time = %I:%M
 time-alt = %I:%M:%S
 
-format-prefix-font = 2
+format-prefix-font = 1
 format-prefix = ""
-format-prefix-foreground = ${color.bar-fg}
+format-prefix-foreground = #bc101010
+;content-foreground = #9c101010
 ;format-prefix-background = #be404040
 format-prefix-background = ${colors.bg}
 

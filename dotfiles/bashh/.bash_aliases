@@ -80,6 +80,6 @@ alias as='sudo $(history -p !!)'
 #https://www.atlassian.com/git/tutorials/dotfiles
 alias config='/usr/bin/git --git-dir=/home/brendonk/.cfg/ --work-tree=/home/brendonk'
 
-alias cadd='config add ~/.bashrc; config add ~/.vimrc; config add ~/dotfiles/'
+alias cadd='config add ~/.bashrc; config add ~/.vimrc; config add ~/dotfiles/; config add ~/.config/polybar'
 alias cpush='config push origin master'
 alias ccom='config commit -m'
