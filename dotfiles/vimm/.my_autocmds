@@ -32,8 +32,8 @@ augroup END
 
 augroup python
   autocmd!
-  autocmd Filetype python nnoremap <buffer> dc mt^"_x`th
-  autocmd Filetype python nnoremap <buffer> yc mtI#<esc>`tl
+  autocmd Filetype python nnoremap <buffer> dc mt^"_2x`t2h
+  autocmd Filetype python nnoremap <buffer> yc mtI# <esc>`t2l
 augroup END
 
 
@@ -41,8 +41,8 @@ augroup java
   autocmd!
   " add delete and add comments, add == yc supposed to be similar
   " to how we add in surround plugin
-  autocmd Filetype java nnoremap <buffer> dc mt^"_3x`t3h
-  autocmd Filetype java nnoremap <buffer> yc mtI// <esc>`t3l
+  autocmd Filetype java,cs nnoremap <buffer> dc mt^"_3x`t3h
+  autocmd Filetype java,cs nnoremap <buffer> yc mtI// <esc>`t3l
   " have seen a disorienting ammount of tabs in project
   autocmd Filetype java setlocal nolist
   autocmd Filetype java set makeprg=javac\ %

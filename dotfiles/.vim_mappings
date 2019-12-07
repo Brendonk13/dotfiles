@@ -236,7 +236,10 @@ inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 
 " if I want preview window to stay open after
 " then change to InsertLeave
-autocmd CompleteDone * pclose
+augroup omniComplete
+    autocmd!
+    autocmd CompleteDone * pclose
+augroup END
 
 "I need a autocmd that does <C-n><C-p> every time I press a letter? so that I can view a preview always
 " what might be better tho is so just have a key mapped to <C-n><C-p> ... or maybe just press those keystrokes when this is desired behavior
@@ -253,7 +256,7 @@ inoremap <C-y> <esc>"iyiwea
 
 
 " mnemonic: Capitalize
-inoremap <C-c> <esc>b~ea
+inoremap <C-c> <esc>mtb~`ta
 
 
 " ------------ abbreviations!! ---------------------------
