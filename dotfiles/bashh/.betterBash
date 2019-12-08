@@ -1,3 +1,29 @@
+
+#[module/spotify]
+#type = custom/text
+#label-font = 7
+#content = 
+#content-foreground = #FFF
+#content-background = #444
+#;exec = /home/brendonk/.config/polybar/poly_spotify_buttons.sh
+#click-left = /usr/bin/playerctl play-pause &
+#click-middle = /usr/bin/playerctl next &
+#click-right = /usr/bin/playerctl previous &
+#interval = 2
+#
+#format-prefix = 
+#format-prefix-foreground = #FFF
+#format-prefix-background = #444
+#format-prefix-font = 7
+#
+#format-suffix = 
+#format-suffix-foreground = #FFF
+#format-suffix-background = #444
+#format-suffix-font = 7
+
+
+
+
 #!/bin/env bash
 # note that alias's in this file are at bottom
 

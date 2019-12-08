@@ -95,6 +95,85 @@ format-prefix-padding-right = ${layout.icon-padding}
 
 
 
+[module/beforeSpotify]
+type = custom/text
+content-font = 8
+content = " "
+content-foreground = #dddfdfdf
+content-background = ${colors.bg}
+
+click-left = /home/brendonk/.config/polybar/player-mpris-tail.py next &
+click-middle = /home/brendonk/.config/polybar/spotify_off.sh
+
+
+
+[module/spotifyIcon]
+type = custom/text
+content-font = 7
+content =  
+content-foreground = #61be65
+content-background = ${colors.bg}
+
+click-left = /home/brendonk/.config/polybar/player-mpris-tail.py play-pause &
+click-middle = /home/brendonk/.config/polybar/spotify_off.sh
+click-right = /home/brendonk/.config/polybar/player-mpris-tail.py next &
+
+
+
+[module/spotifyInfo]
+type = custom/script
+format = <label>
+
+label-font = 7
+label = %output%
+label-foreground = ${colors.foreground}
+label-background = ${colors.bg}
+
+exec = /home/brendonk/.config/polybar/player-mpris-tail.py --icon-playing ' ' --icon-paused ' ' --icon-stopped ' ' --truncate-text '' -f '{icon} {:artist:t12:{artist}:}{:artist: - :}{:t14:{title}:}'
+
+click-left = /home/brendonk/.config/polybar/player-mpris-tail.py play-pause &
+click-middle = /home/brendonk/.config/polybar/spotify_off.sh
+
+interval = 8
+tail = true
+
+
+
+;hook-0 = /home/brendonk/.config/polybar/player-mpris-tail.py -f '{artist} - {title}'
+;hook-1 = /home/brendonk/.config/polybar/player-mpris-tail.py -f '{icon}'
+
+[module/mpris]
+type = custom/ipc
+;enable-ipc = true
+format = <output>
+format-output-font = 7
+format-output-foreground = ${colors.foreground}
+format-output-background = ${color.bar-fg}
+;tail = true
+
+hook-0 = /home/brendonk/.config/polybar/spotify_on
+hook-1 = /usr/bin/playerctl play-pause
+hook-2 = /home/brendonk/.config/polybar/player-mpris-tail.py next &
+hook-3 = /usr/bin/playerctl previous
+hook-4 = echo ""
+;hook-2 = /usr/bin/playerctl next
+
+initial = 5
+
+; start/kill with middle click
+click-middle = polybar-msg hook mpris 1
+; play/pause spotify
+click-left = polybar-msg hook mpris 2
+
+click-right = polybar-msg hook mpris 3
+
+; next song
+double-click-left = polybar-msg hook mpris 3
+; prev song
+double-click-right = polybar-msg hook mpris 4
+
+
+
 [module/openweathermap-fullfeatured]
 type = custom/script
 label-font = 9
@@ -107,7 +186,8 @@ format-prefix = "  "
 
 exec = /home/brendonk/.config/polybar/openweathermap-fullfeatured.sh
 click-left = /home/brendonk/.config/polybar/clickedWeather.sh
-interval = 4
+interval = 16
+
 
 
 [module/AfterI3]
@@ -151,6 +231,7 @@ bar-fill-icon = ﭳ
 
 [bar/myBar]
 ;monitor = ${env:MONITOR:HDMI-1}
+enable-ipc = true
 width = 100%
 height = 18
 ;offset-x = 1%
@@ -176,11 +257,11 @@ font-2 = "mplus Nerd Font:style=Medium:size=15;2"
 font-3 = "mplus Nerd Font:style=Medium:size=13;2"
 font-4 = "mplus Nerd Font:style=Medium:size=12;3"
 
-font-5 = "mplus Nerd Font:style=Medium:size=11;1"
+font-5 = "mplus Nerd Font:style=Medium:size=10;2"
 
 
-font-6 = "FontAwesome5Free:style=Solid:size=14:antialias=false"
-font-7 = "FontAwesome5Brands:style=Solid:size=14:antialias=false"
+font-6 = "FontAwesome5Free:style=Solid:size=8;1"
+font-7 = "FontAwesome5Free:style=Solid:size=11;2:antialias=false"
 font-8 = "Weather Icons:style=Regular:size=12;1"
 
 
@@ -188,8 +269,12 @@ font-8 = "Weather Icons:style=Regular:size=12;1"
 
 modules-left = BeforeDate date AfterDate i3 AfterI3 openweathermap-fullfeatured
 
+;modules-center = player-mpris-tail
+;modules-center = spotifyIcon spot spotifyOn spotifyOff
+modules-center = beforeSpotify spotifyIcon spotifyInfo
+
 modules-right = left-end-bottom brightness right-end-top left-end-bottom memory  cpu right-end-top left-end-bottom battery right-end-top powermenu
-enable-ipc = true
+;enable-ipc = true
 
 tray-position = right
 tray-padding = 2
@@ -262,7 +347,7 @@ type = internal/xbacklight
 ; Use the following command to list available cards:
 ; $ ls -1 /sys/class/backlight/
 card = intel_backlight
-interval = 2
+interval = 8
 
 ; Available tags:
 ;   <label> (default)
@@ -351,14 +436,15 @@ ramp-load-5-foreground = #fdd835
 ramp-load-6-foreground = #e53935
 ramp-load-7-foreground = #e53935
 
+format-foreground = ${colors.foreground}
 format-background = ${color.bar-fg}
 
 [module/memory]
 type = internal/memory
 interval = 8
-format-prefix-foreground = ${colors.foreground}
 ;format-underline = #dd119911
 format-prefix = "﬘ "
+format-prefix-foreground = ${colors.foreground}
 label = %gb_used%,
 format-background = ${color.bar-fg}
 label-font = 4
@@ -407,7 +493,7 @@ format-prefix-font = 4
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 32
 date =
 date-alt = " %a-%b  (%d/%m/%Y)  "
 
@@ -496,21 +582,23 @@ type = internal/battery
 battery = BAT0
 adapter = AC
 full-at = 98
-interval = 8
+interval = 16
+poll-interval = 5
 
 
 format-charging = <label-charging>
 label-charging = %percentage%%
 format-charging-prefix = 
 format-charging-prefix-foreground = #E4E700
+format-charging-prefix-background = ${color.bar-fg}
 
-format-discharging = <label-discharging> <ramp-capacity>
+format-discharging = <label-discharging><ramp-capacity>
 label-discharging = %percentage%%
 ;format-charging-font = 4
 ;format-discharging-font = 4
 
 label-discharging-font = 4
-label-charging-font = 6
+label-charging-font = 4
 format-charging-prefix-font = 6
 ramp-capacity-font = 3
 
@@ -520,11 +608,17 @@ ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
 
+label-full =  
+label-full-font = 3
+label-full-foreground = #43a047
+label-full-background = ${color.bar-fg}
 
-label-full = 
 
-format-charging-background = ${color.bar-fg}
-format-discharging-background = ${color.bar-fg}
+label-charging-foreground = ${colors.foreground}
+label-discharging-foreground = ${colors.foreground}
+
+label-charging-background = ${color.bar-fg}
+label-discharging-background = ${color.bar-fg}
 
 
 ramp-capacity-0-foreground = #e53935
@@ -532,6 +626,13 @@ ramp-capacity-1-foreground = #fdd835
 ramp-capacity-2-foreground = #43a047
 ramp-capacity-3-foreground = #43a047
 ramp-capacity-4-foreground = #43a047
+
+ramp-capacity-0-background = ${color.bar-fg}
+ramp-capacity-1-background = ${color.bar-fg}
+ramp-capacity-2-background = ${color.bar-fg}
+ramp-capacity-3-background = ${color.bar-fg}
+ramp-capacity-4-background = ${color.bar-fg}
+
 
 
 ;format-charging = <animation-charging> <label-charging>
