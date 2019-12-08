@@ -22,7 +22,7 @@ background = #222
 background-alt = #c7232323
 ;background-alt = #3b3b3b
 ;foreground = ${xrdb:color7:#222}
-foreground = #dfdfdf
+foreground = #f9dfdfdf
 foreground-alt = #555
 primary = #ffb52a
 secondary = #e60053
@@ -273,7 +273,7 @@ modules-left = BeforeDate date AfterDate i3 AfterI3 openweathermap-fullfeatured
 ;modules-center = spotifyIcon spot spotifyOn spotifyOff
 modules-center = beforeSpotify spotifyIcon spotifyInfo
 
-modules-right = left-end-bottom brightness right-end-top left-end-bottom memory  cpu right-end-top left-end-bottom battery right-end-top powermenu
+modules-right = left-end-bottom battery right-end-top left-end-bottom memory  cpu right-end-top left-end-bottom brightness right-end-top powermenu
 ;enable-ipc = true
 
 tray-position = right
@@ -369,9 +369,7 @@ label = %percentage%%
 ramp-0 = 
 ramp-1 = 
 ramp-2 = 
-ramp-3 = 
-ramp-4 = 
-ramp-5 = 
+ramp-3 = 
 ; one day I'll make my own big aterisk to indicate full
 ; and then have smaller versions for the ramp
 
@@ -383,10 +381,8 @@ bar-foreground-0 = #e53935
 bar-foreground-1 = #e53935
 bar-foreground-2 = #fdd835
 bar-foreground-3 = #43a047
-bar-foreground-4 = #43a047
-;bar-foreground-5 = #43a047
 
-bar-width = 6
+bar-width = 4
 bar-fill = ﭳ
 bar-gradient = false
 bar-fill-icon = ﭳ
@@ -426,6 +422,12 @@ ramp-load-7 = 
 
 ;ramp-load-7 = █
 
+; this screw up label/ramp fonts for some reason
+;format-prefix = 
+;format-prefix-font = 7
+;format-prefix-foreground = ${colors.foreground}
+;format-prefix-background = ${color.bar-fg}
+
 
 ramp-load-0-foreground = #43a047
 ramp-load-1-foreground = #43a047
@@ -439,6 +441,8 @@ ramp-load-7-foreground = #e53935
 format-foreground = ${colors.foreground}
 format-background = ${color.bar-fg}
 
+
+
 [module/memory]
 type = internal/memory
 interval = 8
@@ -449,6 +453,13 @@ label = %gb_used%,
 format-background = ${color.bar-fg}
 label-font = 4
 format-prefix-font = 4
+
+; this is where I can add gotop later
+format-suffix = " "
+format-suffix-font = 4
+format-suffix-foreground = #dddfdfdf
+;format-suffix-foreground = ${colors.foreground}
+format-suffix-background = ${color.bar-fg}
 
 
 ;[module/wlan]
@@ -614,8 +625,9 @@ label-full-foreground = #43a047
 label-full-background = ${color.bar-fg}
 
 
-label-charging-foreground = ${colors.foreground}
-label-discharging-foreground = ${colors.foreground}
+; slightly dimmer/ more trasparent to make less noticable
+label-charging-foreground = #f2d7d7d7
+label-discharging-foreground = #f2d7d7d7
 
 label-charging-background = ${color.bar-fg}
 label-discharging-background = ${color.bar-fg}
