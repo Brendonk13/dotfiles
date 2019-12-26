@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
 
     alias doc='cd /mnt/c/Users/Brendon*/Documents/Documents/'
@@ -40,6 +40,7 @@ alias ...='up 2;  ls'
 alias dotf='cd ~/dotfiles/bashh; lsa'
 alias cdl=changeDirAndShow
 alias cdl..='cdl ..'
+alias cd-='cd -'
 
 alias ls='ls --group-directories-first --color=auto'
 alias lsa='ls -A'
@@ -81,5 +82,5 @@ alias as='sudo $(history -p !!)'
 alias config='/usr/bin/git --git-dir=/home/brendonk/.cfg/ --work-tree=/home/brendonk'
 
 alias cadd='config add ~/.bashrc; config add ~/.vimrc; config add ~/dotfiles/; config add ~/.config/polybar; config add ~/Scripts/battest_cronjob'
-alias cpush='config push origin master'
 alias ccom='config commit -m'
+alias cpush='config push origin master'

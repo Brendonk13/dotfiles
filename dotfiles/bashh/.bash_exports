@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 export EDITOR=nvim
 
 if cat /proc/version | grep Microsoft >/dev/null 2>&1; then

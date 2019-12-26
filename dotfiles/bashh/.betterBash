@@ -1,30 +1,4 @@
-
-#[module/spotify]
-#type = custom/text
-#label-font = 7
-#content = 
-#content-foreground = #FFF
-#content-background = #444
-#;exec = /home/brendonk/.config/polybar/poly_spotify_buttons.sh
-#click-left = /usr/bin/playerctl play-pause &
-#click-middle = /usr/bin/playerctl next &
-#click-right = /usr/bin/playerctl previous &
-#interval = 2
-#
-#format-prefix = 
-#format-prefix-foreground = #FFF
-#format-prefix-background = #444
-#format-prefix-font = 7
-#
-#format-suffix = 
-#format-suffix-foreground = #FFF
-#format-suffix-background = #444
-#format-suffix-font = 7
-
-
-
-
-#!/bin/env bash
+#!/usr/bin/env bash
 # note that alias's in this file are at bottom
 
 # should make a cmd called aliases which cat's the bash_aliases file then also the last lines in
@@ -45,17 +19,11 @@ function changeDirAndShow() {
     cd "$1" && ls -A
 }
 
-function lcc() {
-    cd "$1"
-    echo ""
-    ls
-    echo ""
-}
-
 # this function moves files to a directory then changes user to that folder
 function mcd() {
     if [ "$#" -lt 2 ]; then
         echo "Input files and destination for this to work jeez."
+        echo "Next time enter more than 1 argument: mcd files dest."
         return
     fi
     file_destination=${@:$#}
@@ -77,43 +45,6 @@ function mcd() {
     echo ""
 }
 
-
-# this should never have been done..
-function search_aliases() {
-    chars_before_eq=`alias | awk '{first = $1; $1 = ""; print $0, first; }' | cut -d = -f 1`
-    #echo "$chars_before_eq"
-    #alias | sed -e 's/^alias//' | awk -v "fst=$1" '{printf "$1"; for (i=0; i < $(($max_chars - ${#fst})); i++) printf " "; printf "="; for (j=2; j<NF; j++) printf $j " "; print $NF}' | fzf
-
-    # this loop finds the longest alias name
-    max_chars=-1
-    word=""
-    while read -r line; do
-        # add quotes to curr_chars if not working
-        if [ ${#line} -gt $max_chars ]; then
-            max_chars=${#line}
-            word="$line"
-        fi
-    done <<< "$chars_before_eq"
-    echo -n "the longest alias has: "; echo -n "$max_chars"; echo " characters."
-    echo -n "the word is: "; echo "$word"
-
-    #awk {'first = $1; $1 = ""; printf ("%${max_chars}s%s\n", $5, $1)'}
-    # print first thing: alias name, then $max_chars spaces, another space, then print everything but fst col (fst printed at beginning)
-    alias | sed -e 's/^alias//' | awk -v "loop_count=$(($max_chars - ${#1}))" '{printf $1; for (i=0; i<"$loop_count"; i++) printf " "; printf "="; for (j=2; j<NF; j++) printf $j " "; print $NF}' | fzf
-
-    # alias | sed -e 's/^alias//' | cut -d = -f 1
-    # ---- to retrieve alias name only
-    # need to delete alias keyword, then compute #whitespaces== max_chars - curr_char length
-    # then print #whitespaces
-    # then do print:  alias | cut -d = -f 2:100
-    #----- this prints everything after the equals sign
-    #-------- alias | sed -e 's/^.\+\=//' does this better
-
-    #awk '{first = $1; $1 = ""; for (i=}'
-    # adds $diff spaces at beginning of line
-    #sed 's/^/'"$(printf %${DIFF}s)"'/'
-    return
-}
 
 # Universal zip extracter
 function extract () {
@@ -154,8 +85,6 @@ function search_packages() {
     fi
 }
 
-#bind -x '"\C-y": "sp-dbus PlayPause"'
-
 # no more friggin error sound !!!
 bind 'set bell-style none'
 
@@ -173,3 +102,42 @@ bind "set show-all-if-ambiguous on"
 
 # Don't record some commands -- who cares if they only show up once!
 #export HISTIGNORE="&:[ ]*:exit:ls:history:clear"
+
+
+# this should never have been done..
+function search_aliases() {
+    chars_before_eq=`alias | awk '{first = $1; $1 = ""; print $0, first; }' | cut -d = -f 1`
+    #echo "$chars_before_eq"
+    #alias | sed -e 's/^alias//' | awk -v "fst=$1" '{printf "$1"; for (i=0; i < $(($max_chars - ${#fst})); i++) printf " "; printf "="; for (j=2; j<NF; j++) printf $j " "; print $NF}' | fzf
+
+    # this loop finds the longest alias name
+    max_chars=-1
+    word=""
+    while read -r line; do
+        # add quotes to curr_chars if not working
+        if [ ${#line} -gt $max_chars ]; then
+            max_chars=${#line}
+            word="$line"
+        fi
+    done <<< "$chars_before_eq"
+    echo -n "the longest alias has: "; echo -n "$max_chars"; echo " characters."
+    echo -n "the word is: "; echo "$word"
+
+    #awk {'first = $1; $1 = ""; printf ("%${max_chars}s%s\n", $5, $1)'}
+    # print first thing: alias name, then $max_chars spaces, another space, then print everything but fst col (fst printed at beginning)
+    alias | sed -e 's/^alias//' | awk -v "loop_count=$(($max_chars - ${#1}))" '{printf $1; for (i=0; i<"$loop_count"; i++) printf " "; printf "="; for (j=2; j<NF; j++) printf $j " "; print $NF}' | fzf
+
+    # alias | sed -e 's/^alias//' | cut -d = -f 1
+    # ---- to retrieve alias name only
+    # need to delete alias keyword, then compute #whitespaces== max_chars - curr_char length
+    # then print #whitespaces
+    # then do print:  alias | cut -d = -f 2:100
+    #----- this prints everything after the equals sign
+    #-------- alias | sed -e 's/^.\+\=//' does this better
+
+    #awk '{first = $1; $1 = ""; for (i=}'
+    # adds $diff spaces at beginning of line
+    #sed 's/^/'"$(printf %${DIFF}s)"'/'
+    return
+}
+
