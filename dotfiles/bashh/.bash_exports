@@ -18,6 +18,7 @@ else
     export dow="$HOME/Downloads/"
     export submit="$HOME/Documents/Mcgill/submissions/"
     export sem="/home/brendonk/Documents/Mcgill/5th-year/fall-sem/"
+    export mors="$HOME/PyStuff/morsels/"
 
     export _Z_DATA="$HOME/.config/.z_data_file"
     export RIPGREP_CONFIG_PATH=$HOME/.config/.ripgreprc

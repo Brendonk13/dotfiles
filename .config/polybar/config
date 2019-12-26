@@ -304,7 +304,7 @@ label-mode-background = ${colors.background-alt}
 
 ; focused = Active workspace on focused monitor
 label-focused-font = 4
-label-focused = %index%
+label-focused = %name%
 label-focused-background = ${colors.focusedworkspaceCol}
 label-focused-foreground = #F9F9F9
 ;label-focused-background = ${colors.background-alt}
@@ -312,20 +312,20 @@ label-focused-foreground = #F9F9F9
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
+label-unfocused = %name%
 label-unfocused-background = ${colors.background-alt}
 label-unfocused-foreground = #E9E9E9
 label-unfocused-padding = 2
 label-unfocused-font = 4
 
 ; visible = Active workspace on unfocused monitor
-label-visible = %index%
+label-visible = %name%
 label-visible-background = ${self.label-focused-background}
 ;label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
-label-urgent = %index%
+label-urgent = %name%
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
@@ -674,6 +674,12 @@ ramp-capacity-4-background = ${color.bar-fg}
 ;animation-discharging-2 = 
 ;animation-discharging-foreground = ${colors.foreground-alt}
 ;animation-discharging-framerate = 750
+
+
+
+
+; add temperature and change the weather thing
+
 
 
 

@@ -63,6 +63,11 @@ nnoremap ; :
 nnoremap ;; ;
 
 
+" need to map something to save a file and then swithc down buffers to a
+" terminal and enter it as well
+"nnoremap 
+
+
 " should make this into a function at some point which pastes at the correct indentation level
 " can just get the current column number
 nnoremap <leader>p mto<esc>p`t
