@@ -11,6 +11,8 @@ else
     alias submit='cd ~/Documents/Mcgill/submissions'
     alias sem='cd ~/Documents/Mcgill/5th-year/fall-sem; ls'
     alias scrot='cd ~/Pictures/screenshots; ls'
+    alias gog='cd ~/Job-Applications/goog; ls'
+    alias print='cd ~/Scripts/ideas/print; ls'
 
     # functions in betterBash -- fuzzy finds packages in pacman/yay
     alias spac='search_packages pacman'
@@ -19,6 +21,7 @@ else
     # copy speakers code to clipboards
     alias blue='echo 'C0:28:8D:01:4F:DE' | xclip -selection c; bluetoothctl'
     alias night='redshift -l 45.513860:-73.570660'
+    alias hdmi='xrandr --output HDMI1 --mode 1920x1080 --rate 60'
 
     #alias al=search_aliases
     alias graph='cd /home/brendonk/Downloads/1-Classes/graphics/COMP557A4F19Provided/comp557F19/src/comp557/a4; ls'

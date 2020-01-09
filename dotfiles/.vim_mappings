@@ -70,8 +70,14 @@ nnoremap ;; ;
 
 " should make this into a function at some point which pastes at the correct indentation level
 " can just get the current column number
-nnoremap <leader>p mto<esc>p`t
-nnoremap <leader>P mtO<esc>p`t
+"nnoremap <leader>p mto<esc>p`t
+"nnoremap <leader>P mtO<esc>p`t
+nnoremap <leader>p echom 'use ]p shit'
+nnoremap <leader>P echom 'use [P shit'
+
+" the ]p shit is native and much smarter than my hacky thing
+
+
 
 " saner searching
 nnoremap g; g;zz

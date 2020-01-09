@@ -30,7 +30,7 @@ alert = #bd2c40
 ;bg = #77404040
 ;bg = #df161616
 bg = #b2393737
-focusedworkspaceCol = #b9943B00
+focusedworkspaceCol = #d9943B00
 ;power
 
 [color]
@@ -182,7 +182,7 @@ label = %output%
 format-label-foreground = #FFF
 format-label-background = #444
 
-format-prefix = "  "
+;format-prefix = 
 
 exec = /home/brendonk/.config/polybar/openweathermap-fullfeatured.sh
 click-left = /home/brendonk/.config/polybar/clickedWeather.sh
@@ -267,7 +267,7 @@ font-8 = "Weather Icons:style=Regular:size=12;1"
 
 " after I3 is meant to have padding beteen i3 and line
 
-modules-left = BeforeDate date AfterDate i3 AfterI3 openweathermap-fullfeatured
+modules-left = BeforeDate openweathermap-fullfeatured date AfterDate i3 
 
 ;modules-center = player-mpris-tail
 ;modules-center = spotifyIcon spot spotifyOn spotifyOff
@@ -306,7 +306,7 @@ label-mode-background = ${colors.background-alt}
 label-focused-font = 4
 label-focused = %name%
 label-focused-background = ${colors.focusedworkspaceCol}
-label-focused-foreground = #F9F9F9
+label-focused-foreground = #ECECEC
 ;label-focused-background = ${colors.background-alt}
 ;label-focused-underline = #d9EFAB00
 label-focused-padding = 2
