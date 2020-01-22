@@ -36,6 +36,12 @@ augroup python
   autocmd Filetype python nnoremap <buffer> yc mtI# <esc>`t2l
 augroup END
 
+"augroup ocaml
+"  need a more complex thing for multiline comments
+"  autocmd!
+"  autocmd Filetype ocaml nnoremap <buffer> dc mt^"_2x`t2h
+"  autocmd Filetype ocaml nnoremap <buffer> yc mtI# <esc>`t2l
+"augroup END
 
 augroup java
   autocmd!

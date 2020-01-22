@@ -94,6 +94,15 @@ format-prefix-foreground = ${color.icon-fg}
 format-prefix-padding-right = ${layout.icon-padding}
 
 
+[module/beforeCal]
+type = custom/text
+content-font = 1
+content = ""
+content-foreground = #bc101010
+content-background = ${colors.bg}
+
+
+
 
 [module/beforeSpotify]
 type = custom/text
@@ -136,6 +145,17 @@ click-middle = /home/brendonk/.config/polybar/spotify_off.sh
 
 interval = 8
 tail = true
+
+
+[module/popup-calendar]
+type = custom/script
+format = <label>
+label = %output% 
+format-font = 4
+label-foreground = #E9E9E9
+label-background = ${color.bar-fg}
+exec = /home/brendonk/Downloads/ricer/polybar-scripts/polybar-scripts/popup-calendar/popup-calendar.sh
+click-left = /home/brendonk/Downloads/ricer/polybar-scripts/polybar-scripts/popup-calendar/popup-calendar.sh --popup &
 
 
 
@@ -201,7 +221,7 @@ content = 
 
 
 
-[module/BeforeDate]
+[module/beforeWeather]
 type = custom/text
 format-prefix-font = 2
 content-foreground = #69F48B00
@@ -267,7 +287,7 @@ font-8 = "Weather Icons:style=Regular:size=12;1"
 
 " after I3 is meant to have padding beteen i3 and line
 
-modules-left = BeforeDate openweathermap-fullfeatured date AfterDate i3 
+modules-left = beforeWeather openweathermap-fullfeatured beforeCal popup-calendar AfterDate i3
 
 ;modules-center = player-mpris-tail
 ;modules-center = spotifyIcon spot spotifyOn spotifyOff

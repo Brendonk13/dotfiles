@@ -9,7 +9,7 @@ if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
 else
     alias dow='cd ~/Downloads; ls'
     alias submit='cd ~/Documents/Mcgill/submissions'
-    alias sem='cd ~/Documents/Mcgill/5th-year/fall-sem; ls'
+    alias sem='cd ~/Documents/Mcgill/5th-year/Winter; ls'
     alias scrot='cd ~/Pictures/screenshots; ls'
     alias gog='cd ~/Job-Applications/goog; ls'
     alias print='cd ~/Scripts/ideas/print; ls'
@@ -23,11 +23,13 @@ else
     alias night='redshift -l 45.513860:-73.570660'
     alias hdmi='xrandr --output HDMI1 --mode 1920x1080 --rate 60'
 
+    alias camnotes='cd ~/Documents/Mcgill/5th-year/Winter/Compilers/Ocaml; ls'
     #alias al=search_aliases
     alias graph='cd /home/brendonk/Downloads/1-Classes/graphics/COMP557A4F19Provided/comp557F19/src/comp557/a4; ls'
     # alias graph='cd ~/Downloads/Assignments/COMP557A3F19Provided/comp557F19/src/comp557/a3; ls; echo -e "\n  ----------------------------   up 3 to root dir"'
     alias eclipse='cd /home/brendonk/Downloads/programs/java-2019-06/eclipse; ./eclipse &'
     #alias toclip='cd /home/brendonk/Downloads/programs/eclipse-workspace/graphics-a2/src/comp557/a2; ls'
+    alias utop='eval $(opam env); utop'
 
     # mnemonic:  EclipseWorkspace
     alias ework='cd /home/brendonk/Downloads/programs/eclipse-workspace; ls'

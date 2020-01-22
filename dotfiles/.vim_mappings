@@ -289,7 +289,10 @@ nnoremap q: :CmdHist<CR>
 command! QHist call fzf#vim#search_history({'bottom': '10'})
 nnoremap q/ :QHist<CR>
 
-nnoremap <M-f> :FZF<CR>
+" appending leader searches from vim's pwd
+nnoremap <leader><M-f> :FZF<CR>
+" normal is to search from the current buffer's directory.
+nnoremap <silent> <M-f> :Files <C-r>=expand('%:h')<CR><CR>
 
 "mnemonic: meta-buffers
 nnoremap <M-b> :Buffers<CR>
@@ -320,6 +323,7 @@ if has('nvim')
   tnoremap <M-k> <c-\><c-n><c-w>k
   tnoremap <M-l> <c-\><c-n><c-w>l
 
+  " currently don't even use nu, rnu but may as well keep.
   augroup term
   autocmd!
   autocmd TermOpen * setlocal nonumber norelativenumber
