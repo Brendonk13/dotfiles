@@ -308,6 +308,12 @@ nnoremap <M-h> :Helptags<CR>
 
 "don't like that these are such big windows so far:(
 
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+
 "------------------- TERMINAL ---------------------------------------
 
 
