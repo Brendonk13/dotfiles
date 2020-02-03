@@ -19,6 +19,7 @@ else # ------ Manjaro Aliases --------------------------------------------------
 # ------ Course directories ------------------------------------------------
     alias andor='cd /home/brendonk/Documents/Mcgill/5th-year/fall-sem/andor/f2019-hexanome-14; ls'
     alias camnotes='cd ~/Documents/Mcgill/5th-year/Winter/Compilers/Ocaml; ls'
+    alias comp='cd ~/Documents/Mcgill/5th-year/Winter/Compilers; ls'
 
 
 # ------ Commands ----------------------------------------------------------
@@ -31,6 +32,8 @@ else # ------ Manjaro Aliases --------------------------------------------------
     alias blue='echo 'C0:28:8D:01:4F:DE' | xclip -selection c; bluetoothctl'
     alias night='redshift -l 45.513860:-73.570660'
     alias hdmi='xrandr --output HDMI1 --mode 1920x1080 --rate 60'
+    # show how to run mvn from command line
+    alias mrun='echo -e "mvn exec:java -Dexec.mainClass=Comp409_A1.Idk \n\t .mainClass=groupid.(class Name with Main)"'
 
 
 # ------ Random directories ------------------------------------------------
@@ -42,6 +45,7 @@ else # ------ Manjaro Aliases --------------------------------------------------
     alias eclipse='cd /home/brendonk/Downloads/programs/java-2019-06/eclipse; ./eclipse &'
 fi
 # ------ END OS SPECIFIC ALIASES -------------------------------------------
+
 
 
 # -------------- NAVIGATION ------------------------------------------------

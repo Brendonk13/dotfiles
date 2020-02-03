@@ -19,7 +19,7 @@ else
 # my linux env var's.
     export dow="$HOME/Downloads/"
     export submit="$HOME/Documents/Mcgill/submissions/"
-    export sem="/home/brendonk/Documents/Mcgill/5th-year/fall-sem/"
+    export sem="/home/brendonk/Documents/Mcgill/5th-year/Winter/"
     export mors="$HOME/PyStuff/morsels/"
 
     export _Z_DATA="$HOME/.config/.z_data_file"
@@ -36,8 +36,13 @@ else
         export VISUAL="nvim"
     fi
 
-    export JAVA_HOME="/opt/java/jdk1.8.0_221"
-    export PATH=$PATH:"/opt/java/jdk1.8.0_221/bin"
+    # note that below did NOT work for changing jdk
+    # export JAVA_HOME="/opt/java/jdk-11.0.6"
+    # export PATH=$PATH:"/opt/java/jdk-11.0.6/bin"
+
+    # this works maybe should add to .bash_profile tho
+    export JAVA_HOME=/opt/java/jdk-11.0.6
+    export PATH=$JAVA_HOME/bin:$PATH
 
 
 fi

@@ -4,8 +4,11 @@ set encoding=utf-8
 " , means the dir in which vim was opened, '.' means the directory of the file where the cursor is
 set path=.,,,~/,~/vim-notes,~/dotfiles/**,~/PyStuff/morsels,~/.i3,~/.vimPlug/**,~/Scripts/
 
-" add compiler path
-set path+=~/Documents/Mcgill/5th-year/Winter/Compilers/Ocaml/brendon_keirle/
+" add compiler assignment path
+set path+=/Documents/Mcgill/5th-year/Winter/Compilers/brendon_keirle/src/
+" add java assignment path
+set path+=~/Downloads/programs/eclipse-workspace/Comp409A1/src/
+
 " now these types don't appear in wild menu options
 set wildignore=*.o,*.a,*.so,*.pyc,*.swp,.git/*,*.class,~/FromInternet/*,*.dll,~/.vim_black/,~/.vim_black/**~/.vim_black,*pycache*
 " whhyyyy can't I get .vim_black to not appear in wildignore!!
