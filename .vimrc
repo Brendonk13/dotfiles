@@ -5,7 +5,7 @@ set encoding=utf-8
 set path=.,,,~/,~/vim-notes,~/dotfiles/**,~/PyStuff/morsels,~/.i3,~/.vimPlug/**,~/Scripts/
 
 " add compiler assignment path
-set path+=/Documents/Mcgill/5th-year/Winter/Compilers/brendon_keirle/src/
+set path+=~/Documents/Mcgill/5th-year/Winter/Compilers/brendon_keirle/src/
 " add java assignment path
 set path+=~/Downloads/programs/eclipse-workspace/Comp409A1/src/
 
@@ -13,6 +13,10 @@ set path+=~/Downloads/programs/eclipse-workspace/Comp409A1/src/
 set wildignore=*.o,*.a,*.so,*.pyc,*.swp,.git/*,*.class,~/FromInternet/*,*.dll,~/.vim_black/,~/.vim_black/**~/.vim_black,*pycache*
 " whhyyyy can't I get .vim_black to not appear in wildignore!!
 " note that frominternet appears as well!!!
+
+" jump to window if searching for file in one of this sessions windows
+" for quickfix window only
+set switchbuf=usetab
 
 " when set, occasionally got weird err's (maybe to do with wsl)
 "set clipboard=unnamedplus      "need to check if this/leader>y both work on server!
@@ -60,9 +64,13 @@ set scrolloff=1
 "set formatoptions+=j     " Delete comment character when joining commented lines
 "allows smart indenting for numbered lists
 set formatoptions+=n
+" highlight current line
 set cursorline
-" highlight current line" don't wrap line mid-word
-set linebreak
+" " don't wrap line mid-word
+if has('linebreak')
+    set linebreak
+  let &showbreak='⤷ '                 " ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS (U+2937, UTF-8: E2 A4 B7)
+endif
 
 if has('virtualedit')
     "idk how to explain, nice for visual block mode
@@ -218,13 +226,6 @@ endif
 "    if isdirectory('~/.vim/tmp')
 "      set viminfo+=n~/.vim/tmp
 
-
-" augroup all
-"   autocmd!
-" augroup END
-" set iskeyword+=:
-" syntax match myNote "\vNOTE\:"
-" highlight! link myNote ToDo
 
 
 if filereadable(expand("~/dotfiles/vimm/.my_autocmds"))
