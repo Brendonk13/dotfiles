@@ -68,7 +68,14 @@ augroup END
 
 augroup xml
   autocmd!
-  autocmd Filetype xml setlocal shiftwidth=2 tabstop=2 softtabstop=2
+  autocmd Filetype xml,yaml setlocal shiftwidth=2 tabstop=2 softtabstop=2
+  "autocmd FileType xml setlocal foldmethod=indent foldlevelstart=999 foldminlines=0
+augroup END
+
+
+augroup make
+  autocmd!
+  autocmd Filetype make setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
   "autocmd FileType xml setlocal foldmethod=indent foldlevelstart=999 foldminlines=0
 augroup END
 

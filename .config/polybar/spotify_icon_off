@@ -1,8 +1,0 @@
-#!/usr/bin/bash
-
-if ! pgrep -x spotify > /dev/null 2>&1; then
-    if pgrep -x spotify_icon_on > /dev/null 2>&1; then
-        pkill -9 spotify_icon_on
-    fi
-fi
-

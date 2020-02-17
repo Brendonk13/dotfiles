@@ -78,10 +78,10 @@ function search_packages() {
         return
     fi
     if [ "$pac_manager" == "yay" ]; then
-        "$pac_manager" -S "$package_name"
+        "$pac_manager" -S --noconfirm "$package_name"
         # sudo not recommended for yay installs
     else
-        sudo "$pac_manager" -S "$package_name"
+        sudo "$pac_manager" -S --noconfirm "$package_name"
     fi
 }
 

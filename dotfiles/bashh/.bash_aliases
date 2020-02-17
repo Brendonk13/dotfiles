@@ -7,19 +7,22 @@ if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
     alias dow='cd /mnt/c/Users/Brendon*/Downloads/; ls'
     alias song='dow;  cd W*/Av*/; ls -A'
 
-else # ------ Manjaro Aliases ---------------------------------------------------
+elif [ "$HOME" = "/home/brendon" ]; then
+# ------ Manjaro Aliases ---------------------------------------------------
 
 # ------ Common directory navigation ---------------------------------------
     alias dow='cd ~/Downloads; ls'
     alias submit='cd ~/Documents/Mcgill/submissions'
     alias sem='cd ~/Documents/Mcgill/5th-year/Winter; ls'
     alias scrot='cd ~/Pictures/screenshots; ls'
+    alias bk='cd ~/prev/brendonk/; ls'
 
 
 # ------ Course directories ------------------------------------------------
-    alias andor='cd /home/brendonk/Documents/Mcgill/5th-year/fall-sem/andor/f2019-hexanome-14; ls'
-    alias camnotes='cd ~/Documents/Mcgill/5th-year/Winter/Compilers/Ocaml; ls'
-    alias comp='cd ~/Documents/Mcgill/5th-year/Winter/Compilers; ls'
+    alias andor='cd /home/brendon/Documents/Mcgill/5th-year/fall-sem/andor/f2019-hexanome-14; ls'
+    alias cam='cd ~/Documents/Mcgill/5th-year/Winter/Compilers/Ocaml; ls'
+    alias comp='cd /home/brendon/Documents/Mcgill/5th-year/Winter/Compilers/goLite/2020_group11; ls'
+
 
 
 # ------ Commands ----------------------------------------------------------
@@ -34,15 +37,19 @@ else # ------ Manjaro Aliases --------------------------------------------------
     alias hdmi='xrandr --output HDMI1 --mode 1920x1080 --rate 60'
     # show how to run mvn from command line
     alias mrun='echo -e "mvn exec:java -Dexec.mainClass=Comp409_A1.Idk \n\t .mainClass=groupid.(class Name with Main)"'
+    # monitor
+    alias mon='mons -e right'
+    alias gotop='gotop -p'
 
 
 # ------ Random directories ------------------------------------------------
     # mnemonic:  EclipseWorkspace
-    alias ework='cd /home/brendonk/Downloads/programs/eclipse-workspace; ls'
+    alias ework='cd /home/brendon/Downloads/programs/eclipse-workspace; ls'
     alias gog='cd ~/Job-Applications/goog; ls'
     alias print='cd ~/Scripts/ideas/print; ls'
 
-    alias eclipse='cd /home/brendonk/Downloads/programs/java-2019-06/eclipse; ./eclipse &'
+    alias eclipse='cd /home/brendon/Downloads/programs/java-2019-06/eclipse; ./eclipse &'
+
 fi
 # ------ END OS SPECIFIC ALIASES -------------------------------------------
 
@@ -52,9 +59,11 @@ fi
 alias   .='ls'
 alias  ..='cd ..;  ls'
 alias ...='up 2;  ls'
-alias dotf='cd ~/dotfiles/bashh; lsa'
-alias cdl=changeDirAndShow
-alias cdl..='cdl ..'
+if [ -d ~/dotfiles/bashh ]; then
+    alias dotf='cd ~/dotfiles/bashh; lsa'
+    alias cdl=changeDirAndShow
+    alias cdl..='cdl ..'
+fi
 
 # ls
 alias ls='ls --group-directories-first --color=auto'
@@ -63,34 +72,56 @@ alias ll='ls -l'
 
 
 # -------------- CONDA -----------------------------------------------------
-alias newc='conda create -n'
-alias remc='conda env remove --name'   
-alias act='conda activate'
-alias deac='conda deactivate'
+if hash conda > /dev/null 2>&1; then
+    alias newc='conda create -n'
+    alias remc='conda env remove --name'   
+    alias act='conda activate'
+    alias deac='conda deactivate'
+fi
 
 
 # -------------- GITHUB ----------------------------------------------------
-alias gcom='git commit -m'
-alias co='git checkout'
-alias gadd='git add'
-alias gstat='git status'
-alias gl1='git log --oneline'
-
+if hash git > /dev/null 2>&1; then
+    alias gcom='git commit -m'
+    alias co='git checkout'
+    alias gadd='git add'
+    alias gstat='git status'
+    alias gl1='git log --oneline'
+else
+    echo "git not found, no aliases created."
+fi
 
 # -------------- Configuration ---------------------------------------------
 #https://www.atlassian.com/git/tutorials/dotfiles
-alias config='/usr/bin/git --git-dir=/home/brendonk/.cfg/ --work-tree=/home/brendonk'
 
-alias cadd='config add ~/.bashrc; config add ~/.vimrc; config add ~/dotfiles/; config add ~/.config/polybar; config add ~/Scripts/battest_cronjob'
-alias ccom='config commit -m'
-alias cpush='config push origin master'
+# don't add this to servers
+if [ "$HOME" = "/home/brendon" ]; then
+    alias config='/usr/bin/git --git-dir=/home/brendon/.cfg/ --work-tree=/home/brendon'
 
+    alias cadd='config add ~/.bashrc; config add ~/.vimrc; config add ~/dotfiles/; config add ~/.config/polybar; config add ~/Scripts/battest_cronjob'
+    alias ccom='config commit -m'
+    alias cpush='config push origin master'
+fi
 
 # -------------- APPLICATIONS ----------------------------------------------
-alias cat='bat'
 alias bell='echo -ne "\a"'
-alias man='pinfo'
-alias open='xdg-open'
+if hash bat > /dev/null 2>&1; then
+    alias cat='bat'
+else
+    echo "bat not found, alias not created."
+fi
+
+if hash pinfo > /dev/null 2>&1; then
+    alias man='pinfo'
+else
+    echo "pinfo not found, alias not created."
+fi
+
+if hash xdg-open > /dev/null 2>&1; then
+    alias open='xdg-open'
+else
+    echo "xdg-open not found, alias not created."
+fi
 
 alias vim="$VISUAL"
 alias vi="$VISUAL"
@@ -122,8 +153,8 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # save these in case I want to find them again.
 
 
-    #alias graph='cd /home/brendonk/Downloads/1-Classes/graphics/COMP557A4F19Provided/comp557F19/src/comp557/a4; ls'
+    #alias graph='cd /home/brendon/Downloads/1-Classes/graphics/COMP557A4F19Provided/comp557F19/src/comp557/a4; ls'
 
     # alias graph='cd ~/Downloads/Assignments/COMP557A3F19Provided/comp557F19/src/comp557/a3; ls; echo -e "\n  ----------------------------   up 3 to root dir"'
 
-    #alias toclip='cd /home/brendonk/Downloads/programs/eclipse-workspace/graphics-a2/src/comp557/a2; ls'
+    #alias toclip='cd /home/brendon/Downloads/programs/eclipse-workspace/graphics-a2/src/comp557/a2; ls'

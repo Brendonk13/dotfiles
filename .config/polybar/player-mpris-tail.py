@@ -12,7 +12,7 @@ import time
 from dbus.mainloop.glib import DBusGMainLoop
 from gi.repository import GLib
 DBusGMainLoop(set_as_default=True)
-#        with open('/home/brendonk/.config/polybar/showSongInfo.txt', 'r') as f:
+#        with open('/home/brendon/.config/polybar/showSongInfo.txt', 'r') as f:
 #            booll = False
 #            for line in f:
 #                if line.startswith("haveClicked"):
@@ -152,7 +152,7 @@ class PlayerManager:
         if self.connected:
             current_player = self.getCurrentPlayer()
             if current_player != None:
-                with open('/home/brendonk/.config/polybar/showSongInfo.txt', 'r') as f: 
+                with open('/home/brendon/.config/polybar/showSongInfo.txt', 'r') as f: 
                     booll = False
                     for line in f:
                         if line.startswith("haveClicked"):
@@ -436,7 +436,7 @@ class Player:
             except:
                 print("Invalid format string")
 
-            with open('/home/brendonk/.config/polybar/showSongInfo.txt', 'r') as f: 
+            with open('/home/brendon/.config/polybar/showSongInfo.txt', 'r') as f: 
                 booll = False
                 for line in f:
                     if line.startswith("haveClicked"):

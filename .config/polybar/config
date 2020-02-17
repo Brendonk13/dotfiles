@@ -111,8 +111,8 @@ content = " "
 content-foreground = #dddfdfdf
 content-background = ${colors.bg}
 
-click-left = /home/brendonk/.config/polybar/player-mpris-tail.py next &
-click-middle = /home/brendonk/.config/polybar/spotify_off.sh
+click-left = /home/brendon/.config/polybar/player-mpris-tail.py next &
+click-middle = /home/brendon/.config/polybar/spotify_off.sh
 
 
 
@@ -123,9 +123,9 @@ content =  
 content-foreground = #61be65
 content-background = ${colors.bg}
 
-click-left = /home/brendonk/.config/polybar/player-mpris-tail.py play-pause &
-click-middle = /home/brendonk/.config/polybar/spotify_off.sh
-click-right = /home/brendonk/.config/polybar/player-mpris-tail.py next &
+click-left = /home/brendon/.config/polybar/player-mpris-tail.py play-pause &
+click-middle = /home/brendon/.config/polybar/spotify_off.sh
+click-right = /home/brendon/.config/polybar/player-mpris-tail.py next &
 
 
 
@@ -138,10 +138,10 @@ label = %output%
 label-foreground = ${colors.foreground}
 label-background = ${colors.bg}
 
-exec = /home/brendonk/.config/polybar/player-mpris-tail.py --icon-playing ' ' --icon-paused ' ' --icon-stopped ' ' --truncate-text '' -f '{icon} {:artist:t12:{artist}:}{:artist: - :}{:t14:{title}:}'
+exec = /home/brendon/.config/polybar/player-mpris-tail.py --icon-playing ' ' --icon-paused ' ' --icon-stopped ' ' --truncate-text '' -f '{icon} {:artist:t12:{artist}:}{:artist: - :}{:t14:{title}:}'
 
-click-left = /home/brendonk/.config/polybar/player-mpris-tail.py play-pause &
-click-middle = /home/brendonk/.config/polybar/spotify_off.sh
+click-left = /home/brendon/.config/polybar/player-mpris-tail.py play-pause &
+click-middle = /home/brendon/.config/polybar/spotify_off.sh
 
 interval = 8
 tail = true
@@ -154,13 +154,13 @@ label = %output% 
 format-font = 4
 label-foreground = #E9E9E9
 label-background = ${color.bar-fg}
-exec = /home/brendonk/Downloads/ricer/polybar-scripts/polybar-scripts/popup-calendar/popup-calendar.sh
-click-left = /home/brendonk/Downloads/ricer/polybar-scripts/polybar-scripts/popup-calendar/popup-calendar.sh --popup &
+exec = /home/brendon/Downloads/ricer/polybar-scripts/polybar-scripts/popup-calendar/popup-calendar.sh
+click-left = /home/brendon/Downloads/ricer/polybar-scripts/polybar-scripts/popup-calendar/popup-calendar.sh --popup &
 
 
 
-;hook-0 = /home/brendonk/.config/polybar/player-mpris-tail.py -f '{artist} - {title}'
-;hook-1 = /home/brendonk/.config/polybar/player-mpris-tail.py -f '{icon}'
+;hook-0 = /home/brendon/.config/polybar/player-mpris-tail.py -f '{artist} - {title}'
+;hook-1 = /home/brendon/.config/polybar/player-mpris-tail.py -f '{icon}'
 
 [module/mpris]
 type = custom/ipc
@@ -171,9 +171,9 @@ format-output-foreground = ${colors.foreground}
 format-output-background = ${color.bar-fg}
 ;tail = true
 
-hook-0 = /home/brendonk/.config/polybar/spotify_on
+hook-0 = /home/brendon/.config/polybar/spotify_on
 hook-1 = /usr/bin/playerctl play-pause
-hook-2 = /home/brendonk/.config/polybar/player-mpris-tail.py next &
+hook-2 = /home/brendon/.config/polybar/player-mpris-tail.py next &
 hook-3 = /usr/bin/playerctl previous
 hook-4 = echo ""
 ;hook-2 = /usr/bin/playerctl next
@@ -204,8 +204,8 @@ format-label-background = #444
 
 ;format-prefix = 
 
-exec = /home/brendonk/.config/polybar/openweathermap-fullfeatured.sh
-click-left = /home/brendonk/.config/polybar/clickedWeather.sh
+exec = /home/brendon/.config/polybar/openweathermap-fullfeatured.sh
+click-left = /home/brendon/.config/polybar/clickedWeather.sh
 interval = 16
 
 
@@ -250,6 +250,7 @@ bar-fill-icon = ﭳ
 
 
 [bar/myBar]
+monitor = ${env:MONITOR:}
 ;monitor = ${env:MONITOR:HDMI-1}
 enable-ipc = true
 width = 100%
@@ -314,7 +315,7 @@ index-sort = true
 wrapping-scroll = false
 
 ; Only show workspaces on the same output as the bar
-;pin-workspaces = true
+pin-workspaces = true
 ;format-label-state-prefix = " "
 ;format-label-state-foreground = #E9E9E9
 
@@ -343,6 +344,7 @@ label-visible = %name%
 label-visible-background = ${self.label-focused-background}
 ;label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
+label-visible-font = 4
 
 ; urgent = Workspace with urgency hint set
 label-urgent = %name%

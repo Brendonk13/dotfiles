@@ -36,7 +36,7 @@ get_duration() {
 }
 
 
-if ! cat /home/brendonk/.config/polybar/showWeather.txt | rg haveClicked >/dev/null 2>&1; then
+if ! cat /home/brendon/.config/polybar/showWeather.txt | rg haveClicked >/dev/null 2>&1; then
     #avoid all this if don't need to display the weather
     echo 
 fi
@@ -101,7 +101,7 @@ if [ -n "$current" ] && [ -n "$forecast" ]; then
     #fi
     daytime=""
 
-    if cat /home/brendonk/.config/polybar/showWeather.txt | rg haveClicked >/dev/null 2>&1; then
+    if cat /home/brendon/.config/polybar/showWeather.txt | rg haveClicked >/dev/null 2>&1; then
         echo "$(get_icon "$current_icon") $current_temp$SYMBOL  $trend  $(get_icon "$forecast_icon") $forecast_temp$SYMBOL   $daytime"
     else
         #echo 

@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# I run this in a script so that I can killall using the script's name
-/usr/bin/python3 /home/brendonk/.config/polybar/player-mpris-tail.py --icon-playing ' ' --icon-paused ' ' --icon-stopped ' ' --truncate-text '...' -f '{icon} {artist} - {title}'
