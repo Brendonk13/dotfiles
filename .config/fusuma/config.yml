@@ -1,0 +1,37 @@
+swipe:
+  3:
+    left:
+      command: 'xdotool key alt+Left'
+    right:
+      command: 'xdotool key alt+Right'
+    up:
+      command: 'xdotool key ctrl+t; xdotool key ctrl+l'
+      threshold: 1
+    down:
+      command: 'xdotool key ctrl+w'
+      threshold: 1
+  4:
+    left:
+      command: 'xdotool key super+ctrl+Left'
+    right:
+      command: 'xdotool key super+ctrl+Right'
+    down:
+      command: 'notify-send --urgency=critical "Shutting down in 1 minutes" "Enter shutdown -c or four finger swipe up to cancel."; shutdown +1'
+    up:
+      command: 'notify-send --urgency=critical "Cancelling shutdown with shutdown -c"; shutdown +2'
+pinch:
+  2:
+    in:
+      command: 'xdotool key ctrl+plus'
+      threshold: 0.1
+    out:
+      command: 'xdotool key ctrl+minus'
+      threshold: 0.1
+
+threshold:
+  swipe: 1
+  pinch: 1
+
+interval:
+  swipe: 1
+  pinch: 1

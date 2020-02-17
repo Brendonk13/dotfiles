@@ -1,0 +1,10 @@
+
+# Add my 'web' type, can search for *web files now
+--type-add
+web:*.{html,css,js}*
+
+# the default command will not search these files
+--glob=!*.{o,a,so,pyc,swp,mli,cmi,cmo,git/*,class}*
+
+--smart-case
+--hidden
