@@ -2,6 +2,10 @@
 
 dotBashDir=~/dotfiles/bashh
 
+# if not running interactively then don't do anything
+# added so that my bind cmd's dont give me grief over ssh
+[ -z "$PS1" ] && return
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-export EDITOR=nvim
+# export EDITOR=nvim
 
 if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
 # windows environment variables
@@ -44,8 +44,8 @@ elif [ "$HOME" = "/home/brendon" ]; then
     # this works maybe should add to .bash_profile tho
     export JAVA_HOME=/opt/java/jdk-11.0.6
     export PATH=$JAVA_HOME/bin:$PATH
-
-
+else
+    export VISUAL="vim"
 fi
 
 # colored GCC warnings and errors

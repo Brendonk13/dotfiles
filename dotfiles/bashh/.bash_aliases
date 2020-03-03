@@ -39,6 +39,9 @@ elif [ "$HOME" = "/home/brendon" ]; then
     alias mrun='echo -e "mvn exec:java -Dexec.mainClass=Comp409_A1.Idk \n\t .mainClass=groupid.(class Name with Main)"'
     # monitor
     alias mon='mons -e right'
+    # For multiple monitors consider changing to below, which works for 1 monitor
+    # xrandr --output $( xrandr | grep 'HDMI.* connected' | head -n1 | awk '{ print $1 }' ) --off
+    alias monoff='xrandr --output HDMI-0 --off'
     alias gotop='gotop -p'
 
 
@@ -74,7 +77,7 @@ alias ll='ls -l'
 # -------------- CONDA -----------------------------------------------------
 if hash conda > /dev/null 2>&1; then
     alias newc='conda create -n'
-    alias remc='conda env remove --name'   
+    alias remc='conda env remove --name'
     alias act='conda activate'
     alias deac='conda deactivate'
 fi
@@ -87,7 +90,7 @@ if hash git > /dev/null 2>&1; then
     alias gadd='git add'
     alias gstat='git status'
     alias gl1='git log --oneline'
-else
+elif [ "$HOME" = "/home/brendon" ]; then
     echo "git not found, no aliases created."
 fi
 
@@ -98,7 +101,7 @@ fi
 if [ "$HOME" = "/home/brendon" ]; then
     alias config='/usr/bin/git --git-dir=/home/brendon/.cfg/ --work-tree=/home/brendon'
 
-    alias cadd='config add ~/.bashrc; config add ~/.vimrc; config add ~/dotfiles/; config add ~/.config/polybar; config add ~/Scripts/battest_cronjob'
+    alias cadd='config add ~/dotfiles/bashh/configAdd.sh; source ~/dotfiles/bashh/configAdd.sh'
     alias ccom='config commit -m'
     alias cpush='config push origin master'
 fi
@@ -107,19 +110,19 @@ fi
 alias bell='echo -ne "\a"'
 if hash bat > /dev/null 2>&1; then
     alias cat='bat'
-else
+elif [ "$HOME" = "/home/brendon" ]; then
     echo "bat not found, alias not created."
 fi
 
 if hash pinfo > /dev/null 2>&1; then
     alias man='pinfo'
-else
+elif [ "$HOME" = "/home/brendon" ]; then
     echo "pinfo not found, alias not created."
 fi
 
 if hash xdg-open > /dev/null 2>&1; then
     alias open='xdg-open'
-else
+elif [ "$HOME" = "/home/brendon" ]; then
     echo "xdg-open not found, alias not created."
 fi
 

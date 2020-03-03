@@ -5,7 +5,7 @@ swipe:
     right:
       command: 'xdotool key alt+Right'
     up:
-      command: 'xdotool key ctrl+t; xdotool key ctrl+l'
+      command: 'xdotool key ctrl+t ctrl+l'
       threshold: 1
     down:
       command: 'xdotool key ctrl+w'
