@@ -10,7 +10,7 @@ set path+=~/Documents/Mcgill/5th-year/Winter/Compilers/goLite/2020_group11/**
 set path+=~/Downloads/programs/eclipse-workspace/Comp409A1/src/
 
 " now these types don't appear in wild menu options
-set wildignore=*.o,*.a,*.so,*.pyc,*.swp,.git/*,*.class,~/FromInternet/*,*.dll,~/.vim_black/,~/.vim_black/**~/.vim_black,*pycache*,*.cmi,*.cmo,*.mli,*.depends
+set wildignore=*.o,*.a,*.so,*.pyc,*.swp,.git/*,*.class,~/FromInternet/*,*.dll,~/.vim_black/,~/.vim_black/**~/.vim_black,*pycache*,*.cmi,*.cmo,*.cmx,*.mli,*.depends,*.native,_build/*
 " whhyyyy can't I get .vim_black to not appear in wildignore!!
 " note that frominternet appears as well!!!
 

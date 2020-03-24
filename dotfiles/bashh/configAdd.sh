@@ -15,3 +15,5 @@ config add ~/.config/mimeapps.list
 config add ~/Scripts/battest_cronjob
 config add ~/Scripts/redshift_toggle.sh
 config add ~/Scripts/which_hw.sh
+config add ~/Scripts/i3_start_layout.sh
+config add ~/Scripts/monitorStart.sh

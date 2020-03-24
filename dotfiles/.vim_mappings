@@ -126,7 +126,7 @@ vnoremap <silent><leader>ss :TREPLSendSelection<CR>
 " this next one defines an operator which I can use to send selections to neoterm
 nmap <silent><leader>s <Plug>(neoterm-repl-send)
 
-"---------- WINDOW MANAGEMENT ------------
+"----------------------------------------------- WINDOW MANAGEMENT -------------------------------------------------
 " maybe I will change this to <C-<lt>> as a normal mode mapping ... this is barely less keystrokes, just nice not to think about numbers
 nnoremap <C-w>> <C-w>20>
 nnoremap <C-w>2> <C-w>40>
@@ -164,13 +164,13 @@ nnoremap <silent> <leader>o :only<CR>
 " close windows easily!!
 nnoremap <silent> <leader>c :close<CR>
 
-"----------- END WINDOW MANAGEMENT -----------
+"------------------------------------------------ END WINDOW MANAGEMENT ------------------------------------------------
 
 " note that there are hella commands possible from with insert mode, check index!!
 
 
 
-"------------------ SEARCH --------------------
+"------------------------------------------------------- SEARCH ---------------------------------------------------------
 "nmap / ms/
 "nmap ? ms?
 " my excuse for not adding these before was that I'd break nerdtree/ some other plugin i'm not using
@@ -194,9 +194,9 @@ nnoremap <leader>tf :tabfind<space>
 " don't really like c-p since I accidently press lots when trying to esc.
 
 
-"----------------- END SEARCH ----------------
+"------------------------------------------------------ END SEARCH -----------------------------------------------------
 
-"----------------- VISUAL MODE -------------------
+"------------------------------------------------------ VISUAL MODE --------------------------------------------------------
 " this visually selects most recent paste/insert mode session
 nnoremap gV `[v`]
 
@@ -206,7 +206,11 @@ nnoremap gV `[v`]
 vnoremap . :norm .<CR>
 vnoremap Q :norm @@<CR>
 
-"----------------- INSERT MODE ------------------
+
+
+
+
+"------------------------------------------------------ INSERT MODE -------------------------------------------------------
 " neeeeeeeed to make put all these bs things in a fold, i even know to use mkview..
 " force non-usage of arrow keys
 imap <Up>    <Nop>
@@ -270,16 +274,16 @@ inoremap <C-y> <esc>"iyiwea
 inoremap <C-c> <esc>mtb~`ta
 
 
-" ------------ abbreviations!! ---------------------------
+" ------------------------------------------------- abbreviations!! ----------------------------------------------------------------
 
 inoreabbrev slef self
 
 
 cnoreabbrev makrs marks
 
-" ------------ END abbreviations!! ---------------------------
+" ------------------------------------------------- END abbreviations!! ----------------------------------------------------------------
 
-"------------------- plugin mappings --------------------------------
+"-------------------------------------------------------- plugin mappings ---------------------------------------------------------------------
 
 " Better command history with q:
 command! CmdHist call fzf#vim#command_history({'bottom': '10'})
@@ -310,11 +314,16 @@ nnoremap <M-h> :Helptags<CR>
 
 xmap ga <Plug>(EasyAlign)
 
+" this allows for easy alignment based on searching
+xmap <leader>ga :EasyAlign //<left>
+
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" nmap <leader>ga :EasyAlign
 
-"------------------- TERMINAL ---------------------------------------
+
+"-------------------------------------------------------- TERMINAL ----------------------------------------------------------------------------
 
 
 if has('nvim')
@@ -337,4 +346,4 @@ if has('nvim')
 
 endif
 
-"------------------- END TERMINAL ---------------------------------------
+"-------------------------------------------------------- END TERMINAL ----------------------------------------------------------------------------

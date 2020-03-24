@@ -81,6 +81,8 @@ if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
 else
     if [ -f /usr/share/z/z.sh ]; then
         source /usr/share/z/z.sh
+    # opam configuration -- ocaml
+    test -r /home/brendon/.opam/opam-init/init.sh && . /home/brendon/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
     fi
 fi
 

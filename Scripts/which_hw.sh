@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-int x = 10 ehco echo ;
 
 # Todo: add concurency option.
 # check if I can make strings for each cmd, then evaluate if its the chosen cmd
@@ -14,10 +13,10 @@ int x = 10 ehco echo ;
 # ---------- ASSIGNMENT LINKS ------------------------------------------
 
 # ass_520_urls='https://www.cs.mcgill.ca/~cs520/2020/assignments/Assignment2_Specifications.pdf https://www.cs.mcgill.ca/~cs520/2020/assignments/Assignment2.pdf https://www.cs.mcgill.ca/~cs520/2020/assignments/Assignment2_Rubric.pdf'
-ass_520_urls='https://www.cs.mcgill.ca/~cs520/2020/project/Milestone1.pdf https://www.cs.mcgill.ca/~cs520/2020/project/Milestone1_Specifications.pdf https://www.cs.mcgill.ca/~cs520/2020/project/Milestone1_Rubric.pdf'
+ass_520_urls='https://www.cs.mcgill.ca/~cs520/2020/project/Milestone2.pdf https://www.cs.mcgill.ca/~cs520/2020/project/Milestone2_Specifications.pdf https://www.cs.mcgill.ca/~cs520/2020/project/Milestone2_Rubric.pdf'
 
 ass_421_pdf='/home/brendon/Downloads/Assignments/db/outline/a2.pdf'
-ass_409_pdf='/home/brendon/Downloads/Assignments/concur/assig2.pdf'
+ass_409_pdf='/home/brendon/Downloads/Assignments/concur/assig3.pdf'
 
 
 # ---------- NOTE LINKS ------------------------------------------

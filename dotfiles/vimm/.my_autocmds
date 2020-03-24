@@ -35,6 +35,10 @@ augroup marks
 augroup END
 
 
+augroup Csharp
+  autocmd!
+  autocmd Filetype cs setlocal commentstring=//\ %s
+augroup END
 
 augroup vimFiles
   autocmd!
@@ -50,8 +54,8 @@ augroup END
 
 augroup ocaml
   autocmd!
-  set commentstring=(*\ %s\ *)
-  au BufRead,BufNewFile *.ml,*.mli,*.mly,*.mll compiler ocaml
+  autocmd Filetype ocaml setlocal commentstring=(*\ %s\ *)
+  autocmd BufRead,BufNewFile *.ml,*.mli,*.mly,*.mll compiler ocaml
 augroup END
 
 augroup java
@@ -91,7 +95,10 @@ autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 "augroup END
 
+" this is meant to change the background of listchar, doesn't work.
 highlight SpecialKey guibg=#000211
+
+
 augroup BackgroundHighlight
     autocmd!
     autocmd! WinEnter * setlocal colorcolumn=0 cursorline

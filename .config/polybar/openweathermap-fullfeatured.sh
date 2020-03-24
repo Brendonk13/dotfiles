@@ -36,10 +36,11 @@ get_duration() {
 }
 
 
-if ! cat /home/brendon/.config/polybar/showWeather.txt | rg haveClicked >/dev/null 2>&1; then
-    #avoid all this if don't need to display the weather
-    echo 
-fi
+#if ! cat /home/brendon/.config/polybar/showWeather.txt | rg haveClicked >/dev/null 2>&1; then
+#    #avoid all this if don't need to display the weather
+#    echo 
+#    # echo 
+#fi
 
 
 KEY="5ffe94080ea5d2afd1614a4d494ee3e1"
@@ -106,6 +107,7 @@ if [ -n "$current" ] && [ -n "$forecast" ]; then
     else
         #echo 
         #echo 
-        echo 
+        echo 
+        # echo 
     fi
 fi
