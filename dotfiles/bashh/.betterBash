@@ -4,7 +4,7 @@
 # should make a cmd called aliases which cat's the bash_aliases file then also the last lines in
 # this one until it encounters a line with nada on it
 
-source ~/dotfiles/bashh/from_online.sh
+[ -f "$HOME/dotfiles/bashh/from_online.sh" ] && source "$HOME/dotfiles/bashh/from_online.sh"
 
 # moves up $1 directories
 function up() {
@@ -19,7 +19,36 @@ function changeDirAndShow() {
     cd "$1" && ls -A
 }
 
-# this function moves files to a directory then changes user to that folder
+
+# ------------------------------- Search For input in fasd -Rfl file list or from $PWD----------------------------
+alias sf=ssf
+ssf() {
+    rg_command='rg --column --line-number --no-heading --fixed-strings --color "always"'
+    search=""
+    printf -v search "%q" "$*"
+    if [ $# -lt 1 ]; then
+        recents="$(fasd -Rfl "$1")"
+        fils="$(echo -e $recents | awk '!/(^.*\.mp4$)/{print}')"
+        files=`eval $rg_command $search "{$fils[*]}" | fzf --ansi --multi --reverse | awk -F ':' '{print $1":"$2":"$3}'`
+    else
+        files=`eval $rg_command $search | fzf --ansi --multi --reverse | awk -F ':' '{print $1":"$2":"$3}'`
+    fi
+
+    [[ -n "$files" ]] && $VISUAL "$files"
+}
+
+# this is sick cuz it will open shit in vim also
+alias o=fuzzy_xdgopen
+fuzzy_xdgopen() {
+    [ $# -gt 0 ] && fasd -f "$*" | xargs -0 xdg-open && return
+    local file
+    file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && xdg-open "${file}" || return 1
+}
+[ -f "$HOME/.config/.fzf_setup.sh" ] && source "$HOME/.config/.fzf_setup.sh"
+
+
+
+# ------------------------------- follow moved files to the dest. folder ----------------------------
 function mcd() {
     if [ "$#" -lt 2 ]; then
         echo "Input files and destination for this to work jeez."
@@ -46,30 +75,8 @@ function mcd() {
 }
 
 
-# Universal zip extracter
-function extract () {
-  if [ -f $1 ] ; then
-    case $1 in
-      *.tar.bz2)   tar xvjf $1    > /dev/null 2>&1 ;;
-      *.tar.gz)    tar xvzf $1    > /dev/null 2>&1 ;;
-      *.tar.xz)    tar Jxvf $1    > /dev/null 2>&1 ;;
-      *.bz2)       bunzip2 $1     > /dev/null 2>&1 ;;
-      *.rar)       rar x $1       > /dev/null 2>&1 ;;
-      *.gz)        gunzip $1      > /dev/null 2>&1 ;;
-      *.tar)       tar xvf $1     > /dev/null 2>&1 ;;
-      *.tbz2)      tar xvjf $1    > /dev/null 2>&1 ;;
-      *.tgz)       tar xvzf $1    > /dev/null 2>&1 ;;
-      *.zip)       unzip -d `echo $1 | sed 's/\(.*\)\.zip/\1/'` $1 > /dev/null 2>&1 ;;
-      *.Z)         uncompress $1  > /dev/null 2>&1 ;;
-      *.7z)        7z x $1        > /dev/null 2>&1 ;;
-      *)           echo "don't know how to extract '$1'" ;;
-    esac
-  else
-    echo "'$1' is not a valid file!"
-  fi
-}
 
-# fuzzy search arch/AUR repositories then download
+#-------------------------------------------- fuzzy search arch/AUR repositories then download --------------------------------------------
 function search_packages() {
     pac_manager="$1"
     package_name=$("$pac_manager" -Slq | fzf) > /dev/null 2>&1
@@ -102,42 +109,3 @@ bind "set show-all-if-ambiguous on"
 
 # Don't record some commands -- who cares if they only show up once!
 #export HISTIGNORE="&:[ ]*:exit:ls:history:clear"
-
-
-# this should never have been done..
-function search_aliases() {
-    chars_before_eq=`alias | awk '{first = $1; $1 = ""; print $0, first; }' | cut -d = -f 1`
-    #echo "$chars_before_eq"
-    #alias | sed -e 's/^alias//' | awk -v "fst=$1" '{printf "$1"; for (i=0; i < $(($max_chars - ${#fst})); i++) printf " "; printf "="; for (j=2; j<NF; j++) printf $j " "; print $NF}' | fzf
-
-    # this loop finds the longest alias name
-    max_chars=-1
-    word=""
-    while read -r line; do
-        # add quotes to curr_chars if not working
-        if [ ${#line} -gt $max_chars ]; then
-            max_chars=${#line}
-            word="$line"
-        fi
-    done <<< "$chars_before_eq"
-    echo -n "the longest alias has: "; echo -n "$max_chars"; echo " characters."
-    echo -n "the word is: "; echo "$word"
-
-    #awk {'first = $1; $1 = ""; printf ("%${max_chars}s%s\n", $5, $1)'}
-    # print first thing: alias name, then $max_chars spaces, another space, then print everything but fst col (fst printed at beginning)
-    alias | sed -e 's/^alias//' | awk -v "loop_count=$(($max_chars - ${#1}))" '{printf $1; for (i=0; i<"$loop_count"; i++) printf " "; printf "="; for (j=2; j<NF; j++) printf $j " "; print $NF}' | fzf
-
-    # alias | sed -e 's/^alias//' | cut -d = -f 1
-    # ---- to retrieve alias name only
-    # need to delete alias keyword, then compute #whitespaces== max_chars - curr_char length
-    # then print #whitespaces
-    # then do print:  alias | cut -d = -f 2:100
-    #----- this prints everything after the equals sign
-    #-------- alias | sed -e 's/^.\+\=//' does this better
-
-    #awk '{first = $1; $1 = ""; for (i=}'
-    # adds $diff spaces at beginning of line
-    #sed 's/^/'"$(printf %${DIFF}s)"'/'
-    return
-}
-

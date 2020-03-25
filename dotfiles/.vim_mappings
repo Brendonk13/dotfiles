@@ -296,8 +296,33 @@ nnoremap q/ :QHist<CR>
 " appending leader searches from vim's pwd
 nnoremap <leader><M-f> :FZF<CR>
 " normal is to search from the current buffer's directory.
-nnoremap <silent> <M-f> :Files <C-r>=expand('%:h')<CR><CR>
+nnoremap <silent> <M-f> :Files <C-R>=fnameescape(expand('%:p:h')).'/'<CR><CR>
 
+nnoremap <silent> <M-r> :RgFromFilesDir<CR>
+nnoremap <silent> <leader><M-r> :RgVimPWD<CR>
+
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
+command! -bang -nargs=* RgFromFilesDir
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+    \   fzf#vim#with_preview({'dir': expand('%:p:h')}), <bang>0)
+
+command! -bang -nargs=* RgVimPWD
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+    \   fzf#vim#with_preview(), <bang>0)
+
+
+" Global line completion (not just open buffers. ripgrep required.)
+inoremap <expr> <c-x><c-l> fzf#vim#complete(fzf#wrap({
+    \ 'prefix': '^.*$',
+    \ 'source': 'rg -n ^ --color always',
+    \ 'options': '--ansi --delimiter : --nth 3..',
+    \ 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') }}))
+
+"
 "mnemonic: meta-buffers
 nnoremap <M-b> :Buffers<CR>
 

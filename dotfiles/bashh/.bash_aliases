@@ -53,6 +53,9 @@ elif [ "$HOME" = "/home/brendon" ]; then
 
     alias eclipse='cd /home/brendon/Downloads/programs/java-2019-06/eclipse; ./eclipse &'
 
+    # fuzzy search and cd, files based on recency as per fasd
+    alias z=fuzzy_z
+
 fi
 # ------ END OS SPECIFIC ALIASES -------------------------------------------
 
@@ -72,6 +75,8 @@ fi
 alias ls='ls --group-directories-first --color=auto'
 alias lsa='ls -A'
 alias ll='ls -l'
+# show file sizes in MB
+alias lb='ls -l --block-size=M'
 
 
 # -------------- CONDA -----------------------------------------------------
@@ -88,7 +93,7 @@ if hash git > /dev/null 2>&1; then
     alias gcom='git commit -m'
     alias co='git checkout'
     alias gadd='git add'
-    alias gstat='git status'
+    alias gstat='git status -s'
     alias gl1='git log --oneline'
 elif [ "$HOME" = "/home/brendon" ]; then
     echo "git not found, no aliases created."
@@ -128,7 +133,7 @@ fi
 
 alias vim="$VISUAL"
 alias vi="$VISUAL"
-alias v="$VISUAL"
+# alias v=vv
 alias rpy='python3'
 
 

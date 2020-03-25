@@ -57,13 +57,14 @@ if [ -f $dotBashDir/.bash_exports ]; then
     source $dotBashDir/.bash_exports
 fi
 
-if [ -f $dotBashDir/.bash_aliases ]; then
-    source $dotBashDir/.bash_aliases
-fi
-
 #betterBash has functions and a few common alias's 
 if [ -f $dotBashDir/.betterBash ]; then
     source $dotBashDir/.betterBash
+fi
+
+
+if [ -f $dotBashDir/.bash_aliases ]; then
+    source $dotBashDir/.bash_aliases
 fi
 
 #[ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -79,11 +80,11 @@ if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
     export PATH=~/FromInternet/anaconda3/bin:$PATH
 
 else
-    if [ -f /usr/share/z/z.sh ]; then
-        source /usr/share/z/z.sh
+    # if [ -f /usr/share/z/z.sh ]; then
+    #     source /usr/share/z/z.sh
     # opam configuration -- ocaml
     test -r /home/brendon/.opam/opam-init/init.sh && . /home/brendon/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
-    fi
+    # fi
 fi
 
 # >>> conda initialize >>>

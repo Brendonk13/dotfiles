@@ -1,4 +1,5 @@
-#!/bin/env bash
+#!/usr/bin/env bash
+
 # HSTR configuration - add this to ~/.bashrc
 #alias hh=hstr                    # hh to be alias for hstr
 #export HSTR_CONFIG=hicolor       # get more colors
@@ -6,52 +7,83 @@
 #export HISTCONTROL=ignorespace   # leading space hides commands from history
 export HISTFILESIZE=10000        # increase history file size (default is 500)
 export HISTSIZE=${HISTFILESIZE}  # increase history size (default is 500)
-
 # if this is interactive shell, then bind hstr to Ctrl-r (for Vi mode check doc)
 # fzf has a better interface
 #if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
 # if this is interactive shell, then bind 'kill last command' to Ctrl-x k
 #if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 
-# lscolor's project by geoff greer
-#LS_COLORS=$LS_COLORS:'di=1;34;47:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
-#export LS_COLORS='di=1;34;47:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
 
-# what's left: remove the follow and g options and no-ignore in fzf default
-# figure out what default ops means exxactly by trying
-# then delete the -g things in sf command,
-# delete more options incrementally by testing on the command line till it works
+fasd_cache="$HOME/.fasd-init-bash"
+if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
+  eval "$(fasd --init auto)"
+  fasd --init posix-alias bash-hook bash-ccomp bash-ccomp-install >| "$fasd_cache"
+fi
+source "$fasd_cache"
+unset fasd_cache
+_fasd_bash_hook_cmd_complete v m j o zz
 
 
-# note that downloading and using fd as the default command should be faster
-# -- actually not true since they both "use the same code to walk the directories" -burntsushi reddit
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-# options like --hidden and --smart-case are specified as rg defaults in ~/FromInternet/.ripgreprc
-export FZF_DEFAULT_COMMAND='rg --files'
-export FZF_ALT_C_COMMAND="bfs -type d -nohidden"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_DEFAULT_OPTS='--bind J:down,K:up --reverse --ansi --multi'
-bind -x '"\C-p": fzf'
-# what's the point of a ctrl-t command lol 
-#-- can do ctrl-t in c-line to search without pulling up vim
-# and the alt c command is for FINDING DIRECTORIES ONLY
-
-# the --no-ignore means we're searching thru .gitignore's!
-# the --follow flag means we're following symlinks!
-# maybe need to change to --color 'always' -- changing quotes basically
-# the --fixed-string thing means that we can't search using regex!
-
-### need to look into the --fixed-strings mode more, think it could be kinda sick!
-
-sf() {
-    if [ "$#" -lt 1 ]; then echo "Supply string to search for!"; return 1; fi
-    printf -v search "%q" "$*"
-    #include="yml,js,json,php,md,styl,pug,jade,html,config,py,cpp,c,go,hs,rb,conf,fa,lst"
-    #exclude=".config,.git,node_modules,vendor,build,yarn.lock,*.sty,*.bst,*.coffee,dist"
-    rg_command='rg --column --line-number --no-heading --fixed-strings --color "always"'
-    files=`eval $rg_command $search | fzf --ansi --multi --reverse | awk -F ':' '{print $1":"$2":"$3}'`
-    [[ -n "$files" ]] && $VISUAL $files
+# fasd & fzf change directory - open best matched file using `fasd` if given argument, filter output of `fasd` using `fzf` else
+v() {
+    [ $# -gt 0 ] && fasd -f -e ${EDITOR} "$*" && return
+    local file
+    file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && $VISUAL "${file}" || return 1
 }
 
+# fasd & fzf change directory - jump using `fasd` if given argument, filter output of `fasd` using `fzf` else
+fuzzy_z() {
+    [ $# -gt 0 ] && fasd_cd -d "$*" && return
+    local dir
+    dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
+}
+
+# binds ctrl+<space> to fzf search through cmd templates
+# bookmark my own cmd with ctrl-k
+[[ -s "$HOME/.local/share/marker/marker.sh" ]] && source "$HOME/.local/share/marker/marker.sh"
+
+
+#----------------------------- Universal zip extracter ----------------------------------------------
+function extract () {
+  if [ -f "$1" ] ; then
+    case "$1" in
+      *.tar.bz2)   tar xvjf "$1"    > /dev/null 2>&1 ;;
+      *.tar.gz)    tar xvzf "$1"    > /dev/null 2>&1 ;;
+      *.tar.xz)    tar Jxvf "$1"    > /dev/null 2>&1 ;;
+      *.bz2)       bunzip2 "$1"     > /dev/null 2>&1 ;;
+      *.rar)       rar x "$1"       > /dev/null 2>&1 ;;
+      *.gz)        gunzip "$1"      > /dev/null 2>&1 ;;
+      *.tar)       tar xvf "$1"     > /dev/null 2>&1 ;;
+      *.tbz2)      tar xvjf "$1"    > /dev/null 2>&1 ;;
+      *.tgz)       tar xvzf "$1"    > /dev/null 2>&1 ;;
+      *.zip)       unzip -d `echo "$1" | sed 's/\(.*\)\.zip/\1/'` "$1" > /dev/null 2>&1 ;;
+      *.Z)         uncompress "$1"  > /dev/null 2>&1 ;;
+      *.7z)        7z x "$1"        > /dev/null 2>&1 ;;
+      *)           echo "don't know how to extract '$1'" ;;
+    esac
+  else
+    echo "'$1' is not a valid file!"
+  fi
+}
+
+
+
+
+# random but will be nice to look at one day
+# would be sick if I could make it show the cmd needed to invoke
+
+# CTRL-X-1 - Invoke Readline functions by name
+__fzf_readline ()
+{
+    builtin eval "
+        builtin bind ' \
+            \"\C-x3\": $(
+                builtin bind -l | command fzf +s +m --toggle-sort=ctrl-r
+            ) \
+        '
+    "
+}
+
+builtin bind -x '"\C-x2": __fzf_readline';
+builtin bind '"\C-x1": "\C-x2\C-x3"'
 
