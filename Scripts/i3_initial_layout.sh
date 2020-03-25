@@ -7,6 +7,9 @@ workspace_names=(": Compilers" ": Unity" ": Threads" ": DB")
 open_a_terminal="exec kitty"
 
 if type "xrandr"; then
+    sleep 2
+    mons -e right
+    sleep 5
     num=1
     num_mon=$(xrandr --query | grep " connected" | cut -d" " -f1 | wc -l)
     for name in "${workspace_names[@]}"; do
@@ -29,7 +32,7 @@ if type "xrandr"; then
             num=$((num + 1))
 
             # necessary to avoid strange undeterministic i3 behaviour
-            sleep 0.9
+            sleep 1.2
         done
     done
 fi
