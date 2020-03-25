@@ -84,6 +84,27 @@ function! ToggleDropDownNeoterm()
 endfunction
 
 
+" --------------------------- FZF commands --------------------------------
+
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
+command! -bang -nargs=* RgCurrentBufferDir
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+    \   fzf#vim#with_preview({'dir': expand('%:p:h')}), <bang>0)
+
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 0,
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+
+
+
+
+
+" -------------------- define popup window -----------------------------------
+
 " popup windows, stolen from a long ways down this: https://github.com/junegunn/fzf.vim/issues/821
 
 fu s:snr() abort

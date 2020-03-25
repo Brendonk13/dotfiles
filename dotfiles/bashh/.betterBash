@@ -79,16 +79,13 @@ function mcd() {
 #-------------------------------------------- fuzzy search arch/AUR repositories then download --------------------------------------------
 function search_packages() {
     pac_manager="$1"
-    package_name=$("$pac_manager" -Slq | fzf) > /dev/null 2>&1
-    if [ "$package_name" == "" ]; then
-        #echo "CTRL-C detected"
-        return
-    fi
     if [ "$pac_manager" == "yay" ]; then
-        "$pac_manager" -S --noconfirm "$package_name"
+        # "$pac_manager" -S --noconfirm "$package_name"
+        yay -Slq --noconfirm | fzf -m --preview 'yay -Si {1}'| xargs -ro yay -S
         # sudo not recommended for yay installs
     else
-        sudo "$pac_manager" -S --noconfirm "$package_name"
+        pacman -Slq --noconfirm | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
+    #     sudo "$pac_manager" -S --noconfirm "$package_name"
     fi
 }
 

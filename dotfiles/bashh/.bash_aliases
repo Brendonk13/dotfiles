@@ -52,6 +52,7 @@ elif [ "$HOME" = "/home/brendon" ]; then
     alias print='cd ~/Scripts/ideas/print; ls'
 
     alias eclipse='cd /home/brendon/Downloads/programs/java-2019-06/eclipse; ./eclipse &'
+    alias conc='cd /home/brendon/Downloads/programs/eclipse-workspace/ConcurrA3/src/ConcurrA3; ls'
 
     # fuzzy search and cd, files based on recency as per fasd
     alias z=fuzzy_z
