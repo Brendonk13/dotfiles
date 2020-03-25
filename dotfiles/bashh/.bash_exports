@@ -11,6 +11,7 @@ if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
     export _Z_DATA="$HOME/FromInternet/z/.z"
 
     export VISUAL="nvim"
+    export EDITOR=$VISUAL
     # using this and XCsrv1.20.1.4
     #export DISPLAY=localhost:0.0
     export RIPGREP_CONFIG_PATH="$HOME/FromInternet/.ripgreprc"
@@ -40,6 +41,7 @@ elif [ "$HOME" = "/home/brendon" ]; then
     else
         export VISUAL="nvim"
     fi
+    export EDITOR=$VISUAL
 
     # note that below did NOT work for changing jdk
     # export JAVA_HOME="/opt/java/jdk-11.0.6"

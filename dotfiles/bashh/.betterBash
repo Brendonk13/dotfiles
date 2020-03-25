@@ -5,7 +5,6 @@
 # this one until it encounters a line with nada on it
 
 source ~/dotfiles/bashh/from_online.sh
-# source ~/dotfiles/bashh/from_online.sh
 
 # moves up $1 directories
 function up() {
