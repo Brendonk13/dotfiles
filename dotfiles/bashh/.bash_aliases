@@ -10,19 +10,20 @@ if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
 elif [ "$HOME" = "/home/brendon" ]; then
 # ------ Manjaro Aliases ---------------------------------------------------
 
+
 # ------ Common directory navigation ---------------------------------------
-    alias dow='cd ~/Downloads; ls'
-    alias submit='cd ~/Documents/Mcgill/submissions'
-    alias sem='cd ~/Documents/Mcgill/5th-year/Winter; ls'
-    alias scrot='cd ~/Pictures/screenshots; ls'
-    alias bk='cd ~/prev/brendonk/; ls'
+    alias dow='cd ~/Downloads; lsd --group-dirs first'
+    alias submit='cd ~/Documents/Mcgill/submissions; lsd --group-dirs first'
+    alias sem='cd ~/Documents/Mcgill/5th-year/Winter; lsd --group-dirs first'
+    alias scrot='cd ~/Pictures/Screenshots; lsd --group-dirs first; ranger'
 
 
 # ------ Course directories ------------------------------------------------
-    alias andor='cd /home/brendon/Documents/Mcgill/5th-year/fall-sem/andor/f2019-hexanome-14; ls'
-    alias cam='cd ~/Documents/Mcgill/5th-year/Winter/Compilers/Ocaml; ls'
-    alias comp='cd /home/brendon/Documents/Mcgill/5th-year/Winter/Compilers/goLite/2020_group11; ls'
-
+    alias andor='cd /home/brendon/Documents/Mcgill/5th-year/fall-sem/andor/f2019-hexanome-14/hexanome-14/Assets; lsd --group-dirs first'
+    alias cam='cd ~/Documents/Mcgill/5th-year/Winter/Compilers/Ocaml; lsd --group-dirs first'
+    alias comp='cd /home/brendon/Documents/Mcgill/5th-year/Winter/Compilers/goLite/2020_group11; lsd --group-dirs first'
+    alias conc='cd /home/brendon/Downloads/programs/eclipse-workspace/ConcurrA3/src/ConcurrA3; lsd --group-dirs first'
+    alias db='cd /home/brendon/Documents/Mcgill/5th-year/Winter/databases; lsd --group-dirs first'
 
 
 # ------ Commands ----------------------------------------------------------
@@ -44,18 +45,40 @@ elif [ "$HOME" = "/home/brendon" ]; then
     alias monoff='xrandr --output HDMI-0 --off'
     alias gotop='gotop -p'
 
+    # fuzzy search and cd, files based on recency as per fasd
+    alias z=fuzzy_z
+
+    alias bashrc='source ~/.bashrc'
+    # word count of current directory
+    alias wcd='wc -l `find . -maxdepth 1 -type f`'
+
+# ------ compiler tests ----------------------------------------------------
+    alias arr='./main.native symbol ../programs-solution/1-scan+parse/valid/7-3-arrays.go'
+    alias slice='./main.native symbol ../programs-solution/1-scan+parse/valid/7-2-slices.go'
+    alias struct='./main.native symbol ../programs-solution/1-scan+parse/valid/7-4-structs.go'
+    alias built='./main.native symbol ../programs-solution/1-scan+parse/valid/9-7-builtins.go'
+    alias cast='./main.native symbol ../programs-solution/1-scan+parse/valid/9-8-typecastexpr.go'
+    alias func='./main.native symbol ../programs-solution/1-scan+parse/valid/9-6-funccallexprs.go'
+
+    alias parr='./main.native pretty ../programs-solution/1-scan+parse/valid/7-3-arrays.go'
+    alias pslice='./main.native pretty ../programs-solution/1-scan+parse/valid/7-2-slices.go'
+    alias pstruct='./main.native pretty ../programs-solution/1-scan+parse/valid/7-4-structs.go'
+    alias pbuilt='./main.native pretty ../programs-solution/1-scan+parse/valid/9-7-builtins.go'
+    alias pcast='./main.native pretty ../programs-solution/1-scan+parse/valid/9-8-typecastexpr.go'
+    alias pfunc='./main.native pretty ../programs-solution/1-scan+parse/valid/9-6-funccallexprs.go'
+
+    alias sym='bash /home/brendon/Documents/Mcgill/5th-year/Winter/Compilers/goLite/testprogs/symTest.sh'
+    alias pretty='bash /home/brendon/Documents/Mcgill/5th-year/Winter/Compilers/goLite/testprogs/prettyTest.sh'
+
+
 
 # ------ Random directories ------------------------------------------------
     # mnemonic:  EclipseWorkspace
-    alias ework='cd /home/brendon/Downloads/programs/eclipse-workspace; ls'
-    alias gog='cd ~/Job-Applications/goog; ls'
-    alias print='cd ~/Scripts/ideas/print; ls'
+    alias ework='cd /home/brendon/Downloads/programs/eclipse-workspace; lsd --group-dirs first'
+    alias print='cd ~/Scripts/my_projects/print; lsd --group-dirs first'
 
     alias eclipse='cd /home/brendon/Downloads/programs/java-2019-06/eclipse; ./eclipse &'
-    alias conc='cd /home/brendon/Downloads/programs/eclipse-workspace/ConcurrA3/src/ConcurrA3; ls'
 
-    # fuzzy search and cd, files based on recency as per fasd
-    alias z=fuzzy_z
 
 fi
 # ------ END OS SPECIFIC ALIASES -------------------------------------------
@@ -73,11 +96,12 @@ if [ -d ~/dotfiles/bashh ]; then
 fi
 
 # ls
-alias ls='ls --group-directories-first --color=auto'
+alias ls='lsd --group-dirs first'
 alias lsa='ls -A'
-alias ll='ls -l'
-# show file sizes in MB
-alias lb='ls -l --block-size=M'
+# ls -l --total-size --blocks user,size,name
+alias ll='ls -l --total-size'
+# show file sizes
+alias lss='ls -l --blocks size,name'
 
 
 # -------------- CONDA -----------------------------------------------------
@@ -100,7 +124,7 @@ elif [ "$HOME" = "/home/brendon" ]; then
     echo "git not found, no aliases created."
 fi
 
-# -------------- Configuration ---------------------------------------------
+# -------------- Configuration Version Control -----------------------------
 #https://www.atlassian.com/git/tutorials/dotfiles
 
 # don't add this to servers
@@ -127,14 +151,14 @@ elif [ "$HOME" = "/home/brendon" ]; then
 fi
 
 if hash xdg-open > /dev/null 2>&1; then
-    alias open='xdg-open'
+    # setsid opens the file in a new session so the process will survive the parent process.
+    alias open='setsid xdg-open'
 elif [ "$HOME" = "/home/brendon" ]; then
     echo "xdg-open not found, alias not created."
 fi
 
 alias vim="$VISUAL"
 alias vi="$VISUAL"
-# alias v=vv
 alias rpy='python3'
 
 

@@ -26,7 +26,8 @@ bindsym $mod+Shift+P exec --no-startup-id $HOME/.config/polybar/launch.sh
 
 # bindsym $mod+Y exec $HOME/Scripts/selective_paste.sh $HOME/Scripts/pasted/mcmail.txt
 
-
+bindsym $mod+Shift+t exec 'setsid Telegram'
+# don't work, solution is to just use rofi or to create script which just does setsid Telegram
 
 
 

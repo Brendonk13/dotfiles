@@ -306,7 +306,7 @@ nnoremap <leader><M-f> :GFiles<CR>
 nnoremap <silent> <M-f> :Files <C-R>=fnameescape(expand('%:p:h')).'/'<CR><CR>
 
 " grep all files in curr buffer's dir
-nnoremap <silent> <M-r> :CurrentBufferDir<CR>
+nnoremap <silent> <M-r> :RgCurrentBufferDir<CR>
 " grep project with preview
 nnoremap <silent> <leader><M-r> :GGrep<CR>
 
@@ -325,10 +325,10 @@ nnoremap <M-h> :Helptags<CR>
 
 "don't like that these are such big windows so far:(
 
-xmap ga <Plug>(EasyAlign)
+xmap <leader>ga <Plug>(EasyAlign)
 
 " this allows for easy alignment based on searching
-xmap <leader>ga :EasyAlign //<left>
+xmap ga :EasyAlign //<left>
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)

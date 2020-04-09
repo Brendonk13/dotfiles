@@ -14,6 +14,17 @@ export HISTSIZE=${HISTFILESIZE}  # increase history size (default is 500)
 #if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 
 
+# moves up $1 directories
+function up() {
+  times=$1
+  while [ "$times" -gt "0" ]; do
+    cd ..
+    times=$(($times - 1))
+  done
+}
+
+
+
 fasd_cache="$HOME/.fasd-init-bash"
 if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
   eval "$(fasd --init auto)"

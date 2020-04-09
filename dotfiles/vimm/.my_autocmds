@@ -88,12 +88,27 @@ augroup END
 "   autocmd Filetype fp, vp set ft=java 
 " augroup END
 
-"augroup goyo
-  "autocmd!
-autocmd! User GoyoEnter Limelight
-"autocmd! User GoyoEnter setlocal nocursorline
-autocmd! User GoyoLeave Limelight!
-"augroup END
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+function! s:goyo_enter()
+  setlocal noshowmode
+  setlocal noshowcmd
+  setlocal scrolloff=999
+  Limelight
+  " ...
+endfunction
+
+function! s:goyo_leave()
+  setlocal showmode
+  setlocal showcmd
+  setlocal scrolloff=1
+  Limelight!
+  " ...
+endfunction
+
+
+
 
 " this is meant to change the background of listchar, doesn't work.
 highlight SpecialKey guibg=#000211

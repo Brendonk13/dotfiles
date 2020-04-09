@@ -11,7 +11,6 @@ if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
     export _Z_DATA="$HOME/FromInternet/z/.z"
 
     export VISUAL="nvim"
-    export EDITOR=$VISUAL
     # using this and XCsrv1.20.1.4
     #export DISPLAY=localhost:0.0
     export RIPGREP_CONFIG_PATH="$HOME/FromInternet/.ripgreprc"
@@ -32,16 +31,7 @@ elif [ "$HOME" = "/home/brendon" ]; then
     export XDG_CONFIG_HOME="$HOME/.config"
     export PYTHONSTARTUP="$XDG_CONFIG_HOME/ptpython/config.py"
 
-    # currently exporting in bash_profile since this isn't shell specific
-    # [[ -z "$ROFI_PASS_CONFIG" ]] && export ROFI_PASS_CONFIG="$HOME/.config/rofi-pass/config"
-
-    # if we call vim __.x within nvim, use nvr and don't nest vim in terminal.
-    if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
-        export VISUAL="nvr"
-    else
-        export VISUAL="nvim"
-    fi
-    export EDITOR=$VISUAL
+    export PATH="/home/$USER/bin:$PATH"
 
     # note that below did NOT work for changing jdk
     # export JAVA_HOME="/opt/java/jdk-11.0.6"
@@ -50,9 +40,21 @@ elif [ "$HOME" = "/home/brendon" ]; then
     # this works maybe should add to .bash_profile tho
     export JAVA_HOME=/opt/java/jdk-11.0.6
     export PATH=$JAVA_HOME/bin:$PATH
+
+
+    # if we call vim __.x within nvim, use nvr and don't nest vim in terminal.
+    if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+        export VISUAL="nvr"
+    else
+        export VISUAL="nvim"
+    fi
+
 else
     export VISUAL="vim"
 fi
+
+export EDITOR=$VISUAL
+
 
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'

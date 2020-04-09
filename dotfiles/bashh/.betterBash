@@ -1,26 +1,30 @@
 #!/usr/bin/env bash
-# note that alias's in this file are at bottom
-
-# should make a cmd called aliases which cat's the bash_aliases file then also the last lines in
-# this one until it encounters a line with nada on it
 
 [ -f "$HOME/dotfiles/bashh/from_online.sh" ] && source "$HOME/dotfiles/bashh/from_online.sh"
-
-# moves up $1 directories
-function up() {
-  times=$1
-  while [ "$times" -gt "0" ]; do
-    cd ..
-    times=$(($times - 1))
-  done
-}
 
 function changeDirAndShow() {
     cd "$1" && ls -A
 }
 
 
-# ------------------------------- Search For input in fasd -Rfl file list or from $PWD----------------------------
+#think best solution is to just loop over both out, lss at same time 
+# and concat each pair ala python zip printing as I go :(
+
+#dankLS() {
+#    # info="$(lsd --group-dirs first -l --total-size | awk '{print $11}' | xargs file)"
+#    declare -a ls_output
+#    ls_output="$(lsd --group-dirs first -l --total-size --blocks size,name)"
+#    info="$(echo -e $ls_output awk '{print $3}' | xargs file)"
+#    for ls_out in "${ls_output[@]}"; do
+#    done
+#    #-l --blocks size,name'
+#}
+# out="$(lss | awk '{print $3}' | xargs file | awk '{for (i=2; i<NF; i++) printf $i " "; print $NF}')"
+# lmerge <(echo -e "$out") <(lsd -l --blocks size,name) | head | paste - -
+
+
+
+# ------------------------------- Search For input in "fasd -Rfl" file list or from $PWD----------------------------
 alias sf=ssf
 ssf() {
     rg_command='rg --column --line-number --no-heading --fixed-strings --color "always"'
@@ -38,14 +42,28 @@ ssf() {
 }
 
 # this is sick cuz it will open shit in vim also
+# neeeeed to hook this up to rofi!!!
+# but rofi already has modes for these things ..
+# desired functionality: open an img/pdf in terminal without it being associated with the terminal
+# ie I can close the terminal and the img/pdf will persist
 alias o=fuzzy_xdgopen
 fuzzy_xdgopen() {
     [ $# -gt 0 ] && fasd -f "$*" | xargs -0 xdg-open && return
     local file
-    file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && xdg-open "${file}" || return 1
+    # setsid opens the file in a new session so the process will survive the parent process.
+    file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && setsid xdg-open "${file}"
 }
 [ -f "$HOME/.config/.fzf_setup.sh" ] && source "$HOME/.config/.fzf_setup.sh"
 
+
+cht() {
+    paste the general cheat sheet curl cmd in terminal
+    echo 'use: cht.sh/java/"question"'
+    echo -n 'curl cht.sh/ /"for loop"' | xclip -selection c
+    echo 'just enter this command for way more cheat sheet info !!'
+    sleep 0.1
+    xdotool key ctrl+shift+v
+}
 
 
 # ------------------------------- follow moved files to the dest. folder ----------------------------
@@ -81,10 +99,10 @@ function search_packages() {
     pac_manager="$1"
     if [ "$pac_manager" == "yay" ]; then
         # "$pac_manager" -S --noconfirm "$package_name"
-        yay -Slq --noconfirm | fzf -m --preview 'yay -Si {1}'| xargs -ro yay -S
+        yay -Slq | fzf -m --preview 'yay -Si {1}'| xargs -ro yay -S --noconfirm
         # sudo not recommended for yay installs
     else
-        pacman -Slq --noconfirm | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
+        pacman -Slq  | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S --noconfirm
     #     sudo "$pac_manager" -S --noconfirm "$package_name"
     fi
 }

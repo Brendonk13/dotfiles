@@ -2,7 +2,7 @@ set nocompatible
 "default for nvim, but who knows about elsewhere..
 set encoding=utf-8
 " , means the dir in which vim was opened, '.' means the directory of the file where the cursor is
-set path=.,,,~/,~/vim-notes,~/dotfiles/**,~/PyStuff/morsels,~/.i3,~/.vimPlug/**,~/Scripts/
+set path=.,,,~/,~/Notes/vim-notes,~/dotfiles/**,~/PyStuff/morsels,~/.i3,~/.vimPlug/**,~/Scripts/
 
 " add compiler assignment path
 set path+=~/Documents/Mcgill/5th-year/Winter/Compilers/goLite/2020_group11/**
