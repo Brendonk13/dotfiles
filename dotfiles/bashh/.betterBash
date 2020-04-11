@@ -22,16 +22,30 @@ function changeDirAndShow() {
 # out="$(lss | awk '{print $3}' | xargs file | awk '{for (i=2; i<NF; i++) printf $i " "; print $NF}')"
 # lmerge <(echo -e "$out") <(lsd -l --blocks size,name) | head | paste - -
 
+
 fuzzyDeleteBranch() {
+    # last column is the name we are looking for
     chosen_branch="$(git branch -a | fzf | awk '{print $NF}')"
     [[ "$chosen_branch" = "" ]] && return
+
     if [[ "$chosen_branch" = remotes* ]]; then
+        # delimited by /  only keep 3rd field of remotes/origin/branch_name
         just_name="$(echo "$chosen_branch" | cut -d '/' -f3)"
     else
         just_name="$chosen_branch"
     fi
+    # delete the local branch
     git branch -D "$just_name"
+    # delete remote branch
     [[ "$chosen_branch" = remotes* ]] && git push origin --delete "$just_name"
+}
+
+
+# this will just push to origin current_branch
+gpush() {
+    # extract name of current branch from output, here first column is *
+    current_branch="$(git branch -a | awk '{if ($1 ~ /\*/) print $NF}')"
+    git push origin "$current_branch"
 }
 
 

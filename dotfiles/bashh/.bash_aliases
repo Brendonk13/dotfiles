@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
-     # ------ Windows 10 aliases ------------------------------------------------
+# ------ Windows 10 aliases ------------------------------------------------
 
     alias doc='cd /mnt/c/Users/Brendon*/Documents/Documents/'
     alias sem='doc;  cd 00*/0*/0*/; ls'
@@ -11,26 +11,26 @@ elif [ "$HOME" = "/home/brendon" ]; then
 # ------ Manjaro Aliases ---------------------------------------------------
 
 
-# ------ Common directory navigation ---------------------------------------
-    alias dow='cd ~/Downloads; lsd --group-dirs first'
-    alias submit='cd ~/Documents/Mcgill/submissions; lsd --group-dirs first'
-    alias sem='cd ~/Documents/Mcgill/5th-year/Winter; lsd --group-dirs first'
+    # ------ Common directory navigation ---------------------------------------
+    alias dow='cd "$dow"; lsd --group-dirs first'
+    alias submit='cd "$submit"; lsd --group-dirs first'
+    alias sem='cd "$sem"; lsd --group-dirs first'
     alias scrot='cd ~/Pictures/Screenshots; lsd --group-dirs first; ranger'
 
 
-# ------ Course directories ------------------------------------------------
-    alias andor='cd /home/brendon/Documents/Mcgill/5th-year/fall-sem/andor/f2019-hexanome-14/hexanome-14/Assets; lsd --group-dirs first'
+    # ------ Course directories ------------------------------------------------
+    alias andor='cd "$andor"; lsd --group-dirs first'
     alias cam='cd ~/Documents/Mcgill/5th-year/Winter/Compilers/Ocaml; lsd --group-dirs first'
-    alias comp='cd /home/brendon/Documents/Mcgill/5th-year/Winter/Compilers/goLite/2020_group11; lsd --group-dirs first'
+    alias comp='cd "$comp"; lsd --group-dirs first'
     alias conc='cd /home/brendon/Downloads/programs/eclipse-workspace/ConcurrA3/src/ConcurrA3; lsd --group-dirs first'
     alias db='cd /home/brendon/Documents/Mcgill/5th-year/Winter/databases; lsd --group-dirs first'
+    alias peep='cd "$comp"; cd ../../Peephole-Template; lsd --group-dirs first'
 
 
-# ------ Commands ----------------------------------------------------------
+
+    # ------ Commands ----------------------------------------------------------
     alias utop='eval $(opam env); utop'
     # functions in betterBash -- fuzzy finds packages in pacman/yay
-    alias spac='search_packages pacman'
-    alias syay='search_packages yay'
 
     # copy speakers code to clipboards and start bluetoothctl
     alias blue='echo 'C0:28:8D:01:4F:DE' | xclip -selection c; bluetoothctl'
@@ -45,34 +45,32 @@ elif [ "$HOME" = "/home/brendon" ]; then
     alias monoff='xrandr --output HDMI-0 --off'
     alias gotop='gotop -p'
 
-    # fuzzy search and cd, files based on recency as per fasd
-    alias z=fuzzy_z
-
     alias bashrc='source ~/.bashrc'
+
     # word count of current directory
     alias wcd='wc -l `find . -maxdepth 1 -type f`'
 
-# ------ compiler tests ----------------------------------------------------
-    alias arr='./main.native symbol ../programs-solution/1-scan+parse/valid/7-3-arrays.go'
-    alias slice='./main.native symbol ../programs-solution/1-scan+parse/valid/7-2-slices.go'
-    alias struct='./main.native symbol ../programs-solution/1-scan+parse/valid/7-4-structs.go'
-    alias built='./main.native symbol ../programs-solution/1-scan+parse/valid/9-7-builtins.go'
-    alias cast='./main.native symbol ../programs-solution/1-scan+parse/valid/9-8-typecastexpr.go'
-    alias func='./main.native symbol ../programs-solution/1-scan+parse/valid/9-6-funccallexprs.go'
-
-    alias parr='./main.native pretty ../programs-solution/1-scan+parse/valid/7-3-arrays.go'
-    alias pslice='./main.native pretty ../programs-solution/1-scan+parse/valid/7-2-slices.go'
-    alias pstruct='./main.native pretty ../programs-solution/1-scan+parse/valid/7-4-structs.go'
-    alias pbuilt='./main.native pretty ../programs-solution/1-scan+parse/valid/9-7-builtins.go'
-    alias pcast='./main.native pretty ../programs-solution/1-scan+parse/valid/9-8-typecastexpr.go'
-    alias pfunc='./main.native pretty ../programs-solution/1-scan+parse/valid/9-6-funccallexprs.go'
-
-    alias sym='bash /home/brendon/Documents/Mcgill/5th-year/Winter/Compilers/goLite/testprogs/symTest.sh'
-    alias pretty='bash /home/brendon/Documents/Mcgill/5th-year/Winter/Compilers/goLite/testprogs/prettyTest.sh'
+    # word count of a given filetype in a directory
+    # alias wcf='wcd | awk '$NF ~ /.sh$/{print $1 " " $NF}''
+    # add this as a bash function later where I can send the filetype as an argument
 
 
+    # ------ My bash fxns ------------------------------------------------------
 
-# ------ Random directories ------------------------------------------------
+    # fuzzy search and cd, files based on recency as per fasd
+    alias z=fuzzy_z
+
+    # fuzzy search thru pacman -Slq then download package
+    alias spac='search_packages pacman'
+    # same for AUR
+    alias syay='search_packages yay'
+
+    # ------ compiler tests ----------------------------------------------------
+    source "$comp/../test-mode.sh"
+
+
+
+    # ------ Random directories ------------------------------------------------
     # mnemonic:  EclipseWorkspace
     alias ework='cd /home/brendon/Downloads/programs/eclipse-workspace; lsd --group-dirs first'
     alias print='cd ~/Scripts/my_projects/print; lsd --group-dirs first'
