@@ -118,8 +118,14 @@ if hash git > /dev/null 2>&1; then
     alias gcom='git commit -m'
     alias co='git checkout'
     alias gadd='git add'
+
     alias gstat='git status -s'
     alias gl1='git log --oneline'
+
+    # mnemonic: Git Branch Delete
+    # alias gbd='
+    alias gbd=fuzzyDeleteBranch
+
 elif [ "$HOME" = "/home/brendon" ]; then
     echo "git not found, no aliases created."
 fi

@@ -22,6 +22,17 @@ function changeDirAndShow() {
 # out="$(lss | awk '{print $3}' | xargs file | awk '{for (i=2; i<NF; i++) printf $i " "; print $NF}')"
 # lmerge <(echo -e "$out") <(lsd -l --blocks size,name) | head | paste - -
 
+fuzzyDeleteBranch() {
+    chosen_branch="$(git branch -a | fzf | awk '{print $NF}')"
+    [[ "$chosen_branch" = "" ]] && return
+    if [[ "$chosen_branch" = remotes* ]]; then
+        just_name="$(echo "$chosen_branch" | cut -d '/' -f3)"
+    else
+        just_name="$chosen_branch"
+    fi
+    git branch -D "$just_name"
+    [[ "$chosen_branch" = remotes* ]] && git push origin --delete "$just_name"
+}
 
 
 # ------------------------------- Search For input in "fasd -Rfl" file list or from $PWD----------------------------
