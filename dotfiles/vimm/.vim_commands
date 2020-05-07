@@ -19,8 +19,8 @@ function! DoWindowSwap()
 endfunction
 
 " these functions come from https://stackoverflow.com/questions/2586984/how-can-i-swap-positions-of-two-open-files-in-splits-in-vim/4903681#4903681
-nmap <silent> <leader>mw :call MarkWindowSwap()<CR>
-nmap <silent> <leader>pw :call DoWindowSwap()<CR>
+nmap <silent> <leader>wm :call MarkWindowSwap()<CR>
+nmap <silent> <leader>wp :call DoWindowSwap()<CR>
 
 
 
@@ -86,28 +86,182 @@ endfunction
 
 " --------------------------- FZF commands --------------------------------
 
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
-command! -bang -nargs=* Rg
-    \ call fzf#vim#grep(
-    \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-    \   fzf#vim#with_preview(), <bang>0)
-cnoremap RG Rg<CR>
+
+
+
+" Default FZF options with bindings to match layout and select all + none
+" let $FZF_DEFAULT_OPTS = '--layout=default --reverse' .
+"   \ ' --info inline' .
+"   \ ' --bind ctrl-e:preview-down,ctrl-y:preview-up,ctrl-u:preview-page-up,ctrl-d:preview-page-down,tab:toggle+up,shift-tab:toggle+down' .
+"   \ ' --preview "bat --style=numbers,changes --color always {2..-1} | head -200" --expect=ctrl-v,ctrl-x'
+
+
+" Defines search command for :Files
+let $FZF_DEFAULT_COMMAND='rg --column --line-number --no-heading --color=always --smart-case --files --hidden --iglob "!.DS_Store" --iglob "!.git"'
+
+" Todo: add devicons/git status to :Gfiles
+
+" command! -bang -nargs=* Rg
+"     \ call fzf#vim#grep(
+"     \   'rg --column --line-number --no-heading --color=always --colors "path:fg:190,220,255" --colors "line:fg:128,128,128" --smart-case '.shellescape(<q-args>), 1,
+"     \   fzf#vim#with_preview(), <bang>0)
+" cnoremap RG Rg<CR>
 
 command! -bang -nargs=* RgCurrentBufferDir
+    \ cd %:p:h |
     \ call fzf#vim#grep(
-    \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+    \   'rg --column --line-number --no-heading --color=always --colors "path:fg:190,220,255" --colors "line:fg:128,128,128" --smart-case '.shellescape(<q-args>), 1,
     \   fzf#vim#with_preview({'dir': expand('%:p:h')}), <bang>0)
 
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 0,
+  \   'rg --column --line-number --no-heading --color=always --colors "path:fg:190,220,255" --colors "line:fg:128,128,128" --smart-case '.shellescape(<q-args>), 0,
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
 
+command! -bang -nargs=* Gthing
+    \ call FzfFilePreview(1)
+command! -bang -nargs=* Thing
+    \ call FzfFilePreview(0)
+
+" whyyyyyyyyy does it go to wrong file !!!!!!!!!!!!!
 
 
+" Files + devicons + floating fzf
+function! FzfFilePreview(curr_buff)
+  let l:fzf_files_options = '--preview "bat --style=numbers,changes --color always {3..-1} | head -128" --expect=ctrl-v,ctrl-x'
+  let s:files_status = {}
+  " let l:curr_buff_dir = a:curr_buff
+  " let search_dir = ' ' . (a:curr_buff == 1 ? fnameescape(expand('%:p:h')) : systemlist('git rev-parse --show-toplevel')[0]) . '/'
+  " echom search_dir
+  " let s:cmd = (a:curr_buff == 1 ? $FZF_DEFAULT_COMMAND . ' $(realpath ' . search_dir . ')"' : $FZF_DEFAULT_COMMAND)
+  " let s:cmd = $FZF_DEFAULT_COMMAND . search_dir
+  let s:cmd = a:curr_buff
+  echom s:cmd
+
+  function! s:cacheGitStatus()
+    let l:gitcmd = 'git -c color.status=false -C ' . $PWD . ' status -s'
+    let l:statusesStr = system(l:gitcmd)
+    let l:statusesSplit = split(l:statusesStr, '\n')
+    for l:statusLine in l:statusesSplit
+      let l:fileStatus = split(l:statusLine, ' ')[0]
+      let l:fileName = split(l:statusLine, ' ')[1]
+      let s:files_status[l:fileName] = l:fileStatus
+    endfor
+  endfunction
+
+  function! s:files()
+    call s:cacheGitStatus()
+    let git_dir = system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+    " echom git_dir
+    if git_dir != ''
+    " let l:files = (l:curr_buff_dir == 1 ? glob : '')
+        if s:cmd == 1
+            exec 'cd' fnameescape(fnamemodify(finddir('.git',
+              \ escape(expand('%:p:h'), ' ') . ';'), ':h'))
+            " cd system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+            let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
+        else
+            cd %:p:h
+            let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
+        endif
+    else
+        cd %:p:h
+        let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
+    endif
+
+    return s:prepend_indicators(l:files)
+  endfunction
+
+  function! s:prepend_indicators(candidates)
+    return s:prepend_git_status(s:prepend_icon(a:candidates))
+  endfunction
+
+  function! s:prepend_git_status(candidates)
+    let l:result = []
+    for l:candidate in a:candidates
+      let l:status = ''
+      let l:icon = split(l:candidate, ' ')[0]
+      let l:filePathWithIcon = split(l:candidate, ' ')[1]
+
+      let l:pos = strridx(l:filePathWithIcon, ' ')
+      let l:file_path = l:filePathWithIcon[pos+1:-1]
+      if has_key(s:files_status, l:file_path)
+        let l:status = s:files_status[l:file_path]
+        call add(l:result, printf('%s %s %s', l:status, l:icon, l:file_path))
+      else
+        " printf statement contains a load-bearing unicode space
+        " the file path is extracted from the list item using {3..-1},
+        " this breaks if there is a different number of spaces, which
+        " means if we add a space in the following printf it breaks.
+        " using a unicode space preserves the spacing in the fzf list
+        " without breaking the {3..-1} index
+        call add(l:result, printf('%s %s %s', ' ', l:icon, l:file_path))
+      endif
+    endfor
+
+    return l:result
+  endfunction
+
+  function! s:prepend_icon(candidates)
+    let l:result = []
+    for l:candidate in a:candidates
+      let l:filename = fnamemodify(l:candidate, ':p:t')
+      let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
+      call add(l:result, printf('%s %s', l:icon, l:candidate))
+    endfor
+
+    return l:result
+  endfunction
+
+  function! s:edit_file(lines)
+    if len(a:lines) < 2 | return | endif
+
+    let l:cmd = get({'ctrl-x': 'split',
+                 \ 'ctrl-v': 'vertical split',
+                 \ 'ctrl-t': 'tabe'}, a:lines[0], 'e')
+
+    for l:item in a:lines[1:]
+      let l:pos = strridx(l:item, ' ')
+      let l:file_path = l:item[pos+1:-1]
+      execute 'silent '. l:cmd . ' ' . l:file_path
+    endfor
+  endfunction
+
+  let transformer = "| awk -F: 'BEGIN { OFS = FS } {$3 = $3 \":shortened-path:\" $2 \":\" $3; print}'"
+
+call fzf#run({
+        \ 'source': <sid>files(),
+        \ 'sink*':   function('s:edit_file'),
+        \ 'options': '-m --prompt Files\> ' . l:fzf_files_options,
+        \ 'window': 'call '..s:snr..'fzf_window(0.92, 0.75, "Comment")'})
+        " \ 'down':    '40%',
+        " \ 'window': 'call FloatingFZF()'})
+
+
+endfunction
+
+  " if a:is_grep
+  "     call fzf#vim#grep(
+  "                \   "rg --column --line-number --no-heading --color=always --smart-case "..shellescape(<sid>files())..transformer,
+  "                \   1,
+  "                \   { 'options': '--delimiter=: --with-nth=4..' },
+  "                \   <bang>0)
+  " else
+  "     echom 'files'
+  "       call fzf#vim#grep(
+  "           \   "rg --files --column --line-number --no-heading --color=always --smart-case "..<sid>files()..transformer,
+  "           \   1,
+  "           \   { 'options': '--delimiter=: --with-nth=4..' },
+  "           \   <bang>0)
+
+        " \ 'window': 'call '..s:snr..'fzf_window(0.92, 0.75, "Comment")'})
+
+  " endif
+
+
+    
 
 " -------------------- define popup window -----------------------------------
 

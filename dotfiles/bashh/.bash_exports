@@ -31,6 +31,7 @@ elif [ "$HOME" = "/home/brendon" ]; then
     export XDG_CONFIG_HOME="$HOME/.config"
     export PYTHONSTARTUP="$XDG_CONFIG_HOME/ptpython/config.py"
 
+    export MANPAGER='nvim +Man!'
     export PATH="/home/$USER/bin:$PATH"
 
     # note that below did NOT work for changing jdk
@@ -40,7 +41,7 @@ elif [ "$HOME" = "/home/brendon" ]; then
     # this works maybe should add to .bash_profile tho
     export JAVA_HOME=/opt/java/jdk-11.0.6
     export PATH=$JAVA_HOME/bin:$PATH
-
+    export GOLITEGROUP11='/home/brendon/Documents/Mcgill/5th-year/Winter/Compilers/goLite/2020_group11'
 
     # if we call vim __.x within nvim, use nvr and don't nest vim in terminal.
     if [ -n "$NVIM_LISTEN_ADDRESS" ]; then

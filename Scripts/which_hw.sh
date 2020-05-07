@@ -13,7 +13,7 @@
 # ---------- ASSIGNMENT LINKS ------------------------------------------
 
 # ass_520_urls='https://www.cs.mcgill.ca/~cs520/2020/assignments/Assignment2_Specifications.pdf https://www.cs.mcgill.ca/~cs520/2020/assignments/Assignment2.pdf https://www.cs.mcgill.ca/~cs520/2020/assignments/Assignment2_Rubric.pdf'
-ass_520_urls='https://www.cs.mcgill.ca/~cs520/2020/project/Milestone2.pdf https://www.cs.mcgill.ca/~cs520/2020/project/Milestone2_Specifications.pdf https://www.cs.mcgill.ca/~cs520/2020/project/Milestone2_Rubric.pdf'
+ass_520_urls='https://www.cs.mcgill.ca/~cs520/2020/project/Milestone4.pdf https://www.cs.mcgill.ca/~cs520/2020/project/Milestone4_Rubric.pdf'
 
 ass_421_pdf='/home/brendon/Downloads/Assignments/db/milestone3/p3.pdf'
 ass_409_pdf='/home/brendon/Downloads/Assignments/concur/assig3.pdf'
@@ -36,7 +36,8 @@ notes_andor='https://mycourses2.mcgill.ca/d2l/le/lessons/404114/units/4517021'
 
 # --------- PROMPTS -----------------------------------------------------------
 
-classes="Databases\nCompilers\nAndor\nConcurrency"
+# \nConcurrency
+classes="Databases\nCompilers\nAndor"
 class_choice=$(echo -e "$classes" | dmenu -i -p "Which class link?")
 class_choice=$(echo -e "$class_choice" | tr -d '\n')
 if [ "$class_choice" == "" ]; then

@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
-dotBashDir=~/dotfiles/bashh
+dotBashDir="$HOME/dotfiles/bashh"
 
 # if not running interactively then don't do anything
 # added so that my bind cmd's dont give me grief over ssh
 [ -z "$PS1" ] && return
+
+ble_path="$HOME/.config/ble-0.3.2/ble.sh"
+rc_file="$(dirname $ble_path)/src/ble.sh/blerc"
+[[ $- == *i* ]] && [[ -f "$ble_path" ]] && source "$ble_path" --noattach --rcfile "$rc_file"
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -80,11 +84,8 @@ if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
     export PATH=~/FromInternet/anaconda3/bin:$PATH
 
 else
-    # if [ -f /usr/share/z/z.sh ]; then
-    #     source /usr/share/z/z.sh
     # opam configuration -- ocaml
     test -r /home/brendon/.opam/opam-init/init.sh && . /home/brendon/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
-    # fi
 fi
 
 # >>> conda initialize >>>
@@ -157,3 +158,6 @@ if [ "$HOME" = "/home/brendon" ]; then
 
     export PS1="\`parse_git_branch\`  \[\e[33m\]-\[\e[m\]  \@ \[\e[33m\]-\[\e[m\] \[\e[01;31m\][\[\e[m\]$curr_parent\[\e[01;31m\]] \[\e[m\]\[\e[32m\]\\$\[\e[m\] "
 fi
+
+
+((_ble_bash)) && ble-attach

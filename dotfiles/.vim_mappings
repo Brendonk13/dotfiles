@@ -63,6 +63,10 @@ nnoremap ; :
 nnoremap ;; ;
 
 
+" Open and close folds with Enter
+nnoremap <expr> <cr>   foldlevel(line('.'))  ? "za" : "\<cr>"
+
+
 " need to map something to save a file and then swithc down buffers to a
 " terminal and enter it as well
 "nnoremap 
@@ -103,10 +107,14 @@ set wildcharm=<C-z>
 cnoremap Bd :ls<CR>:      bd<space><C-z>
 " have spaces in order to see status ie hidden/active
 
+" deletes all tabs in current file, nice cuz i have listchar set
 " mnemonic: Delete tab
 nnoremap <leader>d<tab> :%s/\v^\s+$//<CR>
 
 
+" navigate by staged/unstaged changes
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
 
 " http://learnvimscriptthehardway.stevelosh.com/chapters/15.html\   has nice operator pending maps 
 " https://medium.com/@sidneyliebrand/a-collection-of-vim-key-binds-4d227c9a455
@@ -143,6 +151,8 @@ nnoremap <M-k> <C-w>3+
 nnoremap <C-w>- <C-w>_
 nnoremap <C-w>\ <C-w><bar>
 
+" make current buffer max size
+nnoremap <leader>m <C-w>_<C-w><bar>
 
 " easier window switching
 nnoremap <C-h> <C-w>h
@@ -163,6 +173,10 @@ nmap <leader>ls :vert topleft 22vs %%<CR>
 nnoremap <silent> <leader>o :only<CR>
 " close windows easily!!
 nnoremap <silent> <leader>c :close<CR>
+
+" deletes current buffer while preserving layout.
+nnoremap <Leader>bd :bp<CR>:bd#<CR>
+
 
 "------------------------------------------------ END WINDOW MANAGEMENT ------------------------------------------------
 
@@ -207,7 +221,12 @@ vnoremap . :norm .<CR>
 vnoremap Q :norm @@<CR>
 
 
+" keep selection after shifting
+vnoremap < <gv
+vnoremap > >gv
 
+vnoremap j gj
+vnoremap k gk
 
 
 "------------------------------------------------------ INSERT MODE -------------------------------------------------------
@@ -300,19 +319,69 @@ nnoremap q: :CmdHist<CR>
 command! QHist call fzf#vim#search_history({'bottom': '10'})
 nnoremap q/ :QHist<CR>
 
-" appending leader searches project files
-nnoremap <leader><M-f> :GFiles<CR>
-" normal is to search from the current buffer's directory.
-nnoremap <silent> <M-f> :Files <C-R>=fnameescape(expand('%:p:h')).'/'<CR><CR>
 
+" normal is to search from the current buffer's directory.
+" nnoremap <silent> <M-f> :call FzfFilePreview(1,0)<CR>
+" nnoremap <silent> <leader><M-f> :call FzfFilePreview(0,0)<CR>
+" nnoremap <silent> <M-f> :call FzfFilePreview(curr_buff:true) <C-R>=fnameescape(expand('%:p:h')).'/'<CR><CR>
+
+" nnoremap <silent> <M-r> :call FzfFilePreview(1,1)<CR>
 " grep all files in curr buffer's dir
+
 nnoremap <silent> <M-r> :RgCurrentBufferDir<CR>
 " grep project with preview
 nnoremap <silent> <leader><M-r> :GGrep<CR>
 
-"
+
+" nnoremap <silent> <M-f> :FzfPreviewProjectFiles<CR>
+let g:fzf_preview_use_dev_icons = 1
+let g:fzf_preview_lines_command = 'bat --color=always --style=grid --theme=ansi-dark --plain'
+let g:fzf_binary_preview_command = 'echo "{} is a binary file"'
+" let g:fzf_preview_filelist_postprocess_command = 'xargs -d "\n" ls -U --color'
+let g:fzf_preview_filelist_postprocess_command = 'xargs -d "\n" exa --color=always'
+let g:fzf_preview_floating_window_winblend = 4
+" let g:fzf_preview_grep_cmd = 'rg --line-number --no-heading --smart-case --files --hidden --iglob "!.DS_Store" --iglob "!.git"'
+" let g:fzf_preview_directory_files_command = 'rg --files --hidden --column --line-number --no-heading  --smart-case --color=always'
+" let g:fzf_preview_fzf_color_option = ' --colors "path:fg:190,220,255" --colors "line:fg:128,128,128"'
+" let g:fzf_preview_grep_cmd = 'rg --line-number --no-heading --color=always --colors "path:fg:190,220,255" --colors "line:fg:128,128,128" --smart-case'
+
+" let g:rooter_manual_only = 1
+" let g:rooter_patterns = ['.git/', 'tags']
+" let g:rooter_silent_chdir = 1
+" let g:rooter_change_directory_for_non_project_files = 'current'
+
+" nnoremap <silent> <M-r> :Rooter<CR> <bar> :<C-u>FzfPreviewProjectGrep<space>
+
+" search thru all files with unstaged changes
+nnoremap <silent> <M-g> :<C-u>FzfPreviewGitStatus<CR>
+" nnoremap <silent> <M-g> :Rooter<CR> <bar> :<C-u>FzfPreviewGitStatus<CR>
+
 "mnemonic: meta-buffers
-nnoremap <M-b> :Buffers<CR>
+nnoremap <silent> <M-b> :FzfPreviewAllBuffers<CR>
+
+" function! s:find_files()
+"     let git_dir = system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+"     echom git_dir
+"     if git_dir != ''
+"         " execute 'FzfPreviewDirectoryFiles' git_dir
+"         execute 'FzfPreviewFromResources directory'
+"     else
+"         lcd %:p:h
+"         execute 'FzfPreviewDirectoryFiles'
+"     endif
+" endfunction
+" command! FromRootIfExists execute s:find_files()
+" nmap <silent> 0 :FzfPreviewDirectoryFiles <C-R>=expand('%:h')<CR><CR>
+
+" search files in current project, rooter looks for a .git dir, then tags file
+" to find it
+" nnoremap <silent> <leader><M-f> :<C-u>FzfPreviewFromResources<space>directory<CR>
+
+" appending leader searches project files
+nnoremap <silent> <leader><M-f> :GFiles<CR>
+
+" search files in current directory
+nnoremap <silent> <M-f> :cd %:p:h<CR><bar>:<C-u>FzfPreviewFromResources<space>directory<CR>
 
 "mnemonic: meta-current
 nnoremap <M-c> :BLines<CR>

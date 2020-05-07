@@ -18,6 +18,14 @@ set wildignore=*.o,*.a,*.so,*.pyc,*.swp,.git/*,*.class,~/FromInternet/*,*.dll,~/
 " for quickfix window only
 set switchbuf=usetab
 
+" show fold numbering on the side
+" set foldcolumn=0
+
+set shortmess+=c
+
+set mouse=a
+set mousemodel=popup
+
 " when set, occasionally got weird err's (maybe to do with wsl)
 "set clipboard=unnamedplus      "need to check if this/leader>y both work on server!
 
@@ -101,6 +109,7 @@ set incsearch
 " assume the /g flag on :s substitutions to replace all matches in a line
 set gdefault
 
+
 if filereadable(expand("~/.vimPlug/vimPlugCall"))
     source ~/.vimPlug/vimPlugCall
 else
@@ -144,13 +153,18 @@ set termguicolors
 set t_Co=256
 let g:solarized_bold=1
 let g:solarized_italic=1
+" syntax enable
+syntax on
 set background=dark
-syntax enable
 colorscheme solarized
 
 " sets vertical split to be a bar
 set fillchars+=vert:│
 highlight VertSplit ctermbg=NONE guibg=NONE
+
+set signcolumn=yes
+highlight SignColumn guibg=bg
+highlight SignColumn ctermbg=bg
 
 " set status line divider for inactive windows
 " TODO: create a function which will only draw these ~'s if the window is on

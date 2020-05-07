@@ -12,7 +12,8 @@ if [[ -z `ps -A | rg redshift` ]]; then
     # lat=$( echo "$gpsdata"  | jsawk 'return this.lat' )
     # lon=$( echo "$gpsdata"  | jsawk 'return this.lon' )
     # # the -P flag resets redshift before applying changes
-    redshift -P -l 45.513860:-73.570660
+    # redshift -P -l 45.513860:-73.570660
+    redshift -P -l 51.062661:-115.325971
 else
     pkill redshift
 fi
