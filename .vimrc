@@ -2,7 +2,7 @@ set nocompatible
 "default for nvim, but who knows about elsewhere..
 set encoding=utf-8
 " , means the dir in which vim was opened, '.' means the directory of the file where the cursor is
-set path=.,,,~/,~/Notes/vim-notes,~/dotfiles/**,~/PyStuff/morsels,~/.i3,~/.vimPlug/**,~/Scripts/
+set path=.,,,~/,~/Notes/vim-notes,~/.config/dotfiles/**,~/PyStuff/morsels,~/.i3,~/.vimPlug/**,~/Scripts/
 
 " add compiler assignment path
 set path+=~/Documents/Mcgill/5th-year/Winter/Compilers/goLite/2020_group11/**
@@ -125,16 +125,16 @@ endif
 
 " source those keyboard mappings
 " how can I move this file to diff folder and make it work with git?
-if filereadable(expand("~/dotfiles/.vim_mappings"))
-    source ~/dotfiles/.vim_mappings
+if filereadable(expand("~/.config/dotfiles/.vim_mappings"))
+    source ~/.config/dotfiles/.vim_mappings
 else
-    echoerr 'could not find|read ~/dotfiles/.vim_mappings'
+    echoerr 'could not find|read ~/.config/dotfiles/.vim_mappings'
 endif
 " source vim command file
-if filereadable(expand("~/dotfiles/vimm/.vim_commands"))
-    source ~/dotfiles/vimm/.vim_commands
+if filereadable(expand("~/.config/dotfiles/vimm/.vim_commands"))
+    source ~/.config/dotfiles/vimm/.vim_commands
 else
-    echoerr 'could not find|read ~/dotfiles/vimm/.vim_mappings'
+    echoerr 'could not find|read ~/.config/dotfiles/vimm/.vim_mappings'
 endif
 
 " NOTE: that I source autocmd's at bottom of file (need highlights done after
@@ -242,10 +242,10 @@ endif
 
 
 
-if filereadable(expand("~/dotfiles/vimm/.my_autocmds"))
-    source ~/dotfiles/vimm/.my_autocmds
+if filereadable(expand("~/.config/dotfiles/vimm/.my_autocmds"))
+    source ~/.config/dotfiles/vimm/.my_autocmds
 else
-    echoerr 'Could not find|read ~/dotfiles/vimm/.my_autocmds'
+    echoerr 'Could not find|read ~/.config/dotfiles/vimm/.my_autocmds'
 endif
 
 if exists('&belloff')

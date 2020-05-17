@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 config add ~/.i3/config
-config add ~/dotfiles/
 config add ~/.bashrc
 config add ~/.bash_profile
 config add ~/.profile
 config add ~/.vimrc
 config add ~/.latexmkrc
 
+config add ~/.config/dotfiles/
 config add ~/.config/polybar
 config add ~/.config/fusuma
 config add ~/.config/kitty

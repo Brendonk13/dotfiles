@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-dotBashDir="$HOME/dotfiles/bashh"
+dotBashDir="$XDG_CONFIG_HOME/dotfiles/bashh"
 
 # if not running interactively then don't do anything
 # added so that my bind cmd's dont give me grief over ssh
 [ -z "$PS1" ] && return
 
-ble_path="$HOME/.config/ble-0.3.2/ble.sh"
+ble_path="$XDG_CONFIG_HOME/ble-0.3.2/ble.sh"
 rc_file="$(dirname $ble_path)/src/ble.sh/blerc"
 [[ $- == *i* ]] && [[ -f "$ble_path" ]] && source "$ble_path" --noattach --rcfile "$rc_file"
 

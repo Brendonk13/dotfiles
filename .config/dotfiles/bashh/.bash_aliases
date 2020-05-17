@@ -163,7 +163,7 @@ if [ "$HOME" = "/home/brendon" ]; then
 
     alias config='/usr/bin/git --git-dir=/home/brendon/.cfg/ --work-tree=/home/brendon'
 
-    alias cadd='config add ~/dotfiles/bashh/configAdd.sh; source ~/dotfiles/bashh/configAdd.sh'
+    alias cadd='config add ~/.config/dotfiles/bashh/configAdd.sh; source ~/.config/dotfiles/bashh/configAdd.sh'
     alias ccom='config commit -m'
     alias cpush='config push origin master'
 fi
