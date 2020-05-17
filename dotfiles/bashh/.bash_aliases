@@ -120,6 +120,8 @@ else
     # show file sizes
 fi
 
+alias tree='tree -F --dirsfirst -C'
+
 # -------------- CONDA ---------------------------------------------------------
 if hash conda > /dev/null 2>&1; then
     alias newc='conda create -n'

@@ -248,11 +248,6 @@ else
     echoerr 'Could not find|read ~/dotfiles/vimm/.my_autocmds'
 endif
 
-
-
-
-
-
 if exists('&belloff')
 " bells bad!
   set belloff=all

@@ -34,10 +34,10 @@ bindsym $mod+Shift+t exec 'setsid Telegram'
 # mod+ assignment -- if mult assignment pages,
 # could make a script with dmenu to select which one
 # to copy into clipboard,, or maybe open it automatically if I'm sick
-bindsym $mod+a exec /home/brendon/Scripts/which_hw.sh
+bindsym $mod+a exec /home/brendon/dev/dev/Scripts/which_hw.sh
 #bindsym $mod+A exec /home/brendon/Scripts/which_hw.sh
 
-bindsym $mod+n exec /home/brendon/Scripts/redshift_toggle.sh
+bindsym $mod+n exec /home/brendon/dev/dev/Scripts/redshift_toggle.sh
 
 #bindsym $mod+e exec /home/brendon/Scripts/rofi-fontawesome/fontawesome-menu/fontawesome-menu -f /home/brendon/Scripts/rofi-fontawesome/fontawesome-menu/fa5-icon-list.txt -o '-i columns 3'
 
@@ -414,7 +414,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec xcape -e 'Control_L=Escape'
 
 # don't do this at boot since the mons command screws it up and must be done prior to this script
-exec --no-startup-id $HOME/Scripts/i3_initial_layout.sh
+exec --no-startup-id $HOME/dev/dev/Scripts/i3_initial_layout.sh
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:

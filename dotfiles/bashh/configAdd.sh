@@ -17,9 +17,9 @@ config add ~/.config/compton.conf
 config add ~/.config/mimeapps.list
 config add ~/.config/zathura/zathurarc
 
-config add ~/Scripts/battest_cronjob
-config add ~/Scripts/redshift_toggle.sh
-config add ~/Scripts/which_hw.sh
-config add ~/Scripts/monitorStart.sh
-config add ~/Scripts/i3_initial_layout.sh
-config add ~/Scripts/test-mode.sh
+config add ~/dev/dev/Scripts/battest_cronjob
+config add ~/dev/dev/Scripts/redshift_toggle.sh
+config add ~/dev/dev/Scripts/which_hw.sh
+config add ~/dev/dev/Scripts/monitorStart.sh
+config add ~/dev/dev/Scripts/i3_initial_layout.sh
+config add ~/dev/dev/Scripts/test-mode.sh
