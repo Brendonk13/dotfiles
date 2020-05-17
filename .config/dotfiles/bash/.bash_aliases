@@ -97,8 +97,8 @@ fi
 alias   .='ls'
 alias  ..='cd ..;  ls'
 alias ...='up 2;  ls'
-if [ -d ~/dotfiles/bashh ]; then
-    alias dotf='cd ~/dotfiles/bashh; lsa'
+if [ -d ~/.config/dotfiles/bash ]; then
+    alias dotf='cd ~/.config/dotfiles/bash; lsa'
     alias cdl=changeDirAndShow
     alias cdl..='cdl ..'
 fi
@@ -163,7 +163,7 @@ if [ "$HOME" = "/home/brendon" ]; then
 
     alias config='/usr/bin/git --git-dir=/home/brendon/.cfg/ --work-tree=/home/brendon'
 
-    alias cadd='config add ~/.config/dotfiles/bashh/configAdd.sh; source ~/.config/dotfiles/bashh/configAdd.sh'
+    alias cadd='config add ~/.config/dotfiles/bash/configAdd.sh; source ~/.config/dotfiles/bash/configAdd.sh'
     alias ccom='config commit -m'
     alias cpush='config push origin master'
 fi

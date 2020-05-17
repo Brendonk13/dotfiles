@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
-dotBashDir="$XDG_CONFIG_HOME/dotfiles/bashh"
-
 # if not running interactively then don't do anything
 # added so that my bind cmd's dont give me grief over ssh
 [ -z "$PS1" ] && return
+
+XDG_CONFIG_HOME="$HOME/.config"
+dotBashDir="$XDG_CONFIG_HOME/dotfiles/bash"
 
 ble_path="$XDG_CONFIG_HOME/ble-0.3.2/ble.sh"
 rc_file="$(dirname $ble_path)/src/ble.sh/blerc"
@@ -71,6 +72,9 @@ if [ -f $dotBashDir/.bash_aliases ]; then
     source $dotBashDir/.bash_aliases
 fi
 
+if [ -f $dotBashDir/git-prompt.sh ]; then
+    source $dotBashDir/git-prompt.sh
+fi
 #[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f /usr/share/fzf/key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash
 [ -f /usr/share/fzf/completion.bash ] && source /usr/share/fzf/completion.bash
@@ -156,7 +160,8 @@ if [ "$HOME" = "/home/brendon" ]; then
     # this allows me to only show current and parent directory!
     curr_parent='${PWD#"${PWD%/*/*}/"}'
 
-    export PS1="\`parse_git_branch\`  \[\e[33m\]-\[\e[m\]  \@ \[\e[33m\]-\[\e[m\] \[\e[01;31m\][\[\e[m\]$curr_parent\[\e[01;31m\]] \[\e[m\]\[\e[32m\]\\$\[\e[m\] "
+    export PS1='$(__git_ps1 "\[\e[01;31m\][\[\e[m\]%s\[\e[01;31m\]]\[\e[m\]")'
+    export PS1="$PS1  \[\e[33m\]-\[\e[m\]  \@ \[\e[33m\]-\[\e[m\] \[\e[01;31m\][\[\e[m\]$curr_parent\[\e[01;31m\]] \[\e[m\]\[\e[32m\]\\$\[\e[m\] "
 fi
 
 

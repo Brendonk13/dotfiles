@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-[ -f "$HOME/dotfiles/bashh/from_online.sh" ] && source "$HOME/dotfiles/bashh/from_online.sh"
+[ -f "$XDG_CONFIG_HOME/dotfiles/bash/from_online.sh" ] && source "$XDG_CONFIG_HOME/dotfiles/bash/from_online.sh"
 
 function changeDirAndShow() {
     cd "$1" && ls -A
