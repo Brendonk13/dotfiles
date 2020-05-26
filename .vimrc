@@ -172,6 +172,8 @@ highlight StatusLineNC ctermbg=NONE guibg=NONE
 
 " Don't show URL's as incorrectly spelled
 syn match UrlNoSpell "\w\+:\/\/[^[:space:]]\+" contains=@NoSpell
+" I. will. not. capitalize.
+set spellcapcheck=
 
 
 " use ripgrep instead of grep
