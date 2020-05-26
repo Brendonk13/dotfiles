@@ -133,6 +133,7 @@ fi
 
 # -------------- GITHUB --------------------------------------------------------
 if hash git > /dev/null 2>&1; then
+    alias g='git'
     alias gcom='git commit -m'
     alias gadd='git add'
 
