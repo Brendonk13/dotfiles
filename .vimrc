@@ -4,15 +4,8 @@ set encoding=utf-8
 " , means the dir in which vim was opened, '.' means the directory of the file where the cursor is
 set path=.,,,~/,~/Notes/vim-notes,~/.config/dotfiles/**,~/PyStuff/morsels,~/.i3,~/.vimPlug/**,~/Scripts/
 
-" add compiler assignment path
-set path+=~/Documents/Mcgill/5th-year/Winter/Compilers/goLite/2020_group11/**
-" add java assignment path
-set path+=~/Downloads/programs/eclipse-workspace/Comp409A1/src/
-
 " now these types don't appear in wild menu options
 set wildignore=*.o,*.a,*.so,*.pyc,*.swp,.git/*,*.class,~/FromInternet/*,*.dll,~/.vim_black/,~/.vim_black/**~/.vim_black,*pycache*,*.cmi,*.cmo,*.cmx,*.mli,*.depends,*.native,_build/*
-" whhyyyy can't I get .vim_black to not appear in wildignore!!
-" note that frominternet appears as well!!!
 
 " jump to window if searching for file in one of this sessions windows
 " for quickfix window only
@@ -175,6 +168,11 @@ highlight SignColumn ctermbg=bg
 " https://stackoverflow.com/questions/8070850/get-position-of-splitted-windows-on-a-vim-editor
 set fillchars+=stlnc:~
 highlight StatusLineNC ctermbg=NONE guibg=NONE
+
+
+" Don't show URL's as incorrectly spelled
+syn match UrlNoSpell "\w\+:\/\/[^[:space:]]\+" contains=@NoSpell
+
 
 " use ripgrep instead of grep
 set grepprg=rg

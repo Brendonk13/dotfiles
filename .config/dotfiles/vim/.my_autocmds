@@ -1,16 +1,3 @@
-" This syntax matchesku the word NOTE
-" syn keyword	cNote		contained NOTE
-" This add the cNote syntax keyword to the cCommentGroup cluster, so it only
-" shows up in comments
-" syn cluster	cCommentGroup	contains=cTodo,cNote,cBadContinuation
-" This links the syntax matcher to the highlight group Note
-" hi def link cNote Note
-" This set the Note group highlight color
-" hi Note ctermfg=107 ctermbg=16 cterm=bold guifg=#87af5f guibg=#000000 gui=bold
-" code above is from:
-" https://gist.github.com/kbenzie/e108ccf375aa63d69d12
-" allows us to always highlight \"Note\"
-
 
 " this highlights the or'd words (if they have colon at the end!)
 augroup highlight_todo
@@ -21,10 +8,33 @@ augroup END
 highlight def link MyTodo Todo
 " from bottom of: https://stackoverflow.com/questions/4097259/in-vim-how-do-i-highlight-todo-and-fixme
 
+augroup highlight_URL
+    autocmd!
+    autocmd Syntax * syn match Link /\v<(Link|Links|LINK|LINKS):/
+          \ containedin=.*Comment,vimCommentTitle
+    autocmd Syntax * syn match URL /\v<(http[s]?:\/\/[^ ]+>)/
+          \ containedin=.*Comment,vimCommentTitle
+augroup END
+
+
+" Colors are chosen from vim-solarized groups for vim files (idk which ones)
+highlight LinkColor cterm=NONE gui=bold ctermfg=4 guifg=#268bd2 ctermbg=NONE guibg=NONE
+highlight URL_Color cterm=NONE gui=NONE ctermfg=13 guifg=#6c71c4 ctermbg=NONE guibg=NONE
+
+
+highlight def link Link LinkColor
+highlight def link URL URL_Color
+highlight def link UrlNoSpell URL_Color
+
+
 augroup NaturalLanguage
     autocmd!
     autocmd BufRead,BufNewFile *.md,*.rst,*.txt,*.tex setlocal spell spelllang=en_us
     autocmd FileType gitcommit setlocal spell spelllang=en_us
+    " no spellcheck in help files
+    autocmd FileType help setlocal nospell
+    " Don't show URL's as incorrectly spelled
+    autocmd BufRead,BufNewFile *.md,*.rst,*.txt,*.tex syn match UrlNoSpell "\w\+:\/\/[^[:space:]]\+" contains=@NoSpell
 augroup END
 
 " function! s:deleteLatexGarb()
@@ -138,8 +148,10 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 autocmd FileType netrw setlocal bufhidden=wipe
 
 
-" this is meant to change the background of listchar, doesn't work.
+" this is meant to change the background of listchar, doesn't work for
+" linebreak char :(
 " highlight SpecialKey guibg=#000211
+
 
 " https://stackoverflow.com/questions/16987362/how-to-get-vim-to-highlight-non-ascii-characters
 " was trying to have a special highlight for showbreak so it's background
