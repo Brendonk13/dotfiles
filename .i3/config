@@ -29,6 +29,8 @@ bindsym $mod+Shift+P exec --no-startup-id $HOME/.config/polybar/launch.sh
 bindsym $mod+Shift+t exec 'setsid Telegram'
 # don't work, solution is to just use rofi or to create script which just does setsid Telegram
 
+# close chrome tabs with mouse
+bindsym --whole-window --release button2 exec '/usr/bin/xdotool key ctrl+w'
 
 
 # mod+ assignment -- if mult assignment pages,

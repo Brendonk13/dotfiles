@@ -6,6 +6,7 @@ config add ~/.bash_profile
 config add ~/.profile
 config add ~/.vimrc
 config add ~/.latexmkrc
+config add ~/.gitconfig
 
 config add ~/.config/dotfiles/
 config add ~/.config/polybar
