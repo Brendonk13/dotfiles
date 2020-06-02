@@ -74,14 +74,28 @@ if [ -f $dotBashDir/aliases.sh ]; then
     source $dotBashDir/aliases.sh
 fi
 
+
+# this shows repo info in prompt
 if [ -f $dotBashDir/git-prompt.sh ]; then
     source $dotBashDir/git-prompt.sh
 fi
+# this allows me to only show current and parent directory!
+curr_parent='${PWD#"${PWD%/*/*}/"}'
+
+if [ -f $dotBashDir/git-prompt.sh ]; then
+    export PS1='$(__git_ps1 " \[\e[01;31m\][\[\e[m\]%s\[\e[01;31m\]]\[\e[m\]")'
+else
+    export PS1=''
+fi
+
+export PS1="$PS1  \[\e[33m\]-\[\e[m\]  \@ \[\e[33m\]-\[\e[m\] \[\e[01;31m\][\[\e[m\]$curr_parent\[\e[01;31m\]] \[\e[m\]\[\e[32m\]\\$\[\e[m\] "
+
 #[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f /usr/share/fzf/key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash
 [ -f /usr/share/fzf/completion.bash ] && source /usr/share/fzf/completion.bash
 
 
+# Note: this file exists on win10 and manjaro but not mac so change to uname output one day
 if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
 
     if [ -f ~/FromInternet/z/z.sh ]; then
@@ -93,12 +107,6 @@ else
     # opam configuration -- ocaml
     test -r /home/brendon/.opam/opam-init/init.sh && . /home/brendon/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 fi
-
-# this allows me to only show current and parent directory!
-curr_parent='${PWD#"${PWD%/*/*}/"}'
-
-export PS1='$(__git_ps1 " \[\e[01;31m\][\[\e[m\]%s\[\e[01;31m\]]\[\e[m\]")'
-export PS1="$PS1  \[\e[33m\]-\[\e[m\]  \@ \[\e[33m\]-\[\e[m\] \[\e[01;31m\][\[\e[m\]$curr_parent\[\e[01;31m\]] \[\e[m\]\[\e[32m\]\\$\[\e[m\] "
 
 
 if hash ble-attach; then
