@@ -7,6 +7,7 @@
 XDG_CONFIG_HOME="$HOME/.config"
 dotBashDir="$XDG_CONFIG_HOME/dotfiles/bash"
 
+# ble gives fish shell style command completion as you type.
 ble_path="$XDG_CONFIG_HOME/ble-0.3.2/ble.sh"
 rc_file="$(dirname $ble_path)/src/ble.sh/blerc"
 [[ $- == *i* ]] && [[ -f "$ble_path" ]] && source "$ble_path" --noattach --rcfile "$rc_file"
@@ -59,18 +60,18 @@ if ! shopt -oq posix; then
 fi
 
 
-if [ -f $dotBashDir/.bash_exports ]; then
-    source $dotBashDir/.bash_exports
+if [ -f $dotBashDir/exports.sh ]; then
+    source $dotBashDir/exports.sh
 fi
 
 #betterBash has functions and a few common alias's 
-if [ -f $dotBashDir/.betterBash ]; then
-    source $dotBashDir/.betterBash
+if [ -f $dotBashDir/functions.sh ]; then
+    source $dotBashDir/functions.sh
 fi
 
 
-if [ -f $dotBashDir/.bash_aliases ]; then
-    source $dotBashDir/.bash_aliases
+if [ -f $dotBashDir/aliases.sh ]; then
+    source $dotBashDir/aliases.sh
 fi
 
 if [ -f $dotBashDir/git-prompt.sh ]; then
@@ -100,7 +101,9 @@ export PS1='$(__git_ps1 " \[\e[01;31m\][\[\e[m\]%s\[\e[01;31m\]]\[\e[m\]")'
 export PS1="$PS1  \[\e[33m\]-\[\e[m\]  \@ \[\e[33m\]-\[\e[m\] \[\e[01;31m\][\[\e[m\]$curr_parent\[\e[01;31m\]] \[\e[m\]\[\e[32m\]\\$\[\e[m\] "
 
 
-((_ble_bash)) && ble-attach
+if hash ble-attach; then
+    ((_ble_bash)) && ble-attach
+fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -116,54 +119,3 @@ export PS1="$PS1  \[\e[33m\]-\[\e[m\]  \@ \[\e[33m\]-\[\e[m\] \[\e[01;31m\][\[\e
 #fi
 #unset __conda_setup
 # <<< conda initialize <<<
-
-# don't want fancy prompt on server
-# if [ "$HOME" = "/home/brendon" ]; then
-#     # get current branch in git repo
-#     function parse_git_branch() {
-#             BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-#                 if [ ! "${BRANCH}" == "" ]
-#                 then
-#                     STAT=`parse_git_dirty`
-#                     echo "[${BRANCH}${STAT}]"
-#                 else
-#                     echo ""
-#                 fi
-#     }
-
-#     # get current status of git repo
-#     function parse_git_dirty {
-#             status=`git status 2>&1 | tee`
-#             dirty=`echo -n "${status}" 2> /dev/null | ag "modified:" &> /dev/null; echo "$?"`
-#             untracked=`echo -n "${status}" 2> /dev/null | ag "Untracked files" &> /dev/null; echo "$?"`
-#             ahead=`echo -n "${status}" 2> /dev/null | ag "Your branch is ahead of" &> /dev/null; echo "$?"`
-#             newfile=`echo -n "${status}" 2> /dev/null | ag "new file:" &> /dev/null; echo "$?"`
-#             renamed=`echo -n "${status}" 2> /dev/null | ag "renamed:" &> /dev/null; echo "$?"`
-#             deleted=`echo -n "${status}" 2> /dev/null | ag "deleted:" &> /dev/null; echo "$?"`
-#             bits=''
-
-#             if [ "${renamed}" == "0" ]; then
-#                 bits=">${bits}"
-#             fi
-#             if [ "${ahead}" == "0" ]; then
-#                 bits="*${bits}"
-#             fi
-#             if [ "${newfile}" == "0" ]; then
-#                 bits="+${bits}"
-#             fi
-#             if [ "${untracked}" == "0" ]; then
-#                 bits="?${bits}"
-#             fi
-#             if [ "${deleted}" == "0" ]; then
-#                 bits="x${bits}"
-#             fi
-#             if [ "${dirty}" == "0" ]; then
-#                 bits="!${bits}"
-#             fi
-#             if [ ! "${bits}" == "" ]; then
-#                 echo " ${bits}"
-#             else
-#                 echo ""
-#             fi
-#     }
-
