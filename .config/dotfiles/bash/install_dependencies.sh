@@ -36,11 +36,9 @@ do
 
     elif [ "$ARCH_BASED" = true ]; then
         # try to install via pacman, use yay if not
-        echo "arch based"
         sudo pacman -S --noconfirm "$p" || yay -S --noconfirm "$p"
     else
-        echo "not arch"
-        "$DOWNLOAD_COMMAND" "$p"
+        "$DOWNLOAD_COMMAND " "$p"
     fi
 
     # keep track of packages which weren't downloaded
