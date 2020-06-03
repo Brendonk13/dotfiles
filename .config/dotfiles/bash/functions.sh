@@ -7,20 +7,61 @@ function changeDirAndShow() {
 }
 
 
-#think best solution is to just loop over both out, lss at same time 
-# and concat each pair ala python zip printing as I go :(
+# follow moved files to the dest. folder
+function mcd() {
+    if [ "$#" -lt 2 ]; then
+        echo "Input files and destination for this to work jeez."
+        echo "Next time enter more than 1 argument: mcd files dest."
+        return
+    fi
+    file_destination=${@:$#}
+    num_files=$#
 
-#full_info_ls() {
-#    # info="$(lsd --group-dirs first -l --total-size | awk '{print $11}' | xargs file)"
-#    declare -a ls_output
-#    ls_output="$(lsd --group-dirs first -l --total-size --blocks size,name)"
-#    info="$(echo -e $ls_output awk '{print $3}' | xargs file)"
-#    for ls_out in "${ls_output[@]}"; do
-#    done
-#    #-l --blocks size,name'
-#}
-# out="$(lss | awk '{print $3}' | xargs file | awk '{for (i=2; i<NF; i++) printf $i " "; print $NF}')"
-# lmerge <(echo -e "$out") <(lsd -l --blocks size,name) | head | paste - -
+    # num_files is originally counting files and the destination dir
+    # so shift one less time than $#
+    num_files=$(($num_files - 1))
+
+    while [ "$num_files" -gt 0 ]; do
+        mv "$1" "$file_destination"
+        num_files=$(($num_files - 1))
+        shift
+    done
+
+    echo "";  echo " ----- DESTINATION DIR CONTENTS:";
+    cd "$file_destination"
+    if hash lsd > /dev/null 2>&1; then
+        lsd --group-dirs first
+    else
+        ls --group-directories --color
+    fi
+    echo ""
+}
+
+
+cht() {
+    paste the general cheat sheet curl cmd in terminal
+    echo 'use: cht.sh/java/"question"'
+    echo -n 'curl cht.sh/ /"for loop"' | xclip -selection c
+    echo 'just enter this command for way more cheat sheet info !!'
+    sleep 0.1
+    if hash xdotool > /dev/null 2>&1; then
+        xdotool key ctrl+shift+v
+    fi
+}
+
+
+# fuzzy search arch/AUR repositories then download
+function search_packages() {
+    pac_manager="$1"
+    if [ "$pac_manager" == "yay" ]; then
+        # "$pac_manager" -S --noconfirm "$package_name"
+        yay -Slq | fzf -m --preview 'yay -Si {1}'| xargs -ro yay -S --noconfirm
+        # sudo not recommended for yay installs
+    else
+        pacman -Slq  | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S --noconfirm
+    #     sudo "$pac_manager" -S --noconfirm "$package_name"
+    fi
+}
 
 
 # -------------- Git commands --------------------------------------------------
@@ -37,6 +78,8 @@ fuzzyMerge() {
     # search for all merge conflicts upon merge, display conflicts if there are any
     git branch -a | fzf | awk '{print $NF}' | xargs git merge || showMergeConflicts
 }
+# alias merg=fuzzyMerge
+
 
 # search through all branches and check it out
 fuzzySwitchBranch() {
@@ -109,75 +152,21 @@ fuzzy_xdgopen() {
 [ -f "$HOME/.config/.fzf_setup.sh" ] && source "$HOME/.config/.fzf_setup.sh"
 
 
-cht() {
-    paste the general cheat sheet curl cmd in terminal
-    echo 'use: cht.sh/java/"question"'
-    echo -n 'curl cht.sh/ /"for loop"' | xclip -selection c
-    echo 'just enter this command for way more cheat sheet info !!'
-    sleep 0.1
-    xdotool key ctrl+shift+v
-}
-
-
-# ------------------------------- follow moved files to the dest. folder ----------------------------
-function mcd() {
-    if [ "$#" -lt 2 ]; then
-        echo "Input files and destination for this to work jeez."
-        echo "Next time enter more than 1 argument: mcd files dest."
-        return
-    fi
-    file_destination=${@:$#}
-    num_files=$#
-
-    # num_files is originally counting files and the destination dir
-    # so shift one less time than $#
-    num_files=$(($num_files - 1))
-
-    while [ "$num_files" -gt 0 ]; do
-        mv "$1" "$file_destination"
-        num_files=$(($num_files - 1))
-        shift
-    done
-
-    echo "";  echo " ----- DESTINATION DIR CONTENTS:";
-    cd "$file_destination"
-    lsd --group-dirs first
-    echo ""
-}
 
 
 
-#-------------------------------------------- fuzzy search arch/AUR repositories then download --------------------------------------------
-function search_packages() {
-    pac_manager="$1"
-    if [ "$pac_manager" == "yay" ]; then
-        # "$pac_manager" -S --noconfirm "$package_name"
-        yay -Slq | fzf -m --preview 'yay -Si {1}'| xargs -ro yay -S --noconfirm
-        # sudo not recommended for yay installs
-    else
-        pacman -Slq  | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S --noconfirm
-    #     sudo "$pac_manager" -S --noconfirm "$package_name"
-    fi
-}
+#think best solution is to just loop over both out, lss at same time 
+# and concat each pair ala python zip printing as I go :(
 
-# no more friggin error sound !!!
-bind 'set bell-style none'
+#full_info_ls() {
+#    # info="$(lsd --group-dirs first -l --total-size | awk '{print $11}' | xargs file)"
+#    declare -a ls_output
+#    ls_output="$(lsd --group-dirs first -l --total-size --blocks size,name)"
+#    info="$(echo -e $ls_output awk '{print $3}' | xargs file)"
+#    for ls_out in "${ls_output[@]}"; do
+#    done
+#    #-l --blocks size,name'
+#}
+# out="$(lss | awk '{print $3}' | xargs file | awk '{for (i=2; i<NF; i++) printf $i " "; print $NF}')"
+# lmerge <(echo -e "$out") <(lsd -l --blocks size,name) | head | paste - -
 
-
-## SMARTER TAB-COMPLETION (Readline bindings) ##
-#
-# Perform file completion in a case insensitive fashion
-bind "set completion-ignore-case on"
-
-# Treat hyphens and underscores as equivalent
-bind "set completion-map-case on"
-
-# Display matches for ambiguous patterns at first tab press
-bind "set show-all-if-ambiguous on"
-
-# Don't record some commands -- who cares if they only show up once!
-#export HISTIGNORE="&:[ ]*:exit:ls:history:clear"
-
-
-# this stores the dir this script is in!
-# DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"

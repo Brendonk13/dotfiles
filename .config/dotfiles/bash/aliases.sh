@@ -39,7 +39,7 @@ elif [ "$HOME" = "/home/brendon" ]; then
     alias plint='pyflakes'
 
     # copy speakers code to clipboards and start bluetoothctl
-    alias blue='echo 'C0:28:8D:01:4F:DE' | xclip -selection c; bluetoothctl'
+    # alias blue='echo 'C0:28:8D:01:4F:DE' | xclip -selection c; bluetoothctl'
     alias hdmi='xrandr --output HDMI1 --mode 1920x1080 --rate 60'
     # show how to run mvn from command line
     alias mrun='echo -e "mvn exec:java -Dexec.mainClass=Comp409_A1.Idk \n\t .mainClass=groupid.(class Name with Main)"'
@@ -48,7 +48,7 @@ elif [ "$HOME" = "/home/brendon" ]; then
     # For multiple monitors consider changing to below, which works for 1 monitor
     # xrandr --output $( xrandr | grep 'HDMI.* connected' | head -n1 | awk '{ print $1 }' ) --off
     alias monoff='xrandr --output HDMI-0 --off'
-    alias gotop='gotop -p'
+    alias top='ytop -p -c monokai'
 
     alias bashrc='source ~/.bashrc'
 
@@ -74,11 +74,6 @@ elif [ "$HOME" = "/home/brendon" ]; then
     alias spac='search_packages pacman'
     # same for AUR
     alias syay='search_packages yay'
-
-    # ------ compiler tests ----------------------------------------------------
-    source "$comp/../test-mode.sh"
-
-
 
     # ------ Random directories ------------------------------------------------
     # mnemonic:  EclipseWorkspace
@@ -135,11 +130,8 @@ fi
 if hash git > /dev/null 2>&1; then
     alias g='git'
     alias gcom='git commit -m'
-    alias gadd='git add'
+    # alias gadd='git add'
 
-    alias gstat='git status -s'
-    # show graph and also branches/tags which reference the commit.
-    alias gl1='git log --oneline --graph --decorate'
     alias conflict=showMergeConflicts
 
     alias gpush=pushCurrentBranch
@@ -159,18 +151,18 @@ fi
 #------------------ DOTFILES REPO ----------------------------------------------
 #https://www.atlassian.com/git/tutorials/dotfiles
 
-if [ "$HOME" = "/home/brendon" ]; then
+if [ "$HOME" = "/home/brendon" ] || [ "$HOME" = "/Users/macadmin" ]; then
     # don't add this to servers
+    # need a better fix one day as my list of machines with dotfiles grows
 
     alias config='/usr/bin/git --git-dir=/home/brendon/.cfg/ --work-tree=/home/brendon'
 
-    alias cadd='config add ~/.config/dotfiles/bash/configAdd.sh; source ~/.config/dotfiles/bash/configAdd.sh'
-    alias ccom='config commit -m'
     alias cpush='config push origin master'
 fi
 
 # -------------- APPLICATIONS --------------------------------------------------
 alias bell='echo -ne "\a"'
+
 if hash bat > /dev/null 2>&1; then
     alias cat='bat'
 elif [ "$HOME" = "/home/brendon" ]; then

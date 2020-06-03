@@ -96,6 +96,8 @@ export PS1="$PS1  \[\e[33m\]-\[\e[m\]  \@ \[\e[33m\]-\[\e[m\] \[\e[01;31m\][\[\e
 
 
 # Note: this file exists on win10 and manjaro but not mac so change to uname output one day
+# NOTE: changed to uname in .bash_profile
+#   - check if uname command exists on win10 before changing everywhere.
 if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
 
     if [ -f ~/FromInternet/z/z.sh ]; then
@@ -108,6 +110,25 @@ else
     test -r /home/brendon/.opam/opam-init/init.sh && . /home/brendon/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 fi
 
+bind 'set bell-style none'
+
+## SMARTER TAB-COMPLETION (Readline bindings) ##
+#
+# Perform file completion in a case insensitive fashion
+bind "set completion-ignore-case on"
+
+# Treat hyphens and underscores as equivalent
+bind "set completion-map-case on"
+
+# Display matches for ambiguous patterns at first tab press
+bind "set show-all-if-ambiguous on"
+
+# Don't record some commands -- who cares if they only show up once!
+#export HISTIGNORE="&:[ ]*:exit:ls:history:clear"
+
+
+# this stores the dir this script is in!
+# DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 if hash ble-attach; then
     ((_ble_bash)) && ble-attach
