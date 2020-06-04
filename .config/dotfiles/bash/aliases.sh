@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+
+
+# change this OS check to one found in .bash_profile (once tested that it works on win10)
+# because: macOS (boooo) doesn't have /proc
 if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
 # ------ Windows 10 aliases ----------------------------------------------------
 
@@ -39,7 +43,7 @@ elif [ "$HOME" = "/home/brendon" ]; then
     alias plint='pyflakes'
 
     # copy speakers code to clipboards and start bluetoothctl
-    # alias blue='echo 'C0:28:8D:01:4F:DE' | xclip -selection c; bluetoothctl'
+    alias blue='echo 'C0:28:8D:01:4F:DE' | xclip -selection c; bluetoothctl'
     alias hdmi='xrandr --output HDMI1 --mode 1920x1080 --rate 60'
     # show how to run mvn from command line
     alias mrun='echo -e "mvn exec:java -Dexec.mainClass=Comp409_A1.Idk \n\t .mainClass=groupid.(class Name with Main)"'
@@ -75,6 +79,11 @@ elif [ "$HOME" = "/home/brendon" ]; then
     # same for AUR
     alias syay='search_packages yay'
 
+    # ------ compiler tests ----------------------------------------------------
+    source "$comp/../test-mode.sh"
+
+
+
     # ------ Random directories ------------------------------------------------
     # mnemonic:  EclipseWorkspace
     alias ework='cd /home/brendon/Downloads/programs/eclipse-workspace; lsd --group-dirs first'
@@ -92,8 +101,8 @@ fi
 alias   .='ls'
 alias  ..='cd ..;  ls'
 alias ...='up 2;  ls'
-if [ -d ~/.config/dotfiles/bash ]; then
-    alias dotf='cd ~/.config/dotfiles/bash; lsa'
+if [ -d  "$XDG_CONFIG_HOME"/dotfiles/bash ]; then
+    alias dotf='cd "$XDG_CONFIG_HOME"/dotfiles/bash; lsa'
     alias cdl=changeDirAndShow
     alias cdl..='cdl ..'
 fi
@@ -108,7 +117,7 @@ if hash lsd > /dev/null 2>&1; then
     # show file sizes
     alias lss='ls -l --blocks size,name'
 else
-    alias ls='ls --group-directories --color'
+    alias ls='ls --group-directories --color=always'
     alias lsa='ls -A'
     # ls -l --total-size --blocks user,size,name
     alias ll='ls -l --size'
@@ -153,16 +162,14 @@ fi
 
 if [ "$HOME" = "/home/brendon" ] || [ "$HOME" = "/Users/macadmin" ]; then
     # don't add this to servers
-    # need a better fix one day as my list of machines with dotfiles grows
 
-    alias config='/usr/bin/git --git-dir=/home/brendon/.cfg/ --work-tree=/home/brendon'
-
+    alias config='/usr/bin/git --git-dir="$HOME"/.cfg/ --work-tree="$HOME"'
+    alias cadd='config add "$XDG_CONFIG_HOME"/dotfiles/bash/configAdd.sh; source  "$XDG_CONFIG_HOME"/dotfiles/bash/configAdd.sh'
     alias cpush='config push origin master'
 fi
 
 # -------------- APPLICATIONS --------------------------------------------------
 alias bell='echo -ne "\a"'
-
 if hash bat > /dev/null 2>&1; then
     alias cat='bat'
 elif [ "$HOME" = "/home/brendon" ]; then
@@ -178,6 +185,7 @@ fi
 
 alias vim="$VISUAL"
 alias vi="$VISUAL"
+# mnemonic: Run Python
 alias rpy='python3'
 
 
@@ -185,7 +193,7 @@ alias rpy='python3'
 alias cd..='cd ..'
 alias cd-='cd -'
 
-# mnemonic: add sudo
+# mnemonic: Add Sudo
 alias as='sudo $(history -p !!)'
 
 

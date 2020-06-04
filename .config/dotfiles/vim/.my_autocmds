@@ -33,6 +33,7 @@ augroup NaturalLanguage
     autocmd FileType gitcommit setlocal spell spelllang=en_us
     " no spellcheck in help files
     autocmd FileType help setlocal nospell
+    autocmd FileType markdown setlocal commentstring=[//]:\ #\ (%s)
     " Don't show URL's as incorrectly spelled
     autocmd BufRead,BufNewFile *.md,*.rst,*.txt,*.tex syn match UrlNoSpell "\w\+:\/\/[^[:space:]]\+" contains=@NoSpell
 augroup END
