@@ -1,0 +1,82 @@
+call plug#begin()
+Plug 'ericbn/vim-solarized'
+" lightline begone soon
+Plug 'itchyny/lightline.vim'
+" colorscheme
+" Plug 'arcticicestudio/nord-vim'
+
+" a pretty decent colorscheme
+" Plug 'mhartington/oceanic-next'
+
+" allows for commands/substitutions to be done in visual block mode.
+Plug 'vim-scripts/vis'
+Plug 'nixon/vim-vmath'
+
+" track coding stats
+Plug 'wakatime/vim-wakatime'
+
+Plug 'unblevable/quick-scope'
+
+" smooth scrolling
+Plug 'psliwka/vim-smoothie'
+
+
+" show colors of all #992344
+Plug 'https://github.com/chrisbra/Colorizer'
+Plug 'ryanoasis/vim-devicons'
+
+" python context aware syntax highlighting
+" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+
+Plug 'keith/swift.vim'
+
+
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-obsession'
+
+Plug 'tpope/vim-fugitive'
+Plug 'jreybert/vimagit'
+Plug 'mhinz/vim-signify'
+Plug 'junegunn/gv.vim'
+
+
+" start using this only once I am the git master
+" Plug 'sodapopcan/vim-twiggy'
+
+" note: to delete plugins, comment line, source vimrc then :PlugClean
+
+
+Plug 'wincent/Pinnacle'
+Plug 'wincent/Loupe'
+
+
+" neoterm not nice in python cuz of newlines
+" one day will patch by adding \ after EOL before newlines
+Plug 'kassio/neoterm'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'junegunn/vim-easy-align'
+
+Plug 'yuki-ycino/fzf-preview.vim'
+" Plug 'airblade/vim-rooter'
+
+" this one kinda sucks sometimes
+Plug 'ludovicchabant/vim-gutentags'
+" used for sf bash alias.
+Plug 'wsdjeg/vim-fetch'
+
+"Plug 'python/black'
+call plug#end()
+" Plug 'fenetikm/falcon'
+
+" source ~/.vimPlug/plugSettings
+
+" set runtimepath^=~/.vim/plugged/loupe/
+
+"source ~/.vim/plugged/improved-paragraph-motion/ipmotion.vim

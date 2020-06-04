@@ -1,0 +1,188 @@
+
+" note that I can edit the function! neoterm#repl#selection() in  neoterm/autoload/neoterm/repl.vim
+" to make it add backspaces to new lines in python code when visually selected easily.
+" described more in Pystuff/python_ideas/how_improve_neoterm.txt
+
+" let g:comfortable_motion_friction = 150.0
+" let g:comfortable_motion_air_drag = 0.5
+" 
+" noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
+" noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
+" 
+" let g:comfortable_motion_impulse_multiplier = 1  " Feel free to increase/decrease this value.
+" nnoremap <silent> <C-d> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
+" nnoremap <silent> <C-u> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
+" nnoremap <silent> <C-f> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 4)<CR>
+" nnoremap <silent> <C-b> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0)
+
+let g:black_virtualenv="~/.vim_black"
+
+" this is for vim-signify
+set updatetime=256
+
+nmap <leader>tc <Plug>Colorizer
+
+" doesn't work for terminal anyways
+let g:qs_buftype_blacklist = ['terminal']
+
+" don't quick_scope for long lines
+let g:qs_max_chars=100
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+augroup qs_colors
+  autocmd!
+  autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+augroup END
+
+
+
+" config for lightline, can do hella customization, explained on  https://github.com/itchyny/lightline.vim#solarized-light
+" was wombat
+let g:lightline = {
+   \ 'colorscheme': 'solarized',
+   \ 'separator': { 'left': '', 'right': '' },
+   \ 'subseparator': { 'left': '', 'right': '' },
+   \ 'active' : {
+   \   'left': [ [ 'mode', 'paste' ],
+   \           [ 'myfilename',  'readonly', 'modified' ] ],
+   \   'right': [ [ 'lineinfo' ],
+   \            [ 'percent' ],
+   \            [ 'filetype' ] ]
+   \ },
+   \ 'inactive' : {
+   \    'right' : [ [ 'modified' ] ]
+   \ },
+   \ 'component_function': {
+   \       'readonly': 'LightlineReadOnly',
+   \       'filetype': 'LightlineFileType',
+   \       'percent': 'LightlinePercent',
+   \       'modified': 'LightlineModified',
+   \       'myfilename': 'LightlineFileName',
+   \ },
+   \ 'component_expand': {
+   \       'session' : 'GetObsessionStatus'
+   \ },
+   \ 'component': {
+   \       'lineinfo': '%3l:%-2v' . '←c'
+   \ },
+   \ 'tabline': {
+   \        'left': [ [ 'tabs' ] ],
+   \        'right': [ [ 'session' ] ]
+   \ }
+\ }
+
+" don't care if files are modified in tabs
+let g:lightline.tab = {
+    \ 'active':   [ 'tabnum', 'filename', 'session' ],
+    \ 'inactive': [ 'tabnum', 'filename' ]
+\ }
+
+function! GetObsessionStatus()
+    return '%{ObsessionStatus()}'
+endfunction
+
+" deleted this and moved to inside the big g:lightline
+" don't want that close sign showing
+" let g:lightline.tabline = {
+"    \ 'left': [ [ 'tabs' ] ],
+"    \ 'right': [ [ '' ] ] 
+" \ }
+
+
+function! LightlineReadOnly()
+   return &readonly ? 'RO ' : ''
+endfunction
+
+function! LightlineFileName()
+    return winwidth(0) < 44 ? expand('%:t:r') : expand('%:t')
+endfunction
+
+function! LightlineModified()
+    return &modifiable && &modified ? '+' : ''
+endfunction
+
+function! LightlinePercent()
+    " don't show percent if no space under these conditions
+    " because here we have &R.O or '+' taking up space already
+    if winwidth(0) < 60
+        return ''
+    endif
+
+    let file_name = expand('%:t:r')
+
+    " don't show file names if its just a terminal!
+    if file_name =~# 'bash'
+        return ''
+    endif
+
+    let above = line('w0') - 1
+    let below = line('$') - line('w$')
+    if below <= 0
+        return above ? 'Bot' : 'All'
+    elseif above <= 0
+        return 'Top'
+    else
+        return printf('%2d%%', above > 1000000 ?
+                \ above / ((above + below) / 100) :
+                \ above * 100 / (above + below))
+    endif
+endfunction
+
+
+" not being used currently
+function! LightlineFileType()
+   return ''
+    " don't show filetype if window < 55
+   "return winwidth(0) > 62 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+
+
+" this deletes the colored line at tabline//below active window
+
+let s:palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
+let s:palette.tabline.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
+
+" let s:palette.normal.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
+" let s:palette.inactive.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
+
+
+" note winfixheight option used by neoterm_fixedsize
+" let g:neoterm_term_per_tab = 1
+" let g:neoterm_autoinsert = 1
+" let g:neoterm_fixedsize = 1
+let g:neoterm_autoscroll = '1'
+let g:neoterm_default_mod = 'botright'
+let g:neoterm_size = 11
+
+let g:fzf_action = {
+   \ 'ctrl-t': 'tab split',
+   \ 'ctrl-s': 'split',
+   \ 'ctrl-v': 'vsplit' }
+
+" augroup fzf
+"  autocmd!
+"  autocmd! FileType fzf
+"  autocmd  FileType fzf set laststatus=0 noruler nonumber norelativenumber
+"  \| autocmd BufLeave <buffer> set laststatus=2 ruler
+" augroup END
+
+
+let g:limelight_default_coefficient = 0.3
+
+
+" NOTE: much easier to just align using regex than adding a delimeter.
+
+" EasyAlign /->/
+
+let g:easy_align_delimiters = {
+  \ ';': { 'pattern': ';', 'left_margin': 0, 'stick_to_left': 1 } }
+
+" let g:easy_align_delimiters = {
+" \ ';': {
+" \     'pattern':         '\;',
+" \     'left_margin':   0,
+" \     'right_margin':  0,
+" \     'stick_to_left': 0,
+" \     'ignore_groups':   ['!Comment'] },
+" \ }
