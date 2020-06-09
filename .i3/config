@@ -242,8 +242,10 @@ bindsym $mod+Ctrl+Left workspace prev
 bindsym $mod+r exec i3-input -F 'rename workspace to "%s"' -P 'New name for this workspace: '
 # needed to set strip_workspace_numbers to no in order to use numbers as desired
 
-bindsym $mod+Shift+less move workspace to output HDMI-0
-bindsym $mod+Shift+greater move workspace to output DP-2
+
+# SICK -- move an entire workspace from screen to screen ---------------!!!!
+bindsym $mod+Shift+greater move workspace to output HDMI-0
+bindsym $mod+Shift+less move workspace to output DP-2
 
 
 # not sure why I only did this for 1-8 but it works..

@@ -69,14 +69,14 @@ function search_packages() {
 # lots of git bindings to look at here ^
 # the forgit plugin is also sick
 
-showMergeConflicts() {
-    rg --count --multiline '(<<<|===|>>>)+.*$(\n.*?)+(<<<|===|>>>)+.*\n'
-}
+# showMergeConflicts() {
+#     rg --count --multiline '(<<<|===|>>>)+.*$(\n.*?)+(<<<|===|>>>)+.*\n'
+# }
 
 # search through all branches and merge entered selection
 fuzzyMerge() {
     # search for all merge conflicts upon merge, display conflicts if there are any
-    git branch -a | fzf | awk '{print $NF}' | xargs git merge || showMergeConflicts
+    git branch -a | fzf | awk '{print $NF}' | xargs git merge || git mergetool #showMergeConflicts
 }
 # alias merg=fuzzyMerge
 

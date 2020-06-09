@@ -3,6 +3,7 @@
     a   = add --all
     com = commit
     p   = push
+    br  = branch
     co  = checkout
     f   = fetch
     fa  = fetch --all
@@ -26,10 +27,17 @@
 [push]
     default = simple
 
+# handle merge conflicts with vim-fugitive
+# -- from: Link: https://www.grzegorowski.com/using-vim-or-neovim-nvim-as-a-git-mergetool
+[mergetool "nvim"]
+    cmd = "$VISUAL" -f -c \"Gvdiffsplit!\" \"$MERGED\"
+# set "nvim" as tool for merging, (use $VISUAL in case we are already within vim -- untested)
+
 [merge]
-    tool = vimdiff
+    tool = nvim
 
 [mergetool]
+    prompt = false
     keepBackup = false
 
 [user]
