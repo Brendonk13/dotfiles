@@ -2,6 +2,8 @@
 From https://www.atlassian.com/git/tutorials/dotfiles
 Kind of messy but also kind of well documented as well as being kind of cross-platform for windows and linux (Manjaro) given file structure is the same.
 
+[./bash/functions.sh](./bash/functions.sh)
+
 ## Setup
 ```sh
 git init --bare $HOME/.cfg
