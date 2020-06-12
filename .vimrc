@@ -73,6 +73,9 @@ if has('linebreak')
   let &showbreak='⤷ '                 " ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS (U+2937, UTF-8: E2 A4 B7)
 endif
 
+" wow this is great, lines wrap at same indentation as previous line
+set breakindent
+
 if has('virtualedit')
     "idk how to explain, nice for visual block mode
     set virtualedit=block

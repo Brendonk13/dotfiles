@@ -1,4 +1,7 @@
 [alias]
+    # checkout: https://blog.jez.io/cli-code-review/ for nice code review aliases
+    # also has a dependency graph visualizer alias
+
     aliases = !git config --get-regexp alias | sed -re 's/alias\\.(\\S*)\\s(.*)$/\\1 = \\2/g'
     a   = add --all
     com = commit

@@ -60,15 +60,26 @@ export EDITOR=$VISUAL
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-#Avoid duplicate entries
-export HISTCONTROL=ignoredups:erasedups
 
+export HISTFILESIZE=20000        # increase history file size (default is 500)
+export HISTSIZE=${HISTFILESIZE}  # increase history size (default is 500)
+
+
+export HISTCONTROL=ignorespace:erasedups
+export HISTIGNORE="history*:exit:ls*:cd*:clear:vim:fzf:pwd:mount*:umount*:ping*"
 shopt -s histappend
+# store multiline commands as one history entry
+shopt -s cmdhist
+function historymerge {
+    history -n; history -w; history -c; history -r;
+}
+trap historymerge EXIT
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # https://unix.stackexchange.com/questions/18212/bash-history-ignoredups-and-erasedups-setting-conflict-with-common-history/18443#18443
 # so for some reason its actually a pain to get bash history working WELL
 # this solution works bad but not awfully, from above link
 # could check reddit and man pages myself if care to fix one day
-PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+# PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 
 #export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"

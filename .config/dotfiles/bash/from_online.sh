@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-# HSTR configuration - add this to ~/.bashrc
-#alias hh=hstr                    # hh to be alias for hstr
-#export HISTCONTROL=ignorespace   # leading space hides commands from history
-export HISTFILESIZE=10000        # increase history file size (default is 500)
-export HISTSIZE=${HISTFILESIZE}  # increase history size (default is 500)
-
 # moves up $1 directories
 function up() {
   times=$1
