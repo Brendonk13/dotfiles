@@ -121,16 +121,16 @@ endif
 
 " source those keyboard mappings
 " how can I move this file to diff folder and make it work with git?
-if filereadable(expand("~/.config/dotfiles/vim/.vim_mappings"))
-    source ~/.config/dotfiles/vim/.vim_mappings
+if filereadable(expand("~/.config/dotfiles/vim/mappings"))
+    source ~/.config/dotfiles/vim/mappings
 else
-    echoerr 'could not find|read ~/.config/dotfiles/vim/.vim_mappings'
+    echoerr 'could not find|read ~/.config/dotfiles/vim/mappings'
 endif
 " source vim command file
-if filereadable(expand("~/.config/dotfiles/vim/.vim_commands"))
-    source ~/.config/dotfiles/vim/.vim_commands
+if filereadable(expand("~/.config/dotfiles/vim/commands"))
+    source ~/.config/dotfiles/vim/commands
 else
-    echoerr 'could not find|read ~/.config/dotfiles/vim/.vim_mappings'
+    echoerr 'could not find|read ~/.config/dotfiles/vim/commands'
 endif
 
 " NOTE: that I source autocmd's at bottom of file (need highlights done after
@@ -245,10 +245,10 @@ endif
 
 
 
-if filereadable(expand("~/.config/dotfiles/vim/.my_autocmds"))
-    source ~/.config/dotfiles/vim/.my_autocmds
+if filereadable(expand("~/.config/dotfiles/vim/autocmds"))
+    source ~/.config/dotfiles/vim/autocmds
 else
-    echoerr 'Could not find|read ~/.config/dotfiles/vim/.my_autocmds'
+    echoerr 'Could not find|read ~/.config/dotfiles/vim/autocmds'
 endif
 
 if exists('&belloff')
