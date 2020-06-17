@@ -31,7 +31,6 @@ elif [ "$HOME" = "/home/brendon" ]; then
     alias peep='cd "$comp"; cd ../../Peephole-Template; lsd --group-dirs first'
 
 
-
     # ------ Commands ----------------------------------------------------------
     alias utop='eval $(opam env); utop'
     # functions in betterBash -- fuzzy finds packages in pacman/yay
@@ -60,7 +59,8 @@ elif [ "$HOME" = "/home/brendon" ]; then
     alias mpat='mv /home/brendon/Documents/Mcgill/5th-year/Winter/Compilers/goLite/patterns.h /home/brendon/Documents/Mcgill/5th-year/Winter/Compilers/goLite/Peephole-Template/JOOSA-src/'
 
     # word count of current directory
-    alias wcd='wc -l `find . -maxdepth 1 -type f`'
+    # alias wcd='wc -l `find . -maxdepth 1 -type f`'
+    alias lines=lines_in_dir
     # add this as a bash function later where I can send the filetype as an argument
     # word count of a given filetype in a directory
     # alias wcf='wcd | awk '$NF ~ /.sh$/{print $1 " " $NF}''
@@ -78,10 +78,6 @@ elif [ "$HOME" = "/home/brendon" ]; then
     alias spac='search_packages pacman'
     # same for AUR
     alias syay='search_packages yay'
-
-    # ------ compiler tests ----------------------------------------------------
-    source "$comp/../test-mode.sh"
-
 
 
     # ------ Random directories ------------------------------------------------

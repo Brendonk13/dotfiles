@@ -20,10 +20,8 @@ elif [ "$HOME" = "/home/brendon" ]; then
     export dow="$HOME/Downloads/"
     export submit="$HOME/Documents/Mcgill/submissions/"
     export sem="$HOME/Documents/Mcgill/5th-year/Winter/"
-    export mors="$HOME/PyStuff/morsels/"
+    export mors="$HOME/dev/dev/langs/PyStuff/morsels"
     export ZIP="$HOME/Downloads/Random/Zips/"
-    export andor="$HOME/Documents/Mcgill/5th-year/fall-sem/andor/f2019-hexanome-14/hexanome-14/Assets"
-    export comp="$HOME/Documents/Mcgill/5th-year/Winter/Compilers/goLite/2020_group11/src"
 
     export _Z_DATA="$HOME/.config/.z_data_file"
     export RIPGREP_CONFIG_PATH=$HOME/.config/.ripgreprc

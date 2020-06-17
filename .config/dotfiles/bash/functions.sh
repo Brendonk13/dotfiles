@@ -64,6 +64,31 @@ function search_packages() {
 }
 
 
+# get line count of files, pass in arg to recurse into directories :)
+function lines_in_dir() {
+    help="USAGE:\tlines filetype [recurse-depth]\ndefault depth is 1"
+    if [ "$#" -lt 1 ]; then
+        echo -e "$help"
+        return
+    fi
+    filetype="$1"
+    files=""
+    if [ "$#" -eq 1 ]; then
+        files=$(find . -maxdepth 1 -type f -name "*.$filetype")
+    elif [ "$#" -eq 2 ]; then
+        files=$(find . -maxdepth $2 -type f -name "*.$filetype")
+    fi
+
+    if [ "$files" = "" ]; then
+        echo "No files with extension: .$filetype found at given depth"
+        return
+    else
+        echo "$files" | wc -l `awk '{print $1}'`
+    fi
+}
+# alias lines=lines_in_dir
+
+
 # -------------- Git commands --------------------------------------------------
 # https://gist.github.com/junegunn/8b572b8d4b5eddd8b85e5f4d40f17236
 # lots of git bindings to look at here ^
