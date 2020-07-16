@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 declare -a workspace_names
-workspace_names=(": Swift" ": Work" ": Network buys" ": NetSec" ": Git" ": Media" ": Stuff Manager")
+workspace_names=(": JS" ": Work" ": Network buys" ": NetSec" ": Media" ": Stuff Manager")
 # workspace_names=(": Compilers" ": Unity")
 # workspace_names=(": Compilers")
 open_a_terminal="exec kitty"

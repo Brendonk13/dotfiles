@@ -47,7 +47,9 @@ elif [ "$HOME" = "/home/brendon" ]; then
     # show how to run mvn from command line
     alias mrun='echo -e "mvn exec:java -Dexec.mainClass=Comp409_A1.Idk \n\t .mainClass=groupid.(class Name with Main)"'
     # monitor
-    alias mon='mons -e right'
+    # alias mon='mons -e right'
+    # my screen on left
+    alias mon='mons -e left'
     # For multiple monitors consider changing to below, which works for 1 monitor
     # xrandr --output $( xrandr | grep 'HDMI.* connected' | head -n1 | awk '{ print $1 }' ) --off
     alias monoff='xrandr --output HDMI-0 --off'

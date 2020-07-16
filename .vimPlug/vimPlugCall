@@ -64,12 +64,17 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-easy-align'
 
 Plug 'yuki-ycino/fzf-preview.vim'
+"Plug 'jesseleite/vim-agriculture'
+
 " Plug 'airblade/vim-rooter'
 
 " this one kinda sucks sometimes
 Plug 'ludovicchabant/vim-gutentags'
 " used for sf bash alias.
 Plug 'wsdjeg/vim-fetch'
+
+Plug 'jamessan/vim-gnupg'
+
 
 "Plug 'python/black'
 call plug#end()

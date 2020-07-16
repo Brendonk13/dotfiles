@@ -328,7 +328,7 @@ nnoremap q/ :QHist<CR>
 " nnoremap <silent> <M-r> :call FzfFilePreview(1,1)<CR>
 " grep all files in curr buffer's dir
 
-nnoremap <silent> <M-r> :RgCurrentBufferDir<CR>
+" nnoremap <silent> <M-r> :RgCurrentBufferDir<CR>
 " grep project with preview
 nnoremap <silent> <leader><M-r> :GGrep<CR>
 
@@ -359,6 +359,9 @@ nnoremap <silent> <M-g> :<C-u>FzfPreviewGitStatus<CR>
 "mnemonic: meta-buffers
 nnoremap <silent> <M-b> :FzfPreviewAllBuffers<CR>
 
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
 " function! s:find_files()
 "     let git_dir = system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 "     echom git_dir
@@ -376,12 +379,40 @@ nnoremap <silent> <M-b> :FzfPreviewAllBuffers<CR>
 " search files in current project, rooter looks for a .git dir, then tags file
 " to find it
 " nnoremap <silent> <leader><M-f> :<C-u>FzfPreviewFromResources<space>directory<CR>
+" function! CdIfNeed()
+"     let git_dir = system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+"     echom git_dir
+"     if git_dir != ''
+"         exec 'cd' git_dir
+"     endif
+" endfunction
 
+function! CdIfNeed()
+    cd %:p:h | cd `git rev-parse --show-toplevel`
+endfunction
 " appending leader searches project files
-nnoremap <silent> <leader><M-f> :GFiles<CR>
+nnoremap <silent> <leader><M-f> :call CdIfNeed()<CR>:GFiles<CR>
+
 
 " search files in current directory
-nnoremap <silent> <M-f> :cd %:p:h<CR><bar>:<C-u>FzfPreviewFromResources<space>directory<CR>
+" nnoremap <silent> <M-f> :cd %:p:h<CR><bar>:<C-u>FzfPreviewFromResources<space>directory<CR>
+
+nnoremap <silent> <M-f> :Files %:p:h<CR>
+
+" can pass in regex to Ripgrep with preview window
+nnoremap <silent> <M-r> :cd %:p:h<CR><bar>:RG<CR>
+
+nnoremap <silent> <leader><M-r> :call CdIfNeed()<CR><bar>:RG<CR>
+
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --colors "path:fg:190,220,255" --colors "line:fg:128,128,128" --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 "mnemonic: meta-current
 nnoremap <M-c> :BLines<CR>
