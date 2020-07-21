@@ -357,7 +357,8 @@ nnoremap <silent> <M-g> :<C-u>FzfPreviewGitStatus<CR>
 " nnoremap <silent> <M-g> :Rooter<CR> <bar> :<C-u>FzfPreviewGitStatus<CR>
 
 "mnemonic: meta-buffers
-nnoremap <silent> <M-b> :FzfPreviewAllBuffers<CR>
+" nnoremap <silent> <M-b> :FzfPreviewAllBuffers<CR>
+nnoremap <silent> <M-b> :Buffers<CR>
 
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
@@ -387,6 +388,7 @@ command! -bang -nargs=? -complete=dir Files
 "     endif
 " endfunction
 
+" Todo: change these to lcd ???
 function! CdIfNeed()
     cd %:p:h | cd `git rev-parse --show-toplevel`
 endfunction

@@ -16,6 +16,8 @@ Plug 'nixon/vim-vmath'
 Plug 'wakatime/vim-wakatime'
 
 Plug 'unblevable/quick-scope'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 
 " smooth scrolling
 Plug 'psliwka/vim-smoothie'
