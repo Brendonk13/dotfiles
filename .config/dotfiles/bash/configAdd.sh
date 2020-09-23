@@ -22,6 +22,5 @@ config add ~/.config/zathura/zathurarc
 config add ~/dev/dev/Scripts/battest_cronjob
 config add ~/dev/dev/Scripts/redshift_toggle.sh
 config add ~/dev/dev/Scripts/which_hw.sh
-config add ~/dev/dev/Scripts/monitorStart.sh
 config add ~/dev/dev/Scripts/i3_initial_layout.sh
 config add ~/dev/dev/Scripts/test-mode.sh

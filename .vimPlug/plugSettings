@@ -287,8 +287,8 @@ omap ac <Plug>(coc-classobj-a)
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of LS, ex: coc-tsserver
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
+nmap <silent> S 0<Plug>(coc-range-select)
+xmap <silent> S 0<Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -335,4 +335,4 @@ endfunction
 " hi Folded ctermfg=White guibg=None
 set foldtext=MyFoldText()
 
-hi Folded term=NONE cterm=NONE gui=NONE
+let g:UltiSnipsExpandTrigger='<C-Space>'

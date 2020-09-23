@@ -19,7 +19,7 @@ elif [ "$HOME" = "/home/brendon" ]; then
 # my linux env var's.
     export dow="$HOME/Downloads/"
     export submit="$HOME/Documents/Mcgill/submissions/"
-    export sem="$HOME/Documents/Mcgill/5th-year/Winter/"
+    export sem="$HOME/Documents/Mcgill/6th-year/"
     export mors="$HOME/dev/dev/langs/PyStuff/morsels"
     export ZIP="$HOME/Downloads/Random/Zips/"
 
@@ -41,6 +41,14 @@ elif [ "$HOME" = "/home/brendon" ]; then
     export PATH=$JAVA_HOME/bin:$PATH
     export GOLITEGROUP11='/home/brendon/Documents/Mcgill/5th-year/Winter/Compilers/goLite/2020_group11'
 
+    # classes, nice for: $ mv assignment.py $326
+    # export 326="$HOME/Documents/Mcgill/6th-year/326"
+    # export 321="$HOME/Documents/Mcgill/6th-year/Prog_challenges"
+    # export 429="$HOME/Documents/Mcgill/6th-year/429"
+    # export chem="$HOME/Documents/Mcgill/6th-year/chem"
+    # export atmo="$HOME/Documents/Mcgill/6th-year/atmo"
+
+
     # if we call vim __.x within nvim, use nvr and don't nest vim in terminal.
     if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
         export VISUAL="nvr"
@@ -59,25 +67,11 @@ export EDITOR=$VISUAL
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 
-export HISTFILESIZE=20000        # increase history file size (default is 500)
-export HISTSIZE=${HISTFILESIZE}  # increase history size (default is 500)
+export HISTFILESIZE=50000        # Max commands saved on disk
+export HISTSIZE=20000            # per session history buffer size
 
-
-export HISTCONTROL=ignorespace:erasedups
-export HISTIGNORE="history*:exit:ls*:cd*:clear:vim:fzf:pwd:mount*:umount*:ping*"
-shopt -s histappend
-# store multiline commands as one history entry
-shopt -s cmdhist
-function historymerge {
-    history -n; history -w; history -c; history -r;
-}
-trap historymerge EXIT
-PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
-
-# https://unix.stackexchange.com/questions/18212/bash-history-ignoredups-and-erasedups-setting-conflict-with-common-history/18443#18443
-# so for some reason its actually a pain to get bash history working WELL
-# this solution works bad but not awfully, from above link
-# could check reddit and man pages myself if care to fix one day
-# PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
-
-#export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
+if [ -f $dotBashDir/setup_history.sh ]; then
+    source $dotBashDir/setup_history.sh
+else
+    echo "setup_history.sh file is not in the same dir as my bash dotfiles"
+fi

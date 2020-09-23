@@ -19,6 +19,7 @@ application/pdf=org.pwmt.zathura-pdf-mupdf.desktop
 application/x-bittorrent=deluge.desktop
 x-scheme-handler/tg=telegramdesktop.desktop
 x-scheme-handler/msteams=teams.desktop
+x-scheme-handler/etcher=balena-etcher-electron.desktop
 
 [Added Associations]
 x-scheme-handler/http=userapp-Pale Moon.desktop;

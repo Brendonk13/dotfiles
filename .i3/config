@@ -22,10 +22,6 @@ bindsym $mod+Shift+P exec --no-startup-id $HOME/.config/polybar/launch.sh
 #bindsym $mod+g exec --no-startup-id rofi -show run -modi run,window -show-icons -terminal kitty
 #bindsym $mod+g exec --no-startup-id "rofi -show run -font \\"Font Awesome 12\\" -run-shell-command '{kitty} -e \\" {gotop}; read -n 1 -s\\"'"
 
-# bindsym $mod+F1 exec /home/brendon/Scripts/pasters/mcmail.sh
-
-# bindsym $mod+Y exec $HOME/Scripts/selective_paste.sh $HOME/Scripts/pasted/mcmail.txt
-
 bindsym $mod+Shift+t exec 'setsid Telegram'
 # don't work, solution is to just use rofi or to create script which just does setsid Telegram
 
@@ -105,18 +101,19 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 ################################################################################################
 
 # Screen brightness controls
-# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+#NOTE: these were commented:
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 # Start Applications
 # bmenu is actually very powerful for hardware/services/driver stuff
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
-bindsym $mod+F2 exec palemoon
+# bindsym $mod+F2 exec palemoon
 # pcmanfm is a gui file manager
-bindsym $mod+F3 exec pcmanfm
+# bindsym $mod+F3 exec pcmanfm
 # bindsym $mod+F3 exec ranger
 #bindsym $mod+Shift+F3 exec gksu pcmanfm how is this different than other pcmanfm
-bindsym $mod+F5 exec terminal -e 'mocp'
+# bindsym $mod+F5 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 #bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"

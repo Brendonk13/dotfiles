@@ -1,0 +1,7 @@
+{
+    "tsserver.reportStyleChecksAsWarnings": false,
+    "suggest.autoTrigger": "trigger",
+    "suggest.autoTrigger": "always",
+    "javascript.showUnused": false,
+    "typescript.showUnused": false
+}

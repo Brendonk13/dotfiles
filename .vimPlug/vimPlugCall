@@ -4,9 +4,13 @@ Plug 'ericbn/vim-solarized'
 Plug 'itchyny/lightline.vim'
 " colorscheme
 " Plug 'arcticicestudio/nord-vim'
-
 " a pretty decent colorscheme
 " Plug 'mhartington/oceanic-next'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'SirVer/ultisnips'
+Plug 'epilande/vim-react-snippets'
+
 
 " allows for commands/substitutions to be done in visual block mode.
 Plug 'vim-scripts/vis'
@@ -15,13 +19,10 @@ Plug 'nixon/vim-vmath'
 " track coding stats
 Plug 'wakatime/vim-wakatime'
 
+
 Plug 'unblevable/quick-scope'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-
 " smooth scrolling
 Plug 'psliwka/vim-smoothie'
-
 
 " show colors of all #992344
 Plug 'https://github.com/chrisbra/Colorizer'

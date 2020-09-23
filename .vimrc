@@ -70,7 +70,7 @@ set cursorline
 " " don't wrap line mid-word
 if has('linebreak')
     set linebreak
-  let &showbreak='⤷ '                 " ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS (U+2937, UTF-8: E2 A4 B7)
+  let &showbreak='  ⤷ '                 " ARROW POINTING DOWNWARDS THEN CURVING RIGHTWARDS (U+2937, UTF-8: E2 A4 B7)
 endif
 
 " wow this is great, lines wrap at same indentation as previous line
@@ -255,3 +255,5 @@ if exists('&belloff')
 " bells bad!
   set belloff=all
 endif
+
+highlight Folded guibg=NONE guifg=LightGray

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 # change this OS check to one found in .bash_profile (once tested that it works on win10)
 # because: macOS (boooo) doesn't have /proc
 if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
@@ -23,12 +22,12 @@ elif [ "$HOME" = "/home/brendon" ]; then
 
 
     # ------ Course directories ------------------------------------------------
-    alias andor='cd "$andor"; lsd --group-dirs first'
     alias cam='cd ~/Documents/Mcgill/5th-year/Winter/Compilers/Ocaml; lsd --group-dirs first'
-    alias comp='cd "$comp"; lsd --group-dirs first'
-    alias conc='cd /home/brendon/Downloads/programs/eclipse-workspace/ConcurrA3/src/ConcurrA3; lsd --group-dirs first'
-    alias db='cd /home/brendon/Documents/Mcgill/5th-year/Winter/databases; lsd --group-dirs first'
-    alias peep='cd "$comp"; cd ../../Peephole-Template; lsd --group-dirs first'
+    alias 326='cd "$sem";  cd 326;             lsd --group-dirs first'
+    alias 321='cd "$sem";  cd Prog_challenges; lsd --group-dirs first'
+    alias 429='cd "$sem";  cd 429;             lsd --group-dirs first'
+    alias chem='cd "$sem"; cd Chem;            lsd --group-dirs first'
+    alias atmo='cd "$sem"; cd Atmosphere;      lsd --group-dirs first'
 
 
     # ------ Commands ----------------------------------------------------------
@@ -46,29 +45,20 @@ elif [ "$HOME" = "/home/brendon" ]; then
     alias hdmi='xrandr --output HDMI1 --mode 1920x1080 --rate 60'
     # show how to run mvn from command line
     alias mrun='echo -e "mvn exec:java -Dexec.mainClass=Comp409_A1.Idk \n\t .mainClass=groupid.(class Name with Main)"'
-    # monitor
+
+    alias top='ytop -p -c monokai'
+
+    # monitors
     # alias mon='mons -e right'
-    # my screen on left
     alias mon='mons -e left'
+    # ^--> my screen on left
     # For multiple monitors consider changing to below, which works for 1 monitor
     # xrandr --output $( xrandr | grep 'HDMI.* connected' | head -n1 | awk '{ print $1 }' ) --off
     alias monoff='xrandr --output HDMI-0 --off'
-    alias top='ytop -p -c monokai'
+
+    #Note: can view nvidia gpu live shit with: $ nvtop
 
     alias bashrc='source ~/.bashrc'
-
-    alias pat='cp /home/brendon/Documents/Mcgill/5th-year/Winter/Compilers/goLite/Peephole-Template/JOOSA-src/patterns.h /home/brendon/Documents/Mcgill/5th-year/Winter/Compilers/goLite/'
-    alias mpat='mv /home/brendon/Documents/Mcgill/5th-year/Winter/Compilers/goLite/patterns.h /home/brendon/Documents/Mcgill/5th-year/Winter/Compilers/goLite/Peephole-Template/JOOSA-src/'
-
-    # word count of current directory
-    # alias wcd='wc -l `find . -maxdepth 1 -type f`'
-    alias lines=lines_in_dir
-    # add this as a bash function later where I can send the filetype as an argument
-    # word count of a given filetype in a directory
-    # alias wcf='wcd | awk '$NF ~ /.sh$/{print $1 " " $NF}''
-
-    # this sums the line count and prints it at the end
-    # alias wcf='wcd | awk '$NF ~ /.sh$/{SUM+=$1; print $1 " " $NF}END{print SUM}''
 
 
     # ------ My bash fxns ------------------------------------------------------
@@ -80,6 +70,17 @@ elif [ "$HOME" = "/home/brendon" ]; then
     alias spac='search_packages pacman'
     # same for AUR
     alias syay='search_packages yay'
+
+    # word count of current directory
+    alias lines=lines_in_dir
+    # alias wcd='wc -l `find . -maxdepth 1 -type f`'
+    # add this as a bash function later where I can send the filetype as an argument
+    # word count of a given filetype in a directory
+    # alias wcf='wcd | awk '$NF ~ /.sh$/{print $1 " " $NF}''
+
+    # this sums the line count and prints it at the end
+    # alias wcf='wcd | awk '$NF ~ /.sh$/{SUM+=$1; print $1 " " $NF}END{print SUM}''
+
 
 
     # ------ Random directories ------------------------------------------------
