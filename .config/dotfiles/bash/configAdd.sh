@@ -7,6 +7,7 @@ config add ~/.profile
 config add ~/.vimrc
 config add ~/.latexmkrc
 config add ~/.gitconfig
+config add ~/.gitignore_global
 config add ~/.vimPlug/
 
 config add ~/.config/dotfiles/

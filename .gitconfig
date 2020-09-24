@@ -48,3 +48,7 @@
     email = brendonk13.bk@gmail.com
 [credential]
     helper = cache --timeout=3600
+
+[core]
+    # global gitignore
+    excludesfile = /home/brendon/.gitignore_global

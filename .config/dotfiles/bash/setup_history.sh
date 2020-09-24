@@ -8,7 +8,8 @@ else
 fi
 
 HISTCONTROL=ignorespace:ignoredups
-HISTIGNORE="exit:cd*:clear:pwd:mount*:umount*:ping*"
+# Note that this is kind of useless now that I'm deleting all the duplicates
+HISTIGNORE="exit:clear:pwd:mount*:umount*:ping*"
 
 PROMPT_COMMAND="history -a"
 # Below link explains that this command is run right before bash displays: $PS1
