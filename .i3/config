@@ -29,13 +29,13 @@ bindsym $mod+Shift+t exec 'setsid Telegram'
 bindsym --whole-window --release button2 exec '/usr/bin/xdotool key ctrl+w'
 
 
-# mod+ assignment -- if mult assignment pages,
-# could make a script with dmenu to select which one
-# to copy into clipboard,, or maybe open it automatically if I'm sick
 bindsym $mod+a exec /home/brendon/dev/dev/Scripts/which_hw.sh
 #bindsym $mod+A exec /home/brendon/Scripts/which_hw.sh
 
 bindsym $mod+n exec /home/brendon/dev/dev/Scripts/redshift_toggle.sh
+
+# clipboard manager with rofi: greenclip
+bindsym $mod+c exec /home/brendon/dev/dev/Scripts/open_greenclip.sh
 
 #bindsym $mod+e exec /home/brendon/Scripts/rofi-fontawesome/fontawesome-menu/fontawesome-menu -f /home/brendon/Scripts/rofi-fontawesome/fontawesome-menu/fa5-icon-list.txt -o '-i columns 3'
 
@@ -44,7 +44,6 @@ bindsym $mod+n exec /home/brendon/dev/dev/Scripts/redshift_toggle.sh
 # font rofi search to clipboard
 # bindsym $mod+e exec /usr/bin/fontawesome-menu -f /home/brendon/Scripts/rofi-fontawesome/fontawesome-menu/fa5-icon-list.txt -o '-i -columns 3'
 
-#bindsym $mod+a exec "echo 'https://www.cs.mcgill.ca/~kry/comp557F19/a1/a1.html' | xclip -selection c"
 
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
@@ -101,9 +100,8 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 ################################################################################################
 
 # Screen brightness controls
-#NOTE: these were commented:
-bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
+# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 # Start Applications
 # bmenu is actually very powerful for hardware/services/driver stuff
@@ -396,6 +394,7 @@ exec --no-startup-id xautolock -time 15 -corners ---- -locker blurlock
 exec_always --no-startup-id fix_xcursor
 # exec --no-startup-id kitty
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id /usr/bin/greenclip daemon
 
 exec xcape -e 'Control_L=Escape'
 
