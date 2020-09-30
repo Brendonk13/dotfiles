@@ -68,8 +68,8 @@ if type "xrandr"; then
 
             i3-msg "$full_cmd"
 
-            # necessary to avoid strange undeterministic i3 behaviour
-            sleep 1.2
+            # necessary to avoid strange undeterministic i3 behaviour (was 1.2)
+            sleep 1.5
             w_num=$((w_num + 1))
         done
     done
