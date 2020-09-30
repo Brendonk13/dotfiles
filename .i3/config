@@ -8,6 +8,7 @@ set $mod Mod4
 # exec --no-startup-id setxkbmap -layout us -model pc104 -option ctrl:swapcaps -option ctrl:rctrl_ralt
 # exec --no-startup-id setxkbmap -layout "us,us" -model "pc104" -option "ctrl:swapcaps:rctrl_ralt"
 
+exec xcape -e 'Control_L=Escape'
 # checkout /usr/share/X11/xkb/symbols/  file: my_new_control
 exec --no-startup-id setxkbmap -layout my_new_control -option ctrl:swapcaps
 # exec --no-startup-id setxkbmap -option ctrl:swapcaps
@@ -399,7 +400,6 @@ exec_always --no-startup-id fix_xcursor
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id /usr/bin/greenclip daemon
 
-exec xcape -e 'Control_L=Escape'
 
 # don't do this at boot since the mons command screws it up and must be done prior to this script
 exec --no-startup-id $HOME/dev/dev/Scripts/i3_initial_layout.sh

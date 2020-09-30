@@ -29,6 +29,15 @@ nnoremap Q @@
 onoremap ' `
 onoremap ` '
 
+" I make things upper case so much more than the opposite.
+nnoremap gu gU
+nnoremap gU gu
+
+nnoremap guu gUU
+nnoremap gUU guu
+
+
+" backtick is a way better mark
 nnoremap ' `
 nnoremap ` '
 

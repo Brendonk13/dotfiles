@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Todo: add fzf to search thru 'scripts' in package.json!!
+
+
+
 [ -f "$XDG_CONFIG_HOME/dotfiles/bash/from_online.sh" ] && source "$XDG_CONFIG_HOME/dotfiles/bash/from_online.sh"
 
 function changeDirAndShow() {

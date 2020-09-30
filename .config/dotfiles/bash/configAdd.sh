@@ -21,7 +21,11 @@ config add ~/.config/mimeapps.list
 config add ~/.config/zathura/zathurarc
 
 config add ~/dev/dev/Scripts/battest_cronjob
+config add ~/dev/dev/Scripts/backup_bash_history
 config add ~/dev/dev/Scripts/redshift_toggle.sh
 config add ~/dev/dev/Scripts/which_hw.sh
 config add ~/dev/dev/Scripts/i3_initial_layout.sh
 config add ~/dev/dev/Scripts/test-mode.sh
+config add ~/dev/dev/Scripts/open_roficalc.sh
+config add ~/dev/dev/Scripts/open_greenclip.sh
+config add ~/dev/dev/Scripts/default_rofi.sh

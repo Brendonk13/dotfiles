@@ -6,11 +6,11 @@
 # add links to all the andor google docs
 
 
-# would loooove to have projects with many pdf's be opened
-# all in the same tabbed window!!!!!
-
-
 # ---------- ASSIGNMENT LINKS ------------------------------------------
+
+ass_atoc_pdf='/home/brendon/Downloads/Assignments/atmosphere/ATOC181_Assignment1.pdf'
+atoc_textbook='/home/brendon/Downloads/1-Classes/textbooks/atmosphere_textbook.pdf'
+ass_326_pdf='/home/brendon/Downloads/Assignments/326/326_M1.pdf'
 
 # ass_520_urls='https://www.cs.mcgill.ca/~cs520/2020/assignments/Assignment2_Specifications.pdf https://www.cs.mcgill.ca/~cs520/2020/assignments/Assignment2.pdf https://www.cs.mcgill.ca/~cs520/2020/assignments/Assignment2_Rubric.pdf'
 ass_520_urls='https://www.cs.mcgill.ca/~cs520/2020/project/Milestone4.pdf https://www.cs.mcgill.ca/~cs520/2020/project/Milestone4_Rubric.pdf'
@@ -37,8 +37,8 @@ notes_andor='https://mycourses2.mcgill.ca/d2l/le/lessons/404114/units/4517021'
 # --------- PROMPTS -----------------------------------------------------------
 
 # \nConcurrency
-classes="Databases\nCompilers\nAndor"
-class_choice=$(echo -e "$classes" | dmenu -i -p "Which class link?")
+classes="326\n429\nProgramming challenges\nAtmosphere\nchem"
+class_choice=$(echo -e "$classes" | rofi -dmenu -i "Which class link?")
 class_choice=$(echo -e "$class_choice" | tr -d '\n')
 if [ "$class_choice" == "" ]; then
     exit 1
@@ -48,42 +48,45 @@ fi
 # should just add a thing for projects instead of a new script!!!
 
 
-notes_or_assignment=$(echo -e "Assignment\nNotes\nTextbook" | dmenu -i -p "Notes, Assignment, or Textbook?")
+notes_or_assignment=$(echo -e "Assignment\nNotes\nTextbook" | rofi -dmenu -i "Notes, Assignment, or Textbook?")
 # remove trailing newline from selection
 notes_or_assignment=$(echo -e "$notes_or_assignment" | tr -d '\n')
 
 
-if [ "$class_choice" == "Databases" ]; then
-# ------------- DATABASES ----------------------------------------------------
+if [ "$class_choice" == "Programming challenges" ]; then
+# ------------- Comp 321 -------------------------------------------------------
 
     if [ "$notes_or_assignment" == "Notes" ]; then
-        /usr/bin/google-chrome-stable --new-window $notes_421
+        # /usr/bin/google-chrome-stable --new-window $notes_421
+        exit 1
     elif [ "$notes_or_assignment" == "Assignment" ]; then
-        xdg-open $ass_421_pdf
+        exit 1
 
     elif [ "$notes_or_assignment" == "Textbook" ]; then
         exit 1
     else
         exit 1
     fi
-elif [ "$class_choice" == "Compilers" ]; then
-# ------------ COMPILERS -----------------------------------------------------
+elif [ "$class_choice" == "326" ]; then
+# ------------ 326 -------------------------------------------------------------
 
     if [ "$notes_or_assignment" == "Notes" ]; then
-        /usr/bin/google-chrome-stable $notes_520
+        # /usr/bin/google-chrome-stable $notes_520
+        exit 1
     elif [ "$notes_or_assignment" == "Assignment" ]; then
-        /usr/bin/google-chrome-stable $ass_520_urls
+        xdg-open  $ass_326_pdf
 
     elif [ "$notes_or_assignment" == "Textbook" ]; then
         exit 1
     else
         exit 1
     fi
-elif [ "$class_choice" == "Concurrency" ]; then
-# ------------ CONCURRENCY -----------------------------------------------------
+elif [ "$class_choice" == "429" ]; then
+# ------------ 429 -------------------------------------------------------------
 
     if [ "$notes_or_assignment" == "Notes" ]; then
-        /usr/bin/google-chrome-stable  $notes_409
+        # /usr/bin/google-chrome-stable  $notes_409
+        exit 1
     elif [ "$notes_or_assignment" == "Assignment" ]; then
         xdg-open "$ass_409_pdf"
 
@@ -92,16 +95,21 @@ elif [ "$class_choice" == "Concurrency" ]; then
     else
         exit 1
     fi
-else
-# ------------ ANDOR -----------------------------------------------------------
+elif [ "$class_choice" == "Atmosphere" ]; then
+# ------------ ATOC -----------------------------------------------------------
 
 # should make an option to open all of the google docs here !!!!!!!!!!
     if [ "$notes_or_assignment" == "Notes" ]; then
-        /usr/bin/google-chrome-stable $notes_andor
+        # /usr/bin/google-chrome-stable $notes_andor
+        # I never think to use this
+        /usr/bin/kitty -e -d /home/brendon/Documents/Mcgill/6th-year/Atmosphere
+        exit 1
     elif [ "$notes_or_assignment" == "Assignment" ]; then
-        xdg-open /home/brendon/Documents/Mcgill/5th-year/fall-sem/andor/Andor_M4_User_Interface_Demo_Handout.pdf
+        xdg-open $ass_atoc_pdf
+    elif [ "$notes_or_assignment" == "Textbook" ]; then
+        xdg-open $atoc_textbook
     else
-        return
+        exit 1
     fi
 fi
 
