@@ -133,9 +133,6 @@ nmap [h <Plug>(GitGutterPrevHunk)
 " was thinking it would be nice to have one per tab
 "nnoremap <silent>,<CR> :call ()<cr>
 
-" makes s work like d but yanks to blackhole register
-nnoremap s "_d
-
 
 nnoremap <silent><leader><CR> :call ToggleDropDownNeoterm()<cr>
 " nnoremap <silent><leader><CR> :Ttoggle<CR>
@@ -369,6 +366,7 @@ nnoremap <silent> <M-g> :<C-u>FzfPreviewGitStatus<CR>
 " nnoremap <silent> <M-b> :FzfPreviewAllBuffers<CR>
 nnoremap <silent> <M-b> :Buffers<CR>
 
+
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
@@ -399,7 +397,7 @@ command! -bang -nargs=? -complete=dir Files
 
 " Todo: change these to lcd ???
 function! CdIfNeed()
-    cd %:p:h | cd `git rev-parse --show-toplevel`
+    silent! cd %:p:h | silent! cd `git rev-parse --show-toplevel`
 endfunction
 " appending leader searches project files
 nnoremap <silent> <leader><M-f> :call CdIfNeed()<CR>:GFiles<CR>
@@ -415,6 +413,7 @@ nnoremap <silent> <M-r> :cd %:p:h<CR><bar>:RG<CR>
 
 nnoremap <silent> <leader><M-r> :call CdIfNeed()<CR><bar>:RG<CR>
 
+"
 function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --colors "path:fg:190,220,255" --colors "line:fg:128,128,128" --smart-case -- %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
@@ -423,7 +422,9 @@ function! RipgrepFzf(query, fullscreen)
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
+" This command allows me to pass in the same parameters on the command line!!!
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
 
 "mnemonic: meta-current
 nnoremap <M-c> :BLines<CR>

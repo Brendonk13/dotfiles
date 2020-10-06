@@ -1,3 +1,7 @@
+" function! SearchCustomMarks()
+"     let options = ['
+" endfunction
+
 
 function! MarkWindowSwap()
   let g:markedWinNum = winnr()
@@ -107,8 +111,8 @@ endfunction
 "     return l:tab
 " endfunction
 
-command SaveBufferLayout call s:save_buffer_layout()
-command RestoreBufferLayout call s:restore_buffer_layout()
+command! SaveBufferLayout call s:save_buffer_layout()
+command! RestoreBufferLayout call s:restore_buffer_layout()
 
 function s:save_buffer_layout() abort
   let s:buf_layout = winlayout()
@@ -193,7 +197,7 @@ endfunction
 
 
 " Defines search command for :Files
-let $FZF_DEFAULT_COMMAND='rg --column --line-number --no-heading --color=always --smart-case --files --hidden --iglob "!.DS_Store" --iglob "!.git"'
+" let $FZF_DEFAULT_COMMAND='rg --column --line-number --no-heading --color=always --smart-case --files --hidden'
 
 " Todo: add devicons/git status to :Gfiles
 
@@ -356,7 +360,6 @@ endfunction
   " endif
 
 
-    
 
 " -------------------- define popup window -----------------------------------
 

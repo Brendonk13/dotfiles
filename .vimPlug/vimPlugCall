@@ -66,7 +66,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-easy-align'
 
-Plug 'yuki-ycino/fzf-preview.vim'
+" Plug 'yuki-ycino/fzf-preview.vim'
 "Plug 'jesseleite/vim-agriculture'
 
 " Plug 'airblade/vim-rooter'
