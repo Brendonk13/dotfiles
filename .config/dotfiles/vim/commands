@@ -1,7 +1,42 @@
-" function! SearchCustomMarks()
-"     let options = ['
-" endfunction
+" Note: adsjks
+" ex.)
 
+function! FuzzySearchPattern(inp)
+    " inp is text like: '(E)xamples, (N)otes
+    let chosen_letter = a:inp[1]
+    let parsed = a:inp[3:]
+    let user_input = chosen_letter . parsed
+
+    let search_cmd = {
+            \ 'Examples': '\b(Ex|ex|EX|ie|Ie|IE|i\.e)(:|\.\)).*$',
+            \ 'Hacks': ':(hack|Hack|HACK)',
+            \ 'Mems':  '\b:(mem|Mem|MEM)',
+            \ 'Notes': '\b(NOTE|Note|note):',
+            \ 'Urls':  '\b(http[s]?://[^ ]+\b)',
+        \ }
+    " for name in keys(search_cmd)
+    "     echom name
+    "     command! name call RipgrepFzf(search_cmd[name], 0)
+    " endfor
+
+    let pattern = search_cmd[user_input]
+    " echom pattern
+    call RipgrepFzf(pattern, 0)
+endfunction
+
+function! SearchCustomMarks()
+    cd %:p:h
+    let pickLetter = [
+            \ '(E)xamples',
+            \ '(H)acks',
+            \ '(M)ems',
+            \ '(N)otes',
+            \ '(U)rls',
+        \ ]
+    call fzf#run(fzf#wrap({'source': pickLetter, 'sink': function('FuzzySearchPattern')}))
+endfunction
+
+command! Cust call SearchCustomMarks()
 
 function! MarkWindowSwap()
   let g:markedWinNum = winnr()
@@ -166,7 +201,7 @@ function s:apply_layout(layout) abort
     " recursive into child windows
     for index in range(len(wins) )
       call win_gotoid(wins[index])
-      call s:apply_layout(a:layout[1][index])
+      call s:apply_layout(a:layout[1][index])fzf with custom dictionary
     endfor
 
   endif

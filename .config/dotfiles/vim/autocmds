@@ -1,7 +1,8 @@
+" idea:
 
 augroup custom_msg_highlights
     autocmd!
-    autocmd Syntax * syn match MyTodo /\v<(FIXME|Idea|IDEA|NOTE|Note|note|TODO|Todo|todo|OPTIMIZE):/
+    autocmd Syntax * syn match MyTodo /\v<(FIXME|FixMe|fixme|IDEA|Idea|idea|NOTE|Note|note|TODO|Todo|todo|OPTIMIZE|Optimize|optimize):/
           \ containedin=.*Comment,vimCommentTitle
 
     " URL's
@@ -16,7 +17,7 @@ augroup custom_msg_highlights
     autocmd Syntax * syn match Hack /\v:<(hack|Hack|HACK)/
           \ containedin=.*Comment,vimCommentTitle
 
-    autocmd Syntax * syn match Example /\v<(Ex|ex|EX|ie|Ie|IE|i\.e)(:|\.\)).+$/
+    autocmd Syntax * syn match Example /\v<(Ex|ex|EX|ie|Ie|IE|i\.e)(:|\.\)).*$/
           \ containedin=.*Comment,vimCommentTitle
 
     " autocmd Syntax * syn match ExampleTwo /\v<(Ex|ex|EX|ie|Ie|IE|i\.e):/
