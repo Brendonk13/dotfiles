@@ -7,11 +7,40 @@ else
     return
 fi
 
+# add this to prompt command !!!!!!! get extra randomness cuz only happens if we run cmd on 5th minute of an hour
+
+# create a general file merging bash file!!!
+# pass in base_dir and backup_dir arguments
+# it creates a dir structure if not exists
+
+
+# change so that I can hold more versions of files
+# can I lock a file from being looked at by more than 1 process
+#--------- use flock !!!!
+
+randomly_save_history() {
+    time="$(date +%H:%M | tr -d ':' | sed 's/^0*//')"
+    every_four_mins=$(($time%4))
+
+    if [ $every_four_mins -eq 0 ]; then
+        save_history=$((every_four_mins+$RANDOM%6))
+        save_history=$(($save_history%4))
+
+        if [ $save_history -eq 0 ]; then
+            echo "Randomly saving history..."
+            history -a
+            bash /home/brendon/dev/dev/Scripts/backup_bash_history
+            update_history
+        fi
+    fi
+}
+
+
 HISTCONTROL=ignorespace:ignoredups
 # Note that this is kind of useless now that I'm deleting all the duplicates
 HISTIGNORE="exit:clear:pwd:mount*:umount*:ping*"
 
-PROMPT_COMMAND="history -a"
+PROMPT_COMMAND="history -a; randomly_save_history"
 # Below link explains that this command is run right before bash displays: $PS1
 # https://tldp.org/HOWTO/Bash-Prompt-HOWTO/x264.html (try: PROMPT_COMMAND="date +%H%M")
 
@@ -37,24 +66,6 @@ update_history() {
 }
 
 
-
-# add this to prompt command !!!!!!! get extra randomness cuz only happens if we run cmd on 5th minute of an hour
-
-# create a general file merging bash file!!!
-# pass in base_dir and backup_dir arguments
-# it creates a dir structure if not exists
-
-# change so that I can hold more versions of files
-# can I lock a file from being looked at by more than 1 process
-#--------- use flock !!!!
-
-# rand_hist_save() {
-#     time="$(date +%H:%M | tr -d ':' | sed 's/^0*//')"
-
-#     save_history=$(($time%5))
-#     [[ $save_history -eq 0 ]] && update_history && 
-
-# }
 
 
 # Clean history file when bash starts.

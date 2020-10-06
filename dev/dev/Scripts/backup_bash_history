@@ -1,6 +1,12 @@
+# todo: move shit to setup_history
+# create general function which accepts base_dir, backup_dir as input
+# and one which can merge all the files in a dir (and keep everything in the right order ish)
 
 base_dir="$HOME/.history_copies"
 backup_dir="$base_dir/tmp"
+
+
+# -------------- move these to setup_history.sh file in dotfiles
 
 [[ ! -d "$backup_dir" ]] && echo "setup: mkdir -p $backup_dir ..." && mkdir -p "$backup_dir"
 [[ ! -f "$base_dir/curr_num.txt" ]] && echo "setup: creating file: echo '0' > $base_dir/curr_num.txt ..." && echo "0" > "$base_dir/curr_num.txt"
@@ -67,10 +73,13 @@ merge_backup_histories() {
 #TODO: add checks for if the numbering scheme is off
 
 if [ $next_backup_num -eq 6 ]; then
+    # if about to do 6th file in backup_dir, merge histories in this dir
+    # and delete tmp files
     echo "0" > $base_dir/curr_num.txt
     merge_backup_histories
     delete_old_files
 else
+    # copy bash history to hist_backup_XXX file
     echo "$next_backup_num"
     echo "new file name: $backup_dir/hist_backup_$next_backup_num"
     cp $HOME/.bash_history  "$backup_dir/hist_backup_$next_backup_num"
