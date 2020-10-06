@@ -36,6 +36,27 @@ update_history() {
     history -r
 }
 
+
+
+# add this to prompt command !!!!!!! get extra randomness cuz only happens if we run cmd on 5th minute of an hour
+
+# create a general file merging bash file!!!
+# pass in base_dir and backup_dir arguments
+# it creates a dir structure if not exists
+
+# change so that I can hold more versions of files
+# can I lock a file from being looked at by more than 1 process
+#--------- use flock !!!!
+
+# rand_hist_save() {
+#     time="$(date +%H:%M | tr -d ':' | sed 's/^0*//')"
+
+#     save_history=$(($time%5))
+#     [[ $save_history -eq 0 ]] && update_history && 
+
+# }
+
+
 # Clean history file when bash starts.
 clean_bash_history
 

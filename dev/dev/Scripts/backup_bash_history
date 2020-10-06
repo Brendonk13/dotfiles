@@ -1,6 +1,16 @@
 
 base_dir="$HOME/.history_copies"
-backup_dir="$base_dir/backups"
+backup_dir="$base_dir/tmp"
+
+[[ ! -d "$backup_dir" ]] && echo "setup: mkdir -p $backup_dir ..." && mkdir -p "$backup_dir"
+[[ ! -f "$base_dir/curr_num.txt" ]] && echo "setup: creating file: echo '0' > $base_dir/curr_num.txt ..." && echo "0" > "$base_dir/curr_num.txt"
+
+[[ ! -d "$backup_dir/shutdown" ]] && echo "setup: mkdir -p $backup_dir/shutdown ..." && mkdir -p "$base_dir/shutdown"
+[[ ! -d "$backup_dir/spam" ]] && echo "setup: mkdir -p $backup_dir/spam ..." && mkdir -p "$base_dir/spam"
+[[ ! -d "$backup_dir/daily" ]] && echo "setup: mkdir -p $backup_dir/daily ..." && mkdir -p "$base_dir/daily"
+[[ ! -d "$backup_dir/weekly" ]] && echo "setup: mkdir -p $backup_dir/weekly ..." && mkdir -p "$base_dir/weekly"
+[[ ! -d "$backup_dir/monthly" ]] && echo "setup: mkdir -p $backup_dir/monthly ..." && mkdir -p "$base_dir/monthly"
+
 
 next_backup_num="$(cat $base_dir/curr_num.txt)"
 
@@ -17,10 +27,10 @@ delete_old_files(){
     # delete all the tmp merge files and previous saved histories
     for filename in $backup_dir/*; do
         if [ $filename = "$backup_dir/hist_backup_10.txt" ]; then
-            # echo "SKIPPING: $filename"
+            echo "SKIPPING: $filename"
             continue
         else
-            # echo "Removing: $filename"
+            echo "Removing: $filename"
             rm $filename
         fi
     done
@@ -30,7 +40,6 @@ merge_backup_histories() {
     just_backed_up=0
     for first_made_backup in $backup_dir/*; do
         for other_backup in $backup_dir/*; do
-            # echo "file: $first_made_backup,    $other_backup"
             if [ $first_made_backup = $other_backup ]; then
                 continue
             fi
@@ -45,7 +54,7 @@ merge_backup_histories() {
                 output_postfix=$(($output_postfix + 1))
                 merged_history="$backup_dir/hist_backup_$output_postfix.txt"
             fi
-            # echo -e "------ first one is: $first_made_backup \n second is: $other_backup \n output file: $merged_history"
+            echo -e "------ first one is: $first_made_backup \n second is: $other_backup \n output file: $merged_history"
 
             # combine bash histories and output to merged_history file
             awk '!a[$0]++' $first_made_backup $other_backup > $merged_history
@@ -58,9 +67,9 @@ merge_backup_histories() {
 #TODO: add checks for if the numbering scheme is off
 
 if [ $next_backup_num -eq 6 ]; then
+    echo "0" > $base_dir/curr_num.txt
     merge_backup_histories
     delete_old_files
-    echo "0" > $base_dir/curr_num.txt
 else
     echo "$next_backup_num"
     echo "new file name: $backup_dir/hist_backup_$next_backup_num"

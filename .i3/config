@@ -10,7 +10,8 @@ set $mod Mod4
 
 exec xcape -e 'Control_L=Escape'
 # checkout /usr/share/X11/xkb/symbols/  file: my_new_control
-exec --no-startup-id setxkbmap -layout my_new_control -option ctrl:swapcaps
+#exec --no-startup-id setxkbmap -layout my_new_control -option ctrl:swapcaps
+exec --no-startup-id setxkbmap -option ctrl:swapcaps
 # exec --no-startup-id setxkbmap -option ctrl:swapcaps
 # exec --no-startup-id setxkbmap -model pc104 -layout us -option ctrl:swapcaps
 exec --no-startup-id fusuma -d
@@ -104,8 +105,8 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 ################################################################################################
 
 # Screen brightness controls
-# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 10"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 10"
 
 # Start Applications
 # bmenu is actually very powerful for hardware/services/driver stuff

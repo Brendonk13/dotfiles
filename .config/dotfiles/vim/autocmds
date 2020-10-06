@@ -1,31 +1,46 @@
 
-" this highlights the or'd words (if they have colon at the end!)
-augroup highlight_todo
+augroup custom_msg_highlights
     autocmd!
     autocmd Syntax * syn match MyTodo /\v<(FIXME|Idea|IDEA|NOTE|Note|note|TODO|Todo|todo|OPTIMIZE):/
           \ containedin=.*Comment,vimCommentTitle
-augroup END
-highlight def link MyTodo Todo
-" from bottom of: https://stackoverflow.com/questions/4097259/in-vim-how-do-i-highlight-todo-and-fixme
 
-augroup highlight_URL
-    autocmd!
+    " URL's
     autocmd Syntax * syn match Link /\v<(Link|Links|LINK|LINKS):/
           \ containedin=.*Comment,vimCommentTitle
     autocmd Syntax * syn match URL /\v<(http[s]?:\/\/[^ ]+>)/
           \ containedin=.*Comment,vimCommentTitle
+
+    autocmd Syntax * syn match Memorize /\v:<(mem|Mem|MEM)/
+          \ containedin=.*Comment,vimCommentTitle
+
+    autocmd Syntax * syn match Hack /\v:<(hack|Hack|HACK)/
+          \ containedin=.*Comment,vimCommentTitle
+
+    autocmd Syntax * syn match Example /\v<(Ex|ex|EX|ie|Ie|IE|i\.e)(:|\.\)).+$/
+          \ containedin=.*Comment,vimCommentTitle
+
+    " autocmd Syntax * syn match ExampleTwo /\v<(Ex|ex|EX|ie|Ie|IE|i\.e):/
+    "       \ containedin=.*Comment,vimCommentTitle
 augroup END
 
+" from bottom of: https://stackoverflow.com/questions/4097259/in-vim-how-do-i-highlight-todo-and-fixme
 
 " Colors are chosen from vim-solarized groups for vim files (idk which ones)
-highlight LinkColor cterm=NONE gui=bold ctermfg=4 guifg=#268bd2 ctermbg=NONE guibg=NONE
-highlight URL_Color cterm=NONE gui=NONE ctermfg=13 guifg=#6c71c4 ctermbg=NONE guibg=NONE
+highlight LinkColor     cterm=NONE gui=bold ctermfg=4  guifg=#268bd2 ctermbg=NONE guibg=NONE
+highlight URL_Color     cterm=NONE gui=NONE ctermfg=13 guifg=#6c71c4 ctermbg=NONE guibg=NONE
+highlight MemorizeColor cterm=NONE gui=NONE ctermfg=13 guifg=#00cd9a ctermbg=NONE guibg=NONE
+highlight ExampleColor  cterm=NONE gui=NONE ctermfg=13 guifg=#CCCCCC ctermbg=NONE guibg=NONE
+highlight HackColor     cterm=NONE gui=NONE ctermfg=13 guifg=#cc5e22 ctermbg=NONE guibg=NONE
 
 
-highlight def link Link LinkColor
-highlight def link URL URL_Color
-highlight def link UrlNoSpell URL_Color
+highlight def link Link         LinkColor
+highlight def link URL          URL_Color
+highlight def link UrlNoSpell   URL_Color
 
+highlight def link MyTodo       Todo
+highlight def link Memorize     MemorizeColor
+highlight def link Example      ExampleColor
+highlight def link Hack         HackColor
 
 augroup NaturalLanguage
     autocmd!

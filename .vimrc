@@ -105,6 +105,11 @@ set incsearch
 " assume the /g flag on :s substitutions to replace all matches in a line
 set gdefault
 
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 if filereadable(expand("~/.vimPlug/vimPlugCall"))
     source ~/.vimPlug/vimPlugCall
@@ -193,37 +198,39 @@ highlight Pmenu ctermbg=238 gui=bold
 " this sets a red cursor for terminal mode!
 highlight TermCursor ctermfg=red guifg=red
 
-" accidently deleted a file today, now I have vim version control!!
+" ------------ SETUP UNDO ------------------------------------------
 if has('persistent_undo')
     if exists('$SUDO_USER')
         set noundofile
     else
+        if !isdirectory(expand('$HOME/.vim/tmp/undo'))
+            silent !mkdir -p $HOME/.vim/tmp/undo
+            echoerr 'Created directory: $HOME/.vim/tmp/undo since it did not exist'
+        endif
         set undodir=~/.vim/tmp/undo
-        set undodir+=~/local/.vim/tmp/undo
-        set undodir+=.
         " actually turn on undofiles
         set undofile
     endif
 endif
 
+" ------------ SETUP BACKUPS -------------------------------------------
 " root user created backups mean that non root's can no longer access backups
 if exists('$SUDO_USER')
     set nobackup
     set nowritebackup
 else
-    if isdirectory(expand('$HOME/.vim/tmp/backup'))
-        set backupdir=$HOME/.vim/tmp/backup
-    else
-        echoerr 'warning: $HOME/.vim/tmp/backup is not a directory, now writing backups elsewhere'
-        set backupdir+=~/local/.vim/tmp/backup
-        set backupdir+=.
-        " if first option doesn't exist, write to current directory
+    if !isdirectory(expand('$HOME/.vim/tmp/backup'))
+        silent !mkdir -p $HOME/.vim/tmp/backup
+        echoerr 'Created directory: $HOME/.vim/tmp/backup since it did not exist'
     endif
+        set backupdir=$HOME/.vim/tmp/backup
+        " if first option doesn't exist, write to current directory
 endif
 
 " note i can eliminate swap files from my life with wincent/terminus
 " or the plugin made by damian conway listed in potential plugin file
 " don't allow root to create swap files to avoid similar headaches
+" ------------ SETUP SWAPFILE ------------------------------------------
 if exists('$SUDO_USER')
     set noswapfile
 else

@@ -8,9 +8,9 @@ XDG_CONFIG_HOME="$HOME/.config"
 export dotBashDir="$XDG_CONFIG_HOME/dotfiles/bash"
 
 # ble gives fish shell style command completion as you type.
-ble_path="$XDG_CONFIG_HOME/ble-0.3.2/ble.sh"
-rc_file="$(dirname $ble_path)/src/ble.sh/blerc"
-[[ $- == *i* ]] && [[ -f "$ble_path" ]] && source "$ble_path" --noattach --rcfile "$rc_file"
+# ble_path="$XDG_CONFIG_HOME/ble-0.3.2/ble.sh"
+# rc_file="$(dirname $ble_path)/src/ble.sh/blerc"
+# [[ $- == *i* ]] && [[ -f "$ble_path" ]] && source "$ble_path" --noattach --rcfile "$rc_file"
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -113,9 +113,9 @@ bind "set show-all-if-ambiguous on"
 # this stores the dir this script is in!
 # DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-if hash ble-attach; then
-    ((_ble_bash)) && ble-attach
-fi
+# if hash ble-attach; then
+#     ((_ble_bash)) && ble-attach
+# fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
