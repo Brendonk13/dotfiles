@@ -1,88 +1,185 @@
+#!/usr/bin/env bash
+
+# so i added seventh v early to hist4 but it should still be last when most_merged.txt is done
+
 # todo: move shit to setup_history
 # create general function which accepts base_dir, backup_dir as input
 # and one which can merge all the files in a dir (and keep everything in the right order ish)
 
-base_dir="$HOME/.history_copies"
-backup_dir="$base_dir/tmp"
+# base_dir="$HOME/.history_copies"
+# backup_dir="$base_dir/tmp"
 
+#every time a dir has more than 6 files, we merge them
+# STOP using curr_num.txt, start using ls | wc -l !!!!!
 
-# -------------- move these to setup_history.sh file in dotfiles
+setup_dir(){
+    # mkdir a subdir if it does not exist
+    # add "most_merged.txt" to subdir if it doesn't already exist
+    if [ $# -ne 1 ]; then
+        echo -e "Wrong number of args passed\nNeed exactly 1 args --> /path/to/dir\n(in backup_bash_history/setup_dir)"
+        return
+    fi
+    path_to_dir="$1"
 
-[[ ! -d "$backup_dir" ]] && echo "setup: mkdir -p $backup_dir ..." && mkdir -p "$backup_dir"
-[[ ! -f "$base_dir/curr_num.txt" ]] && echo "setup: creating file: echo '0' > $base_dir/curr_num.txt ..." && echo "0" > "$base_dir/curr_num.txt"
-
-[[ ! -d "$backup_dir/shutdown" ]] && echo "setup: mkdir -p $backup_dir/shutdown ..." && mkdir -p "$base_dir/shutdown"
-[[ ! -d "$backup_dir/spam" ]] && echo "setup: mkdir -p $backup_dir/spam ..." && mkdir -p "$base_dir/spam"
-[[ ! -d "$backup_dir/daily" ]] && echo "setup: mkdir -p $backup_dir/daily ..." && mkdir -p "$base_dir/daily"
-[[ ! -d "$backup_dir/weekly" ]] && echo "setup: mkdir -p $backup_dir/weekly ..." && mkdir -p "$base_dir/weekly"
-[[ ! -d "$backup_dir/monthly" ]] && echo "setup: mkdir -p $backup_dir/monthly ..." && mkdir -p "$base_dir/monthly"
-
-
-next_backup_num="$(cat $base_dir/curr_num.txt)"
-
-next_backup_num=$(($next_backup_num + 1))
-
-# echo $backup_num
-
-# store up to 6 backups: hist_backup_0,hist_backup_1,...hist_backup_5
-# want to use less than 10 files for everything so that looping alphabetically over files works
-output_postfix=6
-merged_history="$backup_dir/hist_backup_$output_postfix.txt"
-
-delete_old_files(){
-    # delete all the tmp merge files and previous saved histories
-    for filename in $backup_dir/*; do
-        if [ $filename = "$backup_dir/hist_backup_10.txt" ]; then
-            echo "SKIPPING: $filename"
-            continue
-        else
-            echo "Removing: $filename"
-            rm $filename
-        fi
-    done
+    if [ ! -d "$path_to_dir" ]; then
+        echo "Setup: mkdir -p $path_to_dir ..."
+        mkdir -p "$path_to_dir"
+    fi
+    new_file="$path_to_dir/most_merged.txt"
+    if [ ! -f "$new_file" ]; then
+        echo "Setup: touch $new_file ..."
+        touch "$new_file"
+    fi
+    # echo ""
 }
 
+make_sub_directories(){
+    # input: path/to/dir array of subdir names to create
+    if [ ! -d "$1" ]; then
+        echo -e "First input argument must be a directory,\n(in backup_bash_history/make_sub_directories)"
+        return
+    fi
+    backup_dir="$1"
+    shift
+    for dir_name in $*; do
+        setup_dir "$backup_dir/$dir_name"
+    done
+    # echo ""
+}
+
+create_backup_directories(){
+    # expected: $HOME
+    if [ $# -ne 1 ]; then
+        echo -e "Wrong number of args passed\nNeed exactly 1 arg --> a directory\n(in backup_bash_history/create_backup_directories)"
+        return
+    fi
+    if [ ! -d "$1" ]; then
+        echo -e "Input argument must be a directory\n(in backup_bash_history/create_backup_directories)"
+        return
+    fi
+    base_dir="$1/.history_copies"
+
+    sub_dirs=("hourly" "daily" "weekly" "monthly" "yearly")
+    make_sub_directories "$base_dir/scheduled" "${sub_dirs[@]}"
+
+    sub_dirs=("shutdown" "random_save")
+    make_sub_directories "$base_dir/tmp" "${sub_dirs[@]}"
+}
+
+
 merge_backup_histories() {
-    just_backed_up=0
-    for first_made_backup in $backup_dir/*; do
-        for other_backup in $backup_dir/*; do
-            if [ $first_made_backup = $other_backup ]; then
+    # NOTE: Removes duplicates while preserving the order of when commands were typed
+    if [ $# -ne 1 ]; then
+        echo -e "Wrong number of args passed\nNeed exactly 1 arg --> a directory\n(in backup_bash_history/merge_backup_histories)"
+        return
+    fi
+    if [ ! -d "$1" ]; then
+        echo -e "Input argument must be a directory\n(in backup_bash_history/merge_backup_histories)"
+        return
+    fi
+    backup_dir="$1"
+    iteration=-1
+    # echo "backup dir is: $backup_dir"
+    new_result="$backup_dir/new_result.txt"
+    most_merged="$backup_dir/most_merged.txt"
+
+    for first_file in $backup_dir/*; do
+        for current_file in $backup_dir/*; do
+            # skip iter 0: files are identical
+            # merge on iter 1 to produce: hist_backup_result.txt
+            # every other iteration is: merge hist_backup_result.txt current_file
+
+            iteration=$((iteration+1))
+            # echo "current iter: $iteration, current file: `basename $current_file`"
+            # [ $iteration -eq 0 ] && echo -e "continue\n" && continue
+            [ $iteration -eq 0 ] && continue
+            [ $current_file = $most_merged ] && continue
+
+
+            # if iteration==1 then merge first_file and current_file
+            # then merge this with our previous most_merged.txt file (second awk cmd + mv)
+            if [ $iteration -eq 1 ]; then
+                awk '!a[$0]++' "$first_file" "$current_file" > "$new_result"
+                # echo "merged two files: `basename $first_file` `basename $current_file` > `basename $new_result`"
+
+                # merge the most_merged.txt that was already in this dir with result of first merges: hist0, hist1
+                awk '!a[$0]++' "$most_merged" "$new_result" > "$backup_dir/tmp.txt"
+                # echo "SECONDMERGE two files: `basename $most_merged` `basename $new_result` > `basename $backup_dir/tmp.txt`"
+
+                mv "$backup_dir/tmp.txt" "$most_merged"
+                # echo "mv $backup_dir/tmp.txt $most_merged"
+
+                # echo ""
                 continue
             fi
-            # first iteration: awk backup_0.txt backup1.txt >  hist_backup_6.txt
-            # second iteration: awk hist_backup_6 backup2.txt >  hist_backup_7.txt
-            # third iteration: awk hist_backup_7 backup3.txt >  hist_backup_8.txt
-            # order matters for history lookups
-            if [ $just_backed_up -ge 1 ]; then
-                # 2: this will be hist_backup_100
-                # 3: hist_backup_101
-                first_made_backup="$merged_history"
-                output_postfix=$(($output_postfix + 1))
-                merged_history="$backup_dir/hist_backup_$output_postfix.txt"
-            fi
-            echo -e "------ first one is: $first_made_backup \n second is: $other_backup \n output file: $merged_history"
-
-            # combine bash histories and output to merged_history file
-            awk '!a[$0]++' $first_made_backup $other_backup > $merged_history
-            just_backed_up=$(($just_backed_up + 1))
+            awk '!a[$0]++' "$most_merged" "$current_file" > "$new_result"
+            # echo "merged two files: `basename $most_merged` `basename $current_file` > `basename $new_result`"
+            mv "$new_result" "$most_merged"
+            # echo "mv `basename $new_result` `basename $most_merged`"
+            # echo ""
         done
         break
     done
 }
 
-#TODO: add checks for if the numbering scheme is off
 
-if [ $next_backup_num -eq 6 ]; then
-    # if about to do 6th file in backup_dir, merge histories in this dir
-    # and delete tmp files
-    echo "0" > $base_dir/curr_num.txt
-    merge_backup_histories
-    delete_old_files
-else
-    # copy bash history to hist_backup_XXX file
-    echo "$next_backup_num"
-    echo "new file name: $backup_dir/hist_backup_$next_backup_num"
-    cp $HOME/.bash_history  "$backup_dir/hist_backup_$next_backup_num"
-    echo "$next_backup_num" > $base_dir/curr_num.txt
-fi
+delete_old_files(){
+    # delete all the tmp merge files and previous saved histories
+    if [ $# -ne 1 ]; then
+        echo -e "Wrong number of args passed\nNeed exactly 1 arg --> a directory\n(in backup_bash_history/delete_old_files)"
+        return
+    fi
+    if [ ! -d "$1" ]; then
+        echo -e "Input argument must be a directory\n(in backup_bash_history/delete_old_files)"
+        return
+    fi
 
+    backup_dir="$1"
+    dont_delete="$backup_dir/most_merged.txt"
+    for filename in $backup_dir/*; do
+        if [ $filename = "$dont_delete" ]; then
+            # echo "SKIPPING: $filename"
+            continue
+        else
+            # echo "Removing: $filename"
+            rm $filename
+        fi
+    done
+}
+
+
+
+#MAIN FUNCTION:
+
+
+# PASSED IN PATH TO SPECIFIC DIRECTORY!
+backup_history(){
+    # always backs up the current history
+    # THEN: checks if we need to merge histories
+    if [ $# -ne 1 ]; then
+        echo -e "Wrong number of args passed\nNeed exactly 1 arg --> a directory\n(in backup_bash_history/backup_history -- is main func)"
+        return
+    fi
+    if [ ! -d "$1" ]; then
+        echo -e "Input argument must be an existing directory\n(in backup_bash_history/backup_history -- is main func)"
+        return
+    fi
+    backup_dir="$1"
+
+    next_backup_num="$(ls $backup_dir | wc -l)"
+    # minus one since we count from zero plus there is another file in dir: most_merged.txt
+    next_backup_num=$(($next_backup_num-1))
+    next_backup_file="$backup_dir/hist_$next_backup_num.txt"
+
+    # echo "files in dir: $next_backup_num, file: $next_backup_file"
+
+    cp "$HOME/.bash_history" "$next_backup_file"
+
+    # next file would be: hist_10.txt so my merge fxn will no longer work since the sorting won't work
+    # Note: maybe using sort command solves this
+    if [ $next_backup_num -eq 9 ]; then
+        # echo -e "about to merge the dir: `basename $backup_dir`\n"
+        merge_backup_histories "$backup_dir"
+        delete_old_files "$backup_dir"
+    fi
+}

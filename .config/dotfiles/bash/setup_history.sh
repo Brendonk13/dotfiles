@@ -26,11 +26,12 @@ randomly_save_history() {
         save_history=$((every_four_mins+$RANDOM%6))
         save_history=$(($save_history%4))
 
+        # make more random !!!!
         if [ $save_history -eq 0 ]; then
             echo "Randomly saving history..."
-            history -a
-            bash /home/brendon/dev/dev/Scripts/backup_bash_history
-            update_history
+            # history -a
+            # bash /home/brendon/dev/dev/Scripts/backup_bash_history
+            # update_history
         fi
     fi
 }
