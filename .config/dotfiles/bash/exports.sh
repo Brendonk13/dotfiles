@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# export EDITOR=nvim
+
 
 if cat /proc/version | grep Microsoft >/dev/null 2>&1; then
 # windows environment variables
@@ -28,10 +28,10 @@ elif [ "$HOME" = "/home/brendon" ]; then
     #export PYTHONSTARTUP="$HOME/PyStuff/set_ptREPL.py"
     export XDG_CONFIG_HOME="$HOME/.config"
     export PYTHONSTARTUP="$XDG_CONFIG_HOME/ptpython/config.py"
+    export MAX_HIST_BACKUPS=20
 
     export MANPAGER='nvim +Man!'
     export PATH="/home/$USER/bin:$PATH"
-
     # note that below did NOT work for changing jdk
     # export JAVA_HOME="/opt/java/jdk-11.0.6"
     # export PATH=$PATH:"/opt/java/jdk-11.0.6/bin"

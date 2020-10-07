@@ -7,6 +7,16 @@ else
     return
 fi
 
+if [ -f "$dotBashDir/create_history_backup_dirs.sh" ]; then
+    source "$dotBashDir/create_history_backup_dirs.sh"
+    # note that nothing is done if the dirs exist
+    create_backup_directories "$HOME"
+else
+    echo "create_history_backup_dirs.sh script is NOT in the same directory as bash dotfiles"
+    return
+fi
+
+
 # add this to prompt command !!!!!!! get extra randomness cuz only happens if we run cmd on 5th minute of an hour
 
 # create a general file merging bash file!!!
@@ -23,15 +33,17 @@ randomly_save_history() {
     every_four_mins=$(($time%4))
 
     if [ $every_four_mins -eq 0 ]; then
-        save_history=$((every_four_mins+$RANDOM%6))
-        save_history=$(($save_history%4))
+        save_history=$((3*$every_four_mins+$RANDOM%20))
+        save_history=$(($save_history%5))
 
         # make more random !!!!
         if [ $save_history -eq 0 ]; then
             echo "Randomly saving history..."
-            # history -a
-            # bash /home/brendon/dev/dev/Scripts/backup_bash_history
-            # update_history
+            history -a
+            # save current history (--random just in case to avoid race condition)
+            bash "$HOME/dev/dev/Scripts/backup_bash_history" --random "$HOME/.history_copies/tmp/random_save"
+            # clean current history
+            update_history
         fi
     fi
 }
@@ -67,10 +79,15 @@ update_history() {
 }
 
 
+save_to_rand_file(){
+    # panic and save to random named file when bash closes just in case its a unexpected shutdown
+    history -a
+    bash "$HOME/dev/dev/Scripts/backup_bash_history" --random "$HOME/.history_copies/tmp/shutdown"
+}
 
 
 # Clean history file when bash starts.
 clean_bash_history
 
 # Clean history file when bash exits.
-trap clean_bash_history EXIT
+trap save_to_rand_file EXIT
