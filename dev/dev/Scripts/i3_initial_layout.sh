@@ -8,7 +8,8 @@
 declare -a workspace_names
 # workspace_names=(": Planning" ": Work" ": 326" ": 429" ": Comms" ": Homelab" ": Buys" ": Media" )
 # workspace_names=("Plans" "Work" "3 26" "4 29" "Homelab" "Buy" "Media" )
-workspace_names=("Plans" "Py" "3 26" "4 29" "Homelab" "tmp")
+# workspace_names=("Plans" "Py" "3 26" "4 29" "Homelab" "tmp")
+workspace_names=("Plans" "Py" "3 26" "4 29" "Homelab" "tmp" "prox" "media")
 # workspace_names=("Plans" "Work" "3 26" "4 29" "Atoc" "chem" "Homelab" "Buy" "Media" )
 # workspace_names=(": Planning" ": 429" ": 326" ": Py" ": Buys" ": NetSec" ": Media" ": Stuff Manager")
 open_a_terminal="exec kitty"

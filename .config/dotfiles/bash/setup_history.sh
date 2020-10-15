@@ -28,16 +28,25 @@ fi
 # can I lock a file from being looked at by more than 1 process
 #--------- use flock !!!!
 
+
+# Todo: test this, meant to make it that no shell saves twice in the same minute
+# export last_save_time=""
+
 randomly_save_history() {
-    time="$(date +%H:%M | tr -d ':' | sed 's/^0*//')"
-    every_four_mins=$(($time%4))
+    curr_time="$(date +%H:%M)"
+    time="$(echo $curr_time | tr -d ':' | sed 's/^0*//')"
+    every_four_mins=$(($time%6))
+    # if [ "$last_save_time" = "$curr_time" ]; then
+    #     return
+    # fi
 
     if [ $every_four_mins -eq 0 ]; then
-        save_history=$((3*$every_four_mins+$RANDOM%20))
-        save_history=$(($save_history%5))
+        save_history=$((3*$every_four_mins+$RANDOM%20+$RANDOM%50))
+        save_history=$(($save_history%17))
 
         # make more random !!!!
         if [ $save_history -eq 0 ]; then
+            # export last_save_time="$curr_time"
             echo "Randomly saving history..."
             history -a
             # save current history (--random just in case to avoid race condition)

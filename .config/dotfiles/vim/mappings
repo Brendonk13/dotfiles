@@ -36,6 +36,12 @@ nnoremap gU gu
 nnoremap guu gUU
 nnoremap gUU guu
 
+vnoremap gu gU
+vnoremap gU gu
+
+"vnoremap guu gUU
+"vnoremap gUU guu
+
 
 " backtick is a way better mark
 nnoremap ' `

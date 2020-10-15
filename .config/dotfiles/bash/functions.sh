@@ -10,6 +10,23 @@ function changeDirAndShow() {
     cd "$1" && ls -A
 }
 
+# mvf
+renameSameFiletype() {
+    if [ $# -lt 2 ]; then
+        echo "USAGE: mvf file1.txt file2"
+        return
+    fi
+    local arg_with_ft="$1"
+    local new_name="$2"
+    local ft="${arg_with_ft#*.}"
+    # always try to remove filetype from second arg just in case was inputted by accident
+    new_name="${new_name%%.*}.${ft}"
+    echo "new name: $new_name"
+    mv "$arg_with_ft" "$new_name"
+}
+# mvf: move file (not meant for dirs so appropiate)
+alias mvf=renameSameFiletype
+
 
 # follow moved files to the dest. folder
 function mcd() {
@@ -182,6 +199,20 @@ fuzzy_xdgopen() {
 
 
 
+alias rgaf=rga_fzf
+rga_fzf() {
+    RG_PREFIX="rga --files-with-matches"
+    local file
+    file="$(
+        FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
+            fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
+                            --phony -q "$1" \
+                            --bind "change:reload:$RG_PREFIX {q}" \
+                            --preview-window="70%:wrap"
+    )" &&
+    echo "opening $file" &&
+    setsid xdg-open "$file"
+}
 
 
 #think best solution is to just loop over both out, lss at same time 

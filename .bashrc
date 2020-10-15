@@ -109,6 +109,9 @@ bind "set completion-map-case on"
 # Display matches for ambiguous patterns at first tab press
 bind "set show-all-if-ambiguous on"
 
+# use these to move by whitespace delim words
+bind '"\C-f":vi-fWord'
+bind '"\C-b":vi-bWord'
 
 # this stores the dir this script is in!
 # DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
