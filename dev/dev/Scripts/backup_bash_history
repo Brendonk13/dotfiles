@@ -125,7 +125,7 @@ backup_history(){
     cp "$HOME/.bash_history" "$backed_up_file"
     NUM_BACKUPS="$(ls $backup_dir | wc -l)"
 
-    if [ "$NUM_BACKUPS" = "$MAX_HIST_BACKUPS" ]; then
+    if [ "$NUM_BACKUPS" -ge "$MAX_HIST_BACKUPS" ]; then
         merge_backup_histories "$backup_dir"
 
         # don't delete backups if there was an error merging
