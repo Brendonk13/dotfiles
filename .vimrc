@@ -223,8 +223,8 @@ else
         silent !mkdir -p $HOME/.vim/tmp/backup
         echoerr 'Created directory: $HOME/.vim/tmp/backup since it did not exist'
     endif
-        set backupdir=$HOME/.vim/tmp/backup
-        " if first option doesn't exist, write to current directory
+    set backupdir=$HOME/.vim/tmp/backup
+    " if first option doesn't exist, write to current directory
 endif
 
 " note i can eliminate swap files from my life with wincent/terminus

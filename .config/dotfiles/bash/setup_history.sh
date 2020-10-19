@@ -42,7 +42,7 @@ randomly_save_history() {
 
     if [ $every_four_mins -eq 0 ]; then
         save_history=$((3*$every_four_mins+$RANDOM%20+$RANDOM%50))
-        save_history=$(($save_history%17))
+        save_history=$(($save_history%25))
 
         # make more random !!!!
         if [ $save_history -eq 0 ]; then
@@ -60,7 +60,7 @@ randomly_save_history() {
 
 HISTCONTROL=ignorespace:ignoredups
 # Note that this is kind of useless now that I'm deleting all the duplicates
-HISTIGNORE="exit:clear:pwd:mount*:umount*:ping*"
+# HISTIGNORE="exit:clear:pwd:mount*:umount*"
 
 PROMPT_COMMAND="history -a; randomly_save_history"
 # Below link explains that this command is run right before bash displays: $PS1
