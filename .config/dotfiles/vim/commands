@@ -201,7 +201,7 @@ function s:apply_layout(layout) abort
     " recursive into child windows
     for index in range(len(wins) )
       call win_gotoid(wins[index])
-      call s:apply_layout(a:layout[1][index])fzf with custom dictionary
+      call s:apply_layout(a:layout[1][index]) "fzf with custom dictionary
     endfor
 
   endif

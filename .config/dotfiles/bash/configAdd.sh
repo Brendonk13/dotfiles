@@ -19,6 +19,7 @@ config add ~/.config/.ripgreprc
 config add ~/.config/compton.conf
 config add ~/.config/mimeapps.list
 config add ~/.config/zathura/zathurarc
+config add ~/.config/ptpython/config.py
 
 config add ~/dev/dev/Scripts/battest_cronjob
 config add ~/dev/dev/Scripts/backup_bash_history
