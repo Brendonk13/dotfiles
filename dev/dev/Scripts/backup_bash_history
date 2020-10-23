@@ -84,7 +84,9 @@ delete_old_files(){
 
     backup_dir="$1"
     dont_delete="$backup_dir/most_merged.txt"
-    for filename in $backup_dir/*; do
+    for fil in $backup_dir/*; do
+
+        filename="$backup_dir/$(basename $fil)"
         if [ $filename = "$dont_delete" ]; then
             echo "SKIPPING: $filename"
             continue
@@ -125,7 +127,8 @@ backup_history(){
     cp "$HOME/.bash_history" "$backed_up_file"
     NUM_BACKUPS="$(ls $backup_dir | wc -l)"
 
-    if [ "$NUM_BACKUPS" -ge "$MAX_HIST_BACKUPS" ]; then
+    # default values is 20 (needed for cron jobs which dont use the env var)
+    if [ "$NUM_BACKUPS" -ge "${MAX_HIST_BACKUPS:-20}" ]; then
         merge_backup_histories "$backup_dir"
 
         # don't delete backups if there was an error merging
