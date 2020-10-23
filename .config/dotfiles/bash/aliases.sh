@@ -48,6 +48,8 @@ elif [ "$HOME" = "/home/brendon" ]; then
 
     alias top='ytop -p -c monokai'
 
+    alias mpv='setsid mpv --save-position-on-quit'
+
     # monitors
     # alias mon='mons -e right'
     alias mon='mons -e left'
