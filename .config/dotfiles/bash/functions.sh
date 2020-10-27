@@ -161,12 +161,15 @@ pushCurrentBranch() {
 }
 # alias gpush=pushCurrentBranch
 
+
 # pull from current branch
 pullCurrentBranch() {
     current_branch="$(git branch -a | awk '{if ($1 ~ /\*/) print $NF}')"
     git pull origin "$current_branch"
 }
 # alias gpull=pullCurrentBranch
+
+
 
 # ------------------------------- Search For input in "fasd -Rfl" file list or from $PWD----------------------------
 alias sf=ssf
