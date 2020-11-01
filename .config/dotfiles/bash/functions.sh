@@ -10,6 +10,12 @@ function changeDirAndShow() {
     cd "$1" && ls -A
 }
 
+alias cpd=storeCurrentDirectory
+storeCurrentDirectory() {
+    D="$(pwd)"
+}
+
+
 # mvf
 renameSameFiletype() {
     if [ $# -lt 2 ]; then

@@ -8,10 +8,10 @@ set $mod Mod4
 # exec --no-startup-id setxkbmap -layout us -model pc104 -option ctrl:swapcaps -option ctrl:rctrl_ralt
 # exec --no-startup-id setxkbmap -layout "us,us" -model "pc104" -option "ctrl:swapcaps:rctrl_ralt"
 
-exec xcape -e 'Control_L=Escape'
 # checkout /usr/share/X11/xkb/symbols/  file: my_new_control
-#exec --no-startup-id setxkbmap -layout my_new_control -option ctrl:swapcaps
-exec --no-startup-id setxkbmap -option ctrl:swapcaps
+exec --no-startup-id setxkbmap -layout my_new_control -option ctrl:swapcaps
+exec xcape -e 'Control_L=Escape'
+# exec --no-startup-id setxkbmap -option ctrl:swapcaps
 # exec --no-startup-id setxkbmap -option ctrl:swapcaps
 # exec --no-startup-id setxkbmap -model pc104 -layout us -option ctrl:swapcaps
 exec --no-startup-id fusuma -d

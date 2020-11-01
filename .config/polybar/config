@@ -288,7 +288,8 @@ font-8 = "Weather Icons:style=Regular:size=12;1"
 
 " after I3 is meant to have padding beteen i3 and line
 
-modules-left = beforeWeather openweathermap-fullfeatured beforeCal popup-calendar AfterDate i3
+" modules-left = beforeWeather openweathermap-fullfeatured beforeCal popup-calendar AfterDate i3
+modules-left = beforeCal popup-calendar AfterDate i3
 
 ;modules-center = player-mpris-tail
 ;modules-center = spotifyIcon spot spotifyOn spotifyOff

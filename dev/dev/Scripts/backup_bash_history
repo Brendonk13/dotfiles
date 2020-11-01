@@ -1,16 +1,16 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 my_rand_func() {
    first_num=$((10#$RANDOM*111))
    # get hash of random thing in ram
    second_num="$(ls /tmp/ | sort -R | tail -n 1 | md5sum |  tr -d -c 0-9)"
-   second_num=$((10#$second_num/($RANDOM*$RANDOM)))
+   second_num=$((10#$second_num/(RANDOM*RANDOM)))
    # use $RANDOM again
    third_num=$((10#$RANDOM*61))
    echo "$((10#$first_num+10#$second_num+10#$third_num))"
 }
 
-generate_file_name(){
+generate_file_name() {
     backup_dir="$1"
     if [ $# -eq 2 ]; then
         # only positive numbers with no leading zeros
@@ -18,9 +18,9 @@ generate_file_name(){
         echo "hist_$RAND_NUM.txt"
         return
     fi
-    next_backup_num="$(ls $backup_dir | wc -l)"
+    next_backup_num="$(ls "$backup_dir" | wc -l)"
     # minus one since we count from zero plus there is another file in dir: most_merged.txt
-    next_backup_num=$(($next_backup_num-1))
+    next_backup_num=$((next_backup_num-1))
     backed_up_file="hist_$next_backup_num.txt"
     echo "$backed_up_file"
 }
@@ -37,19 +37,19 @@ merge_backup_histories() {
         return
     fi
     backup_dir="$1"
-    num_merges_done=0
+    # num_merges_done=0
     echo "backup dir is: $backup_dir"
     new_result="/tmp/new_result.txt"
     most_merged="$backup_dir/most_merged.txt"
 
     # files made first are first in arr, v important to preserve order
     # have the nr>1 to skip first line from ls "Total XX files in dir"
-    ordered_file_nums="$(/usr/bin/ls -ltr $backup_dir | awk 'NR>1{print $NF}')"
-    for first_file in ${ordered_file_nums[@]}; do
+    ordered_file_nums="$(/usr/bin/ls -ltr "$backup_dir" | awk 'NR>1{print $NF}')"
+    for first_file in "${ordered_file_nums[@]}"; do
         first_file="$backup_dir/$first_file"
         echo "oldest file in dir is: $first_file"
 
-        for current_file in ${ordered_file_nums[@]}; do
+        for current_file in "${ordered_file_nums[@]}"; do
             current_file="$backup_dir/$current_file"
 
             if [ "$first_file" != "$most_merged" ]; then
@@ -57,12 +57,12 @@ merge_backup_histories() {
                 echo "This often happens right after a merge failed with exit code 1"
                 exit 1
             fi
-            [ $current_file = $most_merged ] && continue
+            [ "$current_file" = "$most_merged" ] && continue
 
             /usr/bin/awk '!a[$0]++' "$most_merged" "$current_file" > "$new_result"
-            echo "merged two files: `basename $most_merged` `basename $current_file` > `basename $new_result`"
+            echo "merged two files: $(basename "$most_merged") $(basename "$current_file") > $(basename "$new_result")"
             mv "$new_result" "$most_merged"
-            echo "mv `basename $new_result` `basename $most_merged`"
+            echo "mv $(basename "$new_result") $(basename "$most_merged")"
             echo ""
         done
         # just loop over inner loop once
@@ -71,7 +71,7 @@ merge_backup_histories() {
 }
 
 
-delete_old_files(){
+delete_old_files() {
     # delete all the tmp merge files and previous saved histories
     if [ $# -ne 1 ]; then
         echo -e "Wrong number of args passed\nNeed exactly 1 arg --> a directory\n(in backup_bash_history/delete_old_files)"
@@ -84,15 +84,15 @@ delete_old_files(){
 
     backup_dir="$1"
     dont_delete="$backup_dir/most_merged.txt"
-    for fil in $backup_dir/*; do
+    for fil in "$backup_dir"/*; do
 
-        filename="$backup_dir/$(basename $fil)"
-        if [ $filename = "$dont_delete" ]; then
+        filename="$backup_dir/$(basename "$fil")"
+        if [ "$filename" = "$dont_delete" ]; then
             echo "SKIPPING: $filename"
             continue
         else
             echo "Removing: $filename"
-            rm $filename
+            rm "$filename"
         fi
     done
 }
@@ -103,7 +103,7 @@ delete_old_files(){
 
 
 # PASSED IN PATH TO SPECIFIC DIRECTORY!
-backup_history(){
+backup_history() {
     # always backs up the current history
     # THEN: checks if we need to merge histories
 
@@ -125,16 +125,17 @@ backup_history(){
 
     # create a backup of bash history
     cp "$HOME/.bash_history" "$backed_up_file"
-    NUM_BACKUPS="$(ls $backup_dir | wc -l)"
+    NUM_BACKUPS="$(ls "$backup_dir" | wc -l)"
 
     # default values is 20 (needed for cron jobs which dont use the env var)
     if [ "$NUM_BACKUPS" -ge "${MAX_HIST_BACKUPS:-20}" ]; then
-        merge_backup_histories "$backup_dir"
 
         # don't delete backups if there was an error merging
-        [ $? -eq 0 ] && delete_old_files "$backup_dir"
+        [ "$(merge_backup_histories "$backup_dir")" ] && delete_old_files "$backup_dir"
+        # [ $? -eq 0 ] && delete_old_files "$backup_dir"
     fi
-    echo -e "-------------------- DONE: $next_backup_file ---------------------"
+    # echo -e "-------------------- DONE: $next_backup_file ---------------------"
+    echo -e "-------------------- DONE  ---------------------"
 }
 
 
@@ -146,7 +147,8 @@ backup_history(){
 OPTIONS=("--random")
 # avoid errors when I just want to source the script and get access to functions
 if [ $# -eq 0 ]; then
-    return
+    echo "USAGE: backup_bash_history [--random] /path/to/dir"
+    exit 1
 
 elif [ $# -eq 1 ]; then
     if [ ! -d "$1" ]; then
@@ -154,7 +156,7 @@ elif [ $# -eq 1 ]; then
         exit 1
     fi
     backup_dir="$1"
-    backed_up_file="$(generate_file_name $*)"
+    backed_up_file="$(generate_file_name "$*")"
     echo "file name: $backed_up_file"
     backup_history "$backup_dir" "$backed_up_file"
 
@@ -165,10 +167,10 @@ elif [ $# -eq 2 ]; then
     fi
     backup_dir="$2"
 
-    for option in ${OPTIONS[@]}; do
+    for option in "${OPTIONS[@]}"; do
         if [ "$1" = "$option" ]; then
             if [ "$option" = '--random' ]; then
-                backed_up_file="$(generate_file_name $*)"
+                backed_up_file="$(generate_file_name "$*")"
                 echo "file name: $backed_up_file"
                 backup_history "$backup_dir" "$backed_up_file"
                 exit 0
@@ -176,5 +178,5 @@ elif [ $# -eq 2 ]; then
         fi
     done
     # if we finish the loop then we never hit a return
-    echo -e "Please use a valid option from the following list: ${OPTIONS[@]}"
+    echo -e "Please use a valid option from the following list: ${OPTIONS[*]}"
 fi
