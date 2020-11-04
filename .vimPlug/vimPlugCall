@@ -72,7 +72,7 @@ Plug 'junegunn/vim-easy-align'
 " Plug 'airblade/vim-rooter'
 
 " this one kinda sucks sometimes
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 " used for sf bash alias.
 Plug 'wsdjeg/vim-fetch'
 

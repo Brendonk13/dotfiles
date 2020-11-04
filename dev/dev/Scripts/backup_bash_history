@@ -120,6 +120,10 @@ backup_history() {
         return
     fi
     backup_dir="$1"
+    last_char="${backup_dir: -1:1}"
+
+    # remove '/' from input: backup_dir if given
+    [ "$last_char" = '/' ] && backup_dir="${backup_dir:0:-1}"
     backed_up_file="$backup_dir/$2"
     echo "$backed_up_file"
 
@@ -170,7 +174,7 @@ elif [ $# -eq 2 ]; then
     for option in "${OPTIONS[@]}"; do
         if [ "$1" = "$option" ]; then
             if [ "$option" = '--random' ]; then
-                backed_up_file="$(generate_file_name "$*")"
+                backed_up_file="$(generate_file_name "$@")"
                 echo "file name: $backed_up_file"
                 backup_history "$backup_dir" "$backed_up_file"
                 exit 0
