@@ -29,8 +29,27 @@ secondary = #e60053
 alert = #bd2c40
 ;bg = #77404040
 ;bg = #df161616
-bg = #b2393737
-focusedworkspaceCol = #d9943B00
+
+
+; prev
+; bg = #b2393737
+; focusedworkspaceCol = #d9943B00
+
+
+bg = #F02E3440
+nord_fg = #D8DEE9
+nord_white = #ECEFF4
+
+nord_green = #A3BE8C
+nord_red = #BF616A
+nord_yellow = #EBCB8B
+
+soft_green = #00ab66
+apple_green = #62BB47
+apple_yellow = #FFE681
+apple_red = #BA0C2E
+
+focusedworkspaceCol = #EA4C566A
 ;power
 
 [color]
@@ -108,7 +127,7 @@ content-background = ${colors.bg}
 type = custom/text
 content-font = 6
 content = " "
-content-foreground = #dddfdfdf
+content-foreground = ${colors.nord_fg}
 content-background = ${colors.bg}
 
 click-left = /home/brendon/.config/polybar/player-mpris-tail.py next &
@@ -120,7 +139,7 @@ click-middle = /home/brendon/.config/polybar/spotify_off.sh
 type = custom/text
 content-font = 7
 content =  
-content-foreground = #61be65
+content-foreground = ${colors.soft_green}
 content-background = ${colors.bg}
 
 click-left = /home/brendon/.config/polybar/player-mpris-tail.py play-pause &
@@ -135,7 +154,7 @@ format = <label>
 
 label-font = 6
 label = %output%
-label-foreground = ${colors.foreground}
+label-foreground = ${colors.nord_fg}
 label-background = ${colors.bg}
 
 exec = /home/brendon/.config/polybar/player-mpris-tail.py --icon-playing ' ' --icon-paused ' ' --icon-stopped ' ' --truncate-text '' -f '{icon} {:artist:t12:{artist}:}{:artist: - :}{:t16:{title}:}'
@@ -152,8 +171,9 @@ type = custom/script
 format = <label>
 label = %output% 
 format-font = 4
-label-foreground = #E9E9E9
-label-background = ${color.bar-fg}
+label-padding = 2
+label-foreground = ${colors.nord_fg}
+label-background = ${colors.bg}
 exec = /home/brendon/Downloads/ricer/polybar-scripts/polybar-scripts/popup-calendar/popup-calendar.sh
 click-left = /home/brendon/Downloads/ricer/polybar-scripts/polybar-scripts/popup-calendar/popup-calendar.sh --popup &
 
@@ -289,13 +309,24 @@ font-7 = "FontAwesome5Free:style=Solid:size=11;2:antialias=false"
 ; after I3 is meant to have padding beteen i3 and line
 
 ; modules-left = beforeWeather openweathermap-fullfeatured beforeCal popup-calendar AfterDate i3
-modules-left = beforeCal popup-calendar AfterDate i3
-
 ;modules-center = player-mpris-tail
 ;modules-center = spotifyIcon spot spotifyOn spotifyOff
-modules-center = beforeSpotify spotifyIcon spotifyInfo
 
-modules-right = left-end-bottom battery right-end-top left-end-bottom memory  cpu right-end-top left-end-bottom brightness right-end-top powermenu
+;modules-left = beforeCal popup-calendar AfterDate i3
+;modules-center = beforeSpotify spotifyIcon spotifyInfo
+;modules-right = left-end-bottom battery right-end-top left-end-bottom memory  cpu right-end-top left-end-bottom brightness right-end-top powermenu
+
+
+module-margin = 0.5
+
+modules-left = i3
+modules-center = beforeSpotify spotifyIcon spotifyInfo
+modules-right =  memory cpu popup-calendar battery powermenu
+
+
+
+
+
 ;enable-ipc = true
 
 tray-position = right
@@ -317,32 +348,35 @@ wrapping-scroll = false
 
 ; Only show workspaces on the same output as the bar
 pin-workspaces = true
-;format-label-state-prefix = " "
-;format-label-state-foreground = #E9E9E9
 
 label-mode-padding = 2
 label-mode-foreground = #E9E9E9
 label-mode-background = ${colors.background-alt}
 
-; focused = Active workspace on focused monitor
+
+; ================ focused: Active workspace on focused monitor ================
 label-focused-font = 4
 label-focused = %name%
 label-focused-background = ${colors.focusedworkspaceCol}
-label-focused-foreground = #ECECEC
-;label-focused-background = ${colors.background-alt}
-;label-focused-underline = #d9EFAB00
+label-focused-foreground = ${colors.nord_white}
 label-focused-padding = 2
+; ================ focused: Active workspace on focused monitor ================
 
-; unfocused = Inactive workspace on any monitor
+
+; ================ unfocused: Inactive workspace on any monitor ================
 label-unfocused = %name%
-label-unfocused-background = ${colors.background-alt}
-label-unfocused-foreground = #E9E9E9
+label-unfocused-background = ${colors.bg}
+label-unfocused-foreground = ${colors.nord_fg}
 label-unfocused-padding = 2
 label-unfocused-font = 4
+; ================ unfocused: Inactive workspace on any monitor ================
+
+
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %name%
-label-visible-background = ${self.label-focused-background}
+label-visible-foreground = ${colors.nord_white}
+label-visible-background = ${colors.focusedworkspaceCol}
 ;label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 label-visible-font = 4
@@ -358,18 +392,12 @@ label-urgent-padding = 2
 
 format-suffix-font = 1
 
-format-suffix = ""
-format-suffix-foreground = #5a151515
-format-suffix-background = ${colors.bg}
-;format-suffix-background = ${colors.background-alt}
-
-
 [module/brightness]
 type = internal/xbacklight
 
 ; Use the following command to list available cards:
 ; $ ls -1 /sys/class/backlight/
-card = intel_backlight
+card = amdgpu_bl0
 interval = 8
 
 ; Available tags:
@@ -378,10 +406,8 @@ interval = 8
 ;   <bar>
 format = <ramp> <bar>
 ;format-background = ${color.base-bg}
-format-background = ${color.bar-fg}
-;base-bg     = #af141414
+format-background = ${colors.bg}
 format-padding = 1
-;format-prefix = " "
 
 ; Available tokens:
 ;   %percentage% (default)
@@ -414,7 +440,7 @@ bar-empty = ﭳ
 ;bar-empty-foreground = #dc404040
 bar-empty-foreground = #666666
 ; Bar
-bar-format = %{T4}%fill%%indicator%%empty%%{F-}%{T-}
+; bar-format = %{T4}%fill%%indicator%%empty%%{F-}%{T-}
 
 ; nooo idea how to set the font for this guy
 
@@ -432,7 +458,7 @@ interval = 4
 
 format = <label> <ramp-load>
 format-font = 4
-label = CPU %percentage%%
+label =  %percentage%%
 ramp-load-spacing = 1
 ramp-load-0 = ▁
 ramp-load-1 = ▂
@@ -449,20 +475,20 @@ ramp-load-7 = 
 ;format-prefix = 
 ;format-prefix-font = 7
 ;format-prefix-foreground = ${colors.foreground}
-;format-prefix-background = ${color.bar-fg}
+;format-prefix-background = ${colors.bg}
 
 
-ramp-load-0-foreground = #43a047
-ramp-load-1-foreground = #43a047
-ramp-load-2-foreground = #43a047
-ramp-load-3-foreground = #fdd835
-ramp-load-4-foreground = #fdd835
-ramp-load-5-foreground = #fdd835
-ramp-load-6-foreground = #e53935
-ramp-load-7-foreground = #e53935
+ramp-load-0-foreground = ${colors.soft_green}
+ramp-load-1-foreground = ${colors.soft_green}
+ramp-load-2-foreground = ${colors.soft_green}
+ramp-load-3-foreground = ${colors.apple_yellow}
+ramp-load-4-foreground = ${colors.apple_yellow}
+ramp-load-5-foreground = ${colors.apple_yellow}
+ramp-load-6-foreground = ${colors.apple_red}
+ramp-load-7-foreground = ${colors.apple_red}
 
 format-foreground = ${colors.foreground}
-format-background = ${color.bar-fg}
+format-background = ${colors.bg}
 
 
 
@@ -471,18 +497,13 @@ type = internal/memory
 interval = 8
 ;format-underline = #dd119911
 format-prefix = "﬘ "
-format-prefix-foreground = ${colors.foreground}
-label = %gb_used%,
-format-background = ${color.bar-fg}
+format-prefix-foreground = ${colors.nord_fg}
+;label = %gb_used%,
+label = %gb_used%
+format-background = ${colors.bg}
 label-font = 4
 format-prefix-font = 4
 
-; this is where I can add gotop later
-format-suffix = " "
-format-suffix-font = 4
-format-suffix-foreground = #dddfdfdf
-;format-suffix-foreground = ${colors.foreground}
-format-suffix-background = ${color.bar-fg}
 
 
 ;[module/wlan]
@@ -621,89 +642,53 @@ poll-interval = 5
 
 
 format-charging = <label-charging>
-label-charging = %percentage%%
+label-charging = %percentage% 
 format-charging-prefix = 
 format-charging-prefix-foreground = #E4E700
-format-charging-prefix-background = ${color.bar-fg}
+format-charging-prefix-background = ${colors.bg}
 
-format-discharging = <label-discharging><ramp-capacity>
-label-discharging = %percentage%%
+
+; slightly dimmer/ more trasparent to make less noticable
+label-charging-foreground = ${colors.nord_fg}
+label-discharging-foreground = ${colors.nord_fg}
+
+label-charging-background = ${colors.bg}
+label-discharging-background = ${colors.bg}
+format-discharging = <label-discharging> <ramp-capacity>
+label-discharging = %percentage%
 ;format-charging-font = 4
 ;format-discharging-font = 4
 
 label-discharging-font = 4
 label-charging-font = 4
 format-charging-prefix-font = 6
-ramp-capacity-font = 3
 
+label-full =  
+label-full-font = 3
+label-full-foreground = ${colors.soft_green}
+label-full-background = ${colors.bg}
+
+
+
+
+
+
+
+ramp-capacity-font = 3
 ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
 
-label-full =  
-label-full-font = 3
-label-full-foreground = #43a047
-label-full-background = ${color.bar-fg}
 
+ramp-capacity-0-foreground = ${colors.apple_red}
+ramp-capacity-1-foreground = ${colors.apple_yellow}
+ramp-capacity-2-foreground = ${colors.soft_green}
+ramp-capacity-3-foreground = ${colors.soft_green}
+ramp-capacity-4-foreground = ${colors.soft_green}
 
-; slightly dimmer/ more trasparent to make less noticable
-label-charging-foreground = #f2d7d7d7
-label-discharging-foreground = #f2d7d7d7
-
-label-charging-background = ${color.bar-fg}
-label-discharging-background = ${color.bar-fg}
-
-
-ramp-capacity-0-foreground = #e53935
-ramp-capacity-1-foreground = #fdd835
-ramp-capacity-2-foreground = #43a047
-ramp-capacity-3-foreground = #43a047
-ramp-capacity-4-foreground = #43a047
-
-ramp-capacity-0-background = ${color.bar-fg}
-ramp-capacity-1-background = ${color.bar-fg}
-ramp-capacity-2-background = ${color.bar-fg}
-ramp-capacity-3-background = ${color.bar-fg}
-ramp-capacity-4-background = ${color.bar-fg}
-
-
-
-;format-charging = <animation-charging> <label-charging>
-;format-charging-underline = #ffb52a
-;
-;format-discharging = <label-discharging>
-;format-discharging-underline = ${self.format-charging-underline}
-;
-;format-full-prefix = " "
-;format-full-prefix-foreground = ${colors.foreground-alt}
-;format-full-underline = ${self.format-charging-underline}
-;
-;ramp-capacity-0 = 
-;ramp-capacity-1 = 
-;ramp-capacity-2 = 
-;ramp-capacity-foreground = ${colors.foreground-alt}
-;
-;animation-charging-0 = 
-;animation-charging-1 = 
-;animation-charging-2 = 
-;animation-charging-foreground = ${colors.foreground-alt}
-;animation-charging-framerate = 750
-;
-;animation-discharging-0 = 
-;;animation-discharging-0 = 
-;animation-discharging-1 = 
-;animation-discharging-2 = 
-;animation-discharging-foreground = ${colors.foreground-alt}
-;animation-discharging-framerate = 750
-
-
-
-
-; add temperature and change the weather thing
-
-
+ramp.background = ${colors.bg}
 
 
 [module/temperature]
