@@ -49,6 +49,18 @@ create_root_backup_dir() {
 }
 
 create_backup_directories(){
+    # created directory structure:
+    # ~/.history_copies/
+    #       scheduled/
+    #           hourly/
+    #           daily/
+    #           weekly/
+    #           monthly/
+    #           yearly/
+    #       tmp/
+    #           shutdown/
+    #           random_save/
+
     # expected: $HOME
     if [ $# -ne 1 ]; then
         echo -e "Wrong number of args passed\nNeed exactly 1 arg --> a directory\n(in create_history_backup_dirs.sh/create_backup_directories)"
@@ -58,6 +70,7 @@ create_backup_directories(){
         echo -e "Input argument must be a directory\n(in create_history_backup_dirs.sh/create_backup_directories)"
         return
     fi
+
     base_dir="$1/.history_copies"
     scheduled="$base_dir/scheduled"
     tmp="$base_dir/tmp"

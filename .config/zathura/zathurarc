@@ -1,3 +1,73 @@
 set synctex true
 set synctex-editor-command "code -g %{input}:%{line}"
 set selection-clipboard clipboard
+
+set highlight-transparency .1
+set zoom-center "true"
+set render-loading "false"
+
+# zathurarc-dark
+
+#   set font "inconsolata 15"
+#   set default-bg "#000000" #00 */
+#   set default-fg "#F7F7F6" #01 */
+
+#   set statusbar-fg "#B0B0B0" #04 */
+#   set statusbar-bg "#202020" #01 */
+
+#   set inputbar-bg "#151515" #00 currently not used */
+#   set inputbar-fg "#FFFFFF" #02 */
+
+#   set notification-error-bg "#AC4142" #08 */
+#   set notification-error-fg "#151515" #00 */
+
+#   set notification-warning-bg "#AC4142" #08 */
+#   set notification-warning-fg "#151515" #00 */
+
+#   set highlight-color "#F4BF75" #0A */
+#   set highlight-active-color "#6A9FB5" #0D */
+
+#   set completion-highlight-fg "#151515" #02 */
+#   set completion-highlight-bg "#90A959" #0C */
+
+#   set completion-bg "#303030" #02 */
+#   set completion-fg "#E0E0E0" #0C */
+
+#   set notification-bg "#90A959" #0B */
+#   set notification-fg "#151515" #00 */
+
+#   set recolor "true"
+#   set recolor-lightcolor "#000000" #00 */
+#   set recolor-darkcolor "#E0E0E0" #06 */
+#   set recolor-reverse-video "true"
+#   set recolor-keephue "true"
+
+set default-bg "#333333" #00
+set default-fg "#F7F7F6" #01
+# set default-fg "#F7F7F6" #01
+
+# # from: https://github.com/majutsushi/etc/blob/master/zathurarc
+# # colors
+# set recolor-darkcolor  "#FFFFFF"
+# set recolor-lightcolor "#333333"
+set statusbar-fg "#D8DEE9"
+set statusbar-bg "#2E3440"
+set inputbar-fg "#FFFFFF"
+set inputbar-bg "#333333"
+set completion-highlight-fg "#F0E68C"
+set completion-highlight-bg "#6B8E23"
+set notification-fg "#FFFFFF"
+set notification-bg "#333333"
+
+# set highlight-color "#FFFFFF"
+# set highlight-active-color "#FFFFFF"
+
+set highlight-color "#D8DEE9"
+set highlight-active-color "#D8DEE9"
+
+set recolor "true"
+set recolor-lightcolor "#3B4252" #00 */
+set recolor-darkcolor "#ECEFF4" #06 */
+
+# set recolor-lightcolor "#303038" #00 */
+# set recolor-darkcolor "#ECEFF4" #06 */

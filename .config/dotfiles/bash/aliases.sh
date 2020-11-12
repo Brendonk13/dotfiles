@@ -56,7 +56,7 @@ elif [ "$HOME" = "/home/brendon" ]; then
     # ^--> my screen on left
     # For multiple monitors consider changing to below, which works for 1 monitor
     # xrandr --output $( xrandr | grep 'HDMI.* connected' | head -n1 | awk '{ print $1 }' ) --off
-    alias monoff='xrandr --output HDMI-0 --off'
+    alias monoff='xrandr --output HDMI-A-0 --off'
 
     #Note: can view nvidia gpu live shit with: $ nvtop
 

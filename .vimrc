@@ -2,7 +2,8 @@ set nocompatible
 "default for nvim, but who knows about elsewhere..
 set encoding=utf-8
 " , means the dir in which vim was opened, '.' means the directory of the file where the cursor is
-set path=.,,,~/,~/Notes/vim-notes,~/.config/dotfiles/**,~/PyStuff/morsels,~/.i3,~/.vimPlug/**,~/Scripts/
+" set runtimepath+=/home/brendon/new_dotfiles/vim/plugins/remote/better_defaults/vim-abolish/abolishes.vim
+set path+=.,,,~/,~/Notes/vim-notes,~/.config/dotfiles/**,~/PyStuff/morsels,~/.i3,~/.vimPlug/**,~/Scripts/
 
 " now these types don't appear in wild menu options
 set wildignore=*.o,*.a,*.so,*.pyc,*.swp,.git/*,*.class,~/FromInternet/*,*.dll,~/.vim_black/,~/.vim_black/**~/.vim_black,*pycache*,*.cmi,*.cmo,*.cmx,*.mli,*.depends,*.native,_build/*

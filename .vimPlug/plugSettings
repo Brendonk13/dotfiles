@@ -1,3 +1,8 @@
+let g:tex_flavor = 'latex'
+
+if empty(v:servername) && exists('*remote_startserver')
+    call remote_startserver('VIM')
+endif
 
 " note that I can edit the function! neoterm#repl#selection() in  neoterm/autoload/neoterm/repl.vim
 " to make it add backspaces to new lines in python code when visually selected easily.

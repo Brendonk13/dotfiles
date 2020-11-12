@@ -21,6 +21,7 @@ x-scheme-handler/tg=telegramdesktop.desktop
 x-scheme-handler/msteams=teams.desktop
 x-scheme-handler/etcher=balena-etcher-electron.desktop
 x-scheme-handler/eclipse+command x-scheme-handler/eclipse+mpc=_usr_lib_eclipse_.desktop
+x-scheme-handler/eclipse+installer=_home_brendon_Downloads_programs_eclipse_online_eclipse-installer_.desktop
 
 [Added Associations]
 x-scheme-handler/http=userapp-Pale Moon.desktop;
