@@ -44,6 +44,9 @@ nord_green = #A3BE8C
 nord_red = #BF616A
 nord_yellow = #EBCB8B
 
+nord_second_most_dark = #3B4252
+
+
 soft_green = #00ab66
 apple_green = #62BB47
 apple_yellow = #FFE681
@@ -125,7 +128,7 @@ content-background = ${colors.bg}
 
 [module/beforeSpotify]
 type = custom/text
-content-font = 6
+content-font = 8
 content = " "
 content-foreground = ${colors.nord_fg}
 content-background = ${colors.bg}
@@ -137,7 +140,7 @@ click-middle = /home/brendon/.config/polybar/spotify_off.sh
 
 [module/spotifyIcon]
 type = custom/text
-content-font = 7
+content-font = 4
 content =  
 content-foreground = ${colors.soft_green}
 content-background = ${colors.bg}
@@ -169,11 +172,12 @@ tail = true
 [module/popup-calendar]
 type = custom/script
 format = <label>
+format-padding = 1
 label = %output% 
+label-underline = ${colors.nord_red}
 format-font = 4
-label-padding = 2
-label-foreground = ${colors.nord_fg}
-label-background = ${colors.bg}
+label-foreground = ${colors.nord_white}
+format-background = ${colors.nord_second_most_dark}
 exec = /home/brendon/Downloads/ricer/polybar-scripts/polybar-scripts/popup-calendar/popup-calendar.sh
 click-left = /home/brendon/Downloads/ricer/polybar-scripts/polybar-scripts/popup-calendar/popup-calendar.sh --popup &
 
@@ -274,7 +278,7 @@ monitor = ${env:MONITOR:}
 ;monitor = ${env:MONITOR:HDMI-1}
 enable-ipc = true
 width = 100%
-height = 18
+height = 23
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0.0
@@ -284,25 +288,28 @@ background = ${colors.bg}
 ;this is text color
 foreground = ${colors.foreground}
 
-line-size = 3
+line-size = 2
 line-color = #99A23100
 
 padding-left = 0
 padding-right = 2
 
+
 font-0 = "mplus Nerd Font:style=Medium:size=22;6"
-font-1 = "mplus Nerd Font:style=Medium:size=15;3"
+font-1 = "mplus Nerd Font:style=Medium:size=15;2"
 ; 2 is for the time
-font-2 = "mplus Nerd Font:style=Medium:size=15;2"
+font-2 = "mplus Nerd Font:style=Medium:size=15;3"
 
 font-3 = "mplus Nerd Font:style=Medium:size=13;2"
-font-4 = "mplus Nerd Font:style=Medium:size=12;3"
+font-4 = "mplus Nerd Font:style=Medium:size=12;1"
 
-font-5 = "mplus Nerd Font:style=Medium:size=10;2"
+font-5 = "mplus Nerd Font:style=Medium:size=12;2"
 
 
 font-6 = "FontAwesome5Free:style=Solid:size=8;1"
 font-7 = "FontAwesome5Free:style=Solid:size=11;2:antialias=false"
+font-8 = "mplus Nerd Font:style=Medium:size=11;1"
+
 ; font-8 = "Weather Icons:style=Regular:size=12;1"
 
 
@@ -321,7 +328,7 @@ module-margin = 0.5
 
 modules-left = i3
 modules-center = beforeSpotify spotifyIcon spotifyInfo
-modules-right =  memory cpu popup-calendar battery powermenu
+modules-right =  memory cpu temperature popup-calendar battery powermenu
 
 
 
@@ -349,13 +356,13 @@ wrapping-scroll = false
 ; Only show workspaces on the same output as the bar
 pin-workspaces = true
 
-label-mode-padding = 2
-label-mode-foreground = #E9E9E9
-label-mode-background = ${colors.background-alt}
+;label-mode-padding = 2
+;label-mode-foreground = #E9E9E9
+;label-mode-background = ${colors.background-alt}
 
 
 ; ================ focused: Active workspace on focused monitor ================
-label-focused-font = 4
+label-focused-font = 2
 label-focused = %name%
 label-focused-background = ${colors.focusedworkspaceCol}
 label-focused-foreground = ${colors.nord_white}
@@ -367,19 +374,22 @@ label-focused-padding = 2
 label-unfocused = %name%
 label-unfocused-background = ${colors.bg}
 label-unfocused-foreground = ${colors.nord_fg}
-label-unfocused-padding = 2
-label-unfocused-font = 4
+label-unfocused-padding = 1
+label-unfocused-font = 6
 ; ================ unfocused: Inactive workspace on any monitor ================
 
 
 
-; visible = Active workspace on unfocused monitor
+; ================ visible: Active workspace on unfocused monitor =============
 label-visible = %name%
 label-visible-foreground = ${colors.nord_white}
 label-visible-background = ${colors.focusedworkspaceCol}
 ;label-visible-underline = ${self.label-focused-underline}
+
 label-visible-padding = ${self.label-focused-padding}
-label-visible-font = 4
+label-visible-font = ${self.label-unfocused-font}
+; ================ visible: Active workspace on unfocused monitor =============
+
 
 ; urgent = Workspace with urgency hint set
 label-urgent = %name%
@@ -390,7 +400,10 @@ label-urgent-padding = 2
 ;label-separator = |
 ;label-separator-font = 3
 
-format-suffix-font = 1
+;format-suffix-font = 1
+
+
+
 
 [module/brightness]
 type = internal/xbacklight
@@ -456,9 +469,13 @@ type = internal/cpu
 inherit = generic-format-style
 interval = 4
 
-format = <label> <ramp-load>
-format-font = 4
-label =  %percentage%%
+format-padding = 1
+;format = <label> <ramp-load>
+format = <label>
+label =  %percentage%%
+label-font = 5
+label-underline = ${colors.nord_fg}
+ramp-underline = ${self.label-underline}
 ramp-load-spacing = 1
 ramp-load-0 = ▁
 ramp-load-1 = ▂
@@ -469,6 +486,13 @@ ramp-load-5 = ▆
 ramp-load-6 = ▇
 ramp-load-7 = 
 
+format-prefix = 
+format-prefix-font = 5
+format-prefix-underline = ${self.label-underline}
+
+
+ramp-font = 5
+ramp-load-underline = ${self.label-underline}
 ;ramp-load-7 = █
 
 ; this screw up label/ramp fonts for some reason
@@ -478,14 +502,14 @@ ramp-load-7 = 
 ;format-prefix-background = ${colors.bg}
 
 
-ramp-load-0-foreground = ${colors.soft_green}
-ramp-load-1-foreground = ${colors.soft_green}
-ramp-load-2-foreground = ${colors.soft_green}
-ramp-load-3-foreground = ${colors.apple_yellow}
-ramp-load-4-foreground = ${colors.apple_yellow}
-ramp-load-5-foreground = ${colors.apple_yellow}
-ramp-load-6-foreground = ${colors.apple_red}
-ramp-load-7-foreground = ${colors.apple_red}
+;ramp-load-0-foreground = ${colors.soft_green}
+;ramp-load-1-foreground = ${colors.soft_green}
+;ramp-load-2-foreground = ${colors.soft_green}
+;ramp-load-3-foreground = ${colors.apple_yellow}
+;ramp-load-4-foreground = ${colors.apple_yellow}
+;ramp-load-5-foreground = ${colors.apple_yellow}
+;ramp-load-6-foreground = ${colors.apple_red}
+;ramp-load-7-foreground = ${colors.apple_red}
 
 format-foreground = ${colors.foreground}
 format-background = ${colors.bg}
@@ -495,14 +519,19 @@ format-background = ${colors.bg}
 [module/memory]
 type = internal/memory
 interval = 8
-;format-underline = #dd119911
+label = %gb_used%
+label-underline = ${colors.nord_fg}
+
 format-prefix = "﬘ "
 format-prefix-foreground = ${colors.nord_fg}
-;label = %gb_used%,
-label = %gb_used%
-format-background = ${colors.bg}
-label-font = 4
 format-prefix-font = 4
+format-prefix-underline = ${self.label-underline}
+
+
+format-background = ${colors.bg}
+label-font = 5
+
+format-padding = 0
 
 
 
@@ -563,7 +592,7 @@ format-prefix-foreground = #bc101010
 ;format-prefix-background = #be404040
 format-prefix-background = ${colors.bg}
 
-format-background = ${color.bar-fg}
+format-background = ${color.bg}
 
 label = %date% %time% 
 ; size = 13; 2
@@ -640,24 +669,35 @@ full-at = 98
 interval = 16
 poll-interval = 5
 
+format-charging-padding = 1
+format-discharging-padding = 1
 
 format-charging = <label-charging>
 label-charging = %percentage% 
 format-charging-prefix = 
-format-charging-prefix-foreground = #E4E700
-format-charging-prefix-background = ${colors.bg}
+; format-charging-prefix-foreground = #E4E700
+format-charging-prefix-foreground = ${colors.apple_yellow}
+format-charging-prefix-background = ${colors.nord_second_most_dark}
+label-charging-underline = ${colors.nord_red}
 
 
 ; slightly dimmer/ more trasparent to make less noticable
-label-charging-foreground = ${colors.nord_fg}
-label-discharging-foreground = ${colors.nord_fg}
+label-charging-foreground = ${colors.nord_white}
+label-discharging-foreground = ${colors.nord_white}
 
-label-charging-background = ${colors.bg}
-label-discharging-background = ${colors.bg}
+label-charging-background    = ${colors.nord_second_most_dark}
+; label-discharging-background = ${colors.nord_second_most_dark}
+; ramp-capacity-background = ${colors.nord_second_most_dark}
+
+format-discharging-background = ${colors.nord_second_most_dark}
+
 format-discharging = <label-discharging> <ramp-capacity>
 label-discharging = %percentage%
 ;format-charging-font = 4
 ;format-discharging-font = 4
+;label-discharging-underline = ${self.label-charging-underline}
+;ramp-capacity-underline = ${self.label-charging-underline}
+format-discharging-underline = ${self.label-charging-underline}
 
 label-discharging-font = 4
 label-charging-font = 4
@@ -672,9 +712,7 @@ label-full-background = ${colors.bg}
 
 
 
-
-
-ramp-capacity-font = 3
+ramp-capacity-font = 4
 ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
@@ -695,20 +733,32 @@ ramp.background = ${colors.bg}
 type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
+format-warn-font = 3
 
-format = <ramp> <label>
-format-underline = #f50a4d
-format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
+format-padding = 1
+
+format = <label>
+format-font = 4
+label-underline = ${colors.soft_green}
+format-warn = <label-warn>
 
 label = %temperature-c%
 label-warn = %temperature-c%
-label-warn-foreground = ${colors.secondary}
+label-warn-foreground = ${colors.apple_red}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
+; underline goes away and font gets big when warn-temperature hit
+label-warn-font = 1
+;label-warn-underline = ${self.label-warn-foreground}
+
+;ramp-underline = ${colors.soft_green}
+;ramp-0 = 
+;ramp-1 = 
+;ramp-2 = 
+;ramp-foreground = ${colors.foreground-alt}
+
+;format-warn-underline = ${colors.apple_red}
+
+
 
 [module/powermenu]
 type = custom/menu

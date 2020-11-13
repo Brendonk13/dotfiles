@@ -24,7 +24,7 @@ x-scheme-handler/eclipse+command x-scheme-handler/eclipse+mpc=_usr_lib_eclipse_.
 x-scheme-handler/eclipse+installer=_home_brendon_Downloads_programs_eclipse_online_eclipse-installer_.desktop
 
 [Added Associations]
-x-scheme-handler/http=userapp-Pale Moon.desktop;
+x-scheme-handler/http=pcmanfm-desktop-pref.desktop;userapp-Pale Moon.desktop;
 x-scheme-handler/https=userapp-Pale Moon.desktop;
 x-scheme-handler/ftp=userapp-Pale Moon.desktop;
 x-scheme-handler/chrome=userapp-Pale Moon.desktop;

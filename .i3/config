@@ -3,14 +3,6 @@
 
 set $mod Mod4
 
-# tapping caps lock == esc.
-# holding caps lock == ctrl.
-# exec --no-startup-id setxkbmap -layout us -model pc104 -option ctrl:swapcaps -option ctrl:rctrl_ralt
-# exec --no-startup-id setxkbmap -layout "us,us" -model "pc104" -option "ctrl:swapcaps:rctrl_ralt"
-
-# checkout /usr/share/X11/xkb/symbols/  file: my_new_control
-exec --no-startup-id setxkbmap -layout my_new_control -option ctrl:swapcaps
-exec xcape -e 'Control_L=Escape'
 # exec --no-startup-id setxkbmap -option ctrl:swapcaps
 # exec --no-startup-id setxkbmap -option ctrl:swapcaps
 # exec --no-startup-id setxkbmap -model pc104 -layout us -option ctrl:swapcaps
@@ -58,7 +50,6 @@ new_float normal
 
 # now popups display when I'm in fullscreen
 popup_during_fullscreen smart
-
 
 # Hide borders
 hide_edge_borders none
@@ -378,12 +369,18 @@ bindsym $mod+mod1+Left workspace prev
 bindsym $mod+mod1+Right workspace next
 
 
+# tapping caps lock == esc.
+# holding caps lock == ctrl.
+# exec --no-startup-id setxkbmap -layout us -model pc104 -option ctrl:swapcaps -option ctrl:rctrl_ralt
+# exec --no-startup-id setxkbmap -layout "us,us" -model "pc104" -option "ctrl:swapcaps:rctrl_ralt"
+
+
 # Lock screen
 # bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; compton -b
+exec --no-startup-id nitrogen --restore; sleep 1; picom -b
 #exec --no-startup-id manjaro-hello
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
@@ -502,3 +499,8 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+
+exec --no-startup-id setxkbmap -option ctrl:swapcaps
+exec --no-startup-id xcape -e 'Control_L=Escape'
+# checkout usr/share/X11/xkb/symbols/  file: my_new_control
+# exec --no-startup-id setxkbmap -layout my_new_control -option ctrl:swapcaps

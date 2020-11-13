@@ -14,11 +14,19 @@ elif [ "$HOME" = "/home/brendon" ]; then
 # ------ Manjaro Aliases -------------------------------------------------------
 
 
+    # make this work with https://wiki.archlinux.org/index.php/backlight
+    # make sure to add curr user to video group !
+    alias bright='echo 255 | sudo tee /sys/class/backlight/amdgpu_bl0/brightness'
+
+
+
+
+
     # ------ Common directory navigation ---------------------------------------
     alias dow='cd "$dow"; lsd --group-dirs first'
     alias submit='cd "$submit"; lsd --group-dirs first'
     alias sem='cd "$sem"; lsd --group-dirs first'
-    alias scrot='cd ~/Pictures/Screenshots; lsd --group-dirs first; ranger'
+    # alias scrot='cd ~/Pictures/Screenshots; lsd --group-dirs first; ranger'
 
 
     # ------ Course directories ------------------------------------------------

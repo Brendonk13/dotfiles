@@ -28,7 +28,7 @@ augroup custom_msg_highlights
     " autocmd Syntax * syn match FlagExplanation /\v(\s*)\-(\-?)([a-zA-Z0-9]+): /
 
     " only match -flag:<space> and --flag:<space> NOT: ---flag or any other # of -'s
-    autocmd Syntax * syn match FlagExplanation /\v^\s*([^-](-|--))[a-zA-Z0-9]+: /
+    autocmd Syntax * syn match FlagExplanation /\v^\s*([^-](-|--))[a-zA-Z0-9-]+: /
           \ containedin=.*Comment,vimCommentTitle
 
     " autocmd Syntax * syn match NumberedList /\v(\d+\.)(\w*\.)?(\d*\.)? /
