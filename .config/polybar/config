@@ -675,17 +675,17 @@ format-discharging-padding = 1
 format-charging = <label-charging>
 label-charging = %percentage% 
 format-charging-prefix = 
-; format-charging-prefix-foreground = #E4E700
 format-charging-prefix-foreground = ${colors.apple_yellow}
 format-charging-prefix-background = ${colors.nord_second_most_dark}
-label-charging-underline = ${colors.nord_red}
+; label-charging-underline = ${colors.nord_red}
+format-charging-underline = ${colors.nord_red}
 
 
 ; slightly dimmer/ more trasparent to make less noticable
 label-charging-foreground = ${colors.nord_white}
 label-discharging-foreground = ${colors.nord_white}
 
-label-charging-background    = ${colors.nord_second_most_dark}
+format-charging-background    = ${colors.nord_second_most_dark}
 ; label-discharging-background = ${colors.nord_second_most_dark}
 ; ramp-capacity-background = ${colors.nord_second_most_dark}
 
@@ -695,9 +695,9 @@ format-discharging = <label-discharging> <ramp-capacity>
 label-discharging = %percentage%
 ;format-charging-font = 4
 ;format-discharging-font = 4
-;label-discharging-underline = ${self.label-charging-underline}
-;ramp-capacity-underline = ${self.label-charging-underline}
-format-discharging-underline = ${self.label-charging-underline}
+;label-discharging-underline = ${self.format-charging-underline}
+;ramp-capacity-underline = ${self.format-charging-underline}
+format-discharging-underline = ${self.format-charging-underline}
 
 label-discharging-font = 4
 label-charging-font = 4
