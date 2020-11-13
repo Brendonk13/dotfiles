@@ -524,14 +524,14 @@ label-underline = ${colors.nord_fg}
 
 format-prefix = "﬘ "
 format-prefix-foreground = ${colors.nord_fg}
-format-prefix-font = 4
+format-prefix-font = 3
 format-prefix-underline = ${self.label-underline}
 
 
 format-background = ${colors.bg}
 label-font = 5
 
-format-padding = 0
+format-padding = 1
 
 
 
@@ -735,7 +735,7 @@ thermal-zone = 0
 warn-temperature = 60
 format-warn-font = 3
 
-format-padding = 1
+format-padding = 2
 
 format = <label>
 format-font = 4
