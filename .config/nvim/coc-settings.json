@@ -5,4 +5,5 @@
     "javascript.showUnused": false,
     "typescript.showUnused": false,
     "highlight.colors.enable" : true,
+    "highlight.colorNames.enable" : false,
 }

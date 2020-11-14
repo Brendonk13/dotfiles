@@ -25,7 +25,7 @@ let g:black_virtualenv="~/.vim_black"
 " this is for vim-signify
 set updatetime=256
 
-nmap <leader>tc <Plug>Colorizer
+" nmap <leader>tc <Plug>Colorizer
 
 " doesn't work for terminal anyways
 let g:qs_buftype_blacklist = ['terminal']
@@ -252,7 +252,7 @@ function! s:show_documentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd! CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -340,4 +340,4 @@ endfunction
 " hi Folded ctermfg=White guibg=None
 set foldtext=MyFoldText()
 
-let g:UltiSnipsExpandTrigger='<C-Space>'
+" let g:UltiSnipsExpandTrigger='<C-Space>'
