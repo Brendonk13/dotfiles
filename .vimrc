@@ -1,4 +1,11 @@
 set nocompatible
+
+" only show top 5 suggestions, never going to look through more options
+set spellsuggest=fast,5
+
+
+
+
 "default for nvim, but who knows about elsewhere..
 set encoding=utf-8
 " , means the dir in which vim was opened, '.' means the directory of the file where the cursor is

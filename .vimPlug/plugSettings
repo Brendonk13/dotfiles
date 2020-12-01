@@ -1,8 +1,18 @@
 let g:tex_flavor = 'latex'
+" g:vimtex_parser_bib_backend = 'bibtex'
 
 if empty(v:servername) && exists('*remote_startserver')
     call remote_startserver('VIM')
 endif
+
+" I usually just copy pasta citations so don't care if they are missing fields
+let g:vimtex_quickfix_ignore_filters = [
+    \ 'Missing "author"',
+\]
+
+
+
+
 
 " note that I can edit the function! neoterm#repl#selection() in  neoterm/autoload/neoterm/repl.vim
 " to make it add backspaces to new lines in python code when visually selected easily.

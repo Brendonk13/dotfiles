@@ -77,8 +77,15 @@ highlight def link ListHeader       WhiteHeader
 
 hi clear SpellBad
 highlight SpellBad guifg=#BA0C2E gui=italic
-highlight Search guifg=#F05000 gui=italic,underline
+" highlight Search guifg=#F05000 gui=italic,bold
+highlight Search guifg=#B02000 gui=italic,underline
 " highlight IncSearch guifg=#BA0C2E gui=italic
+
+highlight MatchParen guibg=#006b6b guifg=#D8DEE9
+
+
+
+
 
 augroup NaturalLanguage
     autocmd!

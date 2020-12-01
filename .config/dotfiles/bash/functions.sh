@@ -6,6 +6,78 @@
 
 [ -f "$XDG_CONFIG_HOME/dotfiles/bash/from_online.sh" ] && source "$XDG_CONFIG_HOME/dotfiles/bash/from_online.sh"
 
+if [ -f "$HOME/new_dotfiles/bash/setup_env/debug/colors/minimal/8-16_compat.sh" ]; then
+    source "$HOME/new_dotfiles/bash/setup_env/debug/colors/minimal/8-16_compat.sh"
+fi
+
+
+changeft() {
+    if [ $# -lt 2 ]; then
+        echo "USAGE: chgft *.txt ft"
+        return
+    fi
+    local FT=${@:$#}
+    local num_files=$#
+
+    # num_files is originally counting files and the destination dir
+    # so shift one less time than $#
+    num_files=$(($num_files - 1))
+
+    local new_name
+    local old_name
+    while [ "$num_files" -gt 0 ]; do
+        old_name="$1"
+        new_name="${old_name%%.*}.${FT}"
+        echo "new name: $new_name"
+        num_files=$(($num_files - 1))
+        # mv "$old_name" "$new_name"
+        shift
+    done
+}
+alias cft=changeft
+
+
+# mv
+renameSameFiletype() {
+    # mv wrapper, behaves the same in all but 1 case
+    # if $1 has a ft and $2 does not (AND $# == 2)
+    # then the second arg gets the ft of $1
+    if [ $# -lt 2 ]; then
+        echo "USAGE: mv file1.txt file2"
+        return 1
+    fi
+    if [ $# -eq 2 ]; then
+        local arg_with_ft="$1"
+        local new_name="$2"
+        if [ -f "$arg_with_ft" ] && [[ "$arg_with_ft" == *.* ]]; then
+            if [[ "$new_name" != *.* ]]; then
+                # if $new_name already has a filetype, don't change it (mimic 'mv' behaviour)
+                if [ ! -d "$new_name" ]; then
+                    # We don't want to append $ft to $new_name if it is a dir !
+                    local ft="${arg_with_ft#*.}"
+                    new_name="${new_name%%.*}.${ft}"
+                    echo -e "$(with_color 'cyan' "new name:") $new_name"
+                    \mv "$arg_with_ft" "$new_name"
+                    return 0
+                fi
+            fi
+        fi
+    fi
+    # echo 'normal mv'
+    \mv "$@"
+    # echo "mv $@"
+}
+# mvf: move file (not meant for dirs so appropiate)
+alias mv=renameSameFiletype
+# alias mvf=renameSameFiletype
+
+
+
+
+
+
+
+
 function changeDirAndShow() {
     cd "$1" && ls -A
 }
@@ -16,23 +88,6 @@ storeCurrentDirectory() {
 }
 
 
-# mvf
-renameSameFiletype() {
-    if [ $# -lt 2 ]; then
-        echo "USAGE: mvf file1.txt file2"
-        return
-    fi
-    local arg_with_ft="$1"
-    local new_name="$2"
-    local ft="${arg_with_ft#*.}"
-    # always try to remove filetype from second arg just in case was inputted by accident
-    new_name="${new_name%%.*}.${ft}"
-    echo "new name: $new_name"
-    mv "$arg_with_ft" "$new_name"
-}
-# mvf: move file (not meant for dirs so appropiate)
-alias mvf=renameSameFiletype
-
 
 # follow moved files to the dest. folder
 function mcd() {
@@ -41,8 +96,8 @@ function mcd() {
         echo "Next time enter more than 1 argument: mcd files dest."
         return
     fi
-    file_destination=${@:$#}
-    num_files=$#
+    local file_destination=${@:$#}
+    local num_files=$#
 
     # num_files is originally counting files and the destination dir
     # so shift one less time than $#

@@ -181,6 +181,11 @@ for_window [instance="spotify"] border pixel 1
 for_window [instance="spotify"] resize set 1450 880
 for_window [instance="spotify"] move position center
 
+
+# So that all controls show always
+for_window [instance="pavucontrol"] resize set 590 420
+for_window [instance="pavucontrol"] move position center
+
 bindsym $mod+s exec spotify
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next

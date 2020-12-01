@@ -18,6 +18,11 @@ elif [ "$HOME" = "/home/brendon" ]; then
     # make sure to add curr user to video group !
     alias bright='echo 255 | sudo tee /sys/class/backlight/amdgpu_bl0/brightness'
 
+    alias behave='behave --no-capture --no-capture-stderr --no-logcapture'
+    alias d4='cd /home/brendon/Downloads/1-Classes/429'
+
+
+
 
 
 
