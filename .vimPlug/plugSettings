@@ -4,6 +4,7 @@ let g:tex_flavor = 'latex'
 if empty(v:servername) && exists('*remote_startserver')
     call remote_startserver('VIM')
 endif
+let g:vimtex_quickfix_open_on_warning = 0
 
 " I usually just copy pasta citations so don't care if they are missing fields
 let g:vimtex_quickfix_ignore_filters = [

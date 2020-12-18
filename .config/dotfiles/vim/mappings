@@ -2,6 +2,13 @@ let mapleader = " "
 let maplocalleader = " "
 
 
+" format a line, add this to autocmds for text files
+nnoremap =al ^~I- <esc>
+
+
+
+
+
 "           note that <CR> by itself is not used in normal mode!!!
 "-- here do: map <expr> <CR> empty(&buftype) ? '@@' : '<CR>'
 " so that <CR> works on special buffers like qf window!!

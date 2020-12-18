@@ -37,6 +37,9 @@ augroup custom_msg_highlights
     autocmd Syntax * syn match NumberedList /\v^\s*(\d+\.)(\w|(\d+))?(\.(\w|(\d+)))?([: .] )?/
           \ containedin=.*Comment,vimCommentTitle
 
+    " TODO: make (\n\s+)1.5% not be highlighted
+
+
     autocmd Syntax * syn match ListHeader /\v^.+:$(\n\s*)*(0|1)\./
           \ containedin=.*Comment,vimCommentTitle
 

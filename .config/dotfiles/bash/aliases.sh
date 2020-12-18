@@ -19,8 +19,18 @@ elif [ "$HOME" = "/home/brendon" ]; then
     alias bright='echo 255 | sudo tee /sys/class/backlight/amdgpu_bl0/brightness'
 
     alias behave='behave --no-capture --no-capture-stderr --no-logcapture'
-    alias d4='cd /home/brendon/Downloads/1-Classes/429'
+    # todo: integrate and add other alias in case lsd non-existant on sys
+    # purpose: lsd -l computes the size of a dir and can take a while
+    # mnemonic: ls_Permissions
+    alias lsp='lsd --blocks permission,user,group,name'
 
+    alias slide='cd /home/brendon/Downloads/1-Classes/atoc/slides'
+    alias note='cd /home/brendon/Downloads/1-Classes/atoc/notes'
+
+    alias asem='cd /home/brendon/Documents/Mcgill/6th-year/Atmosphere/lecture_notes'
+
+    # alias csem='cd /home/brendon/Documents/Mcgill/6th-year/Chem/final'
+    # alias clec='cd /home/brendon/Downloads/1-Classes/chem/final'
 
 
 
