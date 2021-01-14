@@ -413,7 +413,7 @@ type = internal/xbacklight
 
 ; Use the following command to list available cards:
 ; $ ls -1 /sys/class/backlight/
-card = amdgpu_bl0
+card = intel_backlight
 interval = 8
 
 ; Available tags:
@@ -666,7 +666,7 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/battery]
 type = internal/battery
-battery = BAT0
+battery = BAT1
 adapter = AC
 full-at = 98
 interval = 16
