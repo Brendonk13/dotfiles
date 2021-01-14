@@ -31,6 +31,7 @@ elif [ "$HOME" = "/home/brendon" ]; then
 
     # alias csem='cd /home/brendon/Documents/Mcgill/6th-year/Chem/final'
     # alias clec='cd /home/brendon/Downloads/1-Classes/chem/final'
+    alias mnt='cd /mnt/home/brendon'
 
 
 

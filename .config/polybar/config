@@ -328,7 +328,10 @@ module-margin = 0.5
 
 modules-left = i3
 modules-center = beforeSpotify spotifyIcon spotifyInfo
-modules-right =  memory cpu temperature popup-calendar battery powermenu
+modules-right =  memory cpu temperature popup-calendar powermenu
+
+
+; modules-right =  memory cpu temperature popup-calendar battery powermenu
 
 
 
@@ -720,7 +723,7 @@ ramp-capacity-2-foreground = ${colors.soft_green}
 ramp-capacity-3-foreground = ${colors.soft_green}
 ramp-capacity-4-foreground = ${colors.soft_green}
 
-ramp.background = ${colors.bg}
+ramp-background = ${colors.bg}
 
 
 [module/temperature]
