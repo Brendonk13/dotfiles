@@ -1,28 +1,29 @@
 #!/bin/bash
 
 # MUST CHANGE PER MACHINE
-BATPATH=/sys/class/power_supply/BAT1
+BATPATH=/sys/class/power_supply/BAT0
 BAT_FULL=$BATPATH/charge_full
 BAT_NOW=$BATPATH/charge_now
 # BAT_FULL=$BATPATH/energy_full
 # BAT_NOW=$BATPATH/energy_now
-bf=$(cat $BAT_FULL)
-bn=$(cat $BAT_NOW)
+fully_charged=$(cat $BAT_FULL)
+current=$(cat $BAT_NOW)
 
-current_level=$(( 100 * $bn / $bf ))
-
+current_level=$(( 100 * $current / $fully_charged ))
+# icon_path="$HOME/Pictures/battery-charge-icon.png"
+icon_path="$HOME/Pictures/battery-crop.png"
 
 #if [ "$current_level" -lt 4 ]; then
 #    echo "about to shutdown computer"; sytemctl poweroff
 if [ "$current_level" -lt 10 ]; then
-    sudo -u brendon DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus dunstify --urgency critical --timeout 200000 --icon=$HOME/Pictures/battery-charge-icon.png "Low Battery! [$current_level]" "Plug 'er in!!"
+    sudo -u brendon DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus dunstify --urgency critical --timeout 200000 --icon="$icon_path" "Low Battery! [$current_level]" "Plug 'er in!!"
 
 elif [ "$current_level" -lt 15 ]; then
-    sudo -u brendon DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus dunstify --urgency critical --timeout 15000 --icon=$HOME/Pictures/battery-charge-icon.png "Low Battery! [$current_level]" "Plug 'er in!!"
+    sudo -u brendon DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus dunstify --urgency critical --timeout 15000 --icon="$icon_path" "Low Battery! [$current_level]" "Plug 'er in!!"
 
 elif [ "$current_level" -lt 25 ]; then
     #msg="<span font='Iosevka medium oblique 16'>Low Battery!</span>"
-    #notify-send --icon=$HOME/Pictures/battery-charge-icon.png "$msg" "$current_level" "Plug 'er in!!"
-    sudo -u brendon DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus dunstify --icon=$HOME/Pictures/battery-charge-icon.png "Low Battery! [$current_level]" "Plug 'er in!!"
+    #notify-send --icon="$icon_path" "$msg" "$current_level" "Plug 'er in!!"
+    sudo -u brendon DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus dunstify --icon="$icon_path" "Low Battery! [$current_level]" "Plug 'er in!!"
 fi
 

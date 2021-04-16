@@ -505,8 +505,8 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-# setxkbmap -option ctrl:swapcaps; xcape -e 'Control_L=Escape'
 exec --no-startup-id setxkbmap -option ctrl:swapcaps
 exec --no-startup-id xcape -e 'Control_L=Escape'
 # checkout usr/share/X11/xkb/symbols/  file: my_new_control
 # exec --no-startup-id setxkbmap -layout my_new_control -option ctrl:swapcaps
+# setxkbmap -option ctrl:swapcaps; xcape -e 'Control_L=Escape' 

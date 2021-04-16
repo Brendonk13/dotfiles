@@ -15,6 +15,10 @@ generate_file_name() {
     if [ $# -eq 2 ]; then
         # only positive numbers with no leading zeros
         RAND_NUM="$(my_rand_func | tr -d - | sed 's/^0*//')"
+
+        #TODO: fix this with base 10 number issue (is below the fix???)
+        # local rand
+        # printf -v rand "%d" "$*"
         echo "hist_$RAND_NUM.txt"
         return
     fi

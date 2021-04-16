@@ -328,10 +328,12 @@ module-margin = 0.5
 
 modules-left = i3
 modules-center = beforeSpotify spotifyIcon spotifyInfo
-modules-right =  memory cpu temperature popup-calendar powermenu
 
+modules-right =  memory cpu temperature popup-calendar battery powermenu
 
-; modules-right =  memory cpu temperature popup-calendar battery powermenu
+; for devices without batteries
+; modules-right =  memory cpu temperature popup-calendar powermenu
+
 
 
 
@@ -665,8 +667,9 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 
 
 [module/battery]
+; check /sys/class/power_supply/XXXXXXX
 type = internal/battery
-battery = BAT1
+battery = BAT0
 adapter = AC
 full-at = 98
 interval = 16

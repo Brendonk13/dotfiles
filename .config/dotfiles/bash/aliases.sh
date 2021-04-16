@@ -33,6 +33,8 @@ elif [ "$HOME" = "/home/brendon" ]; then
     # alias clec='cd /home/brendon/Downloads/1-Classes/chem/final'
     alias mnt='cd /mnt/home/brendon'
 
+    # alias comp='sudo docker-compose -f ~/dev/dev/docker/traefik/docker-compose-traefik.yml up -d'
+
 
 
 
@@ -80,7 +82,7 @@ elif [ "$HOME" = "/home/brendon" ]; then
     # ^--> my screen on left
     # For multiple monitors consider changing to below, which works for 1 monitor
     # xrandr --output $( xrandr | grep 'HDMI.* connected' | head -n1 | awk '{ print $1 }' ) --off
-    alias monoff='xrandr --output HDMI-A-0 --off'
+    alias monoff='xrandr --output HDMI1 --off'
 
     #Note: can view nvidia gpu live shit with: $ nvtop
 

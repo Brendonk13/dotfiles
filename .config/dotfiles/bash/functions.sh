@@ -10,6 +10,18 @@ if [ -f "$HOME/new_dotfiles/bash/setup_env/debug/colors/minimal/8-16_compat.sh" 
     source "$HOME/new_dotfiles/bash/setup_env/debug/colors/minimal/8-16_compat.sh"
 fi
 
+setup_monitor() {
+    if [ $# -lt 1 ]; then
+        echo "USAGE: setup_monitor MONITOR_SIDE"
+        return
+    fi
+    MONITOR_SIDE="$1"
+    echo "mons -e $MONITOR_SIDE"
+    # echo "$MONITOR_SIDE"
+    mons -e "$MONITOR_SIDE" && bash "$HOME/.config/polybar/launch.sh" > /dev/null 2>&1
+}
+alias m=setup_monitor
+
 
 changeft() {
     if [ $# -lt 2 ]; then
@@ -73,14 +85,10 @@ alias mv=renameSameFiletype
 
 
 
-
-
-
-
-
 function changeDirAndShow() {
     cd "$1" && ls -A
 }
+
 
 alias cpd=storeCurrentDirectory
 storeCurrentDirectory() {

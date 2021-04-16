@@ -6,7 +6,8 @@
 
 
 declare -a workspace_names
-workspace_names=("Plans" "Py" "Homelab" "tmp" "prox" "media" "ansible")
+# workspace_names=("Plans" "Py" "Homelab" "tmp" "prox" "media" "ansible")
+workspace_names=("Stuff")
 open_a_terminal="exec kitty"
 
 # these start with the numbers on which I would make them workspaces anyways

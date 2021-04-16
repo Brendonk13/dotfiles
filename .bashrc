@@ -3,7 +3,9 @@
 # if not running interactively then don't do anything
 # added so that my bind cmd's dont give me grief over ssh
 [ -z "$PS1" ] && return
-# source ~/new_dotfiles/bash/main.sh
+# source ~/new_dotfiles/bash/new_main.sh
+# cd ~/new_dotfiles/bash && src_files
+# source ~/new_dotfiles/bash/bashrc.sh
 
 XDG_CONFIG_HOME="$HOME/.config"
 export dotBashDir="$XDG_CONFIG_HOME/dotfiles/bash"
