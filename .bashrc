@@ -10,6 +10,8 @@
 XDG_CONFIG_HOME="$HOME/.config"
 export dotBashDir="$XDG_CONFIG_HOME/dotfiles/bash"
 
+# bs
+
 # ble gives fish shell style command completion as you type.
 # ble_path="$XDG_CONFIG_HOME/ble-0.3.2/ble.sh"
 # rc_file="$(dirname $ble_path)/src/ble.sh/blerc"
