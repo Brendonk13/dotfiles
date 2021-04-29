@@ -52,3 +52,21 @@
 [core]
     # global gitignore
     excludesfile = /home/brendon/.gitignore_global
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = side-by-side line-numbers decorations
+    whitespace-error-style = 22 reverse
+    # syntax-theme = GitHub
+    syntax-theme = Nord
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow
+    file-decoration-style = none
+    hunk-header-decoration-style = yellow box
+    hunk-header-file-style = yellow box
+
