@@ -7,7 +7,11 @@ my_rand_func() {
    second_num=$((10#$second_num/(RANDOM*RANDOM)))
    # use $RANDOM again
    third_num=$((10#$RANDOM*61))
-   echo "$((10#$first_num+10#$second_num+10#$third_num))"
+   final="$(($first_num + $second_num + $third_num))"
+   # final="$((10#$final))"
+   printf -v final "%d" "$final"
+   echo "$final"
+   # echo "$((10#$first_num+10#$second_num+10#$third_num))"
 }
 
 generate_file_name() {

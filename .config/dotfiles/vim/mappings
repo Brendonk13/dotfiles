@@ -134,6 +134,7 @@ cnoremap Bd :ls<CR>:      bd<space><C-z>
 " deletes all tabs in current file, nice cuz i have listchar set
 " mnemonic: Delete tab
 nnoremap <leader>d<tab> :%s/\v^\s+$//<CR>
+" NOTE: USE THE :retab COMMAND INSTEAD !!!!!!!!!!!!!!
 
 
 " navigate by staged/unstaged changes

@@ -8,9 +8,11 @@ config add ~/.vimrc
 config add ~/.latexmkrc
 config add ~/.gitconfig
 config add ~/.gitignore_global
+config add ~/.vim/after/plugin
 config add ~/.vimPlug/
 
-config add ~/.config/dotfiles/
+
+config add ~/.config/dotfiles/old_bash_dotfiles
 
 config add ~/.config/polybar
 config add ~/.config/fusuma
