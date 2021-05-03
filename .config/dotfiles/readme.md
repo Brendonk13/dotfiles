@@ -19,4 +19,6 @@ config config --local status.showUntrackedFiles no
 ```
 
 ## Replication one-liner
+```
 git clone --separate-git-dir=$HOME/.cfg https://github.com/Brendonk13/dotfiles.git dotfiles-tmp && rsync --recursive --verbose --exclude '.git' dotfiles-tmp/ $HOME/ && rm --recursive dotfiles-tmp && alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME' && config config --local status.showUntrackedFiles no
+```
