@@ -1,8 +1,0 @@
-fzf
-rg
-fasd
-nvim
-bat
-ytop
-xdotool
-pyflakes
