@@ -3,7 +3,7 @@
 [ -z "$PS1" ] && return
 
 XDG_CONFIG_HOME="$HOME/.config"
-export dotBashDir="$XDG_CONFIG_HOME/dotfiles/old_bash_dotfiles"
+export dotBashDir="$XDG_CONFIG_HOME/old_bash_dotfiles"
 
 # ble gives fish shell style command completion as you type.
 # ble_path="$XDG_CONFIG_HOME/ble-0.3.2/ble.sh"
