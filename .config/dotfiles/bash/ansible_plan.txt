@@ -1,0 +1,41 @@
+Next:
+    create manual file copying bashrc.sh, ~/.bashrc, concat_roles.sh etc
+    create file handling the bash_dotfiles_root template
+        -- and the j2 file in templates/alias/***
+
+    Add file for downloading all my packages
+
+
+    - how to handle copying bashrc without fasd ??
+    - maybe just store a diff bashrc without fasd stuff
+        - and role<dev will copy this bashrc
+        - and role >= dev will copy my current with fasd bashrc
+
+
+
+do all files in the tasks directory get executed in what order ??????
+-- relationship to the main.yml in that dir ?
+
+
+
+# needs verification:
+    - copy_bashrc.yml is actually idempotent
+
+
+add function to copy a file to correct dir in ansible_dir
+
+-- add export to ansible_dir for desktop users
+
+
+Setup ssh keys !!
+https://docs.ansible.com/ansible/latest/user_guide/connection_details.html
+
+
+Make things more ansible-y
+
+    Create a variable containing things I will copy
+        - Learn how to create a variable with 2 fields: src and dest
+
+        - can the dest_dir be {{home_dir}} in the vars file ?
+            ie: can vars be based on other vars?
+

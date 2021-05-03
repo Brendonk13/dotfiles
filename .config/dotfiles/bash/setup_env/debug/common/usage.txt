@@ -1,0 +1,27 @@
+
+at the very beginning after checking whether or not this is an interactive shell:
+    source ../colors/8-16_compat.sh > /dev/null
+    source ./func_call_err.sh
+
+
+last line of bashrc:
+    __cleanup_env_of_COLORs
+
+
+What am I ever going to do with debug_dependencies.sh ...
+    - it seems pretty useless if your installing files via ansible
+    - just a headache to maintain lists per dir that the script can read from to check if we have all the deps
+
+    - maybe I could turn it into a more general list partitioner
+        - that's what it does currently at its basis anyways
+        - can extend to any # of splitting criteria
+        - which means its just the py function: filter(cond, item(s))
+
+        - each condition could be given a name and we have created a condition hash-table
+
+
+TODO:
+    port over existing error messages
+    each folder has a setup script
+        this script first reads from each directories listed dependencies and checks if we have all of them
+    add different colors based on support for the colors

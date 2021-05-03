@@ -1,0 +1,8 @@
+---
+- name: test minimal copy
+  hosts: min_servers
+  remote_user: test
+  gather_facts: false
+
+  roles:
+  - minimal

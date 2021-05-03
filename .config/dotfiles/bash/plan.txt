@@ -1,0 +1,180 @@
+Bugs:
+    how to deal with programs/hist_save/dev/backup_bash_history ??
+        - I only look for .sh files but this is not a sh file in order to be cron compatible
+        - could use the file command somehow
+
+        ------ make sure every file has a shebang !!!!!!!!!!!!
+        - and i can find it with find command
+
+
+    -- make bashrc.sh && concat_roles.sh work with the same last_role variable (not make sourced/desktop.sh every time!!!)
+
+
+Last time:
+    - made it so nvr is always used !
+    - made checked_files.txt file -- go over each file in OG dotBashDir and make sure each line is accounted for
+
+
+Next:
+    -xxx make configadd like it used to be
+    - how to handle bashrc?? need first thing to be ->>>>> [ -z "$PS1" ] && return
+    - ansible will echo "bash bashrc_entrypoint.sh" > ~.bashrc
+    where this file will only do: [ -z "$PS1" ] && return followed by in-order sourcing of files in sourced directory
+
+    - note that fasd stuff should probably be garuanteed to run after fzf/dev.sh
+    - how to add additional constraints ??
+
+
+
+    - add code from ./to_add.sh
+    - then just start using it for a few days I guess
+    - maybe make a "old_bashrc" file so that I can just source that incase things ever get out of hand !!
+
+    - need to recheck that the functions are all the same (renameSameFt was diff !!!!!)
+
+    -- alias name ====>>>>> old_bashrc
+
+
+
+
+
+
+OLD BELOW
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Test Full bugs:
+    - try to make configadd like it was before with 2 diff files
+
+    check that lines_in_dir function works !! programs/built_ins/common/light_dependencies.sh
+    -- alias: lines !!!
+
+    change the paths in /programs/hist_save/dev/setup_history.sh
+
+
+
+        - maybe make the gen_files always ignore everything in os_specific
+        - and make it the role of ansible to 
+        - have flag for including or not files in os_specific
+        - always include them when sourcing bashrc
+        - always disclude them when generating files
+        - need flag to include files matching os_specific/$OPERATINGSYSTEM.*
+
+        check if dir is os_specific
+        - disclude if subdir/file is not $OPERATINGSYSTEM
+
+
+
+Next:
+    - fix the command line prompt (PS1)
+        - don't think the files are actually present
+
+    - why is source create_dummy_files.sh taking so long?
+        - cuz its a script --- change it to a function or something!!
+
+    - make function (called once a day by cron) to concatenate hella files together so that I don't source thirty files
+    every time i open a new shell
+        ./programs/hist_save/dev/make_dummy_files.sh
+
+    why is /home/brendon/bin added to $PATH so many times ???
+
+    - make functions to save output of: $ env && $ alias
+        - and compare like I do with the tests/verify_all_files_found.py
+
+    once all exports and aliases are working:
+        figure out good way to delete old files from git repo and add new files
+        -- maybe best to just copy the current directories (backup)
+
+
+    maybe fix the backup_bash_history err
+        - use the file command ???
+
+LAST:
+    - add new stuff in current dotfiles
+
+
+
+
+Next:
+    test with 'dont_source function'
+    - meant to prevent from sourcing shit in 'not_portable' dir
+    - this gets appended in sorted_files_and_dirs function at the very end
+        - need to pass 'os_type' to this function to determine that shit
+        - better to just do that in calling function? -- kinda doesnt fit in tho
+
+
+
+
+need to make aliases relavent to a function appear with that function
+
+    - make a fzf specific group of stuff
+    - guess I gotta figure out some kind of organizational struture based on apps
+
+    - maybe just go overkill like with vim - at least its predictable
+
+        - but what about when there are multiple dependencies for something ?
+        - like mixing rg and fzf
+
+
+order:
+minimal < common < dev < desktop
+-- minimal has hopefully 1-2 max dependencies
+-- common has git
+
+
+every folder has a main.sh
+maybe it imposes some ordering, maybe it doesn't
+
+
+
+how to store roles?
+    - I want ansible stuff to be separate from dotfiles as much as possible
+
+    Idea: each role has a file containing paths to directories/files
+        - also create a bash script which reports an error if the file is NOT -f, or NOT -d
+
+        - This will ease my concerns over changing a path in my dotfiles but that change not being reflected
+          in my ansible groups
+
+          Sick version of this:
+            - would use some advanced logic ala find/hash to try and find where the new file may have been moved
+
+
+    Idea: each dir has any # of minimal/common/dev/desktop directories
+        by default if role is dev:
+            include dev/**
+
+        and in every other dir:
+            include any file named dev.sh
+
+
+        then can just have a 'not list' which we modify when we want a slight
+        variation of a role.
+
+            - 'not list' is files in dev/** or named dev.sh that we don't want for a role
+
+        and can define new roles which just have different 'not lists'
+
+        Note: here, either the dir is named minimal/common/dev/desktop or the file is
+
+
+TODO: add battest cronjob shit plus images and all other scripts to this dir
+
+    -- don't think it should be this way
+    - most of the stuff in configAdd is only for desktop which means I'll get those files from config pulling
+
+
+Todo: test fn_err_msg and debug_dependencies after the light changes I did

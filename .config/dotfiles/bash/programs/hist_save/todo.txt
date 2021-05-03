@@ -1,0 +1,3 @@
+
+cp backup_bash_history to new dotfiles directory !
+update the config add I will be using for the new setup

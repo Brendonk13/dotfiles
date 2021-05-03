@@ -1,0 +1,12 @@
+
+# Add my 'web' type, can search for *web files now
+--type-add
+web:*.{html,css,js}*
+
+# the default command will not search these files
+--glob=!*.{md,o,a,so,pyc,swp,mli,cmi,cmo,class,gitignore}
+--glob=!{.git,node_modules}
+--glob=!package-lock.json
+
+--smart-case
+--hidden

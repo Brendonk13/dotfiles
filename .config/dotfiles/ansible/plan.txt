@@ -1,0 +1,79 @@
+
+Problems:
+    - what to do with files in new_dotfiles/bash/templates ?
+        - probably change them to .j2 files and makeup variable names per file
+
+    - need to change all dotBashDir declarations to be templated....
+
+
+Variables:
+    - dotfiles_root
+        - some files copied here
+        - used to create directories: sourced, not_portable, programs, setup_env, (templates?)
+    - bash_dotfiles_role
+        - defined in inventory per host
+
+Copied Files:
+    Need to generate a copy_files_task.yml:
+        Loop over each line in newly generated files.txt
+        Ansible passes "{{dotBashDir}}" to script which does sed to make another DEST_file with new prefix path
+    1. Create script which outputs all files per role to ansible/bash/roles/$ROLE/files/SOURCE_file_list.txt
+        - maybe then use sed to create ansible/bash/roles/$ROLE/files/DESTINATION_file_list.txt
+
+    2. - then how to loop over the list copying the files  ??
+
+    3.    - also need to remove the absolute path part
+            - create script with args: old_path, new_path
+                - calls 'sed' function to change the path
+                - ansible passes dotfiles_root as the old 
+            - can add "abs_path" flag to main.sh
+            - then only use this for generating ansible file.txt
+            - then have diff function to prepend each file in file.txt with the new abs_path
+    - bashrc.sh
+    - concat_roles.sh
+
+
+Apt/pacman config:
+    dont auto-generate this, not structured enough
+
+
+Change main.sh to have a "out_name" input argument
+- ansible will set this out_name to 
+
+
+
+all current servers:
+
+- rpi-store
+    - common config
+
+- proxmox
+    - pihole
+        - needs common config (and some hardening <-- diff playbook)
+    - prom
+        - needs common config (and some hardening <-- diff playbook)
+    - test-vlan
+        - test diff configs
+
+- VPS
+    - probably common config or dev one maybe
+
+
+Additional playbooks:
+    polybar
+    harden ssh etc
+    nextcloud stack
+    prom
+    media server stack
+    setup keyboard config
+    background images (and install nitrogen)
+
+
+
+
+1. setup inventory and verify ping works
+    $ ansible all -i /path/to/hosts  -u username -m ping
+2. gather facts for fun :)
+    $ ansible all -i /path/to/hosts  -u username -m setup
+
+test with minimal config first

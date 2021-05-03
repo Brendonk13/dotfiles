@@ -1,0 +1,219 @@
+#!/bin/bash
+
+my_rand_func() {
+    # Why use 10# ? -> I do math on these numbers so must ensure they all are base 10
+    local first_num
+    local second_num
+    local third_num
+    local final
+    first_num=$((10#$RANDOM*111))
+    # get hash of random thing in ram
+    second_num="$(ls /tmp/ | sort -R | tail -n 1 | md5sum |  tr -d -c 0-9)"
+    second_num=$((10#$second_num/(RANDOM*RANDOM)))
+    # use $RANDOM again
+    third_num=$((10#$RANDOM*61))
+    # NEW:
+    printf -v final "%d" "$final"
+    echo "$final"
+
+    # old BUGGY LINE:
+    # echo "$((10#$first_num+10#$second_num+10#$third_num))"
+}
+
+
+generate_file_name() {
+    local backup_dir="$1"
+    if [ $# -eq 2 ]; then # give a --random filename to help with race conditions
+        # only positive numbers with no leading zeros
+        local RAND_NUM
+        RAND_NUM="$(my_rand_func | tr -d - | sed 's/^0*//')"
+
+        #TODO: fix this with base 10 number issue (is below the fix???)
+        # local rand
+        # printf -v rand "%d" "$*"
+        echo "hist_$RAND_NUM.txt"
+        return
+    fi
+    local next_backup_num
+    next_backup_num="$(ls "$backup_dir" | wc -l)"
+    # minus one since we count from zero plus there is another file in dir: most_merged.txt
+    next_backup_num=$((next_backup_num-1))
+    local backed_up_file="hist_$next_backup_num.txt"
+    echo "$backed_up_file"
+}
+
+
+merge_backup_histories() {
+    # NOTE: Removes duplicates while preserving the order of when commands were typed
+    if [ $# -ne 1 ]; then
+        echo -e "Wrong number of args passed\nNeed exactly 1 arg --> a directory\n(in backup_bash_history/merge_backup_histories)"
+        return
+    fi
+    if [ ! -d "$1" ]; then
+        echo -e "Input argument must be a directory\n(in backup_bash_history/merge_backup_histories)"
+        return
+    fi
+    local backup_dir="$1"
+    # num_merges_done=0
+    echo "backup dir is: $backup_dir"
+    local new_result="/tmp/new_result.txt"
+    local most_merged="$backup_dir/most_merged.txt"
+
+    # files made first are first in arr, v important to preserve order
+    # have the nr>1 to skip first line from ls "Total XX files in dir"
+    local ordered_file_nums
+    ordered_file_nums="$(/usr/bin/ls -ltr "$backup_dir" | awk 'NR>1{print $NF}')"
+    local first_file
+    for first_file in "${ordered_file_nums[@]}"; do
+        first_file="$backup_dir/$first_file"
+        echo "oldest file in dir is: $first_file"
+
+        local current_file
+        for current_file in "${ordered_file_nums[@]}"; do
+            current_file="$backup_dir/$current_file"
+
+            if [ "$first_file" != "$most_merged" ]; then
+                echo "oldest file is not the correct name in $backup_dir, should be: most_merged.txt"
+                echo "This often happens right after a merge failed with exit code 1"
+                exit 1
+            fi
+            [ "$current_file" = "$most_merged" ] && continue
+
+            /usr/bin/awk '!a[$0]++' "$most_merged" "$current_file" > "$new_result"
+            echo "merged two files: $(basename "$most_merged") $(basename "$current_file") > $(basename "$new_result")"
+            mv "$new_result" "$most_merged"
+            echo "mv $(basename "$new_result") $(basename "$most_merged")"
+            echo ""
+        done
+        # just loop over inner loop once
+        break
+    done
+}
+
+
+delete_old_files() {
+    # delete all the tmp merge files and previous saved histories
+    if [ $# -ne 1 ]; then
+        echo -e "Wrong number of args passed\nNeed exactly 1 arg --> a directory\n(in backup_bash_history/delete_old_files)"
+        return
+    fi
+    if [ ! -d "$1" ]; then
+        echo -e "Input argument must be a directory\n(in backup_bash_history/delete_old_files)"
+        return
+    fi
+
+    local backup_dir="$1"
+    local dont_delete="$backup_dir/most_merged.txt"
+    for fil in "$backup_dir"/*; do
+
+        local filename
+        filename="$backup_dir/$(basename "$fil")"
+        if [ "$filename" = "$dont_delete" ]; then
+            echo "SKIPPING: $filename"
+            continue
+        else
+            echo "Removing: $filename"
+            rm "$filename"
+        fi
+    done
+}
+
+
+
+#MAIN FUNCTION:
+
+
+# PASSED IN PATH TO SPECIFIC DIRECTORY!
+backup_history() {
+    # always backs up the current history
+    # THEN: checks if we need to merge histories
+
+    # bash has a race condition for .bash_history: https://unix.stackexchange.com/questions/190002/how-to-protect-against-purge-of-bash-history
+    # and it gets me every time
+    # this doesn't solve that but combined with cron and PROMPT_COMMAND and shutdown services we can just back up often and lose less each time
+
+    if [ $# -ne 2 ]; then
+        echo -e "Wrong number of args passed\nNeed exactly 2 args --> a directory, and a file name\n(in backup_bash_history/backup_history -- is main func)"
+        return
+    fi
+    if [ ! -d "$1" ]; then
+        echo -e "Input argument must be an existing directory\n(in backup_bash_history/backup_history -- is main func)"
+        return
+    fi
+    local backup_dir="$1"
+    local last_char="${backup_dir: -1:1}"
+
+    # remove '/' from input: backup_dir if given
+    [ "$last_char" = '/' ] && backup_dir="${backup_dir:0:-1}"
+    local backed_up_file="$backup_dir/$2"
+    echo "$backed_up_file"
+
+    # create a backup of bash history
+    cp "$HOME/.bash_history" "$backed_up_file"
+    local NUM_BACKUPS
+    NUM_BACKUPS="$(ls "$backup_dir" | wc -l)"
+
+    # default values is 20 (needed for cron jobs which dont use the env var)
+    if [ "$NUM_BACKUPS" -ge "${MAX_HIST_BACKUPS:-20}" ]; then
+
+        # don't delete backups if there was an error merging
+        [ "$(merge_backup_histories "$backup_dir")" ] && delete_old_files "$backup_dir"
+        # [ $? -eq 0 ] && delete_old_files "$backup_dir"
+    fi
+    # echo -e "-------------------- DONE: $next_backup_file ---------------------"
+    echo -e "-------------------- DONE  ---------------------"
+}
+
+
+
+
+
+# ------------------------ ENTRY POINT -----------------
+
+# TODO: move the entrypoint shit into a diff script which sources ^^^^ functions before being doing its job
+
+OPTIONS=("--random")
+# avoid errors when I just want to source the script and get access to functions
+if [ $# -eq 0 ]; then
+    echo "USAGE: backup_bash_history [--random] /path/to/dir"
+    # exit 0
+    # this is incorrect but allows script to continue executing
+    # need to continue executing since all files are concatenated together
+    # return
+    # echo 'after return'
+
+elif [ $# -eq 1 ]; then
+    if [ ! -d "$1" ]; then
+        echo -e "Input argument must be an existing directory\n(in backup_bash_history/script)"
+        exit 1
+    fi
+    backup_dir="$1"
+    backed_up_file="$(generate_file_name "$*")"
+    echo "file name: $backed_up_file"
+    backup_history "$backup_dir" "$backed_up_file"
+
+elif [ $# -eq 2 ]; then
+    if [ ! -d "$2" ]; then
+        echo -e "Second input argument must be an existing directory\n(in backup_bash_history/script)"
+        exit 1
+    fi
+    backup_dir="$2"
+
+    for option in "${OPTIONS[@]}"; do
+        if [ "$1" = "$option" ]; then
+            if [ "$option" = '--random' ]; then
+                backed_up_file="$(generate_file_name "$@")"
+                echo "file name: $backed_up_file"
+                backup_history "$backup_dir" "$backed_up_file"
+                exit 0
+            fi
+        fi
+    done
+    # if we finish the loop then we never hit a return
+    echo -e "Please use a valid option from the following list: ${OPTIONS[*]}"
+fi
+
+
+
+# dependencies: /usr/bin/awk
+# env var: $MAX_HIST_BACKUPS
