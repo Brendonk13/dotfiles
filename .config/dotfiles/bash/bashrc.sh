@@ -16,6 +16,7 @@ if ! [ -f "$bash_dotfiles_root"/meta/data/ordered_concatenated_files.txt ]; then
 fi
 
 IGNORE_OUTPUT='true'
+# IGNORE_OUTPUT='false'
 
 
 

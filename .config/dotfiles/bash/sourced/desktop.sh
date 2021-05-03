@@ -169,7 +169,7 @@ alias mnt='cd /mnt/home/brendon'
 alias config='/usr/bin/git --git-dir="$HOME"/.cfg/ --work-tree="$HOME"'
 # alias cadd='config add "$HOME"/.config/dotfiles/bash/configAdd.sh; source  "$HOME"/.config/dotfiles/bash/configAdd.sh'
 
-SCRIPT_DIR='programs/git/desktop/config'
+SCRIPT_DIR="$bash_dotfiles_root"/programs/git/desktop/config
 # SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 alias cadd='config add "$SCRIPT_DIR"/configAdd.sh; configAdd'
 alias cpush='config push origin master'
@@ -245,11 +245,14 @@ configAdd(){
     config add ~/.config/.ripgreprc
     config add ~/.config/compton.conf
     config add ~/.config/mimeapps.list
-    config add ~/.config/zathura/zathurarc
+    config add ~/.config/zathura
     config add ~/.config/ptpython/config.py
     config add ~/.config/mpv/mpv.conf
     config add ~/.config/mpv/input.conf
     config add ~/.config/neofetch
+    config add ~/.config/rofi
+    config add ~/.config/dunst
+    config add ~/.config/pavucontrol.ini
 
 
     config add ~/dev/dev/Scripts/battest_cronjob

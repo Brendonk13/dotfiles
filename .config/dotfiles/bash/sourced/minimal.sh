@@ -142,21 +142,22 @@ export bash_dotfiles_root="$HOME/.config/dotfiles/bash"
 SUPPORTS_ARROW=''
 
 # set SUPPORTS_ARROW true if we are in ssh session
-# if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-#   SUPPORTS_ARROW='true'
-# # many other tests omitted
-# else
-#   case $(ps -o comm= -p $PPID) in
-#     sshd|*/sshd) SUPPORTS_ARROW='true';;
-#   esac
-# fi
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    SUPPORTS_ARROW='true'
+    # allows for backspace over ssh :)
+    export TERM=vt100
+# many other tests omitted
+else
+  case $(ps -o comm= -p $PPID) in
+    sshd|*/sshd) SUPPORTS_ARROW='true'
+    # allows for backspace over ssh :)
+    export TERM=vt100
+  esac
+fi
 
 case "$TERM" in
     xterm*)
         SUPPORTS_ARROW='true' ;;
-    *)
-        # allows for backspace over ssh :)
-        export TERM=vt100 ;;
 esac
 
 

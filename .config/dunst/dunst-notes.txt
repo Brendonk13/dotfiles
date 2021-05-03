@@ -1,0 +1,9 @@
+ this is a good format!
+# notify-send " URGENT=> ^M battery critically low"
+
+can have different fonts and shit within a single notification by using 
+different <span tags
+-- check 25:05 in lets linux #041: notifications with dunst video
+
+29:30 shows how to use the dunstrc format thing to have a stdrd msg format
+with regards to each argument passed

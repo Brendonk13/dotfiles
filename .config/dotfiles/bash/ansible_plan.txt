@@ -1,7 +1,35 @@
+Bugs:
+    make it always set TERM=vt100 when coming from ssh !!!
+    -- even xterm-kitty didnt work over ssh for test@192.168.0.30
+
+
+
+Undecided:
+    what to do with programs/ripgrep/hidden/common/.ripgreprc
+    -- and the j2 file in templates/alias/***
+
+    - maybe the vars always get sent to minimal by generate.sh -- minimals job is to always copy file in dotfiles_sources etc
+    - then have if statement for the diff dotfile used by dev and above roles
+
+
+    - how to handle initial config bare repo setup
+    - and when to config pull
+
+
+    Other desktop programs:
+        - only have things for which a j2 file is needed like polybar
+        - other stuff can be handled by config pull setup
+            ----> do this as first step in desktop setup
+            -- but how to do without overwriting files
+
+
+
+# then test with common role etc
+# then make it automatically install programs
+
 Next:
-    create manual file copying bashrc.sh, ~/.bashrc, concat_roles.sh etc
     create file handling the bash_dotfiles_root template
-        -- and the j2 file in templates/alias/***
+    create file which does everything all at once
 
     Add file for downloading all my packages
 
@@ -12,9 +40,8 @@ Next:
         - and role >= dev will copy my current with fasd bashrc
 
 
-
-do all files in the tasks directory get executed in what order ??????
--- relationship to the main.yml in that dir ?
+Noticed conditional bugs:
+    fzf looks weird when TERM=vt100
 
 
 

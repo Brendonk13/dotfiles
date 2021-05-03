@@ -1,0 +1,8 @@
+~/.i3/config
+polybar
+copy fonts
+install polybar fonts and the dow/ricer/polybar-scripts dir
+/usr/share/X11/xkb/
+/usr/share/backgrounds/
+/usr/share/fonts/
+/usr/share/rofi/themes/solarized_alternate.rasi

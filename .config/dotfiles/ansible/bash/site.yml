@@ -1,8 +1,40 @@
 ---
-- name: test minimal copy
-  hosts: min_servers
+# - name: test minimal copy
+#   hosts: min_servers
+#   remote_user: test
+#   gather_facts: false
+
+#   roles:
+#   - minimal
+
+- name: test common copy
+  hosts: common_servers
   remote_user: test
   gather_facts: false
 
   roles:
   - minimal
+  - common
+
+
+# - name: test dev copy
+#   hosts: dev_servers
+#   remote_user: test
+#   gather_facts: false
+
+#   roles:
+#   - minimal
+#   - common
+#   - dev
+
+
+# - name: test desktop copy
+#   hosts: desktop_servers
+#   remote_user: test
+#   gather_facts: false
+
+#   roles:
+#   - minimal
+#   - common
+#   - dev
+#   - desktop

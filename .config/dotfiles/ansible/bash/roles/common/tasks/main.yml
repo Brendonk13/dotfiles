@@ -1,2 +1,7 @@
 ---
 # tasks file for common
+
+- name: install neovim
+  package:
+    name: neovim
+    state: present

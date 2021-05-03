@@ -68,7 +68,7 @@ def create_variables(generated_file, var_name, sources, destinations, dest_dirs)
 
 
 if __name__ == "__main__":
-    print(sys.argv)
+    # print(sys.argv)
     dest_base_dir, generated_file, file_with_paths, var_name = sys.argv[1:]
     create_variables(
         generated_file,

@@ -5,7 +5,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 ansible_root="$bash_dotfiles_root/../ansible/bash"
 gen_script="$SCRIPT_DIR"/mass_copy_role_files_task.py
 
-role='minimal'
+role='common'
 
 
 new_user='test'
@@ -60,14 +60,6 @@ find "$bash_dotfiles_root" -maxdepth 1 -name '*.sh' > "$file_with_paths"
 
 exec_gen_script "$generated_file" "$file_with_paths" "$var_name"
 rm "$file_with_paths"
-
-
-
-# next: delete old config files from config without config rm command (dont delete !)
-# add new ones
-# make configadd command work with new files
-# then test with common role etc
-
 
 
 

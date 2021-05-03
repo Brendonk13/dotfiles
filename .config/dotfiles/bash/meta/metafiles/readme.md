@@ -1,8 +1,8 @@
 
 # What here why ?? !
 
-what: stuff for generating ansible tasks or managing bash dotfiles in general
+**what:** stuff for generating ansible tasks
 
-here: stuff here not added to ../data/ordered_concatenated_files.txt
+**here:** stuff here not added to ../data/ordered_concatenated_files.txt
 
-why: cuz
+**why:** cuz i dont want this stuff sourced from .bashrc !

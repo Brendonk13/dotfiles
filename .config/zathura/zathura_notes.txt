@@ -1,0 +1,25 @@
+
+scroll speed sucked so download imwheel and set this as ~/.imwheelrc
+
+# Speed up scrolling for the document viewer
+"^Zathura$"
+    None, Up, Button4, 6
+    None, Down, Button5, 6
+
+
+Keyboard Shortcuts:
+
+
+    P       snap page to middle of screen
+
+    s       auto zoom to best fit
+
+
+    d       Toggle dual page view !!!
+
+
+
+Can create "quickmarks"
+and bookmarks
+
+see the man zathura
