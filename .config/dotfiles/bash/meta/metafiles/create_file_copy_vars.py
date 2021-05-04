@@ -5,48 +5,55 @@ from os import environ
 
 
 
-def get_directories(file_with_paths):
-    with open(file_with_paths, 'r') as f:
+# todo: make this take FINISHED destinations var as input
+# then not read file
+# and append extra dies
+def get_directories(dest_base_dir, destinations):
+    def most_dirs():
         return [
-            pathlib.Path(line).parents[0]
-            for line in f
+            pathlib.Path(dest).parents[0]
+            for dest in destinations
         ]
+    return set(
+        most_dirs() + [
+                f'{dest_base_dir}/meta/data',
+                f'{dest_base_dir}/sourced',
+            ]
+        )
+
 
 
 def get_src_and_dest(dest_base_dir, file_with_paths):
     src_base_dir = environ['bash_dotfiles_root']
     sources, destinations, dest_dirs = [], [], []
-    # sources, destinations = [], []
-    directories = get_directories(file_with_paths)
     with open(file_with_paths, 'r') as f:
         for src in f:
             src = src.rstrip('\n')
             dest = src.replace(src_base_dir, dest_base_dir)
-            dest_dir = pathlib.Path(dest).parents[0]
             sources.append(src)
             destinations.append(dest)
-            dest_dirs.append(dest_dir)
 
-    return sources, destinations, set(dest_dirs)
-    # return sources, destinations
+    return sources, destinations, get_directories(dest_base_dir, destinations)
 
 
-def get_var_names(var_name):
-    return f'{var_name}_sources', f'{var_name}_destinations', f'{var_name}_dirs'
-
-
-def create_variables(generated_file, var_name, sources, destinations, dest_dirs):
-# def create_variables(generated_file, var_name, sources, destinations):
-    src_name, dest_name, dir_name = get_var_names(var_name)
+def create_variables(sources, destinations, dest_dirs):
+    # Note: use append since this script is called multiple times
     with open('/tmp/src_file.txt', 'a') as f:
+        # f.write('dotfile_sources:\n')
         for src in sources:
             f.write(f'  - {src}\n')
+        # f.write('\n\n')
     with open('/tmp/dest_file.txt', 'a') as f:
+        # f.write('dotfile_destinations:\n')
         for dest in destinations:
             f.write(f'  - {dest}\n')
+        # f.write('\n\n')
     with open('/tmp/ansb_directories.txt', 'a') as f:
+        # f.write('created_dirs:\n')
         for dest_dir in dest_dirs:
             f.write(f'  - {dest_dir}\n')
+        # this one
+        # f.write('\n\n')
 
 
     # with open(generated_file, 'a') as f:
@@ -69,10 +76,8 @@ def create_variables(generated_file, var_name, sources, destinations, dest_dirs)
 
 if __name__ == "__main__":
     # print(sys.argv)
-    dest_base_dir, generated_file, file_with_paths, var_name = sys.argv[1:]
+    dest_base_dir, file_with_paths = sys.argv[1:]
     create_variables(
-        generated_file,
-        var_name,
         *get_src_and_dest(dest_base_dir, file_with_paths)
     )
 

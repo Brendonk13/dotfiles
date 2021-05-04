@@ -13,9 +13,13 @@
   gather_facts: true
   become: yes
 
+  vars_files:
+    - group_vars/all.yml
+
   # - minimal
   roles:
-  - install_files
+    - copy_bash_files
+  # - install_files
 
 
 # - name: test dev copy

@@ -1,27 +1,30 @@
 ---
 # tasks file for minimal
-- name: create dir structure
-  file:
-    path: "{{ item }}"
-    state: directory
-  loop: "{{ created_dirs }}"
+# - name: Create dir structure
+#   file:
+#     path: "{{ item }}"
+#     state: directory
+#   loop: "{{ created_dirs }}"
 
-- name: copy role files
-  # debug:
-    # msg: "{{ item.0 }} {{ item.1 }}"
-  copy:
-    src: "{{ item.0 }}"
-    dest: "{{ item.1 }}"
-  loop: "{{ dotfile_sources | zip( dotfile_destinations) | list }}"
+# - name: Copy role files
+#   copy:
+#     src: "{{ item.0 }}"
+#     dest: "{{ item.1 }}"
+#   loop: "{{ dotfile_sources | zip( dotfile_destinations) | list }}"
 
 - name: Create last_role.txt file
   copy:
     dest: "{{home_dir}}/.config/dotfiles/bash/meta/data/last_role.txt"
     content: |
-      "{{role}}"
+      {{role}}
 
-- name: append line to current bashrc (to source other files)
+- name: Append line to current bashrc (to source other files)
   lineinfile:
     path: "{{ home_dir }}/.bashrc"
     line: 'source ~/.config/dotfiles/bash/bashrc.sh'
     insertbefore: EOF
+
+- name: Delete ordered_concatenated_files.txt
+  file:
+    path: "{{home_dir}}/.config/dotfiles/bash/meta/data/ordered_concatenated_files.txt"
+    state: absent
