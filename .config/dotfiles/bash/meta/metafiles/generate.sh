@@ -11,7 +11,8 @@ role='common'
 new_user='test'
 new_home_dir="/home/$new_user"
 # new_home_dir='/root'
-ansible_vars_file="$ansible_root/roles/$role/vars/main.yml"
+# ansible_vars_file="$ansible_root/roles/$role/vars/main.yml"
+ansible_vars_file="$ansible_root/roles/copy_bash_files/vars/main.yml"
 
 # reset file so we don't continuously append to this file
 echo -e "---\n#Note: this file is generated and overwritten by generate.sh file" > "$ansible_vars_file"

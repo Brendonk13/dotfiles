@@ -1,11 +1,12 @@
 Bugs:
-    make it always set TERM=vt100 when coming from ssh !!!
-    -- even xterm-kitty didnt work over ssh for test@192.168.0.30
 
 
 
 Undecided:
     what to do with programs/ripgrep/hidden/common/.ripgreprc
+        - need ansible to check whether ripgrep is in the list of installed files
+        - maybe a "add dev config files role"
+        - what about a "add common config files" role which adds some basic neovim shit
     -- and the j2 file in templates/alias/***
 
     - maybe the vars always get sent to minimal by generate.sh -- minimals job is to always copy file in dotfiles_sources etc
