@@ -1,0 +1,7 @@
+git
+fasd
+ripgrep
+fzf
+neofetch
+python3-pip
+xcape

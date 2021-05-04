@@ -1,0 +1,9 @@
+git
+fasd
+ripgrep
+fzf
+bat
+lsd
+neofetch
+yay
+python-pip

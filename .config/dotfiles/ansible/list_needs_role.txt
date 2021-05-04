@@ -1,0 +1,33 @@
+~/.i3/config
+polybar
+    - not in ubuntu < 20.10
+    https://medium.com/@tatianaensslin/install-polybar-in-3-steps-on-debian-stretch-c64ab6157fb1
+copy fonts
+install polybar fonts and the dow/ricer/polybar-scripts dir
+latex setup !!
+/usr/share/X11/xkb/
+/usr/share/backgrounds/
+/usr/share/fonts/
+/usr/share/rofi/themes/solarized_alternate.rasi
+ruby-fusuma
+https://github.com/iberianpig/fusuma
+    - install libinput, ruby then gem install fusuma (ruby package manager)
+
+bat:
+https://github.com/sharkdp/bat#on-ubuntu-using-most-recent-deb-packages
+
+lsd:
+https://github.com/Peltoche/lsd#on-ubuntu
+
+bottom:
+https://github.com/ClementTsang/bottom#debian
+
+rofi-calc
+https://github.com/svenstaro/rofi-calc
+apt install rofi-dev qalc libtool
+
+ubuntu:
+no picom, just compton
+no rofi-calc
+no teiler
+

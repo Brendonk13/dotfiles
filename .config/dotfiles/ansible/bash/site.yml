@@ -10,11 +10,12 @@
 - name: test common copy
   hosts: common_servers
   remote_user: test
-  gather_facts: false
+  gather_facts: true
+  become: yes
 
+  # - minimal
   roles:
-  - minimal
-  - common
+  - install_files
 
 
 # - name: test dev copy

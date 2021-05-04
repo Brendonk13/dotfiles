@@ -1,0 +1,6 @@
+xdg-utils
+mpv
+dunst
+kitty
+pavucontrol
+rofi

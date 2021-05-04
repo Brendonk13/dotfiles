@@ -1,0 +1,12 @@
+xdg-utils
+mpv
+dunst
+polybar
+ruby-fusuma
+kitty
+picom
+rofi
+pavucontrol
+rofi-calc
+rofi-pass
+xcape

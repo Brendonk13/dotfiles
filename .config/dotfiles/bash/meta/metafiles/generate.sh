@@ -3,7 +3,7 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 ansible_root="$bash_dotfiles_root/../ansible/bash"
-gen_script="$SCRIPT_DIR"/mass_copy_role_files_task.py
+gen_script="$SCRIPT_DIR"/create_file_copy_vars.py
 
 role='common'
 
@@ -82,3 +82,11 @@ rm /tmp/src_file.txt
 rm /tmp/dest_file.txt
 rm /tmp/ansb_directories.txt
 
+
+
+# install files generation
+
+
+generated_file="$bash_dotfiles_root"/../ansible/bash/roles/install_files/vars/main.yml
+echo -e "---\n# This file is generated and overwritten by generate.sh\nrole: $role\n" > "$generated_file"
+python3 "$SCRIPT_DIR"/create_install_vars.py "$role" >> "$generated_file"
