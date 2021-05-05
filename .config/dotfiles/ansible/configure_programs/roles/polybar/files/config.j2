@@ -1,0 +1,804 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+;background = ${xrdb:color0:#222}
+background = #222
+background-alt = #c7232323
+;background-alt = #3b3b3b
+;foreground = ${xrdb:color7:#222}
+foreground = #f9dfdfdf
+foreground-alt = #555
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+;bg = #77404040
+;bg = #df161616
+
+
+; prev
+; bg = #b2393737
+; focusedworkspaceCol = #d9943B00
+
+
+bg = #F02E3440
+nord_fg = #D8DEE9
+nord_white = #ECEFF4
+
+nord_green = #A3BE8C
+nord_red = #BF616A
+nord_yellow = #EBCB8B
+
+nord_second_most_dark = #3B4252
+
+
+soft_green = #00ab66
+apple_green = #62BB47
+apple_yellow = #FFE681
+apple_red = #BA0C2E
+
+focusedworkspaceCol = #EA4C566A
+;power
+
+[color]
+;base-bg     = #de0a0a0a
+;base-bg     = #be404040
+base-bg     = #bf0d0d0d
+;glyph-bg    = #de0a0a0a
+
+; this is the transition color, ie NOT the angle thing
+; should be the same color as the modules
+;glyph-bg    = #fe404040
+;glyph-bg    = ${colors.bg}
+glyph-bg     = #be404040
+
+; this is black below
+module-bg   = #f00a0a0a
+; this is lighter black below
+selected-bg = #dc1a1a1a
+
+text-fg = #c8c8c8
+icon-fg = #ffffff
+;bar-fg = ${color.glyph-bg}
+bar-fg = #e4111111
+
+red     = #821717
+orange  = #824517
+
+
+
+; these are for the slanted tings
+
+[module/decor-glyph]
+type = custom/text
+content-background = ${color.glyph-bg}
+content-foreground = ${color.base-bg}
+
+[module/left-end-top]
+inherit = module/decor-glyph
+content = "%{T3}%{T-}"
+
+[module/right-end-top]
+inherit = module/decor-glyph
+content = "%{T3}%{T-}"
+
+[module/left-end-bottom]
+inherit = module/decor-glyph
+content = "%{T3}%{T-}"
+
+[module/right-end-bottom]
+inherit = module/decor-glyph
+content = "%{T3}%{T-}"
+
+
+
+[generic-format-style]
+format-background = ${color.module-bg}
+format-padding = ${layout.module-padding}
+
+format-prefix-font = ${layout.icon-font}
+format-prefix-foreground = ${color.icon-fg}
+format-prefix-padding-right = ${layout.icon-padding}
+
+
+[module/beforeCal]
+type = custom/text
+content-font = 1
+content = ""
+content-foreground = #bc101010
+content-background = ${colors.bg}
+
+
+
+
+[module/beforeSpotify]
+type = custom/text
+content-font = 8
+content = " "
+content-foreground = ${colors.nord_fg}
+content-background = ${colors.bg}
+
+click-left = /home/{{ansible_ssh_user}}/.config/polybar/player-mpris-tail.py next &
+click-middle = /home/{{ansible_ssh_user}}/.config/polybar/spotify_off.sh
+
+
+
+[module/spotifyIcon]
+type = custom/text
+content-font = 4
+content =  
+content-foreground = ${colors.soft_green}
+content-background = ${colors.bg}
+
+click-left = /home/{{ansible_ssh_user}}/.config/polybar/player-mpris-tail.py play-pause &
+click-middle = /home/{{ansible_ssh_user}}/.config/polybar/spotify_off.sh
+click-right = /home/{{ansible_ssh_user}}/.config/polybar/player-mpris-tail.py next &
+
+
+
+[module/spotifyInfo]
+type = custom/script
+format = <label>
+
+label-font = 6
+label = %output%
+label-foreground = ${colors.nord_fg}
+label-background = ${colors.bg}
+
+exec = /home/{{ansible_ssh_user}}/.config/polybar/player-mpris-tail.py --icon-playing ' ' --icon-paused ' ' --icon-stopped ' ' --truncate-text '' -f '{icon} {:artist:t12:{artist}:}{:artist: - :}{:t16:{title}:}'
+
+click-left = /home/{{ansible_ssh_user}}/.config/polybar/player-mpris-tail.py play-pause &
+click-middle = /home/{{ansible_ssh_user}}/.config/polybar/spotify_off.sh
+
+interval = 8
+tail = true
+
+
+[module/popup-calendar]
+type = custom/script
+format = <label>
+format-padding = 1
+label = %output% 
+label-underline = ${colors.nord_red}
+format-font = 4
+label-foreground = ${colors.nord_white}
+format-background = ${colors.nord_second_most_dark}
+exec = /home/{{ansible_ssh_user}}/.config/polybar/popup-calendar.sh
+click-left = /home/{{ansible_ssh_user}}/.config/polybar/popup-calendar.sh --popup &
+
+
+
+;hook-0 = /home/{{ansible_ssh_user}}/.config/polybar/player-mpris-tail.py -f '{artist} - {title}'
+;hook-1 = /home/{{ansible_ssh_user}}/.config/polybar/player-mpris-tail.py -f '{icon}'
+
+[module/mpris]
+type = custom/ipc
+;enable-ipc = true
+format = <output>
+format-output-font = 7
+format-output-foreground = ${colors.foreground}
+format-output-background = ${color.bar-fg}
+;tail = true
+
+hook-0 = /home/{{ansible_ssh_user}}/.config/polybar/spotify_on
+hook-1 = /usr/bin/playerctl play-pause
+hook-2 = /home/{{ansible_ssh_user}}/.config/polybar/player-mpris-tail.py next &
+hook-3 = /usr/bin/playerctl previous
+hook-4 = echo ""
+;hook-2 = /usr/bin/playerctl next
+
+initial = 5
+
+; start/kill with middle click
+click-middle = polybar-msg hook mpris 1
+; play/pause spotify
+click-left = polybar-msg hook mpris 2
+
+click-right = polybar-msg hook mpris 3
+
+; next song
+double-click-left = polybar-msg hook mpris 3
+; prev song
+double-click-right = polybar-msg hook mpris 4
+
+
+
+[module/openweathermap-fullfeatured]
+type = custom/script
+label-font = 9
+format = <label>
+label = %output%
+format-label-foreground = #FFF
+format-label-background = #444
+
+;format-prefix = 
+
+exec = /home/{{ansible_ssh_user}}/.config/polybar/openweathermap-fullfeatured.sh
+click-left = /home/{{ansible_ssh_user}}/.config/polybar/clickedWeather.sh
+interval = 16
+
+
+
+[module/AfterI3]
+type = custom/text
+content-foreground = #69F48B00
+content-background = ${colors.bg}
+content = 
+;content = █
+;content = █
+;format-suffix = "  █"
+
+
+
+[module/beforeWeather]
+type = custom/text
+format-prefix-font = 2
+content-foreground = #69F48B00
+content-background = ${colors.bg}
+content = 
+;content = 
+
+
+
+[module/AfterDate]
+type = custom/text
+;content-foreground = #81111111
+content-foreground = #9c101010
+content-background = ${colors.background-alt}
+content = 
+
+[layout]
+icon-font = 2
+
+icon-padding = 1
+module-padding = 2
+
+bar-format = %{T4}%fill%%indicator%%{F#dc404040}%empty%%{F-}%{T-}
+bar-fill-icon = ﭳ
+
+
+
+[bar/myBar]
+monitor = ${env:MONITOR:}
+;monitor = ${env:MONITOR:HDMI-1}
+enable-ipc = true
+width = 100%
+height = 23
+;offset-x = 1%
+;offset-y = 1%
+radius = 0.0
+fixed-center = false
+
+background = ${colors.bg}
+;this is text color
+foreground = ${colors.foreground}
+
+line-size = 2
+line-color = #99A23100
+
+padding-left = 0
+padding-right = 2
+
+
+font-0 = "mplus Nerd Font:style=Medium:size=22;6"
+font-1 = "mplus Nerd Font:style=Medium:size=15;2"
+; 2 is for the time
+font-2 = "mplus Nerd Font:style=Medium:size=15;3"
+
+font-3 = "mplus Nerd Font:style=Medium:size=13;2"
+font-4 = "mplus Nerd Font:style=Medium:size=12;1"
+
+font-5 = "mplus Nerd Font:style=Medium:size=12;2"
+
+
+font-6 = "FontAwesome5Free:style=Solid:size=8;1"
+font-7 = "FontAwesome5Free:style=Solid:size=11;2:antialias=false"
+font-8 = "mplus Nerd Font:style=Medium:size=11;1"
+
+; font-8 = "Weather Icons:style=Regular:size=12;1"
+
+
+; after I3 is meant to have padding beteen i3 and line
+
+; modules-left = beforeWeather openweathermap-fullfeatured beforeCal popup-calendar AfterDate i3
+;modules-center = player-mpris-tail
+;modules-center = spotifyIcon spot spotifyOn spotifyOff
+
+;modules-left = beforeCal popup-calendar AfterDate i3
+;modules-center = beforeSpotify spotifyIcon spotifyInfo
+;modules-right = left-end-bottom battery right-end-top left-end-bottom memory  cpu right-end-top left-end-bottom brightness right-end-top powermenu
+
+
+module-margin = 0.5
+
+modules-left = i3
+modules-center = beforeSpotify spotifyIcon spotifyInfo
+
+modules-right =  memory cpu temperature popup-calendar battery powermenu
+
+; for devices without batteries
+; modules-right =  memory cpu temperature popup-calendar powermenu
+
+
+
+
+
+
+;enable-ipc = true
+
+tray-position = right
+tray-padding = 2
+;tray-background = #0063ff
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+;label-mode-padding = 2
+;label-mode-foreground = #E9E9E9
+;label-mode-background = ${colors.background-alt}
+
+
+; ================ focused: Active workspace on focused monitor ================
+label-focused-font = 2
+label-focused = %name%
+label-focused-background = ${colors.focusedworkspaceCol}
+label-focused-foreground = ${colors.nord_white}
+label-focused-padding = 2
+; ================ focused: Active workspace on focused monitor ================
+
+
+; ================ unfocused: Inactive workspace on any monitor ================
+label-unfocused = %name%
+label-unfocused-background = ${colors.bg}
+label-unfocused-foreground = ${colors.nord_fg}
+label-unfocused-padding = 1
+label-unfocused-font = 4
+; ================ unfocused: Inactive workspace on any monitor ================
+
+
+
+; ================ visible: Active workspace on unfocused monitor =============
+label-visible = %name%
+label-visible-foreground = ${colors.nord_white}
+label-visible-background = ${colors.focusedworkspaceCol}
+;label-visible-underline = ${self.label-focused-underline}
+
+label-visible-padding = ${self.label-focused-padding}
+label-visible-font = ${self.label-unfocused-font}
+; ================ visible: Active workspace on unfocused monitor =============
+
+
+; urgent = Workspace with urgency hint set
+label-urgent = %name%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+; Separator in between workspaces
+;label-separator = |
+;label-separator-font = 3
+
+;format-suffix-font = 1
+
+
+
+
+[module/brightness]
+type = internal/xbacklight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
+card = intel_backlight
+interval = 8
+
+; Available tags:
+;   <label> (default)
+;   <ramp>
+;   <bar>
+format = <ramp> <bar>
+;format-background = ${color.base-bg}
+format-background = ${colors.bg}
+format-padding = 1
+
+; Available tokens:
+;   %percentage% (default)
+label = %percentage%%
+
+; Only applies if <ramp> is used
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+; one day I'll make my own big aterisk to indicate full
+; and then have smaller versions for the ramp
+
+; size 13, 2
+ramp-font = 4
+
+; add this functionality for charging
+bar-foreground-0 = #e53935
+bar-foreground-1 = #e53935
+bar-foreground-2 = #fdd835
+bar-foreground-3 = #43a047
+
+bar-width = 4
+bar-fill = ﭳ
+bar-gradient = false
+bar-fill-icon = ﭳ
+bar-indicator =
+bar-empty = ﭳ
+;bar-empty-foreground = #dc404040
+bar-empty-foreground = #666666
+; Bar
+; bar-format = %{T4}%fill%%indicator%%empty%%{F-}%{T-}
+
+; nooo idea how to set the font for this guy
+
+;format-bar-font = 1
+;format-bar-format-font = 1
+;bar-format-font = 2
+;bar-font = 1
+;format-font = 1
+
+
+[module/cpu]
+type = internal/cpu
+inherit = generic-format-style
+interval = 4
+
+format-padding = 1
+;format = <label> <ramp-load>
+format = <label>
+label =  %percentage%%
+label-font = 5
+label-underline = ${colors.nord_fg}
+ramp-underline = ${self.label-underline}
+ramp-load-spacing = 1
+ramp-load-0 = ▁
+ramp-load-1 = ▂
+ramp-load-2 = ▃
+ramp-load-3 = ▄
+ramp-load-4 = ▅
+ramp-load-5 = ▆
+ramp-load-6 = ▇
+ramp-load-7 = 
+
+format-prefix = 
+format-prefix-font = 5
+format-prefix-underline = ${self.label-underline}
+
+
+ramp-font = 5
+ramp-load-underline = ${self.label-underline}
+;ramp-load-7 = █
+
+; this screw up label/ramp fonts for some reason
+;format-prefix = 
+;format-prefix-font = 7
+;format-prefix-foreground = ${colors.foreground}
+;format-prefix-background = ${colors.bg}
+
+
+;ramp-load-0-foreground = ${colors.soft_green}
+;ramp-load-1-foreground = ${colors.soft_green}
+;ramp-load-2-foreground = ${colors.soft_green}
+;ramp-load-3-foreground = ${colors.apple_yellow}
+;ramp-load-4-foreground = ${colors.apple_yellow}
+;ramp-load-5-foreground = ${colors.apple_yellow}
+;ramp-load-6-foreground = ${colors.apple_red}
+;ramp-load-7-foreground = ${colors.apple_red}
+
+format-foreground = ${colors.foreground}
+format-background = ${colors.bg}
+
+
+
+[module/memory]
+type = internal/memory
+interval = 8
+label = %gb_used%
+label-underline = ${colors.nord_fg}
+
+format-prefix = "﬘ "
+format-prefix-foreground = ${colors.nord_fg}
+format-prefix-font = 3
+format-prefix-underline = ${self.label-underline}
+
+
+format-background = ${colors.bg}
+label-font = 5
+
+format-padding = 1
+
+
+
+;[module/wlan]
+;type = internal/network
+;interface = wlp61s0
+;interval = 3.0
+;
+;format-connected = <ramp-signal> <label-connected>
+;format-connected-underline = #9f78e1
+;label-connected = %essid%
+;
+;format-disconnected =
+;;format-disconnected = <label-disconnected>
+;;format-disconnected-underline = ${self.format-connected-underline}
+;;label-disconnected = %ifname% disconnected
+;;label-disconnected-foreground = ${colors.foreground-alt}
+;
+;ramp-signal-0 = 
+;ramp-signal-1 = 
+;ramp-signal-2 = 
+;ramp-signal-3 = 
+;ramp-signal-4 = 
+;ramp-signal-foreground = ${colors.foreground-alt}
+;
+;[module/eth]
+;type = internal/network
+;interface = enp0s25
+;interval = 3.0
+;
+;format-connected-underline = #55aa55
+;format-connected-prefix = " "
+;format-connected-prefix-foreground = ${colors.foreground-alt}
+;label-connected = %local_ip%
+;
+;format-disconnected =
+;;format-disconnected = <label-disconnected>
+;;format-disconnected-underline = ${self.format-connected-underline}
+;;label-disconnected = %ifname% disconnected
+;;label-disconnected-foreground = ${colors.foreground-alt}
+
+
+
+[module/date]
+type = internal/date
+interval = 32
+date =
+date-alt = " %a-%b  (%d/%m/%Y)  "
+
+;time = %H:%M
+time = %I:%M
+time-alt = %I:%M:%S
+
+format-prefix-font = 1
+format-prefix = ""
+format-prefix-foreground = #bc101010
+;content-foreground = #9c101010
+;format-prefix-background = #be404040
+format-prefix-background = ${colors.bg}
+
+format-background = ${color.bg}
+
+label = %date% %time% 
+; size = 13; 2
+label-font = 4
+
+format-suffix = " "
+;format-suffix-background = ${color.bar-fg}
+format-suffix-background = ${color.bar-fg}
+format-suffix-foreground = #69F48B00
+format-suffix-font = 2
+
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <label-volume> <bar-volume>
+label-volume = VOL %percentage%%
+label-volume-foreground = ${root.foreground}
+
+label-muted = 🔇 muted
+label-muted-foreground = #666
+
+bar-volume-width = 10
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/alsa]
+type = internal/alsa
+
+format-volume = <label-volume> <bar-volume>
+label-volume = VOL
+label-volume-foreground = ${root.foreground}
+
+format-muted-prefix = " "
+format-muted-foreground = ${colors.foreground-alt}
+label-muted = sound muted
+
+bar-volume-width = 10
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+
+[module/battery]
+; check /sys/class/power_supply/XXXXXXX
+type = internal/battery
+battery = {{battery_name}}
+adapter = AC
+full-at = 98
+interval = 16
+poll-interval = 5
+
+format-charging-padding = 1
+format-discharging-padding = 1
+
+format-charging = <label-charging>
+label-charging = %percentage% 
+format-charging-prefix = 
+format-charging-prefix-foreground = ${colors.apple_yellow}
+format-charging-prefix-background = ${colors.nord_second_most_dark}
+; label-charging-underline = ${colors.nord_red}
+format-charging-underline = ${colors.nord_red}
+
+
+; slightly dimmer/ more trasparent to make less noticable
+label-charging-foreground = ${colors.nord_white}
+label-discharging-foreground = ${colors.nord_white}
+
+format-charging-background    = ${colors.nord_second_most_dark}
+format-discharging-background = ${self.format-charging-background}
+label-full-background = ${self.format-charging-background}
+
+format-discharging = <label-discharging> <ramp-capacity>
+label-discharging = %percentage%
+format-discharging-underline = ${self.format-charging-underline}
+
+label-discharging-font = 4
+label-charging-font = 4
+format-charging-prefix-font = 6
+
+label-full =  
+label-full-font = 3
+label-full-foreground = ${colors.soft_green}
+; label-full-background = ${colors.bg}
+label-full-padding = 1
+
+
+
+
+ramp-capacity-font = 4
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+
+ramp-capacity-0-foreground = ${colors.apple_red}
+ramp-capacity-1-foreground = ${colors.apple_yellow}
+ramp-capacity-2-foreground = ${colors.soft_green}
+ramp-capacity-3-foreground = ${colors.soft_green}
+ramp-capacity-4-foreground = ${colors.soft_green}
+
+ramp-background = ${colors.bg}
+
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+format-warn-font = 3
+
+format-padding = 2
+
+format = <label>
+format-font = 4
+label-underline = ${colors.soft_green}
+format-warn = <label-warn>
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.apple_red}
+
+; underline goes away and font gets big when warn-temperature hit
+label-warn-font = 1
+;label-warn-underline = ${self.label-warn-foreground}
+
+;ramp-underline = ${colors.soft_green}
+;ramp-0 = 
+;ramp-1 = 
+;ramp-2 = 
+;ramp-foreground = ${colors.foreground-alt}
+
+;format-warn-underline = ${colors.apple_red}
+
+
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = ${colors.secondary}
+label-close =  cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = power off
+menu-2-0-exec = sudo poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+; vim:ft=dosini

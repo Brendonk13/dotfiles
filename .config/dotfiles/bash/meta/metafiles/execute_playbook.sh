@@ -4,7 +4,8 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 role='common'
 # perform sed with site.yml maybe to add this automatically
-new_user='test'
+# new_user='test'
+new_user='pi'
 new_home_dir="/home/$new_user"
 # IDEA: append role to group_vars and have site.yml have a bunch of diff clauses depending on this var's value
 

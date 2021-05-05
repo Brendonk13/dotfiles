@@ -1,0 +1,12 @@
+---
+# tasks file for random_settings
+- name: copy xkb
+  copy:
+    src: /usr/share/X11/xkb
+    dest: /usr/share/X11/xkb
+
+- name: copy keyboard
+  copy:
+    src: keyboard
+    dest: /etc/default/keyboard
+

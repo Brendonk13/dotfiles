@@ -1,0 +1,19 @@
+---
+
+- name: test common copy
+  hosts: common_servers
+  remote_user: test
+  gather_facts: true
+  become: yes
+
+  vars_files:
+    - group_vars/all.yml
+
+  # - minimal
+  roles:
+    - copy_bash_files
+  # - install_files
+
+
+      # order:
+      # polybar after fonts are added !!!

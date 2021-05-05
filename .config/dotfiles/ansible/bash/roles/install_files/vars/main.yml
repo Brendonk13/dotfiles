@@ -18,6 +18,23 @@ Archlinux_desktop:
   - rofi-calc
   - rofi-pass
   - xcape
+  - xdotool
+  - xclip
+  - nitrogen
+  - yad
+  - yay
+  - redshift
+  - python-dbus
+  - mpd
+  - ttf-font-awesome
+  - xcape
+  - lightdm-settings
+  - blueman
+  - zathura
+  - zathura-pdf-mupdf
+  - tldr
+  - nodejs
+  - nordic-theme-git
 
 Archlinux_dev:
   - git
@@ -29,6 +46,10 @@ Archlinux_dev:
   - neofetch
   - yay
   - python-pip
+
+yay_desktop:
+  - rofi-greenclip
+  - latex-mk
 
 yay_dev:
   - bottom
@@ -45,6 +66,21 @@ Debian_desktop:
   - kitty
   - pavucontrol
   - rofi
+  - xdotool
+  - redshift
+  - redshift
+  - xclip
+  - nitrogen
+  - yad
+  - redshift
+  - mpd
+  - fonts-font-awesome
+  - xcape
+  - pulseaudio
+  - zathura
+  - tldr-py
+  - nodejs
+  - latex-mk
 
 Debian_dev:
   - git

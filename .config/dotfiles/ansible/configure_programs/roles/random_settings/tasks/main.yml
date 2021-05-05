@@ -1,0 +1,16 @@
+---
+# tasks file for random_settings
+- name: copy fonts
+  copy:
+    src: /usr/share/fonts
+    dest: /usr/share/fonts
+
+- name: copy backgrounds
+  copy:
+    src: /usr/share/backgrounds
+    dest: /usr/share/backgrounds
+
+- name:
+  copy:
+    src: /usr/share/rofi/themes/solarized_alternate.rasi
+    dest: /usr/share/rofi/themes/solarized_alternate.rasi

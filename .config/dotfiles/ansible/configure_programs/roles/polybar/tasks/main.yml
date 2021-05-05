@@ -1,0 +1,11 @@
+---
+# tasks file for polybar
+- name: Store battery name in variable
+  ansible.builtin.shell: /bin/bash ls /sys/class/power_supply/ | grep BAT
+  register: battery_name
+
+- name: Create jinja file
+  ansible.builtin.shell: /bin/bash cp config config.j2 && sed -i 's#/home/brendon#/home/{{ansible_ssh_user}}#g' config.j2
+
+- name: Add battery thing
+  ansible.builtin.shell: /bin/bash sed -i -e 's/battery = .*$/battery = {{battery_name}}/' config.j2

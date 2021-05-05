@@ -7,9 +7,23 @@
 #   roles:
 #   - minimal
 
-- name: test common copy
+# - name: test common copy
+#   hosts: common_servers
+#   remote_user: test
+#   gather_facts: true
+#   become: yes
+
+#   vars_files:
+#     - group_vars/all.yml
+
+#   # - minimal
+#   roles:
+#     - copy_bash_files
+#   # - install_files
+
+- name: common raspberry pi
   hosts: common_servers
-  remote_user: test
+  remote_user: pi
   gather_facts: true
   become: yes
 
@@ -19,7 +33,7 @@
   # - minimal
   roles:
     - copy_bash_files
-  # - install_files
+    - install_files
 
 
 # - name: test dev copy

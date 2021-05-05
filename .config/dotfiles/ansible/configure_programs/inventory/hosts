@@ -1,0 +1,20 @@
+
+
+[min_servers]
+# 10.0.50.69
+192.168.0.30
+
+[common_servers]
+# 10.0.50.69
+192.168.0.30
+
+#[common]
+#
+#[nextcloud]
+## this will setup the docker compose and env file and dir structure
+## put in diff playbook
+#
+#[all:vars]
+#ansible_user=idk
+#ansible_ssh_private_key_file=~/......
+## think ill put these elsewhere?

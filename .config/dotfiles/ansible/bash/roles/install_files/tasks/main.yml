@@ -23,13 +23,13 @@
   loop: "{{ Archlinux_desktop }}"
   when: ansible_facts['os_family'] == "Archlinux" and role == "desktop"
 
-- name: install yay_dev packages
-  # Todo: SETUP => https://github.com/mnussbaum/ansible-yay
-  yay:
-    name: "{{item}}"
-    state: present
-  loop: "{{ yay_dev }}"
-  when: ansible_facts['os_family'] == "Archlinux" and role == "dev"
+# # Todo: SETUP => https://github.com/mnussbaum/ansible-yay
+# - name: install yay_dev packages
+#   yay:
+#     name: "{{item}}"
+#     state: present
+#   loop: "{{ yay_dev }}"
+#   when: ansible_facts['os_family'] == "Archlinux" and role == "dev"
 
 
 

@@ -1,0 +1,14 @@
+create symlinks of these files to files/other directory
+use sed to replace /home/brendon/** with /home/{{new_user}}
+    - output j2 file goes in file directory
+
+just copy the fucking files in manually
+run sed on them to create the j2 files
+delete the old files
+run sed to replace 
+battery = BAT0
+with battery = {{battery_name}}
+create variable by running:
+ls /sys/class/power_supply/ | grep BAT
+ON REMOTE MACHINE
+-- use register command

@@ -1,4 +1,9 @@
+bluetooth:
+    blueman, arch guide
 ~/.i3/config
+    # use xrandr --query | grep " connected" | cut -d" " -f1 for these, maybe not suitable for j2 tho ...
+    bindsym $mod+Shift+greater move workspace to output HDMI1
+    bindsym $mod+Shift+less move workspace to output eDP1
 polybar
     - not in ubuntu < 20.10
     https://medium.com/@tatianaensslin/install-polybar-in-3-steps-on-debian-stretch-c64ab6157fb1
