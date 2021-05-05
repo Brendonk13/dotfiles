@@ -1,16 +1,16 @@
 ---
 # tasks file for minimal
-# - name: Create dir structure
-#   file:
-#     path: "{{ item }}"
-#     state: directory
-#   loop: "{{ created_dirs }}"
+- name: Create dir structure
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop: "{{ created_dirs }}"
 
-# - name: Copy role files
-#   copy:
-#     src: "{{ item.0 }}"
-#     dest: "{{ item.1 }}"
-#   loop: "{{ dotfile_sources | zip( dotfile_destinations) | list }}"
+- name: Copy role files
+  copy:
+    src: "{{ item.0 }}"
+    dest: "{{ item.1 }}"
+  loop: "{{ dotfile_sources | zip( dotfile_destinations) | list }}"
 
 - name: Create last_role.txt file
   copy:

@@ -12,21 +12,19 @@ ansible_vars_file="$ansible_root/roles/copy_bash_files/vars/main.yml"
 
 
 
-
-
-# reset file so we don't continuously append to this file
-echo -e "---\n#Note: this file is generated and overwritten by generate.sh file" > "$ansible_vars_file"
-echo -e "\n" >> "$ansible_vars_file"
-#TODO: change these to go in group_vars
-
+# =============== create group_vars file =======================
 ansible_group_vars_file="$ansible_root/group_vars/all.yml"
-echo -e "---\n#Note: this file is generated and overwritten by generate.sh file" > "$ansible_group_vars_file"
+echo -e "---\n#Note: this file is generated and overwritten by generate_copy_vars.sh file" > "$ansible_group_vars_file"
 echo "home_dir: $new_home_dir" > "$ansible_group_vars_file"
 echo "role: $role" >> "$ansible_group_vars_file"
 echo -e "\n" >> "$ansible_group_vars_file"
 
-# never copy meta/data/ordered....
-# then bashrc is forced to call concat_roles first time around
+
+
+
+# reset file so we don't continuously append to this file
+echo -e "---\n#Note: this file is generated and overwritten by generate_copy_vars.sh file" > "$ansible_vars_file"
+echo -e "\n" >> "$ansible_vars_file"
 
 
 
@@ -50,6 +48,7 @@ create_variables(){
 
 
 
+# FIRST add vars for every file in role **NOT IN** $bash_dotfiles_root
 file_with_paths="/tmp/dotfiles_copy_$role"
 
 # generate file with paths for mass copying files in the role
@@ -60,7 +59,7 @@ rm "$file_with_paths"
 
 
 
-
+# SECOND add vars for every file in role **IN** $bash_dotfiles_root
 file_with_paths="/tmp/root_dotfiles_copy_$role"
 
 # generate file with paths for copying bash files in $bash_dotfiles_root dir

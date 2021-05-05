@@ -1,5 +1,5 @@
 ---
-#Note: this file is generated and overwritten by generate.sh file
+#Note: this file is generated and overwritten by generate_copy_vars.sh file
 
 
 dotfile_sources:
@@ -55,23 +55,23 @@ dotfile_destinations:
 
 
 created_dirs:
+  - /home/test/.config/dotfiles/bash/setup_env/exports/common
+  - /home/test/.config/dotfiles/bash/programs/git/minimal
+  - /home/test/.config/dotfiles/bash/programs/nvim/common
+  - /home/test/.config/dotfiles/bash/setup_env/alias
+  - /home/test/.config/dotfiles/bash/programs/built_ins/common
   - /home/test/.config/dotfiles/bash/setup_env/debug/common
+  - /home/test/.config/dotfiles/bash/programs/git/common
+  - /home/test/.config/dotfiles/bash/programs/built_ins/minimal
+  - /home/test/.config/dotfiles/bash/programs/extract
+  - /home/test/.config/dotfiles/bash/sourced
   - /home/test/.config/dotfiles/bash/meta/data
   - /home/test/.config/dotfiles/bash/setup_env/shopts
   - /home/test/.config/dotfiles/bash/setup_env/debug/colors/minimal
-  - /home/test/.config/dotfiles/bash/setup_env/exports/common
-  - /home/test/.config/dotfiles/bash/programs/built_ins/common
-  - /home/test/.config/dotfiles/bash/programs/nvim/common
-  - /home/test/.config/dotfiles/bash/programs/built_ins/minimal
-  - /home/test/.config/dotfiles/bash/setup_env/alias
-  - /home/test/.config/dotfiles/bash/programs/extract
   - /home/test/.config/dotfiles/bash/setup_env/exports
-  - /home/test/.config/dotfiles/bash/programs/git/common
-  - /home/test/.config/dotfiles/bash/programs/git/minimal
   - /home/test/.config/dotfiles/bash/sourced
-  - /home/test/.config/dotfiles/bash
   - /home/test/.config/dotfiles/bash/meta/data
-  - /home/test/.config/dotfiles/bash/sourced
+  - /home/test/.config/dotfiles/bash
 
 
 

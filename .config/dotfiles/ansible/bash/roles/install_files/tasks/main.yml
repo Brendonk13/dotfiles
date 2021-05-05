@@ -2,31 +2,34 @@
 # tasks file for install_files/
 
 # ======================== Arch ================================================
-# - name: install Archlinux_common packages
-#   pacman:
-#     name: "{{item}}"
-#     state: present
-#   loop: "{{ Archlinux_common }}"
-#   when: ansible_os_family == "Archlinux" and role == "common"
+- name: install Archlinux_common packages
+  pacman:
+    name: "{{item}}"
+    state: present
+  loop: "{{ Archlinux_common }}"
+  when: ansible_facts['os_family'] == "Archlinux" and role == "common"
 
-# - name: install Archlinux_dev packages
-#   pacman:
-#     name: "{{item}}"
-#     state: present
-#   loop: "{{ _ }}"
+- name: install Archlinux_dev packages
+  pacman:
+    name: "{{item}}"
+    state: present
+  loop: "{{ Archlinux_dev }}"
+  when: ansible_facts['os_family'] == "Archlinux" and role == "dev"
 
-# - name: install Archlinux_desktop packages
-#   pacman:
-#     name: "{{item}}"
-#     state: present
-#   loop: "{{ _ }}"
+- name: install Archlinux_desktop packages
+  pacman:
+    name: "{{item}}"
+    state: present
+  loop: "{{ Archlinux_desktop }}"
+  when: ansible_facts['os_family'] == "Archlinux" and role == "desktop"
 
-# - name: install yay_dev packages
-#   # Todo: SETUP => https://github.com/mnussbaum/ansible-yay
-#   yay:
-#     name: "{{item}}"
-#     state: present
-#   loop: "{{ _ }}"
+- name: install yay_dev packages
+  # Todo: SETUP => https://github.com/mnussbaum/ansible-yay
+  yay:
+    name: "{{item}}"
+    state: present
+  loop: "{{ yay_dev }}"
+  when: ansible_facts['os_family'] == "Archlinux" and role == "dev"
 
 
 
@@ -39,14 +42,16 @@
   loop: "{{ Debian_common }}"
   when: ansible_facts['os_family'] == "Debian" and role == "common"
 
-# - name: install Debian_dev packages
-#   apt:
-#     name: "{{item}}"
-#     state: present
-#   loop: "{{ _ }}"
+- name: install Debian_dev packages
+  apt:
+    name: "{{item}}"
+    state: present
+  loop: "{{ Debian_dev }}"
+  when: ansible_facts['os_family'] == "Debian" and role == "dev"
 
-# - name: install Debian_desktop packages
-#   apt:
-#     name: "{{item}}"
-#     state: present
-#   loop: "{{ _ }}"
+- name: install Debian_desktop packages
+  apt:
+    name: "{{item}}"
+    state: present
+  loop: "{{ Debian_desktop }}"
+  when: ansible_facts['os_family'] == "Debian" and role == "desktop"

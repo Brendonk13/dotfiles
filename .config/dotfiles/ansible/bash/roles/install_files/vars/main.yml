@@ -1,6 +1,5 @@
 ---
 # This file is generated and overwritten by generate.sh
-role: common
 
 Archlinux_common:
   - neovim
