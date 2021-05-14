@@ -63,8 +63,10 @@ else
 fi
 
 
-if hash ytop > /dev/null 2>&1; then
-    alias top='ytop -p -c monokai'
+if hash btm > /dev/null 2>&1; then
+    # deprecated
+    # alias top='ytop -p -c monokai'
+    alias top='btm'
 else
     echo 'ytop not found, no alias created'
 fi
@@ -253,6 +255,7 @@ configAdd(){
     config add ~/.config/rofi
     config add ~/.config/dunst
     config add ~/.config/pavucontrol.ini
+    config add ~/.config/w3m_Xresources
 
 
     config add ~/dev/dev/Scripts/battest_cronjob

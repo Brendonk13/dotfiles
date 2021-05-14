@@ -32,6 +32,7 @@ configAdd(){
     config add ~/.config/rofi
     config add ~/.config/dunst
     config add ~/.config/pavucontrol.ini
+    config add ~/.config/w3m_Xresources
 
 
     config add ~/dev/dev/Scripts/battest_cronjob
