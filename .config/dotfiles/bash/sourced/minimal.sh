@@ -284,11 +284,11 @@ function mcd() {
 
     echo "";  echo " ----- DESTINATION DIR CONTENTS:";
     cd "$file_destination"
-    if hash lsd > /dev/null 2>&1; then
-        lsd --group-dirs first
-    else
-        ls --group-directories --color
-    fi
+    # if hash lsd > /dev/null 2>&1; then
+    #     lsd --group-dirs first
+    # else
+    ls --group-directories --color
+    # fi
     echo ""
 }
 

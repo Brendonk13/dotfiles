@@ -22,7 +22,6 @@
 /home/brendon/.config/dotfiles/bash/setup_env/alias/dev/conda.sh
 /home/brendon/.config/dotfiles/bash/setup_env/alias/dev/builtin.sh
 /home/brendon/.config/dotfiles/bash/setup_env/alias/dev/pyflakes.sh
-/home/brendon/.config/dotfiles/bash/setup_env/alias/dev/lsd.sh
 /home/brendon/.config/dotfiles/bash/setup_env/alias/dev/dev.sh
 /home/brendon/.config/dotfiles/bash/setup_env/alias/dev/wireshark.sh
 /home/brendon/.config/dotfiles/bash/setup_env/alias/dev/bat.sh
