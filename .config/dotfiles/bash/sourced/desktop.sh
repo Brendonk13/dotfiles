@@ -90,7 +90,7 @@ alias bell='echo -ne "\a"'
 
 
 # for when I make config changes that I want to commit to my ansible setup
-alias ansb="cd $bash_dotfiles_root/../ansible/bash/bash_code/; ls"
+alias ansb="cd $bash_dotfiles_root/../ansible/bash; ls"
 
 
 
@@ -238,6 +238,7 @@ configAdd(){
     config add ~/.gitignore_global
     config add ~/.vim/after/plugin
     config add ~/.vimPlug/
+    config add ~/readme.md
 
     config add ~/.config/dotfiles/
     config add ~/.config/polybar

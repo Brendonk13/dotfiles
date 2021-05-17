@@ -15,6 +15,7 @@ configAdd(){
     config add ~/.gitignore_global
     config add ~/.vim/after/plugin
     config add ~/.vimPlug/
+    config add ~/readme.md
 
     config add ~/.config/dotfiles/
     config add ~/.config/polybar

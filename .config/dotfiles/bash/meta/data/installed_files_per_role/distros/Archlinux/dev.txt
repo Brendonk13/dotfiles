@@ -3,7 +3,7 @@ fasd
 ripgrep
 fzf
 bat
-lsd
+exa
 neofetch
 yay
 python-pip
