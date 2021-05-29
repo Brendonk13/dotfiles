@@ -8,6 +8,14 @@ if have_dependencies 'ps' 'sort' 'head'; then
     alias badproc='ps aux | sort -rk 3,3 | head -n 5'
 fi
 
+find_logs(){
+    # Search lsof for a process's open files, return results containing string: 'log'
+    # returns some bad results but thats 1 out of 5 results for systemd, less for smaller programs!
+    [ $# -ne 1 ] && echo -e "USAGE: find_logs program_name\nError: Need program_name arg, and only this arg" && return 1
+    program_name="$1"
+    pgrep "$program_name" | sudo xargs -n1 lsof -p 2> /dev/null | grep log | awk '{print $NF}' | grep log
+}
+alias flog='find_logs'
 
 alias vim="$VISUAL"
 alias vi="$VISUAL"

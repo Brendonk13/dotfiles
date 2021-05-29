@@ -24,3 +24,4 @@ alias print='cd ~/Scripts/my_projects/print; ls'
 alias eclipse='cd /home/brendon/Downloads/programs/java-2019-06/eclipse; ./eclipse &'
 
 alias mnt='cd /mnt/home/brendon'
+alias mors='cd "$mors"/2021/may-2021 && ls'

@@ -5,4 +5,7 @@ if hash exa > /dev/null 2>&1; then
     alias lsa='ls -a'
 
     alias ll='ls -l --git --no-time -h --group'
+
+    # ls full
+    alias lf='ls -l --git -h -i -H --group'
 fi

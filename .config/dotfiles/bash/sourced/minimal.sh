@@ -243,6 +243,7 @@ bind '"\C-b":vi-bWord'
 
 # correct minor spelling mistakes
 shopt -s cdspell
+shopt -s dirspell
 
 # only suggest directories during tab completion of cd command
 complete -d cd
