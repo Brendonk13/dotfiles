@@ -160,6 +160,27 @@ let g:python3_host_prog='/usr/bin/python'
 " this allows for usage of truecolor !
 set termguicolors
 set t_Co=256
+
+" Fix using different colorscheme in terminal mode (was hard to read the old colors)
+" use terminal's colorscheme in terminal mode: https://github.com/neovim/neovim/issues/2897
+let g:terminal_color_0 = '#000000'
+let g:terminal_color_8 = '#545454'
+let g:terminal_color_1 = '#ff0000'
+let g:terminal_color_9 = '#f40d17'
+let g:terminal_color_2 = '#37dd21'
+let g:terminal_color_10 = '#3bcf1d'
+let g:terminal_color_3 = '#fee409'
+let g:terminal_color_11 = '#ecc809'
+let g:terminal_color_4 = '#1460d2'
+let g:terminal_color_12 = '#5555ff'
+let g:terminal_color_5 = '#ff005d'
+let g:terminal_color_13 = '#ff55ff'
+let g:terminal_color_6 = '#00bbbb'
+let g:terminal_color_14 = '#6ae3f9'
+let g:terminal_color_7 = '#bbbbbb'
+let g:terminal_color_15 = '#ffffff'
+
+
 let g:solarized_bold=1
 let g:solarized_italic=1
 " syntax enable

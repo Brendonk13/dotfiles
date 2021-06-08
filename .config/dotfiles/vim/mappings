@@ -3,7 +3,7 @@ let maplocalleader = " "
 
 
 " format a line, add this to autocmds for text files
-nnoremap =al ^~I- <esc>
+nnoremap =al mt^~I- <esc>`t
 
 
 
