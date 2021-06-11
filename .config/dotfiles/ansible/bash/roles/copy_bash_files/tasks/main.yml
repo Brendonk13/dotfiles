@@ -29,6 +29,20 @@
     path: "{{home_dir}}/.config/dotfiles/bash/meta/data/ordered_concatenated_files.txt"
     state: absent
 
+- name: Add .bash_profile
+  file:
+    path: "{{home_dir}}/.bash_profile"
+    owner: "{{ansible_ssh_user}}"
+    group: "{{ansible_ssh_user}}"
+    mode: 0755
+    state: touch
+
+- name: Add line to source ~/.bashrc in ~/.bash_profile -- makes .bashrc get sourced when accessing through ssh
+  lineinfile:
+    path: "{{home_dir}}/.bash_profile"
+    line: "[[ -f ~/.bashrc ]] && source ~/.bashrc"
+    insertbefore: EOF
+
 - name: Chown the dotfiles directory (needed in case become = yes for when I am installing files too)
   # ansible.builtin.shell: /bin/bash chown -R {{ansible_ssh_user}}:{{ansible_ssh_user}} {{home_dir}}/.config/dotfiles
   file: dest="{{home_dir}}/.config/dotfiles" owner="{{ansible_ssh_user}}" group="{{ansible_ssh_user}}" mode=0755 recurse=yes

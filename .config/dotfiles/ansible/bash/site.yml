@@ -21,11 +21,11 @@
 #     - copy_bash_files
 #   # - install_files
 
-- name: common raspberry pi
+- name: Common install
   hosts: common_servers
-  remote_user: pi
-  gather_facts: true
-  become: yes
+  remote_user: ansible
+  gather_facts: yes
+  # become: no
 
   vars_files:
     - group_vars/all.yml
@@ -38,17 +38,6 @@
 
 # - name: test dev copy
 #   hosts: dev_servers
-#   remote_user: test
-#   gather_facts: false
-
-#   roles:
-#   - minimal
-#   - common
-#   - dev
-
-
-# - name: test desktop copy
-#   hosts: desktop_servers
 #   remote_user: test
 #   gather_facts: false
 

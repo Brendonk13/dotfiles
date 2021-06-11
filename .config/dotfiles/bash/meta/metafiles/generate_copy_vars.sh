@@ -15,7 +15,7 @@ ansible_vars_file="$ansible_root/roles/copy_bash_files/vars/main.yml"
 # =============== create group_vars file =======================
 ansible_group_vars_file="$ansible_root/group_vars/all.yml"
 echo -e "---\n#Note: this file is generated and overwritten by generate_copy_vars.sh file" > "$ansible_group_vars_file"
-echo "home_dir: $new_home_dir" > "$ansible_group_vars_file"
+echo "home_dir: $new_home_dir" >> "$ansible_group_vars_file"
 echo "role: $role" >> "$ansible_group_vars_file"
 echo -e "\n" >> "$ansible_group_vars_file"
 

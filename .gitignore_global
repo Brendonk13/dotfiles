@@ -1,3 +1,4 @@
 tags
 __pycache__/
 .env
+.vault_pass
