@@ -210,13 +210,8 @@ gen_files(){
             -o|--out-file)
                 OUT_NAME="$2"
                 shift; shift ;;
-            # used so I can generate files without affecting my current setup
-            # cuz bashrc.sh reads from last_role.txt file created
-            # --dont-set-last-role)
-            #     dont_set_last_role='true';
-            #     shift ;;
             *)
-            shift ;;
+                shift ;;
         esac
     done
     echo "from command line: LAST_ROLE = $LAST_ROLE,   OUT_NAME = $OUT_NAME"
@@ -226,12 +221,7 @@ gen_files(){
     else
         generate_file_order > "$OUT_NAME"
         echo "saved output to: $(with_color 'white_b' "$OUT_NAME")"
-        # if ! [ "$dont_set_last_role" = 'true' ]; then
-        #     # echo "$LAST_ROLE" > "$bash_dotfiles_root/sourced/last_role.txt"
-        #     echo "$LAST_ROLE" > "$bash_dotfiles_root/meta/data/last_role.txt"
-        # fi
     fi
-
 }
 
 src_files(){
@@ -239,3 +229,4 @@ src_files(){
     # OUT_NAME="$bash_dotfiles_root/meta/data/ordered_concatenated_files.txt"
     source_all_files "$OUT_NAME"
 }
+

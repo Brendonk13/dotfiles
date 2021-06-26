@@ -1,0 +1,1 @@
+Plug 'ericbn/vim-solarized'

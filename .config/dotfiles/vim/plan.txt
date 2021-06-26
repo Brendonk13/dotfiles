@@ -1,0 +1,157 @@
+
+
+
+== think that I should generate the files into a "sourced dir" just like I do with bash
+- nice for debugging
+- faster than sourcing a million files
+
+plugins dir:
+    change each main.vim -> plug_name.vim
+    -- remove the plug begin and end calls so this file just contains the name
+
+
+
+
+
+
+
+
+
+
+-------------------------------------- OLD:
+
+
+done so far:
+    split up .vimrc into a few files/sections
+
+
+TODO: need to just source every file in a loop
+    - how can i make order not matter much
+        - by keeping everything self-contained
+
+    - think I should make a file per plugin and dirs for small groups of plugins
+    - the small group files will have an entrypoint file: small_group.vim which calls everything in that dir
+    /plugins/
+        groups/
+            entrypoint.vim "this function recurses down to all dirs within each dir and sources commands.vim, etc
+            pope/
+                dispatch/
+                    commands.vim
+                    mappings.vim
+                    settings.vim
+                    notes.txt
+                commentary/
+                    commands.vim
+                    mappings.vim
+                    settings.vim
+                    notes.txt
+                etc/
+            fzf/
+                commands.vim
+                mappings.vim
+                settings.vim
+                notes.txt -- or should this be a dir somewhere else ..
+            rice/
+    /plugins/
+        quickscope/
+            commands.vim
+            mappings.vim
+            settings.vim
+            notes.txt
+
+
+Next: write down what the dir structure will look like for small groups
+I think plugins will need their own commands/mappings files as well
+-- should notes be seperate for plugins ? probably
+
+
+Plan:
+    have some vimrc's not contain as many plugins
+    also don't need certain functions maybe
+
+    - end goal is to have ansible setup to install either all dotfiles, the essential ones and maybe a more minimal version too.
+
+    - will this make my dotfiles depend on ansible?
+
+    - maybe it is best to make things also depend on what programs are installed
+        ie set grepprg=ripgrep
+
+    - MAYBE THE BEST THING TO DO IS GIVE EACH BROKEN UP PART AN ACCOMPANYING ANSIBLE SCRIPT FOR SETUP
+
+todo:
+    divide up autocmds and other files
+
+
+
+
+    /plugins/
+        pc/
+            // 1 dir for each plugin
+            // don't go on servers
+        remote/
+            dispatch/
+                commands.vim
+                mappings.vim
+                settings.vim
+                notes.txt
+            commentary/
+                commands.vim
+                mappings.vim
+                settings.vim
+                notes.txt
+            fzf/
+                commands.vim
+                mappings.vim
+                settings.vim
+                notes.txt -- or should this be a dir somewhere else ..
+            rice/
+
+
+
+
+
+
+
+
+how to handle ~/.vim/after/plugin/abolish.vim ?
+- maybe create a hard link between the two and "both" files checks whether or not both files exist ..?
+    - definitely a good idea to have this checked although I should handle this easily in ansible
+
+    solution: vim/plugins/remote/better_defaults/vim-abolish/vim-abolish.vim file has a check that the following file exists: ~/.vim/after/plugin/abolish.vim
+
+
+
+how to organize pc vs remote dirs?
+remote seems to make sense to divide by dependencies for servers
+would be kinda nice to do the same for some dirs in pc
+
+put dirs I know will never be on servers in one dir
+
+    - still need to make a minimal group ...
+        - only have this as a subset of remote stuff
+        - or maybe since remote is so small I make this purely an ansible thing
+
+
+
+comparison of current vim structure to bash dir structure
+so bash is divided by intrusiveness and how much i want/use it kinda
+categories:
+    minimal: need-to-have's && no_dependency why-nots
+    common: used lots or want to have lying around (looking at you badproc) - few dependencies allowed if they are very common Ex.) badproc: ps, sort, head
+    dev: stuff I would add if the env was mine to have at er
+    desktop: probably gui related
+
+    - order: minimal, common, dev, desktop
+
+
+    but vim is divided into:
+        native_vim/
+        plugins/
+
+        - order: native, one_dependency, few_dependencies, many_dependencies
+            - but within these there needs to be orderings: functions before commands/mappings
+
+        big question:
+            do I make a one_dependency thing in pc ??
+
+            NOTE: ANSWER: finish this structure only for remotes then add in the vimscript to test it and see if I like it before applying to pc dir

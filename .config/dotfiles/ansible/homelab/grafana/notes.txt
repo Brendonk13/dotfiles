@@ -1,0 +1,14 @@
+ine 2747: configuration specified the fields ["urls"], but they weren't used
+
+2021-06-12T17:51:56Z E! [telegraf] Error running agent: Error loading config file /etc/telegraf/telegraf.conf: Error parsing data: lin
+e 115: key `urls' is in conflict with line 72d
+
+influxdb prox:
+    - have to edit influxdb config.yml -- add udp support
+    - do I need another port open for this guy? --  -p 8089:8089/udp
+
+    - maybe gotta add something for balloon info in /etc/pve/status or influxdb config.yml
+
+3:00
+
+eventually just copy files into some roles files dir

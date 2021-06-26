@@ -1,0 +1,141 @@
+# Next:
+# Then setup xserver and xcfe and create a template from this
+# Then clone the og arch box and setup the video vault thing
+
+#OLD ansible-playbook -kK -i inventory/hosts  clone_vm.yml
+# ansible-playbook --ask-vault-pass -i inventory/hosts  clone_vm.yml
+# ansible-playbook --vault-password-file=.vault_pass -i inventory/hosts  clone_vm.yml
+- hosts: pve
+  remote_user: root
+  gather_facts: no
+  vars_files:
+    - vars/main.yml
+    - vars/prox_pass.yml
+  # vars:
+  #   created_vmid: 115
+  #   msgg: "VM prom-vault with newid 112 cloned from vm with vmid 111"
+  tasks:
+
+    - name: Generate vmid of to-be-created vm
+      # get vmid with biggest #, store in x. then add 1 to $x to get new vmid
+      shell: x="$(ls /etc/pve/qemu-server | sort | tail -n 1 | awk -F '.conf' '{print $1}')"; printf "1+$x\n" | bc
+      register: generated_vmid
+    - debug: msg="Generated vmid {{generated_vmid.stdout}}"
+
+    - name: set created_vmid as fact
+      set_fact:
+        created_vmid: "{{ generated_vmid.stdout | trim }}"
+    - debug: msg=" created_vmid {{created_vmid}}"
+
+    - name: Clone VM from source vmid {{cloned_vmid}} to new vmid {{created_vmid}} with name {{new_hostname}}
+      shell: qm clone {{cloned_vmid}} {{created_vmid}} --name {{new_hostname}}
+
+
+    - name: Start the created VM
+      shell: qm start {{ created_vmid}} && sleep 25 || /bin/true
+
+    # TODO: do dhcpcd when os is arch based, debian doesnt have dhcpcd
+    - name: Enable sshd and dhcpcd
+      shell: qm guest exec {{ created_vmid}} -- bash -c "systemctl enable sshd; systemctl enable dhcpcd" || /bin/true
+
+    - name: Start sshd and dhcpcd
+      shell: qm guest exec {{ created_vmid }} -- bash -c "systemctl start sshd; systemctl start dhcpcd" || /bin/true
+
+## can do the rest when I get the IP of the created vm
+
+    - name: Get ip address of created vm
+      shell: qm guest exec {{ created_vmid}} -- bash -c "ip route get 1.2.3.4" | grep 'out-data' | awk '{print $9}' # | tr -d '\n'
+      # shell: qm guest exec {{ created_vmid}} -- bash -c "ip route | tr -d '\n' | grep default" | awk -F 'src' '{print $2}' | awk '{print $1}' | tr -d '\n'
+      register: created_vm_ip_addy
+    - debug: msg={{created_vm_ip_addy.stdout}}
+
+    - name: Add host via found ip to group 'just_created'
+      add_host:
+        name: '{{ created_vm_ip_addy.stdout }}'
+        groups: just_created
+
+- hosts: just_created
+  gather_facts: no
+  remote_user: ansible
+  become: yes
+  become_user: root
+  # doesn't work with different become_method: sudo for some reason
+  become_method: su
+  vars_files:
+    - vars/main.yml
+    - vars/ansible_user_pass.yml
+    - vars/ansible_root.yml
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    ansible_become_password: "{{ansible_root_pass}}"
+  tasks:
+
+    - name: ping the new host
+      shell: echo "$HOME"
+      register: idk
+    - debug: msg={{idk.stdout}}
+
+    - name: Store hostname of VM
+      shell: "cat /etc/hostname | tr -d '\n'"
+      register: cloned_hostname
+    - debug: msg="the created clone's hostname is {{cloned_hostname.stdout}}"
+
+    - name: Add correct hostname to /etc/hostname
+      replace:
+        path: "/etc/hostname"
+        regexp: "{{cloned_hostname.stdout}}"
+        replace: "{{new_hostname}}"
+        # dest: "/etc/hostname"
+        # content: "{{ new_hostname }}"
+
+    - name: Add new hostname to /etc/hosts
+      replace:
+        path: "/etc/hosts"
+        regexp: "{{cloned_hostname.stdout}}"
+        replace: '{{new_hostname}}'
+
+    - name: Reboot so that new hostname is registered
+      reboot:
+
+
+
+
+
+
+
+#  ## ========== just need to start dhcpcd and it does the rest !!!!
+#  ## Improvement: pipe output of qm guest exec to grep out-data instead of stdout_lines.3.split().2 ....
+#  ##
+#  ## - name: Get non-loopback interface name of vm
+#  ##   shell: qm guest exec {{ created_vmid.stdout }} -- bash -c "ip link | /bin/grep '2:' | /bin/awk '{print \$2}' | tr -d ':\n'"
+#  ##   register: vm_netw_iface
+#  ## # - debug: msg={{vm_netw_iface.stdout}}
+#  ## - debug: msg={{vm_netw_iface.stdout_lines.3.split().2}}
+
+#  ## - name: Start dhcpcd on interface {{vm_netw_iface.stdout_lines.3.split().2}}
+#  ##   shell: "qm guest exec {{ created_vmid.stdout }} -- dhcpcd {{ vm_netw_iface.stdout_lines.3.split().2}}"
+
+
+
+
+
+
+ # - name: Clone VM from source vmid
+ #   community.general.proxmox_kvm:
+ #     node: pve
+ #     api_host: pve.od
+ #     api_user: root
+ #     api_password: "{{ proxmox_password }}"
+ #     clone: new_vm                 # this does nothing I think
+ #     name: "{{ new_hostname }}"    # name must be a valid dns name!
+ #     vmid: "{{ cloned_vmid }}"
+ #     timeout: 250
+ #   register: clone_vm_output
+ # - debug: msg="{{clone_vm_output.msg}}"
+ #   # "msg": "VM prom-vault with newid 112 cloned from vm with vmid 111"
+
+ # - name: Extract created vmid from clone operation output
+ #   set_fact:
+ #     created_vmid: "{{ clone_vm_output.msg | regex_search('.+newid ([0-9]+) .+', '\\1') | trim }}"
+ # - debug: msg="{{ created_vmid }}"
+

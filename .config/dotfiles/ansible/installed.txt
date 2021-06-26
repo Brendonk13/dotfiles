@@ -1,0 +1,63 @@
+sudo pacman -S yay git neovim fzf ripgrep kitty neofetch redshift polybar python-dbus yad mpd ttf-font-awesome xcape picom lightdm-settings pavucontrol pulseaudio blueman mpv zathura zathura-pdf-mupdf fasd z lsd tldr nodejs rofi && yay -S google-chrome neovim-remote ruby-fusuma mons ptpython python-pip latex-mk nordic-theme-git ttf-google-sans ripgrep-all
+
+
+fzf:
+    fzf
+    ripgrep
+
+install setup:
+sudo pacman-mirrors --fasttrack
+-- first thing after setting up!!
+
+
+arch specific: yay
+neovim git
+
+spotify-tui
+
+pc:
+    neofetch
+    redshift
+    polybar
+        python-dbus -- for: player-mpris-tail
+        yad (new xenity)
+        new nord scheme
+            mpd (music)
+            ttf-font-awesome
+    xcape
+    picom
+    lightdm-settings
+        - numlockx
+    xorg-backlight
+    xorg-setxkbmap
+    pavucontrol
+    pulseaudio
+    blueman
+    mpv
+    zathura && zathura-pdf-mupdf as backend!!
+    texlive-core
+    texlive-bin (also may as well get texlive-latexextra and texlive-science)
+    fasd
+    z
+    lsd
+    tldr
+    yay:
+        neovim-remote
+        ruby-fusuma
+        mons
+        ptpython
+        python-pip
+        latex-mk
+        spotify-tui
+
+
+coc:
+    need nodejs!
+
+
+timedatectl set-ntp true
+
+cp /mnt/usr/share/X11/xkb/symbols/my_new_control /usr/share/X11/xkb/symbols/
+cp /usr/share/X11/xkb/symbols/my_new_control to corresponding location on new laptop
+-- think this is all I needed (plus a restart of computer!)
+setup /usr/share/fonts to be downloaded from repo? as part of pc setup

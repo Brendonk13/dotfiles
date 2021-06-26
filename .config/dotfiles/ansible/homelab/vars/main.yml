@@ -1,0 +1,4 @@
+---
+new_hostname: prom-vault
+cloned_vmid: 113
+ansible_python_interpreter: /usr/bin/python3

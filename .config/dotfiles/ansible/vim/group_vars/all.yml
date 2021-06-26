@@ -1,0 +1,7 @@
+---
+#Note: this file is generated and overwritten by generate_copy_vars.sh file
+
+home_dir: /home/prom
+role: common
+new_dotfiles_root: /home/prom/.config/dotfiles/vim
+current_dotfiles_root: /home/brendon/.config/dotfiles/vim

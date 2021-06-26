@@ -45,6 +45,7 @@ configAdd(){
     config add ~/dev/dev/Scripts/open_greenclip.sh
     config add ~/dev/dev/Scripts/default_rofi.sh
     config add ~/dev/dev/Scripts/backup_bash_history
+    config add ~/dev/dev/Scripts/push_all_repos.sh
 
     # Todo: change these paths to be in dotfiles
 

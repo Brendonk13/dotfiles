@@ -1,0 +1,35 @@
+
+do I make a {one,few,many}_dependency thing in pc ??
+    NOTE: ANSWER: finish this structure only for remotes then add in the vimscript to test it and see if I like it before applying to pc dir
+
+
+
+-- once its divided up I can make arbitrary ansible roles out of combinations of plugins
+
+    - just need to have a seperate script to make the base dir structure
+    - and a basic main file per dir
+
+
+
+
+Naming Scheme:
+    the main.vim thing makes sense for most plugins that only have 1 file
+        - THINK IT'S BETTER TO CHANGE THIS TO SHIT LIKE: NVIM.VIM, PINNACLE.VIM ETC
+            - MORE HELPFUL WHEN EDITING THOSE FILES
+
+    - other files in dir should be given functional names
+
+    - plugins go in directories: "no_dependencies" | "dependency_name" || light_dependencies || many_dependancies
+    - need to make a vimscript function that accepts a list of dependency name's as input and echom's the ones we don't have and throws err
+    - cuz I need checks for the dependencies of each plugin more than I did with bash probably
+
+        -- basically same thing as have_dependencies but just echom instead
+
+
+    Todo: move everything into minimal/common/dev/desktop dirs/files
+        Todo: change names to pinnacle.vim, nvim.vim etc
+
+    Todo: look at all ordering constraints
+    -- try to eliminate these constraints
+
+    Todo: create a main.vim file which calls my bash function to generate the lists then sources all files one list at a time

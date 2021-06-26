@@ -22,8 +22,8 @@ nnoremap =al mt^~I- <esc>`t
 " would be sickkk if i could get rid of that delay (kinda)
 
 " allow enter key in normal mode use leader key so i don't fuck with quickfix :cw
-nnoremap <leader><CR> a<CR><esc>
-nnoremap <leader><BS> i<BS><esc>
+" nnoremap <leader><CR> a<CR><esc>
+" nnoremap <leader><BS> i<BS><esc>
 " <CR> would be much better as a function which moved to beginning of word then i<CR>
 " iff in cursor in the middle of word
 

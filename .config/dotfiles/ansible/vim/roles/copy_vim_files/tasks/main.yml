@@ -1,0 +1,58 @@
+---
+# tasks file for minimal
+- name: Create dir structure
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop: "{{ created_dirs }}"
+
+- name: Copy role files
+  copy:
+    src: "{{ item.0 }}"
+    dest: "{{ item.1 }}"
+  # analagous to zip(dotfile_sources, dotfile_destinations) in python
+  loop: "{{ dotfile_sources | zip( dotfile_destinations) | list }}"
+
+- name: Copy generate_vim_files.py
+  copy:
+    src: "{{current_dotfiles_root}}/meta/metafiles/generate_file_order.py"
+    dest: "{{new_dotfiles_root}}/meta/metafiles/generate_file_order.py"
+
+- name: Create ordered vim file list on node
+  shell: python3 "{{new_dotfiles_root}}/meta/metafiles/generate_file_order.py  --role {{role}}"
+
+- name: Create vim_dotfiles_root.txt
+  copy:
+    dest: "{{new_dotfiles_root}}/meta/data/last_role.txt"
+    content: |
+      {{new_dotfiles_root}}
+
+  # Todo: make this work for vimrc
+# - name: Append line to current bashrc (to source other files)
+#   lineinfile:
+#     path: "{{ home_dir }}/.bashrc"
+#     line: 'source ~/.config/dotfiles/bash/bashrc.sh'
+#     insertbefore: EOF
+
+# - name: Delete ordered_concatenated_files.txt
+#   file:
+#     path: "{{home_dir}}/.config/dotfiles/bash/meta/data/ordered_concatenated_files.txt"
+#     state: absent
+
+# - name: Add .bash_profile
+#   file:
+#     path: "{{home_dir}}/.bash_profile"
+#     owner: "{{ansible_ssh_user}}"
+#     group: "{{ansible_ssh_user}}"
+#     mode: 0755
+#     state: touch
+
+# - name: Add line to source ~/.bashrc in ~/.bash_profile -- makes .bashrc get sourced when accessing through ssh
+#   lineinfile:
+#     path: "{{home_dir}}/.bash_profile"
+#     line: "[[ -f ~/.bashrc ]] && source ~/.bashrc"
+#     insertbefore: EOF
+
+# - name: Chown the dotfiles directory (needed in case become = yes for when I am installing files too)
+#   # ansible.builtin.shell: /bin/bash chown -R {{ansible_ssh_user}}:{{ansible_ssh_user}} {{home_dir}}/.config/dotfiles
+#   file: dest="{{home_dir}}/.config/dotfiles" owner="{{ansible_ssh_user}}" group="{{ansible_ssh_user}}" mode=0755 recurse=yes

@@ -1,0 +1,40 @@
+
+- hosts: local
+  connection: local
+  remote_user: brendon
+  gather_facts: yes
+  vars_files:
+    - host_vars/main.yml
+  roles:
+    - kewlfft.aur
+  tasks:
+
+    - name: Install jsonnet with yay
+      aur:
+        name: jsonnet
+      when: ansible_facts['os_family'] == "Archlinux"
+
+    - name: Install jsonnet with apt
+      apt:
+        name: jsonnet
+      when: ansible_facts['os_family'] == "Debian"
+
+
+    - name: Install Grafonnet
+      git:
+        repo: 'https://github.com/grafana/grafonnet-lib.git'
+        clone: yes
+        update: no
+        dest: "{{grafonnet_repo}}"
+
+    - name: Install jq
+      package:
+        name: jq
+        state: present
+
+
+    # pip install didnt work on arch/manjaro
+    # - name: Install jsonnet with pip
+    #   pip:
+    #     name: jsonnet
+

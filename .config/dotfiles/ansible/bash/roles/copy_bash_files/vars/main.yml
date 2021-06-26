@@ -29,49 +29,49 @@ dotfile_sources:
 
 
 dotfile_destinations:
-  - /home/pi/.config/dotfiles/bash/setup_env/debug/colors/minimal/8-16_compat.sh
-  - /home/pi/.config/dotfiles/bash/setup_env/exports/minimal.sh
-  - /home/pi/.config/dotfiles/bash/setup_env/alias/minimal.sh
-  - /home/pi/.config/dotfiles/bash/setup_env/shopts/minimal.sh
-  - /home/pi/.config/dotfiles/bash/programs/built_ins/minimal/minimal.sh
-  - /home/pi/.config/dotfiles/bash/programs/git/minimal/minimal.sh
-  - /home/pi/.config/dotfiles/bash/setup_env/debug/common/test_func_call_err.sh
-  - /home/pi/.config/dotfiles/bash/setup_env/debug/common/debug_dependencies.sh
-  - /home/pi/.config/dotfiles/bash/setup_env/debug/common/func_call_err.sh
-  - /home/pi/.config/dotfiles/bash/setup_env/exports/common/common.sh
-  - /home/pi/.config/dotfiles/bash/programs/nvim/common/exports.sh
-  - /home/pi/.config/dotfiles/bash/setup_env/alias/common.sh
-  - /home/pi/.config/dotfiles/bash/setup_env/shopts/common.sh
-  - /home/pi/.config/dotfiles/bash/programs/built_ins/common/light_dependencies.sh
-  - /home/pi/.config/dotfiles/bash/programs/built_ins/common/common.sh
-  - /home/pi/.config/dotfiles/bash/programs/extract/common.sh
-  - /home/pi/.config/dotfiles/bash/programs/git/common/functions.sh
-  - /home/pi/.config/dotfiles/bash/concat_roles.sh
-  - /home/pi/.config/dotfiles/bash/generate_file_order.sh
-  - /home/pi/.config/dotfiles/bash/old_bashrc.sh
-  - /home/pi/.config/dotfiles/bash/bashrc.sh
-  - /home/pi/.config/dotfiles/bash/export_dotfiles_root.sh
+  - /home/prom/.config/dotfiles/bash/setup_env/debug/colors/minimal/8-16_compat.sh
+  - /home/prom/.config/dotfiles/bash/setup_env/exports/minimal.sh
+  - /home/prom/.config/dotfiles/bash/setup_env/alias/minimal.sh
+  - /home/prom/.config/dotfiles/bash/setup_env/shopts/minimal.sh
+  - /home/prom/.config/dotfiles/bash/programs/built_ins/minimal/minimal.sh
+  - /home/prom/.config/dotfiles/bash/programs/git/minimal/minimal.sh
+  - /home/prom/.config/dotfiles/bash/setup_env/debug/common/test_func_call_err.sh
+  - /home/prom/.config/dotfiles/bash/setup_env/debug/common/debug_dependencies.sh
+  - /home/prom/.config/dotfiles/bash/setup_env/debug/common/func_call_err.sh
+  - /home/prom/.config/dotfiles/bash/setup_env/exports/common/common.sh
+  - /home/prom/.config/dotfiles/bash/programs/nvim/common/exports.sh
+  - /home/prom/.config/dotfiles/bash/setup_env/alias/common.sh
+  - /home/prom/.config/dotfiles/bash/setup_env/shopts/common.sh
+  - /home/prom/.config/dotfiles/bash/programs/built_ins/common/light_dependencies.sh
+  - /home/prom/.config/dotfiles/bash/programs/built_ins/common/common.sh
+  - /home/prom/.config/dotfiles/bash/programs/extract/common.sh
+  - /home/prom/.config/dotfiles/bash/programs/git/common/functions.sh
+  - /home/prom/.config/dotfiles/bash/concat_roles.sh
+  - /home/prom/.config/dotfiles/bash/generate_file_order.sh
+  - /home/prom/.config/dotfiles/bash/old_bashrc.sh
+  - /home/prom/.config/dotfiles/bash/bashrc.sh
+  - /home/prom/.config/dotfiles/bash/export_dotfiles_root.sh
 
 
 
 created_dirs:
-  - /home/pi/.config/dotfiles/bash/programs/nvim/common
-  - /home/pi/.config/dotfiles/bash/setup_env/debug/common
-  - /home/pi/.config/dotfiles/bash/programs/git/common
-  - /home/pi/.config/dotfiles/bash/setup_env/exports/common
-  - /home/pi/.config/dotfiles/bash/setup_env/debug/colors/minimal
-  - /home/pi/.config/dotfiles/bash/programs/git/minimal
-  - /home/pi/.config/dotfiles/bash/meta/data
-  - /home/pi/.config/dotfiles/bash/programs/built_ins/common
-  - /home/pi/.config/dotfiles/bash/sourced
-  - /home/pi/.config/dotfiles/bash/programs/extract
-  - /home/pi/.config/dotfiles/bash/programs/built_ins/minimal
-  - /home/pi/.config/dotfiles/bash/setup_env/shopts
-  - /home/pi/.config/dotfiles/bash/setup_env/exports
-  - /home/pi/.config/dotfiles/bash/setup_env/alias
-  - /home/pi/.config/dotfiles/bash/sourced
-  - /home/pi/.config/dotfiles/bash/meta/data
-  - /home/pi/.config/dotfiles/bash
+  - /home/prom/.config/dotfiles/bash/programs/extract
+  - /home/prom/.config/dotfiles/bash/setup_env/shopts
+  - /home/prom/.config/dotfiles/bash/setup_env/exports/common
+  - /home/prom/.config/dotfiles/bash/setup_env/alias
+  - /home/prom/.config/dotfiles/bash/setup_env/debug/colors/minimal
+  - /home/prom/.config/dotfiles/bash/programs/built_ins/minimal
+  - /home/prom/.config/dotfiles/bash/programs/built_ins/common
+  - /home/prom/.config/dotfiles/bash/setup_env/debug/common
+  - /home/prom/.config/dotfiles/bash/meta/data
+  - /home/prom/.config/dotfiles/bash/programs/git/common
+  - /home/prom/.config/dotfiles/bash/sourced
+  - /home/prom/.config/dotfiles/bash/programs/nvim/common
+  - /home/prom/.config/dotfiles/bash/setup_env/exports
+  - /home/prom/.config/dotfiles/bash/programs/git/minimal
+  - /home/prom/.config/dotfiles/bash
+  - /home/prom/.config/dotfiles/bash/meta/data
+  - /home/prom/.config/dotfiles/bash/sourced
 
 
 

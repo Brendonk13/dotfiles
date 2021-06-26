@@ -98,14 +98,6 @@ function! GetObsessionStatus()
     return '%{ObsessionStatus()}'
 endfunction
 
-" deleted this and moved to inside the big g:lightline
-" don't want that close sign showing
-" let g:lightline.tabline = {
-"    \ 'left': [ [ 'tabs' ] ],
-"    \ 'right': [ [ '' ] ] 
-" \ }
-
-
 function! LightlineReadOnly()
    return &readonly ? 'RO ' : ''
 endfunction

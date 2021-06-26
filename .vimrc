@@ -1,3 +1,11 @@
+
+" if filereadable(expand("~/.config/dotfiles/vim/vimrc.vim"))
+"     source ~/.config/dotfiles/vim/vimrc.vim
+" else
+"     echoerr 'Could not find|read ~/.config/dotfiles/vim/vimrc.vim'
+" endif
+
+
 set nocompatible
 
 " only show top 5 suggestions, never going to look through more options
@@ -119,31 +127,40 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-if filereadable(expand("~/.vimPlug/vimPlugCall"))
-    source ~/.vimPlug/vimPlugCall
+if filereadable(expand("~/.config/dotfiles/old_vim/plugins/vimPlugCall"))
+    source ~/.config/dotfiles/old_vim/plugins/vimPlugCall
 else
-    echoerr 'could not find|read ~/.vimPlug/vimPlugCall'
+    echoerr 'could not find|read ~/.config/dotfiles/old_vim/plugins/vimPlugCall'
 endif
 
-if filereadable(expand("~/.vimPlug/plugSettings"))
-    source ~/.vimPlug/plugSettings
+if filereadable(expand("~/.config/dotfiles/old_vim/plugins/plugSettings"))
+    source ~/.config/dotfiles/old_vim/plugins/plugSettings
 else
-    echoerr 'could not find|read ~/.vimPlug/plugSettings'
+    echoerr 'could not find|read  ~/.config/dotfiles/old_vim/plugins/plugSettings'
 endif
+
+
+if filereadable(expand("~/.config/dotfiles/old_vim/autocmds"))
+    source ~/.config/dotfiles/old_vim/autocmds
+else
+    echoerr 'Could not find|read ~/.config/dotfiles/old_vim/autocmds'
+endif
+
+
 
 
 " source those keyboard mappings
 " how can I move this file to diff folder and make it work with git?
-if filereadable(expand("~/.config/dotfiles/vim/mappings"))
-    source ~/.config/dotfiles/vim/mappings
+if filereadable(expand("~/.config/dotfiles/old_vim/mappings"))
+    source ~/.config/dotfiles/old_vim/mappings
 else
-    echoerr 'could not find|read ~/.config/dotfiles/vim/mappings'
+    echoerr 'could not find|read ~/.config/dotfiles/old_vim/mappings'
 endif
 " source vim command file
-if filereadable(expand("~/.config/dotfiles/vim/commands"))
-    source ~/.config/dotfiles/vim/commands
+if filereadable(expand("~/.config/dotfiles/old_vim/commands"))
+    source ~/.config/dotfiles/old_vim/commands
 else
-    echoerr 'could not find|read ~/.config/dotfiles/vim/commands'
+    echoerr 'could not find|read ~/.config/dotfiles/old_vim/commands'
 endif
 
 " NOTE: that I source autocmd's at bottom of file (need highlights done after
@@ -280,12 +297,11 @@ endif
 "      set viminfo+=n~/.vim/tmp
 
 
-
-if filereadable(expand("~/.config/dotfiles/vim/autocmds"))
-    source ~/.config/dotfiles/vim/autocmds
-else
-    echoerr 'Could not find|read ~/.config/dotfiles/vim/autocmds'
-endif
+" if filereadable(expand("~/.config/dotfiles/vim/autocmds"))
+"     source ~/.config/dotfiles/vim/autocmds
+" else
+"     echoerr 'Could not find|read ~/.config/dotfiles/vim/autocmds'
+" endif
 
 if exists('&belloff')
 " bells bad!
@@ -293,3 +309,33 @@ if exists('&belloff')
 endif
 
 highlight Folded guibg=NONE guifg=LightGray
+
+
+
+" if filereadable(expand("~/.vimPlug/vimPlugCall"))
+"     source ~/.vimPlug/vimPlugCall
+" else
+"     echoerr 'could not find|read ~/.vimPlug/vimPlugCall'
+" endif
+
+" if filereadable(expand("~/.vimPlug/plugSettings"))
+"     source ~/.vimPlug/plugSettings
+" else
+"     echoerr 'could not find|read ~/.vimPlug/plugSettings'
+" endif
+
+
+" " source those keyboard mappings
+" " how can I move this file to diff folder and make it work with git?
+" if filereadable(expand("~/.config/dotfiles/vim/mappings"))
+"     source ~/.config/dotfiles/vim/mappings
+" else
+"     echoerr 'could not find|read ~/.config/dotfiles/vim/mappings'
+" endif
+" " source vim command file
+" if filereadable(expand("~/.config/dotfiles/vim/commands"))
+"     source ~/.config/dotfiles/vim/commands
+" else
+"     echoerr 'could not find|read ~/.config/dotfiles/vim/commands'
+" endif
+

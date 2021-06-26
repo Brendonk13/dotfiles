@@ -1,0 +1,102 @@
+---
+#Note: this file is generated and overwritten by generate_copy_vars.sh file
+
+
+dotfile_sources:
+  - /home/brendon/.config/dotfiles/vim/vimrc/setup_undo_backups_etc.vim
+  - /home/brendon/.config/dotfiles/vim/vimrc/highlights.vim
+  - /home/brendon/.config/dotfiles/vim/vimrc/settings.vim
+  - /home/brendon/.config/dotfiles/vim/autocmds/minimal.vim
+  - /home/brendon/.config/dotfiles/vim/autocmds/desktop.vim
+  - /home/brendon/.config/dotfiles/vim/mappings/mappings.vim
+  - /home/brendon/.config/dotfiles/vim/mappings/mode_mappings/insert_maps.vim
+  - /home/brendon/.config/dotfiles/vim/mappings/mode_mappings/terminal_mappings.vim
+  - /home/brendon/.config/dotfiles/vim/mappings/mode_mappings/normal_maps.vim
+  - /home/brendon/.config/dotfiles/vim/mappings/mode_mappings/visual_maps.vim
+  - /home/brendon/.config/dotfiles/vim/mappings/related_mappings/random_mappings.vim
+  - /home/brendon/.config/dotfiles/vim/mappings/related_mappings/omnicomplete.vim
+  - /home/brendon/.config/dotfiles/vim/other/abbreviations/abbreviations.vim
+  - /home/brendon/.config/dotfiles/vim/os_specific/windows/desktop/clip.exe/copy_sys_clipboard.vim
+  - /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/rice/pinnacle/pinnacle.vim
+  - /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/rice/lightline/lightline.vim
+  - /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/rice/solarized/solarized.vim
+  - /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/replay/replay_no_deps.vim
+  - /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-abolish/vim-abolish.vim
+  - /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-commentary/vim-commentary.vim
+  - /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/rice/pinnacle/.plug_name
+  - /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/rice/lightline/.plug_name
+  - /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/rice/solarized/.plug_name
+  - /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/vim-dispatch/.plug_name
+  - /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/vim-gnupg/.plug_name
+  - /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/loupe/.plug_name
+  - /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/replay/.plug_name
+  - /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-repeat/.plug_name
+  - /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-unimpaired/.plug_name
+  - /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-abolish/.plug_name
+  - /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-commentary/.plug_name
+  - /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-surround/.plug_name
+
+
+
+dotfile_destinations:
+  - /home/prom/.config/dotfiles/vim/vimrc/setup_undo_backups_etc.vim
+  - /home/prom/.config/dotfiles/vim/vimrc/highlights.vim
+  - /home/prom/.config/dotfiles/vim/vimrc/settings.vim
+  - /home/prom/.config/dotfiles/vim/autocmds/minimal.vim
+  - /home/prom/.config/dotfiles/vim/autocmds/desktop.vim
+  - /home/prom/.config/dotfiles/vim/mappings/mappings.vim
+  - /home/prom/.config/dotfiles/vim/mappings/mode_mappings/insert_maps.vim
+  - /home/prom/.config/dotfiles/vim/mappings/mode_mappings/terminal_mappings.vim
+  - /home/prom/.config/dotfiles/vim/mappings/mode_mappings/normal_maps.vim
+  - /home/prom/.config/dotfiles/vim/mappings/mode_mappings/visual_maps.vim
+  - /home/prom/.config/dotfiles/vim/mappings/related_mappings/random_mappings.vim
+  - /home/prom/.config/dotfiles/vim/mappings/related_mappings/omnicomplete.vim
+  - /home/prom/.config/dotfiles/vim/other/abbreviations/abbreviations.vim
+  - /home/prom/.config/dotfiles/vim/os_specific/windows/desktop/clip.exe/copy_sys_clipboard.vim
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/rice/pinnacle/pinnacle.vim
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/rice/lightline/lightline.vim
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/rice/solarized/solarized.vim
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/replay/replay_no_deps.vim
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-abolish/vim-abolish.vim
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-commentary/vim-commentary.vim
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/rice/pinnacle/.plug_name
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/rice/lightline/.plug_name
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/rice/solarized/.plug_name
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/vim-dispatch/.plug_name
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/vim-gnupg/.plug_name
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/loupe/.plug_name
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/replay/.plug_name
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-repeat/.plug_name
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-unimpaired/.plug_name
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-abolish/.plug_name
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-commentary/.plug_name
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-surround/.plug_name
+
+
+
+created_dirs:
+  - /home/prom/.config/dotfiles/vim/mappings/mode_mappings
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/rice/solarized
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-commentary
+  - /home/prom/.config/dotfiles/vim/autocmds
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-abolish
+  - /home/prom/.config/dotfiles/vim/os_specific/windows/desktop/clip.exe
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/rice/lightline
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/rice/pinnacle
+  - /home/prom/.config/dotfiles/vim/meta/metafiles
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/replay
+  - /home/prom/.config/dotfiles/vim/vimrc
+  - /home/prom/.config/dotfiles/vim/mappings/related_mappings
+  - /home/prom/.config/dotfiles/vim/mappings
+  - /home/prom/.config/dotfiles/vim/meta/data
+  - /home/prom/.config/dotfiles/vim/sourced
+  - /home/prom/.config/dotfiles/vim/other/abbreviations
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/vim-dispatch
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-unimpaired
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/vim-gnupg
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-repeat
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/loupe
+  - /home/prom/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-surround
+
+
+

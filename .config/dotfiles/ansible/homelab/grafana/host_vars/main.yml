@@ -1,0 +1,2 @@
+ansible_python_interpreter: /usr/bin/python3
+grafonnet_repo: /home/brendon/.config/dotfiles/ansible/homelab/grafana/code/grafonnet-lib

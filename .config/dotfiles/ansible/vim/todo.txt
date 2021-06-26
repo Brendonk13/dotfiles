@@ -1,0 +1,3 @@
+test the copy files with line to add .bash_profile
+-- allows bashrc to be sourced automatically over ssh
+-- this is how should test
