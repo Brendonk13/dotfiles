@@ -1,9 +1,9 @@
 
-termcursor is not red for dev
+Need to make seperate minimal, common, etc for plugins
+and do all of those before minimal even !!
 
-wrong window divider (desktop)
+-- colors for quickscope are wrong !!!
 
-idea: source colorscheme if exists before everything else
 
 how to find which file bad:
     add desired lines before and after each source in vimrc.vim

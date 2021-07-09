@@ -1,3 +1,4 @@
+set nocompatible
 
 " ======== Get path where this file lies =============
 " Relative base_path of script file:
@@ -18,15 +19,6 @@ let s:base_path = expand('<sfile>:p:h')
 "   2: Resolve all symbolic links
 "   3: Get the folder of the resolved absolute file
 let s:base_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
-
-
-" would be nice to test this on a diff machine but should just focus on making
-" it work without errors for now
-
-
-
-" find out how to read the vim_dotfiles_root cmd
-" FIRST try just using dot and calling this file from ~/.vimrc
 
 
 function SourceFile(local_path)
@@ -62,7 +54,7 @@ endfunction
 
 
 
-
+" ================ source files ============================
 call LoadPlugins("/sourced/plug_names.vim")
 
 " This is done in the vimrc.vim in root since it changes other highlights if
@@ -70,10 +62,19 @@ call LoadPlugins("/sourced/plug_names.vim")
 if filereadable(expand("$HOME/.vim/plugged/vim-solarized/colors/solarized.vim") )
     set background=dark
     colorscheme solarized
+    " this allows for usage of truecolor !
+    set termguicolors
+    set t_Co=256
+    " NOTE: will have to do some checks here to see if the terminal supports 256
+    " colors !!!!
 endif
 
-call SourceFile("/sourced/minimal.vim")
-" highlight TermCursor ctermfg=red guifg=red
+" call SourceFile("/sourced/minimal.vim")
 call SourceFile("/sourced/common.vim")
 call SourceFile("/sourced/dev.vim")
 call SourceFile("/sourced/desktop.vim")
+" syntax enable -- screws up quickscope colors if done before this
+syntax on
+call SourceFile("/sourced/minimal.vim")
+" highlight SignColumn guibg=bg
+" highlight SignColumn ctermbg=bg

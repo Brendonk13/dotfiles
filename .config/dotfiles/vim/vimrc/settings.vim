@@ -1,4 +1,3 @@
-set nocompatible
 
 " ================= QOL improvements =========================================
 set wildignore=*.o,*.a,*.so,*.pyc,*.swp,.git/*,*.class,*.dll,~/.vim_black/,~/.vim_black/**~/.vim_black,*pycache*,*.cmi,*.cmo,*.cmx,*.mli,*.depends,*.native,_build/*
@@ -71,11 +70,6 @@ set noshowmode
 
 
 " ================================================================================================
-" this allows for usage of truecolor !
-set termguicolors
-set t_Co=256
-" NOTE: will have to do some checks here to see if the terminal supports 256
-" colors !!!!
 " Fix using different colorscheme in terminal mode (was hard to read the old colors)
 " use terminal's colorscheme in terminal mode: https://github.com/neovim/neovim/issues/2897
 let g:terminal_color_0 = '#000000'
@@ -100,19 +94,10 @@ let g:terminal_color_15 = '#ffffff'
 
 
 
-" syntax enable
-syntax on
 
 " sets vertical split to be a bar
 set fillchars+=vert:│
 highlight VertSplit ctermbg=NONE guibg=NONE
-
-if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
 
 set fillchars+=stlnc:~
 highlight StatusLineNC ctermbg=NONE guibg=NONE

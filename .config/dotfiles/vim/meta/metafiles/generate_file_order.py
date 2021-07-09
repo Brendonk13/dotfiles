@@ -77,12 +77,11 @@ def append_file_contents(written_to, file_name):
 
 def create_plug_call_file(plugin_names):
     with open(ROOT_DIR / 'sourced/plug_names.vim', 'w') as f:
-        print(ROOT_DIR)
         f.write("call plug#begin()\n\n")
         for plugin_name in plugin_names:
-            tmp = str(plugin_name)
-            tmp = tmp.replace(str(ROOT_DIR), '')
-            print(tmp)
+            # tmp = str(plugin_name)
+            # tmp = tmp.replace(str(ROOT_DIR), '')
+            # print(tmp)
             f.write(Path(plugin_name).read_text())
         f.write("\ncall plug#end()")
 
@@ -94,12 +93,15 @@ def concat_files_for(curr_role, files_in_role):
             append_file_contents(f, file_name)
 
 def generate_files(last_role):
+    # minimal_files, _ = get_files_in_role('minimal')
     role_order = ['minimal', 'common', 'dev', 'desktop']
     all_files, plugin_names = [], []
     for curr_role in role_order:
         files, plug_names = get_files_in_role(curr_role)
         plugin_names += plug_names
         all_files += files
+
+        # concatenate the files in curr_role
         concat_files_for(curr_role, files)
         if curr_role == last_role: break
     return all_files, plugin_names
@@ -120,6 +122,7 @@ def get_args():
 
 if __name__ == "__main__":
     args = get_args()
+    # minimal_files, all_files, plugin_names = generate_files(last_role=args.role)
     all_files, plugin_names = generate_files(last_role=args.role)
     # pp(plugin_names)
     if args.out_file:
