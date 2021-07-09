@@ -13,6 +13,7 @@ configAdd(){
     config add ~/.latexmkrc
     config add ~/.gitconfig
     config add ~/.gitignore_global
+    config add ~/.gitignore
     config add ~/.vim/after/plugin
     config add ~/.vimPlug/
     config add ~/readme.md

@@ -34,7 +34,7 @@ function SourceFile(local_path)
     let l:path = s:base_path . a:local_path
     if filereadable(expand(l:path))
         exec "source " .  l:path
-        echom 'Sourced: ' . l:path
+        " echom 'Sourced: ' . l:path
     else
         echoerr 'Could not find|read ' . l:path
     endif
@@ -51,14 +51,14 @@ function LoadPlugins(plug_path)
             autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
         endif
         exec "source " .  l:plug_names
-        echom 'Sourced: ' . l:plug_names
+        " echom 'Sourced: ' . l:plug_names
     else
         echoerr 'Could not find|read ./sourced/plug_names.vim'
     endif
 
 endfunction
 
-echom 'base path is: ' . s:base_path
+" echom 'base path is: ' . s:base_path
 
 
 

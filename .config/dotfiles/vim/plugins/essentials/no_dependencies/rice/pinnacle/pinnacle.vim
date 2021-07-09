@@ -1,6 +1,9 @@
 
 augroup custom_msg_highlights
     autocmd!
+    " containedin allows me to have these within comments, contains=@NoSpell
+    " means no spell checking for these highlights
+
     autocmd Syntax * syn match MyTodo /\v<(FIXME|FixMe|fixme|IDEA|Idea|idea|NOTE|Note|note|TODO|Todo|todo|OPTIMIZE|Optimize|optimize):/
           \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
     " FIXME: link fixme to vim's built in highlighting for fixme:
