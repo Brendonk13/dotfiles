@@ -13,7 +13,6 @@ configAdd(){
     config add ~/.latexmkrc
     config add ~/.gitconfig
     config add ~/.gitignore_global
-    config add ~/.gitignore
     config add ~/.vim/after/plugin
     config add ~/.vimPlug/
     config add ~/readme.md
@@ -49,8 +48,8 @@ configAdd(){
     config add ~/dev/dev/Scripts/push_all_repos.sh
 
     # Todo: change these paths to be in dotfiles
-
-
+    config rm --cached -r --quiet ~/.config/dotfiles/bash/sourced > /dev/null 2>&1
+    config rm --cached -r --quiet ~/.config/dotfiles/vim/sourced > /dev/null 2>&1
 }
 # alias cadd='configAdd && echo "did cadd !!"' # && config add "$bash_dotfiles_root"/programs/git/desktop/config/configAdd.sh'
 # alias cadd='configAdd && config add "$bash_dotfiles_root"/programs/git/desktop/config/configAdd.sh'

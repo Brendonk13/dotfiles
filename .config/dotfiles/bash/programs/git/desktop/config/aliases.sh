@@ -8,5 +8,8 @@ alias config='/usr/bin/git --git-dir="$HOME"/.cfg/ --work-tree="$HOME"'
 
 SCRIPT_DIR="$bash_dotfiles_root"/programs/git/desktop/config
 # SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-alias cadd='config add "$SCRIPT_DIR"/configAdd.sh; configAdd'
+alias cadd='config add "$SCRIPT_DIR"/configAdd.sh; configAdd > /dev/null 2>&1'
+# alias cadd='config add "$SCRIPT_DIR"/configAdd.sh; configAdd; config rm --cached -r ~/.config/dotfiles/bash/sourced/; config rm --cached -r ~/.config/dotfiles/vim/sourced/'
+#     config rm --cached -r '~/.config/dotfiles/bash/sourced'
+#     config rm --cached -r '~/.config/dotfiles/vim/sourced'
 alias cpush='config push origin master'
