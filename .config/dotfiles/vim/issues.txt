@@ -8,3 +8,19 @@ and do all of those before minimal even !!
 how to find which file bad:
     add desired lines before and after each source in vimrc.vim
     - test when it stops working
+
+big issue with where syntax on needs to go
+-- also why behavior change affftter sourcing vimrc within vim
+
+fixed with :doautocmd Syntax
+
+
+
+idea: add vimrc directory to extra dirs/files in ansible
+-- so vimrc dir not in minimal file
+and source them seperately before all plugins
+
+Note: minimal file sourced last so plugins dont overwrite my shit
+
+Note: MUST set quickscope befoooore you set colorscheme
+    https://github.com/unblevable/quick-scope

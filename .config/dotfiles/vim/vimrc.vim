@@ -1,4 +1,5 @@
 set nocompatible
+syntax on
 
 " ======== Get path where this file lies =============
 " Relative base_path of script file:
@@ -74,7 +75,9 @@ call SourceFile("/sourced/common.vim")
 call SourceFile("/sourced/dev.vim")
 call SourceFile("/sourced/desktop.vim")
 " syntax enable -- screws up quickscope colors if done before this
-syntax on
+" But pinnacle needs it on to make highlights
+" syntax on
 call SourceFile("/sourced/minimal.vim")
 " highlight SignColumn guibg=bg
 " highlight SignColumn ctermbg=bg
+doautocmd Syntax
