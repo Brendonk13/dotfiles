@@ -1,0 +1,6 @@
+
+termcursor is not red for dev
+
+wrong window divider (desktop)
+
+idea: source colorscheme if exists before everything else

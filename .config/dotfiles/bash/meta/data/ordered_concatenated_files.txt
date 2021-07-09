@@ -45,5 +45,6 @@
 /home/brendon/.config/dotfiles/bash/setup_env/alias/desktop/cmn_dirs.sh
 /home/brendon/.config/dotfiles/bash/programs/git/desktop/config/aliases.sh
 /home/brendon/.config/dotfiles/bash/templates/alias/desktop.sh
+/home/brendon/.config/dotfiles/bash/setup_env/source/desktop/exercism.sh
 /home/brendon/.config/dotfiles/bash/programs/fzf/desktop/functions.sh
 /home/brendon/.config/dotfiles/bash/programs/git/desktop/config/configAdd.sh

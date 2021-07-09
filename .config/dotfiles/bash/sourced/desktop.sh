@@ -191,6 +191,16 @@ alias bright='echo 255 | sudo tee /sys/class/backlight/amdgpu_bl0/brightness'
 
 
 
+# ====================================================================== #
+# ====================================================================== #
+# ===============  setup_env/source/desktop/exercism.sh  =============== #
+# ====================================================================== #
+
+
+[ -f /home/brendon/dev/dev/langs/exercism/exercism_src/shell/exercism_completion.bash ] && source /home/brendon/dev/dev/langs/exercism/exercism_src/shell/exercism_completion.bash
+
+
+
 # =================================================================== #
 # =================================================================== #
 # ===============  programs/fzf/desktop/functions.sh  =============== #

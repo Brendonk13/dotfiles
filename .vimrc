@@ -133,41 +133,6 @@ else
     echoerr 'could not find|read ~/.config/dotfiles/old_vim/plugins/vimPlugCall'
 endif
 
-if filereadable(expand("~/.config/dotfiles/old_vim/plugins/plugSettings"))
-    source ~/.config/dotfiles/old_vim/plugins/plugSettings
-else
-    echoerr 'could not find|read  ~/.config/dotfiles/old_vim/plugins/plugSettings'
-endif
-
-
-if filereadable(expand("~/.config/dotfiles/old_vim/autocmds"))
-    source ~/.config/dotfiles/old_vim/autocmds
-else
-    echoerr 'Could not find|read ~/.config/dotfiles/old_vim/autocmds'
-endif
-
-
-
-
-" source those keyboard mappings
-" how can I move this file to diff folder and make it work with git?
-if filereadable(expand("~/.config/dotfiles/old_vim/mappings"))
-    source ~/.config/dotfiles/old_vim/mappings
-else
-    echoerr 'could not find|read ~/.config/dotfiles/old_vim/mappings'
-endif
-" source vim command file
-if filereadable(expand("~/.config/dotfiles/old_vim/commands"))
-    source ~/.config/dotfiles/old_vim/commands
-else
-    echoerr 'could not find|read ~/.config/dotfiles/old_vim/commands'
-endif
-
-" NOTE: that I source autocmd's at bottom of file (need highlights done after
-" loading colorscheme.
-
-
-
 " note that rpy runs anacondas py3.7 -- also has readline
 "let g:python3_host_prog='/usr/bin/python3.6'
 let g:python3_host_prog='/usr/bin/python'
@@ -243,6 +208,42 @@ highlight Pmenu ctermbg=238 gui=bold
 
 " this sets a red cursor for terminal mode!
 highlight TermCursor ctermfg=red guifg=red
+
+if filereadable(expand("~/.config/dotfiles/old_vim/plugins/plugSettings"))
+    source ~/.config/dotfiles/old_vim/plugins/plugSettings
+else
+    echoerr 'could not find|read  ~/.config/dotfiles/old_vim/plugins/plugSettings'
+endif
+
+
+
+
+if filereadable(expand("~/.config/dotfiles/old_vim/autocmds"))
+    source ~/.config/dotfiles/old_vim/autocmds
+else
+    echoerr 'Could not find|read ~/.config/dotfiles/old_vim/autocmds'
+endif
+
+
+
+
+" source those keyboard mappings
+" how can I move this file to diff folder and make it work with git?
+if filereadable(expand("~/.config/dotfiles/old_vim/mappings"))
+    source ~/.config/dotfiles/old_vim/mappings
+else
+    echoerr 'could not find|read ~/.config/dotfiles/old_vim/mappings'
+endif
+" source vim command file
+if filereadable(expand("~/.config/dotfiles/old_vim/commands"))
+    source ~/.config/dotfiles/old_vim/commands
+else
+    echoerr 'could not find|read ~/.config/dotfiles/old_vim/commands'
+endif
+
+" NOTE: that I source autocmd's at bottom of file (need highlights done after
+" loading colorscheme.
+
 
 " ------------ SETUP UNDO ------------------------------------------
 if has('persistent_undo')

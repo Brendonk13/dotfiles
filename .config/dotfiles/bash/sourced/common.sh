@@ -365,13 +365,15 @@ else
     echo 'no python found on this machine at all'
 fi
 
+alias dmesg='dmesg -TL'
+
+
 # -------------- CORRECT TYPOS -------------------------------------------------
 
 # mnemonic: Add Sudo
 # alias as='sudo $(history -p !!)'
 alias as='sudo !!'
 
-# -------------- RANDOM --------------------------------------------------------
 
 
 

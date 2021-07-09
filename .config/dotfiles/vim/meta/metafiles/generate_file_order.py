@@ -77,8 +77,12 @@ def append_file_contents(written_to, file_name):
 
 def create_plug_call_file(plugin_names):
     with open(ROOT_DIR / 'sourced/plug_names.vim', 'w') as f:
+        print(ROOT_DIR)
         f.write("call plug#begin()\n\n")
         for plugin_name in plugin_names:
+            tmp = str(plugin_name)
+            tmp = tmp.replace(str(ROOT_DIR), '')
+            print(tmp)
             f.write(Path(plugin_name).read_text())
         f.write("\ncall plug#end()")
 
@@ -98,7 +102,6 @@ def generate_files(last_role):
         all_files += files
         concat_files_for(curr_role, files)
         if curr_role == last_role: break
-    create_plug_call_file(plug_names)
     return all_files, plugin_names
 
 
@@ -106,7 +109,8 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-r', '--role',
             choices=['minimal', 'common', 'dev', 'desktop'],
-            dest='role'
+            dest='role',
+            default='desktop'
     )
     parser.add_argument('-o', '--out-file', dest='out_file', required=False, default=None)
     # maybe add interactive plugin adder thing for selecting plugins
@@ -117,6 +121,7 @@ def get_args():
 if __name__ == "__main__":
     args = get_args()
     all_files, plugin_names = generate_files(last_role=args.role)
+    # pp(plugin_names)
     if args.out_file:
         out_file = args.out_file
         Path(out_file).write_text('\n'.join(str(f) for f in all_files))
@@ -124,5 +129,6 @@ if __name__ == "__main__":
     else:
         out_file2 = str(ROOT_DIR / 'meta/data/ordered_concatenated_files.txt')
         Path(out_file2).write_text('\n'.join(str(f) for f in all_files))
+        create_plug_call_file(plugin_names)
     #     # if output file not given, write 
 
