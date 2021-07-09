@@ -4,3 +4,7 @@ termcursor is not red for dev
 wrong window divider (desktop)
 
 idea: source colorscheme if exists before everything else
+
+how to find which file bad:
+    add desired lines before and after each source in vimrc.vim
+    - test when it stops working

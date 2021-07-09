@@ -60,28 +60,20 @@ endfunction
 
 echom 'base path is: ' . s:base_path
 
+
+
+
 call LoadPlugins("/sourced/plug_names.vim")
+
+" This is done in the vimrc.vim in root since it changes other highlights if
+" done after them
+if filereadable(expand("$HOME/.vim/plugged/vim-solarized/colors/solarized.vim") )
+    set background=dark
+    colorscheme solarized
+endif
+
 call SourceFile("/sourced/minimal.vim")
+" highlight TermCursor ctermfg=red guifg=red
 call SourceFile("/sourced/common.vim")
 call SourceFile("/sourced/dev.vim")
 call SourceFile("/sourced/desktop.vim")
-
-
-" if filereadable(expand("~/.config/dotfiles/vim/autocmds"))
-"     source ~/.config/dotfiles/vim/autocmds
-" else
-"     echoerr 'Could not find|read ~/.config/dotfiles/vim/autocmds'
-" endif
-
-" if filereadable(expand("~/.config/dotfiles/vim/autocmds"))
-"     source ~/.config/dotfiles/vim/autocmds
-" else
-"     echoerr 'Could not find|read ~/.config/dotfiles/vim/autocmds'
-" endif
-
-" if filereadable(expand("~/.config/dotfiles/vim/autocmds"))
-"     source ~/.config/dotfiles/vim/autocmds
-" else
-"     echoerr 'Could not find|read ~/.config/dotfiles/vim/autocmds'
-" endif
-

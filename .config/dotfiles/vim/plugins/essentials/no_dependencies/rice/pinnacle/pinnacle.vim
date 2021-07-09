@@ -2,24 +2,24 @@
 augroup custom_msg_highlights
     autocmd!
     autocmd Syntax * syn match MyTodo /\v<(FIXME|FixMe|fixme|IDEA|Idea|idea|NOTE|Note|note|TODO|Todo|todo|OPTIMIZE|Optimize|optimize):/
-          \ containedin=.*Comment,vimCommentTitle
+          \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
     " FIXME: link fixme to vim's built in highlighting for fixme:
 
     " URL's
     autocmd Syntax * syn match Link /\v<(link|Link|Links|LINK|LINKS):/
-          \ containedin=.*Comment,vimCommentTitle
+          \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
     autocmd Syntax * syn match URL /\v<(http[s]?:\/\/[^ ]+>)/
-          \ containedin=.*Comment,vimCommentTitle
+          \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
 
     autocmd Syntax * syn match Memorize /\v:<(mem|Mem|MEM)/
-          \ containedin=.*Comment,vimCommentTitle
+          \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
 
     autocmd Syntax * syn match Example /\v<(Ex|ex|EX|ie|Ie|IE|i\.e)(:|\.\)).*$/
-          \ containedin=.*Comment,vimCommentTitle
+          \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
 
     " order: ^(\s*)$<space><letter>(.*)
     autocmd Syntax * syn match Cmd /\v^(\s*)\$ [a-zA-Z](.+)$/
-          \ containedin=.*Comment,vimCommentTitle
+          \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
 
 
     " /\v(([^-]-[a-zA-Z0-9]+)|([^-]--[a-zA-Z0-9]+)): 
@@ -27,14 +27,14 @@ augroup custom_msg_highlights
 
     " only match -flag:<space> and --flag:<space> NOT: ---flag or any other # of -'s
     autocmd Syntax * syn match FlagExplanation /\v^\s*([^-](-|--))[a-zA-Z0-9-]+: /
-          \ containedin=.*Comment,vimCommentTitle
+          \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
 
 
     " autocmd Syntax * syn match NumberedList /\v(\d+)\. /
     " must be at beginning of line, 1.11.a, 2.a.2 work, 2 ltrs in a row does not
     " can match trailing [: .]
     autocmd Syntax * syn match NumberedList /\v^\s*(\d+\.)(\w|(\d+))?(\.(\w|(\d+)))?([: .] )?/
-          \ containedin=.*Comment,vimCommentTitle
+          \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
     " - FIXME: stop random lines which start with 4.5 from thinking they're in
     "   a numbered list
     "   - solution 1: enforce trailing [: .]
@@ -43,7 +43,7 @@ augroup custom_msg_highlights
 
 
     autocmd Syntax * syn match ListHeader /\v^.+:$(\n\s*)*(0|1)\./
-          \ containedin=.*Comment,vimCommentTitle
+          \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
 
     " autocmd Syntax * syn match ExampleTwo /\v<(Ex|ex|EX|ie|Ie|IE|i\.e):/
     "       \ containedin=.*Comment,vimCommentTitle
