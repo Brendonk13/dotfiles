@@ -1,0 +1,2 @@
+" allows for commands/substitutions to be done in visual block mode.
+Plug 'vim-scripts/vis'

@@ -4,14 +4,12 @@
 BATPATH=/sys/class/power_supply/BAT0
 BAT_FULL=$BATPATH/charge_full
 BAT_NOW=$BATPATH/charge_now
-# BAT_FULL=$BATPATH/energy_full
-# BAT_NOW=$BATPATH/energy_now
 fully_charged=$(cat $BAT_FULL)
 current=$(cat $BAT_NOW)
 
 current_level=$(( 100 * $current / $fully_charged ))
-# icon_path="$HOME/Pictures/battery-charge-icon.png"
-icon_path="$HOME/Pictures/battery-crop.png"
+icon_path="$HOME/Pictures/battery-charge-icon.png"
+# icon_path="$HOME/Pictures/battery-crop.png"
 
 #if [ "$current_level" -lt 4 ]; then
 #    echo "about to shutdown computer"; sytemctl poweroff
