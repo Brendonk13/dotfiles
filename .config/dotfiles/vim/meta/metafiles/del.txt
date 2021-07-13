@@ -1,9 +1,0 @@
-    Randomly did not work SOLUTION:
-        Try loading modules for other devices (one in /etc/pulse/default.pa is hw:2,0) so try 0,1
-        1. $ pacmd unload-module module-alsa-source device=hw:0,0
-        2. Check pavucontrol if new thing shows input mic bar move when talking
-        3. $ pacmd unload-module module-alsa-source device=hw:1,0
-        4. Check pavucontrol if new thing shows input mic bar move when talking
-        4.1123.a. $ pavucontrol
-
-

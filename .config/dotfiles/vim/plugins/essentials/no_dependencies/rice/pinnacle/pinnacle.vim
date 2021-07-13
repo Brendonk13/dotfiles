@@ -42,23 +42,36 @@ augroup custom_msg_highlights
     autocmd Syntax * syn match FlagExplanation /\v^\s*([^-](-|--))[a-zA-Z0-9-]+: /
           \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
 
-    " autocmd Syntax * syn match ExampleTwo /\v<(Ex|ex|EX|ie|Ie|IE|i\.e):/
-    "       \ containedin=.*Comment,vimCommentTitle
+    autocmd Syntax * syn match BoldMarker /\v\*\*/
+          \ containedin=.*Comment,vimCommentTitle conceal
+    autocmd Syntax * syn match MyBold /\v\*\*([ ]+)?.+([ ]+)?\*\*/
+          \ containedin=.*Comment,vimCommentTitle contains=@NoSpell,BoldMarker
+
+    " Comments are already in italics by default, dont need this
+    " autocmd Syntax * syn match ItalicMarker /\v\* /
+    "       \ containedin=.*Comment,vimCommentTitle conceal
+    " autocmd Syntax * syn match MyItalic /\v\*[ ]?.+[ ]?\* /
+    "       \ containedin=.*Comment,vimCommentTitle contains=@NoSpell,ItalicMarker
+
 augroup END
 
 " from bottom of: https://stackoverflow.com/questions/4097259/in-vim-how-do-i-highlight-todo-and-fixme
 
 " Colors are chosen from vim-solarized groups for vim files (idk which ones)
-highlight LinkColor            cterm=NONE gui=bold ctermfg=4  guifg=#268bd2 ctermbg=NONE guibg=NONE
-highlight URL_Color            cterm=NONE gui=NONE ctermfg=13 guifg=#6c71c4 ctermbg=NONE guibg=NONE
-highlight MemorizeColor        cterm=NONE gui=NONE ctermfg=13 guifg=#00cd9a ctermbg=NONE guibg=NONE
-highlight ExampleColor         cterm=NONE gui=NONE ctermfg=13 guifg=#CCCCCC ctermbg=NONE guibg=NONE
-highlight HackColor            cterm=NONE gui=NONE ctermfg=13 guifg=#cc5e22 ctermbg=NONE guibg=NONE
+highlight LinkColor              cterm=NONE gui=bold ctermfg=4  guifg=#268bd2 ctermbg=NONE guibg=NONE
+highlight URL_Color              cterm=NONE gui=NONE ctermfg=13 guifg=#6c71c4 ctermbg=NONE guibg=NONE
+highlight MemorizeColor          cterm=NONE gui=NONE ctermfg=13 guifg=#00cd9a ctermbg=NONE guibg=NONE
+highlight ExampleColor           cterm=NONE gui=NONE ctermfg=13 guifg=#CCCCCC ctermbg=NONE guibg=NONE
+highlight HackColor              cterm=NONE gui=NONE ctermfg=13 guifg=#cc5e22 ctermbg=NONE guibg=NONE
 
-highlight WhiteHeader          cterm=NONE gui=bold ctermfg=13 guifg=#CCCCCC ctermbg=NONE guibg=NONE
+highlight MyBoldColor            cterm=NONE gui=bold   ctermfg=13 guifg=NONE    ctermbg=NONE guibg=NONE
+" Comments are already in italics by default, dont need this
+" highlight MyItalicColor          cterm=NONE gui=italic ctermfg=13 guifg=NONE    ctermbg=NONE guibg=NONE
 
-highlight CmdColor             cterm=NONE gui=NONE ctermfg=13 guifg=#00ad7a ctermbg=NONE guibg=NONE
-highlight FlagExplanationColor cterm=NONE gui=NONE ctermfg=13 guifg=#00a572 ctermbg=NONE guibg=NONE
+highlight WhiteHeader            cterm=NONE gui=bold ctermfg=13 guifg=#CCCCCC ctermbg=NONE guibg=NONE
+
+highlight CmdColor               cterm=NONE gui=NONE ctermfg=13 guifg=#00ad7a ctermbg=NONE guibg=NONE
+highlight FlagExplanationColor   cterm=NONE gui=NONE ctermfg=13 guifg=#00a572 ctermbg=NONE guibg=NONE
 
 
 highlight def link Link         LinkColor
@@ -69,6 +82,9 @@ highlight def link MyTodo       Todo
 highlight def link Memorize     MemorizeColor
 highlight def link Example      ExampleColor
 highlight def link Hack         HackColor
+
+highlight def link MyBold       MyBoldColor
+highlight def link MyItalic     MyItalicColor
 
 highlight def link Cmd              CmdColor
 highlight def link FlagExplanation  FlagExplanationColor
