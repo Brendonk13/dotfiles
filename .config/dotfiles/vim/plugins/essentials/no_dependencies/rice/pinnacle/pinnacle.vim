@@ -42,10 +42,16 @@ augroup custom_msg_highlights
     autocmd Syntax * syn match FlagExplanation /\v^\s*([^-](-|--))[a-zA-Z0-9-]+: /
           \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
 
-    autocmd Syntax * syn match BoldMarker /\v\*\*/
+    " autocmd Syntax * syn match BoldMarker /\v\*\*/
+    autocmd Syntax * syn match BoldMarker /\v[ ]\*([^*]+\*)@=/
           \ containedin=.*Comment,vimCommentTitle conceal
-    autocmd Syntax * syn match MyBold /\v\*\*([ ]+)?.+([ ]+)?\*\*/
-          \ containedin=.*Comment,vimCommentTitle contains=@NoSpell,BoldMarker
+
+    autocmd Syntax * syn match BoldMarkerO /\v(\*[^*]+)@<=\*[ ]/
+          \ containedin=.*Comment,vimCommentTitle conceal
+
+    " autocmd Syntax * syn match MyBold /\v\*\*([ ]+)?.+([ ]+)?\*\*/
+    autocmd Syntax * syn match MyBold /\v[ ]\*([ ]+)?.+([ ]+)?\*[ ]/
+          \ containedin=.*Comment,vimCommentTitle contains=@NoSpell,BoldMarker,BoldMarkerO
 
     " Comments are already in italics by default, dont need this
     " autocmd Syntax * syn match ItalicMarker /\v\* /
@@ -64,7 +70,7 @@ highlight MemorizeColor          cterm=NONE gui=NONE ctermfg=13 guifg=#00cd9a ct
 highlight ExampleColor           cterm=NONE gui=NONE ctermfg=13 guifg=#CCCCCC ctermbg=NONE guibg=NONE
 highlight HackColor              cterm=NONE gui=NONE ctermfg=13 guifg=#cc5e22 ctermbg=NONE guibg=NONE
 
-highlight MyBoldColor            cterm=NONE gui=bold   ctermfg=13 guifg=NONE    ctermbg=NONE guibg=NONE
+highlight MyBoldColor            gui=bold
 " Comments are already in italics by default, dont need this
 " highlight MyItalicColor          cterm=NONE gui=italic ctermfg=13 guifg=NONE    ctermbg=NONE guibg=NONE
 
@@ -84,7 +90,7 @@ highlight def link Example      ExampleColor
 highlight def link Hack         HackColor
 
 highlight def link MyBold       MyBoldColor
-highlight def link MyItalic     MyItalicColor
+" highlight def link MyItalic     MyItalicColor
 
 highlight def link Cmd              CmdColor
 highlight def link FlagExplanation  FlagExplanationColor
