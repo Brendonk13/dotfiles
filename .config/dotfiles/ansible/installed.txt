@@ -1,4 +1,4 @@
-sudo pacman -S yay git neovim fzf ripgrep kitty neofetch redshift polybar python-dbus yad mpd ttf-font-awesome xcape picom lightdm-settings pavucontrol pulseaudio blueman mpv zathura zathura-pdf-mupdf fasd z lsd tldr nodejs rofi fd rofi-pass rofi-calc docker docker-compose bluez bluez-utils pulseaudio-bluetooth && yay -S google-chrome neovim-remote ruby-fusuma mons ptpython python-pip latex-mk nordic-theme-git ttf-google-sans ripgrep-all bottom
+sudo pacman -S yay git neovim fzf ripgrep kitty neofetch redshift polybar python-dbus yad mpd ttf-font-awesome xcape picom lightdm-settings pavucontrol pulseaudio blueman mpv zathura zathura-pdf-mupdf fasd z lsd tldr nodejs rofi fd rofi-pass rofi-calc docker docker-compose bluez bluez-utils pulseaudio-bluetooth gcc cmake exa && yay -S google-chrome neovim-remote ruby-fusuma mons ptpython python-pip latex-mk nordic-theme-git ttf-google-sans ripgrep-all bottom git-delta-git bfs
 
 
 fzf:

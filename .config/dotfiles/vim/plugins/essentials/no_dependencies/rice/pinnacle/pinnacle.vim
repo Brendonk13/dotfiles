@@ -33,10 +33,9 @@ augroup custom_msg_highlights
           \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
 
 
-    " autocmd Syntax * syn match NumberedList /\v(\d+)\. /
     " must be at beginning of line, 1.11.a, 2.a.2 work, 2 ltrs in a row does not
     " can match trailing [: .]
-    autocmd Syntax * syn match NumberedList /\v^\s*(\d+\.)(\w|(\d+))?(\.(\w|(\d+)))?([: .] )?/
+    autocmd Syntax * syn match NumberedList /\v^\s*(\d+)(\.(\w|(\d+)))?(\.(\w|(\d+)))?([: .] )/
           \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
     " - FIXME: stop random lines which start with 4.5 from thinking they're in
     "   a numbered list
