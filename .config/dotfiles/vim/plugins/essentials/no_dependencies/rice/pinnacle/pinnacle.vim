@@ -20,31 +20,26 @@ augroup custom_msg_highlights
     autocmd Syntax * syn match Example /\v<(Ex|ex|EX|ie|Ie|IE|i\.e)(:|\.\)).*$/
           \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
 
-    " order: ^(\s*)$<space><letter>(.*)
-    autocmd Syntax * syn match Cmd /\v^(\s*)\$ [a-zA-Z](.+)$/
-          \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
-
-
     " /\v(([^-]-[a-zA-Z0-9]+)|([^-]--[a-zA-Z0-9]+)): 
     " autocmd Syntax * syn match FlagExplanation /\v(\s*)\-(\-?)([a-zA-Z0-9]+): /
 
-    " only match -flag:<space> and --flag:<space> NOT: ---flag or any other # of -'s
-    autocmd Syntax * syn match FlagExplanation /\v^\s*([^-](-|--))[a-zA-Z0-9-]+: /
-          \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
 
+    autocmd Syntax * syn match ListHeader /\v^.+:$(\n\s*)*(0|1)\./
+          \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
 
     " must be at beginning of line, 1.11.a, 2.a.2 work, 2 ltrs in a row does not
     " can match trailing [: .]
-    autocmd Syntax * syn match NumberedList /\v^\s*(\d+)(\.(\w|(\d+)))?(\.(\w|(\d+)))?([: .] )/
+    autocmd Syntax * syn match NumberedList /\v^\s*(\d+)(\.([a-z]|(\d+)))?(\.([a-z]|(\d+)))?([: .] )/
           \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
-    " - FIXME: stop random lines which start with 4.5 from thinking they're in
-    "   a numbered list
-    "   - solution 1: enforce trailing [: .]
-    "   - solution 2: learn how to match stuff in syntax highlights without
-    "   highlighting every group
+    " NOTE: this highlight is in Cmd group, all changes MUST BE COPIED TO Cmd
+
+    " order: ^\s*(optional NumberedList)$<space><letter>(.*)
+    autocmd Syntax * syn match Cmd /\v^\s*((\d+)(\.([a-z]|(\d+)))?(\.([a-z]|(\d+)))?([: .] ))?\$ [a-zA-Z].+$/
+          \ containedin=.*Comment,vimCommentTitle contains=@NoSpell,NumberedList
 
 
-    autocmd Syntax * syn match ListHeader /\v^.+:$(\n\s*)*(0|1)\./
+    " only match -flag:<space> and --flag:<space> NOT: ---flag or any other # of -'s
+    autocmd Syntax * syn match FlagExplanation /\v^\s*([^-](-|--))[a-zA-Z0-9-]+: /
           \ containedin=.*Comment,vimCommentTitle contains=@NoSpell
 
     " autocmd Syntax * syn match ExampleTwo /\v<(Ex|ex|EX|ie|Ie|IE|i\.e):/
