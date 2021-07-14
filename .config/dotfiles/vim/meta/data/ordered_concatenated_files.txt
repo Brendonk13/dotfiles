@@ -12,6 +12,7 @@
 /home/brendon/.config/dotfiles/vim/mappings/mode_mappings/insert_maps.vim
 /home/brendon/.config/dotfiles/vim/other/abbreviations/abbreviations.vim
 /home/brendon/.config/dotfiles/vim/os_specific/windows/desktop/clip.exe/copy_sys_clipboard.vim
+/home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/nvim-treesitter/treesitter.vim
 /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/rice/lightline/lightline.vim
 /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/rice/solarized/solarized.vim
 /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/rice/pinnacle/pinnacle.vim
@@ -26,7 +27,6 @@
 /home/brendon/.config/dotfiles/vim/plugins/essentials/one_dependency/ocaml/vim-dispatch_ocaml.vim
 /home/brendon/.config/dotfiles/vim/plugins/essentials/few_dependencies/fzf_rg/fzf_rg.vim
 /home/brendon/.config/dotfiles/vim/plugins/essentials/few_dependencies/fzf_git_rg/fzf_rg_git.vim
-/home/brendon/.config/dotfiles/vim/plugins/others/coc/coc.vim
 /home/brendon/.config/dotfiles/vim/plugins/others/git/signify/signify.vim
 /home/brendon/.config/dotfiles/vim/plugins/others/vim-easy-align/vim-easy-align.vim
 /home/brendon/.config/dotfiles/vim/plugins/others/vimtex/vimtex.vim

@@ -27,3 +27,5 @@ _fasd_bash_hook_cmd_complete v m j o z
 alias z=fuzzy_z
 alias o=fuzzy_xdgopen
 alias sf=ssf
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

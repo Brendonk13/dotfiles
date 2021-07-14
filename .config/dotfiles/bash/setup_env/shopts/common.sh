@@ -17,6 +17,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# enable completion for sudo
+complete -cf sudo
+
 # append to histfile, instead of overwriting
 shopt -s histappend
 

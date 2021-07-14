@@ -1,5 +1,6 @@
 set nocompatible
-syntax on
+" needed for treesitter
+" syntax on
 
 " ======== Get path where this file lies =============
 " Relative base_path of script file:
@@ -70,6 +71,7 @@ if filereadable(expand("$HOME/.vim/plugged/vim-solarized/colors/solarized.vim") 
     " colors !!!!
 endif
 
+
 " call SourceFile("/sourced/minimal.vim")
 call SourceFile("/sourced/common.vim")
 call SourceFile("/sourced/dev.vim")
@@ -80,4 +82,36 @@ call SourceFile("/sourced/desktop.vim")
 call SourceFile("/sourced/minimal.vim")
 " highlight SignColumn guibg=bg
 " highlight SignColumn ctermbg=bg
+
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+"   highlight = {
+"     enable = true,
+"     -- custom_captures = {
+"     --   -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
+"     --   ["foo.bar"] = "Identifier",
+"     -- },
+"     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+"     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+"     -- Using this option may slow down your editor, and you may see some duplicate highlights.
+"     -- Instead of true it can also be a list of languages
+"     additional_vim_regex_highlighting = false,
+"   },
+" }
+" EOF
+
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+"   incremental_selection = {
+"     enable = true,
+"     keymaps = {
+"       init_selection = "gnn",
+"       node_incremental = "grn",
+"       scope_incremental = "grc",
+"       node_decremental = "grm",
+"     },
+"   },
+" }
+" EOF
+
 doautocmd Syntax

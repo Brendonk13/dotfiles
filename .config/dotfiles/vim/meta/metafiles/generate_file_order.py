@@ -7,6 +7,9 @@ from pathlib import Path
 import os
 # from pathlib import Path; root = Path(open('../data/vim_dotfiles_root.txt').readline().rstrip('\n'))
 
+# ex.) asda
+# *bold: * asd
+
 NONE_PATTERN = re.compile(r'.+none.+')
 fil = '{}/../data/vim_dotfiles_root.txt'.format(os.path.dirname(os.path.realpath(__file__)))
 ROOT_DIR = Path(Path(fil).read_text().rstrip('\n'))

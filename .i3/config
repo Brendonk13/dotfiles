@@ -245,8 +245,8 @@ bindsym $mod+r exec i3-input -F 'rename workspace to "%s"' -P 'New name for this
 
 #to view monitors: (or just use mons program)
 # xrandr --query | grep " connected" | cut -d" " -f1
-bindsym $mod+Shift+greater move workspace to output HDMI1
-bindsym $mod+Shift+less move workspace to output eDP1
+bindsym $mod+Shift+greater move workspace to output HDMI-A-0
+bindsym $mod+Shift+less move workspace to output eDP
 
 # not sure why I only did this for 1-8 but it works..
 set $ws1 1

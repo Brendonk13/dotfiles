@@ -23,10 +23,10 @@ nnoremap Q @@
 " makes sense, even suggested in help!
 nnoremap Y y$
 
-if has('clipboard')
+" if has('clipboard')
   nnoremap <silent><leader>y :normal! gv"+y<CR>
   vnoremap <silent><leader>y :normal! gv"+y<CR>
-endif
+" endif
 " ============== INVOLVES REGISTERS ============================================
 
 
