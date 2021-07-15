@@ -2,6 +2,8 @@
 
 " no omnicomplete mappings if I have coc plugin running
 if !exists(':CocStart')
+" if exists('*compe#confirm')
+    " echoerr 'erroneosly loading omnicomplete mappings'
 
     inoremap <silent> ;; <C-x><C-o>
 

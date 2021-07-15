@@ -1,5 +1,3 @@
-let mapleader = " "
-let maplocalleader = " "
 
 "           note that <CR> by itself is not used in normal mode!!!
 "-- here do: map <expr> <CR> empty(&buftype) ? '@@' : '<CR>'

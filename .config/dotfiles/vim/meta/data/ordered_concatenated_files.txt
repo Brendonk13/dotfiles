@@ -19,6 +19,8 @@
 /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/replay/replay_no_deps.vim
 /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-abolish/vim-abolish.vim
 /home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/better_defaults/vim-commentary/vim-commentary.vim
+/home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/nvim-compe/nvim-comp.vim
+/home/brendon/.config/dotfiles/vim/plugins/essentials/no_dependencies/lspsaga/lspsage.vim
 /home/brendon/.config/dotfiles/vim/plugins/essentials/one_dependency/fzf/fzf_no_deps.vim
 /home/brendon/.config/dotfiles/vim/plugins/essentials/one_dependency/git/fugitive/fugitive.vim
 /home/brendon/.config/dotfiles/vim/plugins/essentials/one_dependency/latexmk/vim-dispatch_latexmk.vim

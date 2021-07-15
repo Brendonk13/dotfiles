@@ -1,6 +1,7 @@
 set nocompatible
-" needed for treesitter
-" syntax on
+
+let mapleader = " "
+let maplocalleader = " "
 
 " ======== Get path where this file lies =============
 " Relative base_path of script file:
